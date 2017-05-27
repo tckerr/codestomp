@@ -11,9 +11,12 @@ export const environment = {
          companyName: "T-Corp"
       },
       ticker: {
-         intervalMs: 1000,
-         timeUnit: "hour"
+         defaultIntervalMs: 1000,
+         intervalIncrementDelta: 100,
+         minimumInterval: 100,
+         timeUnit: "hours"
       },
+      askBeforeClear: false,
       startTime: "2050-01-01 00:00"
    }
 };

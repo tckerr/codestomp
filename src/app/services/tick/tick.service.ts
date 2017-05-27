@@ -6,9 +6,10 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/timer";
 import {environment} from "../../../environments/environment";
 import {Subscription} from "rxjs/Subscription";
-import {Moment, parseZone} from "moment";
+import {Moment, parseZone} from 'moment';
 import {GameStorageService} from "../game-storage.service";
 import {LoggerService} from '../logger-service';
+import * as moment from 'moment';
 
 @Injectable()
 export class TickService implements Pipeline {
@@ -19,10 +20,14 @@ export class TickService implements Pipeline {
    private timeUnit: string;
    private source = new Subject<Tick>();
    public pipeline = this.source.asObservable();
+   private intervalIncrementDelta: number;
+   private minimumInterval: number;
 
    constructor(private gameStorageService: GameStorageService,
    private logger: LoggerService){
-      this.tickerIntervalMs = environment.gameSettings.ticker.intervalMs;
+      this.tickerIntervalMs = environment.gameSettings.ticker.defaultIntervalMs;
+      this.intervalIncrementDelta = environment.gameSettings.ticker.intervalIncrementDelta;
+      this.minimumInterval = environment.gameSettings.ticker.minimumInterval;
       this.timeUnit = environment.gameSettings.ticker.timeUnit;
       this.baseDate = parseZone(environment.gameSettings.startTime);
    }
@@ -38,8 +43,25 @@ export class TickService implements Pipeline {
          this.subscription.unsubscribe();
    }
 
+   faster(){
+      this.tickerIntervalMs = Math.max(this.minimumInterval, this.tickerIntervalMs - this.intervalIncrementDelta);
+      if(!this.paused)
+         this.start();
+   }
+
+   slower(){
+      this.tickerIntervalMs += this.intervalIncrementDelta;
+      this.timer = Observable.timer(0, this.tickerIntervalMs);
+      if(!this.paused)
+         this.start();
+   }
+
    public get paused(){
-      return this.subscription.closed;
+      return !this.subscription || this.subscription.closed;
+   }
+
+   public get speed(){
+      return Math.round(100000/this.tickerIntervalMs) / 100;
    }
 
    private generateTick() {
@@ -59,8 +81,8 @@ export class TickService implements Pipeline {
    private generateDate(index: number){
       let durationCtor = {};
       durationCtor[this.timeUnit] = index;
-      console.log("Hours:", index)
-      let tempDate = Object.assign(this.baseDate);
+      console.log("Hours:", durationCtor);
+      let tempDate = moment(this.baseDate);
       return tempDate.add(durationCtor);
    }
 }

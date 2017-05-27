@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GameStorageService} from '../../../services/game-storage.service';
 import {Router} from '@angular/router';
-import {TickService} from '../../../services/tick/tick.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
    selector: 'app-game-state',
@@ -10,16 +10,18 @@ import {TickService} from '../../../services/tick/tick.service';
 })
 export class GameStateComponent implements OnInit {
 
-   @Input() gameId: string;
+   private gameId: string;
    @Output() private gameSaved = new EventEmitter<string>();
    private selectedGameId: string;
+   private askBeforeClear: boolean;
 
    constructor(private gameStorageService: GameStorageService,
-               private tickService: TickService,
                private router: Router) {
+      this.askBeforeClear = environment.gameSettings.askBeforeClear;
    }
 
    ngOnInit() {
+      this.gameId = this.gameStorageService.game.id;
       this.loadGame(this.gameId);
       this.selectedGameId = this.gameId;
    }
@@ -41,17 +43,8 @@ export class GameStateComponent implements OnInit {
    }
 
    private clear(): void {
-      if (confirm('Are you sure you want to clear all data?')) {
+      if (!this.askBeforeClear || confirm('Are you sure you want to clear all data?'))
          this.gameStorageService.clear();
-      }
-   }
-
-   private pause(): void {
-      this.tickService.stop();
-   }
-
-   private resume(): void {
-      this.tickService.start();
    }
 
 }

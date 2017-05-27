@@ -20,12 +20,14 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "core-js": "^2.4.1",
-    "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4",
-    "moment": "*",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.25",
-    "font-awesome": "*"
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.4.1",
+    "font-awesome": "*",
+    "less": "^2.7.2",
+    "moment": "*",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "@angular/cli": "1.0.2",

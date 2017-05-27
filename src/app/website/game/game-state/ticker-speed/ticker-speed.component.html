@@ -1,0 +1,41 @@
+<div class="form-inline p-1 game-state">
+   <div class="input-group input-group-sm mr-1">
+      <button
+         (click)="decreaseSpeed()"
+         class="btn btn-sm"
+         [class.btn-warning]="tickService.paused"
+         [class.btn-info]="!tickService.paused">
+         <i class="fa fa-fast-backward"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <button
+         *ngIf="!tickService.paused"
+         (click)="pause()"
+         class="btn btn-info btn-sm"
+         style="min-width: 30px">
+         <i class="fa fa-pause"></i>
+      </button>
+      <button
+         *ngIf="tickService.paused"
+         (click)="resume()"
+         class="btn btn-sm btn-warning"
+         style="min-width: 30px">
+         <i class="fa fa-play"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <button
+         (click)="increaseSpeed()"
+         class=" btn btn-sm"
+         [class.btn-warning]="tickService.paused"
+         [class.btn-info]="!tickService.paused">
+         <i class="fa fa-fast-forward"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm">
+      <span class="input-group-addon p-1">
+         <label class="col-form-label col-form-label-sm">{{tickService.speed | number : '1.2-2'}} ticks/s</label>
+      </span>
+   </div>
+</div>

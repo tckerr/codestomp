@@ -20,7 +20,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
    ngOnInit() {
       this.routeParamsSubscription = this.route.params.subscribe(params => {
-         this.gameId = params['id'];
+         this.gameId = params['gameId'];
          this.onGameLoad();
       });
    }

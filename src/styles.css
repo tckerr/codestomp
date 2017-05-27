@@ -1,25 +1,14 @@
-.background-light-grey {
-   background-color: #f3f3f3;
-}
-.background-white {
-   background-color: #ffffff;
-}
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); }
+
 .mw-100{
-   max-width: 100%;
+max-width: 100%;
 }
 
-::-webkit-scrollbar
-{
-  width: 12px;  /* for vertical scrollbars */
-  height: 12px; /* for horizontal scrollbars */
-}
-
-::-webkit-scrollbar-track
-{
-  background: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-thumb
-{
-  background: rgba(0, 0, 0, 0.5);
+html, body {
+   padding: 0;
+   margin: 0;
+   height: 100%;
+   background-color: #eee!important;
 }

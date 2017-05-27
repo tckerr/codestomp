@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import {IdGeneratorService} from './id-generator.service';
 import {LoggerService} from './logger-service';
 import {Subject} from 'rxjs/Subject';
+import {BusinessUnits} from '../models/business-units/business-units.enum';
 
 @Injectable()
 export class GameStorageService {
@@ -33,7 +34,8 @@ export class GameStorageService {
    }
 
    public create() {
-      this.game = new Game(this.defaultSeed());
+      let seed = this.defaultSeed();
+      this.game = new Game(seed);
       this.save();
       return this.game.id;
    }
@@ -53,7 +55,20 @@ export class GameStorageService {
          id: 'csgm_' + this.idGeneratorService.generate(),
          tick: 0,
          company: {
-            name: environment.gameSettings.defaults.companyName
+            name: environment.gameSettings.defaults.companyName,
+            businessUnits: [
+               {
+                  id: BusinessUnits.HR,
+                  name: 'Human Resources',
+                  active: false
+               },
+               {
+                  id: BusinessUnits.Development,
+                  name: 'Development',
+                  active: true,
+                  spacesVsTabs: 'spaces'
+               }
+            ]
          }
       }
    }

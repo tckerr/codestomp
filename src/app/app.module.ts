@@ -14,6 +14,11 @@ import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {IdGeneratorService} from './services/id-generator.service';
 import {LoggerService} from './services/logger-service';
 import { LogHistoryComponent } from './website/game/log-history/log-history.component';
+import { TickerSpeedComponent } from './website/game/game-state/ticker-speed/ticker-speed.component';
+import { ManagementComponent } from './website/game/management/management.component';
+import {DevelopmentComponent} from './website/game/management/business-units/development/development.component';
+import { HRComponent } from './website/game/management/business-units/hr/hr.component';
+import {BusinessUnits} from './models/business-units/business-units.enum';
 
 const appRoutes: Routes = [
    {
@@ -26,8 +31,34 @@ const appRoutes: Routes = [
       component: NewGameComponent
    },
    {
-      path: 'game/:id',
-      component: GameComponent
+      path: 'game/:gameId',
+      component: GameComponent,
+      children: [
+         {
+            path: '',
+            redirectTo: 'management',
+            pathMatch: 'full'
+         },
+         {
+            path: 'management',
+            component: ManagementComponent,
+            children: [
+               {
+                  path: '',
+                  redirectTo: 'development',
+                  pathMatch: 'full'
+               },
+               {
+                  path: BusinessUnits.Development.toLocaleString(),
+                  component: DevelopmentComponent
+               },
+               {
+                  path: BusinessUnits.HR.toLocaleString(),
+                  component: HRComponent
+               }
+            ]
+         }
+      ]
    }
 ];
 
@@ -38,6 +69,10 @@ const appRoutes: Routes = [
       NewGameComponent,
       GameStateComponent,
       LogHistoryComponent,
+      TickerSpeedComponent,
+      ManagementComponent,
+      DevelopmentComponent,
+      HRComponent
    ],
    imports: [
       BrowserModule,
