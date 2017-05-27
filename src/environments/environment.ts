@@ -4,5 +4,16 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+   production: false,
+   localStorageNamespace: 'codestomp',
+   gameSettings: {
+      defaults: {
+         companyName: "T-Corp"
+      },
+      ticker: {
+         intervalMs: 1000,
+         timeUnit: "hour"
+      },
+      startTime: "2050-01-01 00:00"
+   }
 };

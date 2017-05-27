@@ -1,0 +1,35 @@
+<div class="form-inline p-1">
+   <div class="input-group input-group-sm mr-1">
+      <button routerLink="/" class="btn-success btn btn-sm">
+         <i class="fa fa-plus"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <button (click)="save()" class="btn-success btn btn-sm">
+         <i class="fa fa-floppy-o"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <span class="input-group-addon p-1">
+         <label for="gameId" class="col-form-label col-form-label-sm">Game ID</label>
+      </span>
+      <input [(ngModel)]="selectedGameId" type="text" class="small form-control form-control-sm" id="gameId"
+             name="gameId" required>
+      <span class="input-group-btn">
+         <button type="submit" class="btn-info btn" (click)="loadGame(selectedGameId)">Load</button>
+      </span>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <button (click)="clear()" class="btn-danger btn btn-sm">
+         <i class="fa fa-trash"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <button *ngIf="!tickService.paused" (click)="pause()" class="btn-danger btn btn-sm">
+         <i class="fa fa-pause"></i>
+      </button>
+      <button *ngIf="tickService.paused" (click)="resume()" class="btn-info btn btn-sm">
+         <i class="fa fa-play"></i>
+      </button>
+   </div>
+</div>

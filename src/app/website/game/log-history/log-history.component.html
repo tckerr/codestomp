@@ -1,0 +1,7 @@
+<div class="h-100 p-0" style="position:relative; background-color: #eee ">
+   <div class="mw-100 p-0" style="overflow-y: auto; position:absolute; bottom:0">
+      <div *ngFor="let log of logs" class="mw-100 d-block log-item p-1 small">
+         <code class="mw-100 p-0" *ngFor="let line of log.args">{{line}} </code>
+      </div>
+   </div>
+</div>

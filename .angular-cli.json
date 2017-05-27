@@ -22,7 +22,8 @@
         "styles.css",
         "assets/vendor/css/bootstrap-4.0.0-alpha.6-dist/bootstrap.css",
         "assets/vendor/css/bootstrap-4.0.0-alpha.6-dist/bootstrap-grid.css",
-        "assets/vendor/css/bootstrap-4.0.0-alpha.6-dist/bootstrap-reboot.css"
+        "assets/vendor/css/bootstrap-4.0.0-alpha.6-dist/bootstrap-reboot.css",
+        "../node_modules/font-awesome/css/font-awesome.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
