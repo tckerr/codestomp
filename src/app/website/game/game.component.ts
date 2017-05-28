@@ -3,8 +3,6 @@ import {TickService} from '../../services/tick/tick.service';
 import {GameStorageService} from '../../services/game-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {CustomerAccumulatorService} from '../../services/accumulators/customer-accumulator.service';
-import {DeploymentService} from '../../services/devops/deployment.service';
 import {CodeService} from '../../services/resource-services/code.service';
 import {AccumulationAggregatorService} from '../../services/accumulators/accumulation-aggregator.service';
 

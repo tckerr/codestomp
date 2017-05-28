@@ -26,7 +26,7 @@ export class GameStorageService {
 
    private traceLoad(gameData: string, gameId: string) {
       this.logger.gameLog('Loading...', gameId);
-      console.group("Loading");
+      console.group('Loading');
       console.log(gameData);
       console.log(JSON.parse(gameData));
       console.groupEnd();
@@ -34,7 +34,7 @@ export class GameStorageService {
 
    private traceSave(game: Game) {
       this.logger.gameLog('Saving...', this.game.id);
-      console.group("Saving");
+      console.group('Saving');
       console.log(game);
       console.log(this.toJson(game));
       console.groupEnd();
@@ -61,7 +61,7 @@ export class GameStorageService {
 
    private toJson(game: Game) {
       return JSON.stringify(game, (k, v) => {
-         if (k.indexOf("$") >= 0)
+         if (k.indexOf('$') >= 0)
             return undefined;
          return v;
       });

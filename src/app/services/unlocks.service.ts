@@ -16,18 +16,18 @@ export class UnlocksService {
       this.tickService.pipeline.subscribe(() => this.checkUnlocks())
    }
 
-   public get unlocks(){
+   public get unlocks() {
       return this.gameStorageService.game.company.unlocks;
    }
 
    private checkUnlocks() {
-      if (this.unlocks.deployments == 0 && this.config.deploymentsWhenTotalCodeGte <= this.codeService.total){
+      if (this.unlocks.deployments == 0 && this.config.deploymentsWhenTotalCodeGte <= this.codeService.total) {
          this.gameStorageService.game.company.unlocks.deployments++;
-         this.logger.gameLog("Deployments unlocked!");
+         this.logger.gameLog('Deployments unlocked!');
       }
-      if (this.unlocks.manualTesting == 0 && this.config.manualTestingWhenTotalCodeGte <= this.codeService.total){
+      if (this.unlocks.manualTesting == 0 && this.config.manualTestingWhenTotalCodeGte <= this.codeService.total) {
          this.gameStorageService.game.company.unlocks.manualTesting++;
-         this.logger.gameLog("Manual testing unlocked!");
+         this.logger.gameLog('Manual testing unlocked!');
       }
 
    }

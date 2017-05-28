@@ -11,7 +11,7 @@ export class Developer {
       this.automatic = json.automatic;
    }
 
-   public get name(){
+   public get name() {
       return `${this.firstName} ${this.lastName}`;
    }
 }

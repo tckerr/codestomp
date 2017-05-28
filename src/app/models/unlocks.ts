@@ -2,7 +2,7 @@ export class Unlocks {
    public deployments: number;
    public manualTesting: number;
 
-   constructor(json: any){
+   constructor(json: any) {
       this.deployments = json.deployments;
       this.manualTesting = json.manualTesting;
    }

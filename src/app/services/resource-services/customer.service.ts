@@ -14,8 +14,8 @@ export class CustomerService {
    }
 
    public add(count: number = 1): void {
-     //this.logger.gameLog(`Attracted ${count} customers`);
-     this.gameStorageService.game.company.resources.customers.add(count);
-  }
+      //this.logger.gameLog(`Attracted ${count} customers`);
+      this.gameStorageService.game.company.resources.customers.add(count);
+   }
 
 }

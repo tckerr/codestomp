@@ -24,16 +24,16 @@ import {DeveloperComponent} from './website/game/management/business-units/devel
 import {CodeService} from './services/resource-services/code.service';
 import {DeploymentService} from './services/devops/deployment.service';
 import {CustomerAccumulatorService} from './services/accumulators/customer-accumulator.service';
-import { CodeBreakdownComponent } from './website/game/management/business-units/development/code-breakdown/code-breakdown.component';
+import {CodeBreakdownComponent} from './website/game/management/business-units/development/code-breakdown/code-breakdown.component';
 import {AccumulationAggregatorService} from 'app/services/accumulators/accumulation-aggregator.service';
 import {CodeProfitAccumulatorService} from './services/accumulators/code-profit-accumulator.service';
 import {CustomerService} from './services/resource-services/customer.service';
 import {FundService} from './services/resource-services/fund.service';
-import { DebugComponent } from './website/game/management/business-units/debug/debug.component';
+import {DebugComponent} from './website/game/management/business-units/debug/debug.component';
 import {ConfigurationService} from './services/configuration.service';
 import {DebugService} from './services/debug.service';
-import { DevelopmentActionsComponent } from './website/game/management/business-units/development/development-actions/development-actions.component';
-import { CompanyDigestComponent } from './website/game/management/company-digest/company-digest.component';
+import {DevelopmentActionsComponent} from './website/game/management/business-units/development/development-actions/development-actions.component';
+import {CompanyDigestComponent} from './website/game/management/company-digest/company-digest.component';
 import {CommitGeneratorService} from './commit-generator.service';
 import {UnlocksService} from './services/unlocks.service';
 

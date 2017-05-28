@@ -7,7 +7,7 @@ export class CodeBank {
    public tested: CodeResource;
    public bugs: CodeResource;
 
-   constructor(json: any){
+   constructor(json: any) {
       this.pushed = new CodeResource(json.pushed);
       this.deploying = new CodeResource(json.deploying);
       this.prod = new CodeResource(json.prod);

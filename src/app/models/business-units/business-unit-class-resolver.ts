@@ -5,7 +5,7 @@ import {BaseBusinessUnit} from './base-business-unit';
 export class BusinessUnitClassResolver {
 
    static resolve(unitType: string) {
-      switch (unitType){
+      switch (unitType) {
          case BusinessUnits.Development:
             return DevelopmentBusinessUnit;
          default:

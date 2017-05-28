@@ -6,7 +6,8 @@ import {BusinessUnits} from '../models/business-units/business-units.enum';
 @Injectable()
 export class GameSeedGeneratorService {
 
-   constructor(private idGeneratorService: IdGeneratorService) { }
+   constructor(private idGeneratorService: IdGeneratorService) {
+   }
 
    public defaultSeed(): any {
       return {

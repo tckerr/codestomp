@@ -17,7 +17,8 @@ export class DevelopmentActionsComponent implements OnInit {
                private config: ConfigurationService) {
    }
 
-   ngOnInit(): void { }
+   ngOnInit(): void {
+   }
 
    private writeCode(val: number = 1) {
       this.codeService.write(val);
@@ -31,13 +32,13 @@ export class DevelopmentActionsComponent implements OnInit {
       this.deploymentService.deploy();
    }
 
-   private get canDeploy(){
+   private get canDeploy() {
       return !this.deploymentService.deploying && this.codeService.tested.balance >= this.config.deployThreshold
    }
 
-   private get deployBlockReason(){
+   private get deployBlockReason() {
       if (this.deploymentService.deploying)
-         return "Deploying...";
+         return 'Deploying...';
       let remaining = this.config.deployThreshold - this.codeService.tested.balance;
       return `${remaining} more to release`
    }

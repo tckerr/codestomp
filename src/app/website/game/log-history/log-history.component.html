@@ -2,7 +2,7 @@
    <div class="mw-100 p-0" class="log-history-content">
       <ng-container *ngFor="let log of logs; let odd = odd;">
          <div class="mw-100 d-block log-history-item p-1 small"
-            [class.odd]="odd">
+              [class.odd]="odd">
             <span class="mw-100 p-0" *ngFor="let line of log.args">{{line}} </span>
          </div>
       </ng-container>

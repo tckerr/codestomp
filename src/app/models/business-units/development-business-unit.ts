@@ -13,7 +13,7 @@ export class DevelopmentBusinessUnit implements IBusinessUnit {
       this.id = json.id;
       this.active = json.active;
       this.spacesVsTabs = json.spacesVsTabs;
-      for(let i =0; i < json.developers.length; i++){
+      for (let i = 0; i < json.developers.length; i++) {
          this.developers.push(new Developer(json.developers[i]))
       }
    }

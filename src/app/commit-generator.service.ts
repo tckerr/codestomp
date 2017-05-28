@@ -493,7 +493,7 @@ You should have trusted me.
 NSA backdoor - ignore
 "Get that outta my master."
 Now we tell you your browser sucks in your native tongue.
-         `.split("\n");
+         `.split('\n');
       return external.concat(custom)
    }
 

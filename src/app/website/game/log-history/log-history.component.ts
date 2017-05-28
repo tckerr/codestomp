@@ -21,7 +21,7 @@ export class LogHistoryComponent implements OnInit, OnDestroy {
 
    private saveLog(l) {
       this.logs.push(l);
-      if(this.logs.length > 100){
+      if (this.logs.length > 100) {
          this.logs = this.logs.slice(40, this.logs.length);
       }
    }

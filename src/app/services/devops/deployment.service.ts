@@ -7,18 +7,18 @@ import {TickService} from 'app/services/tick/tick.service';
 import {ConfigurationService} from '../configuration.service';
 
 @Injectable()
-export class DeploymentService  {
-   ngOnInit(): void {}
+export class DeploymentService {
+   ngOnInit(): void {
+   }
 
    private source = new Subject();
    public pipeline = this.source.asObservable();
    public deploying: boolean = false;
 
-   constructor(
-      private codeService: CodeService,
-      private tickService: TickService,
-      private config: ConfigurationService,
-      private logger: LoggerService) {
+   constructor(private codeService: CodeService,
+               private tickService: TickService,
+               private config: ConfigurationService,
+               private logger: LoggerService) {
    }
 
    public deploy(): void {
@@ -35,7 +35,9 @@ export class DeploymentService  {
          })
          .subscribe(
             () => this.moveToDeployed(),
-            () => { throw Error('Something went wrong in the deployment') },
+            () => {
+               throw Error('Something went wrong in the deployment')
+            },
             () => {
                this.deploying = false;
                this.logger.gameLog('Done deployment!');

@@ -9,7 +9,7 @@ export class ResourceBase {
 
    public $updatedPipeline = this.$source.asObservable();
 
-   constructor(json: any){
+   constructor(json: any) {
       this.balance = json.balance;
       this.totalAccumulated = json.totalAccumulated;
    }

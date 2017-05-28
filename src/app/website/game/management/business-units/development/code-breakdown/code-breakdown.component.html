@@ -2,25 +2,32 @@
    <div
       class="progress-bar bg-info"
       role="progressbar"
-      [style.width]="pushedPercent">Pushed ({{pushed | number: '1.0-0'}})</div>
+      [style.width]="pushedPercent">Pushed ({{pushed | number: '1.0-0'}})
+   </div>
    <div
       class="progress-bar bg-primary"
       role="progressbar"
-      [style.width]="testedPercent">Tested ({{tested | number: '1.0-0'}})</div>
+      [style.width]="testedPercent">Tested ({{tested | number: '1.0-0'}})
+   </div>
    <div
       class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
       role="progressbar"
-      [style.width]="deployingPercent">Deploying ({{deploying | number: '1.0-0'}})</div>
+      [style.width]="deployingPercent">Deploying ({{deploying | number: '1.0-0'}})
+   </div>
    <div
       class="progress-bar bg-success"
       role="progressbar"
       [style.width]="prodPercent"
-      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">Production ({{prod | number: '1.0-0'}})</div>
+      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">Production ({{prod
+      | number: '1.0-0'}})
+   </div>
    <div
       class="progress-bar bg-danger"
       role="progressbar"
       [style.width]="bugsPercent"
-      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">Bugs ({{bugs | number: '1.0-0'}})</div>
+      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">Bugs ({{bugs |
+      number: '1.0-0'}})
+   </div>
 </div>
 <div class="progress" *ngIf="codeService.total == 0">
    <div

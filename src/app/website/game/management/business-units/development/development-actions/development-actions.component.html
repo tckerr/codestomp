@@ -8,7 +8,7 @@
    class="btn btn-info btn-sm btn-interactive h-100 p-1"
    (click)="testCode(config.manualTestsPerClick)"
    [disabled]="codeService.pushed.balance <= 0">
-   <span >Test your code</span>
+   <span>Test your code</span>
 </button>
 <button
    *ngIf="unlocksService.unlocks.deployments > 0"
