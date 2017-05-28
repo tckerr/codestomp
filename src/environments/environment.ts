@@ -35,6 +35,9 @@ export const environment = {
          // devops growth rates
          deployChunkRate: 50/perHour,
 
+         // job markets
+         newGraduatesIntervalMs: perDay/2,
+
          // customer growth in ms
          customersToDeployedCodeGrowthRate: .001/perHour,
          customersCapAsPercentOfCode: .5,
@@ -46,7 +49,8 @@ export const environment = {
       },
       unlockThresholds: {
          deploymentsWhenTestedCodeGte: 20,
-         manualTestingWhenTotalCodeGte: 20
+         manualTestingWhenTotalCodeGte: 20,
+         unlockDevHiringWhenFundsGte: 20
       },
       ticker: {
          defaultIntervalMs: tickInterval,

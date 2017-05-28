@@ -51,3 +51,9 @@ html, body {
 .card-digest{
    height: 85px;
 }
+
+.flex-center {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}

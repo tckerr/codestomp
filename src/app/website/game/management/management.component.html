@@ -1,18 +1,38 @@
-<div class="container-fluid mt-2 pr-2 pl-2">
-   <app-company-digest></app-company-digest>
-   <div class="card mt-2">
-      <div class="card-header small pt-2" *ngIf="activeBusinessUnits.length > 1">
-         <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item" *ngFor="let unit of activeBusinessUnits">
-               <a
-                  class="nav-link"
-                  [routerLink]="unit.id"
-                  routerLinkActive="active">{{unit.name}}</a>
-            </li>
-         </ul>
-      </div>
-      <div class="card-block p-2">
-         <router-outlet></router-outlet>
+<div class="container-fluid mt-1 pr-2 pl-2">
+   <div class="row">
+      <div class="col-12">
+         <app-company-digest></app-company-digest>
       </div>
    </div>
+   <div class="row">
+      <div
+         [class.col-8]="hiringUnlocked"
+         [class.pr-1]="hiringUnlocked"
+         [class.col-12]="!hiringUnlocked">
+         <div class="card mt-1">
+            <div class="card-header small pt-2" *ngIf="activeBusinessUnits.length > 1">
+               <ul class="nav nav-tabs card-header-tabs">
+                  <li class="nav-item" *ngFor="let unit of activeBusinessUnits">
+                     <a
+                        class="nav-link"
+                        [routerLink]="unit.id"
+                        routerLinkActive="active">{{unit.name}}</a>
+                  </li>
+               </ul>
+            </div>
+            <div class="card-block p-2">
+               <router-outlet></router-outlet>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-4 pl-0" *ngIf="hiringUnlocked">
+         <div class="card mt-1">
+            <div class="card-block p-2">
+               <app-development-hiring></app-development-hiring>
+            </div>
+         </div>
+      </div>
+   </div>
+
 </div>

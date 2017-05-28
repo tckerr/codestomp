@@ -113,7 +113,7 @@ export class TickService implements Pipeline {
       let date = this.generateDate(tickToMsMapCached);
       let tick = new Tick(index, date, tickToMsMapCached);
       if(this.latest){
-         console.log("Time since last tick:", moment().diff(this.latest, 'ms'))
+         //console.log("Time since last tick:", moment().diff(this.latest, 'ms'))
       }
       this.latest = moment();
       this.source.next(tick);

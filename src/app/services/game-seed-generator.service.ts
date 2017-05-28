@@ -15,11 +15,18 @@ export class GameSeedGeneratorService {
          id: 'csgm_' + this.idGeneratorService.generate(),
          tick: 0,
          time: moment(environment.gameSettings.startTime).format(),
+         marketResources: {
+            graduateDevelopers: {
+               balance: 0,
+               totalAccumulated: 0
+            }
+         },
          company: {
             name: environment.gameSettings.defaults.companyName,
             unlocks: {
                manualTesting: 0,
-               deployments: 0
+               deployments: 0,
+               devHiring: 0
             },
             resources: {
                funds: {

@@ -1,0 +1,31 @@
+<div class="row">
+   <div class="col-12">
+      <div class="row h-100" *ngIf="!hireMode">
+         <div class="col-12 text-center d-flex">
+            <div class='w-100 flex-center'>
+               <div class="m-auto">
+                  <p>Your budding tech company has attracted some local talent.</p>
+                  <button
+                     (click)="showHires()"
+                     class="btn btn-info">Start hiring
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="row h-100" *ngIf="hireMode">
+         <div class="col-4">
+            <div class="list-group small">
+              <a class="list-group-item list-group-item-action p-1"
+              [routerLink]="['Development',{outlets: {'devHiring': ['dev']}}]">Child link test</a>
+            </div>
+         </div>
+         <div class="col-8">
+            <router-outlet name="devHiring"></router-outlet>
+         </div>
+      </div>
+   </div>
+</div>
+
+

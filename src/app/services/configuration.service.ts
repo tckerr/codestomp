@@ -18,11 +18,14 @@ export class ConfigurationService {
 
    public customersToProfitGrowthRate: number;
 
+   public newGraduatesIntervalMs: number;
+
    public bugsPercentage: number;
 
    // unlocks
    public deploymentsWhenTestedCodeGte: number;
    public manualTestingWhenTotalCodeGte: number;
+   public unlockDevHiringWhenFundsGte: number;
 
    constructor() {
       this.codePerClick = environment.gameSettings.defaults.codePerClick;
@@ -40,12 +43,16 @@ export class ConfigurationService {
       // funds growth
       this.customersToProfitGrowthRate = environment.gameSettings.defaults.customersToProfitGrowthRate;
 
+      // job markets
+      this.newGraduatesIntervalMs = environment.gameSettings.defaults.newGraduatesIntervalMs;
+
 
       this.deployThreshold = environment.gameSettings.defaults.deployThreshold;
       this.bugsPercentage = environment.gameSettings.defaults.bugsPercentage;
 
       this.deploymentsWhenTestedCodeGte = environment.gameSettings.unlockThresholds.deploymentsWhenTestedCodeGte;
       this.manualTestingWhenTotalCodeGte = environment.gameSettings.unlockThresholds.manualTestingWhenTotalCodeGte;
+      this.unlockDevHiringWhenFundsGte = environment.gameSettings.unlockThresholds.unlockDevHiringWhenFundsGte;
    }
 
 

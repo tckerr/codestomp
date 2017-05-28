@@ -20,7 +20,6 @@ import {DevelopmentComponent} from './website/game/management/business-units/dev
 import {HRComponent} from './website/game/management/business-units/hr/hr.component';
 import {BusinessUnits} from './models/business-units/business-units.enum';
 import {GameSeedGeneratorService} from './services/game-seed-generator.service';
-import {DeveloperComponent} from './website/game/management/business-units/development/developer/developer.component';
 import {CodeService} from './services/resource-services/code.service';
 import {DeploymentService} from './services/devops/deployment.service';
 import {CustomerAccumulatorService} from './services/accumulators/customer-accumulator.service';
@@ -36,11 +35,11 @@ import {DevelopmentActionsComponent} from './website/game/management/business-un
 import {CompanyDigestComponent} from './website/game/management/company-digest/company-digest.component';
 import {CommitGeneratorService} from './commit-generator.service';
 import {UnlocksService} from './services/unlocks.service';
-import { FundsDigestComponent } from './website/game/management/company-digest/funds-digest/funds-digest.component';
-import { DateDigestComponent } from './website/game/management/company-digest/date-digest/date-digest.component';
-import { CustomersDigestComponent } from './website/game/management/company-digest/customers-digest/customers-digest.component';
-import { DevelopmentStaffComponent } from './website/game/management/business-units/development/development-staff/development-staff.component';
-import { DevelopmentHiringComponent } from './website/game/management/business-units/development/development-hiring/development-hiring.component';
+import {FundsDigestComponent} from './website/game/management/company-digest/funds-digest/funds-digest.component';
+import {DateDigestComponent} from './website/game/management/company-digest/date-digest/date-digest.component';
+import {CustomersDigestComponent} from './website/game/management/company-digest/customers-digest/customers-digest.component';
+import {DevelopmentStaffComponent} from './website/game/management/business-units/development/development-staff/development-staff.component';
+import {DevelopmentHiringComponent} from './website/game/management/development-hiring/development-hiring.component';
 import {GraduateDeveloperGeneratorService} from './services/generators/graduate-developer-generator.service';
 import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
 import {DeveloperHiringPoolService} from './services/hiring-pools/developer-hiring-pool.service';
@@ -75,7 +74,14 @@ const appRoutes: Routes = [
                },
                {
                   path: BusinessUnits.Development,
-                  component: DevelopmentComponent
+                  component: DevelopmentComponent,
+                  children: [
+                     {
+                        path: 'dev',
+                        component: DateDigestComponent,
+                        outlet: 'devHiring'
+                     }
+                  ]
                },
                {
                   path: BusinessUnits.Debug,

@@ -1,16 +1,21 @@
 import {Injectable} from '@angular/core';
 import {TickService} from '../tick/tick.service';
-import {DeveloperHiringPoolService} from '../hiring-pools/developer-hiring-pool.service';
+import {Subject} from 'rxjs/Subject';
+import {Developer} from '../../models/developer';
+import {IdGeneratorService} from '../id-generator.service';
+import {ConfigurationService} from '../configuration.service';
+import {GameStorageService} from '../game-storage.service';
 
 @Injectable()
 export class GraduateDeveloperGeneratorService {
-
-   private timeSinceLastGenerated: number = 0;
+   private source = new Subject<Developer>();
+   public pipeline = this.source.asObservable();
 
    constructor(private tickService: TickService,
-               private hiringPool: DeveloperHiringPoolService) {
+               private config: ConfigurationService,
+               private gameStorageService: GameStorageService,
+               private idGenerator: IdGeneratorService) {
    }
-
 
    public start() {
       this.tickService.pipeline.subscribe(
@@ -19,9 +24,17 @@ export class GraduateDeveloperGeneratorService {
    }
 
    private generateStudentIfNeeded(ms: number) {
-      if (this.hiringPool.pool.length > 4)
-         return
-
-
+      this.gameStorageService.game.marketResources.graduateDevelopers.add(ms);
+      let balance = this.gameStorageService.game.marketResources.graduateDevelopers.balance;
+      let interval = this.config.newGraduatesIntervalMs;
+      if (balance > interval) {
+         this.gameStorageService.game.marketResources.graduateDevelopers.balance -= interval;
+         let developer = new Developer({
+            id: this.idGenerator.generate(),
+            firstName: 'Tom',
+            lastName: 'Kerr'
+         });
+         this.source.next(developer)
+      }
    }
 }
