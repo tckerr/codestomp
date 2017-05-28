@@ -1,11 +1,30 @@
 <div class="form-inline p-1 game-state">
    <div class="input-group input-group-sm mr-1">
       <button
+         (click)="decreaseTps()"
+         class="btn btn-sm btn-info">
+         <i class="fa fa-minus-circle"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <button
+         (click)="increaseTps()"
+         class=" btn btn-sm btn-info">
+         <i class="fa fa-plus-circle"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm">
+      <span class="input-group-addon p-1 mr-4">
+         <label class="col-form-label col-form-label-sm">{{tickService.tps | number : '1.2-2'}} ticks/s</label>
+      </span>
+   </div>
+    <div class="input-group input-group-sm mr-1">
+      <button
          (click)="decreaseSpeed()"
          class="btn btn-sm"
          [class.btn-warning]="tickService.paused"
          [class.btn-info]="!tickService.paused">
-         <i class="fa fa-fast-backward"></i>
+         <i class="fa fa-backward"></i>
       </button>
    </div>
    <div class="input-group input-group-sm mr-1">
@@ -26,16 +45,25 @@
    </div>
    <div class="input-group input-group-sm mr-1">
       <button
-         (click)="increaseSpeed()"
-         class=" btn btn-sm"
+         (click)="step()"
+         class="btn btn-sm btn-interactive"
          [class.btn-warning]="tickService.paused"
          [class.btn-info]="!tickService.paused">
-         <i class="fa fa-fast-forward"></i>
+         <i class="fa fa-step-forward"></i>
+      </button>
+   </div>
+   <div class="input-group input-group-sm mr-1">
+      <button
+         (click)="increaseSpeed()"
+         class="btn btn-sm"
+         [class.btn-warning]="tickService.paused"
+         [class.btn-info]="!tickService.paused">
+         <i class="fa fa-forward"></i>
       </button>
    </div>
    <div class="input-group input-group-sm">
       <span class="input-group-addon p-1">
-         <label class="col-form-label col-form-label-sm">{{tickService.speed | number : '1.2-2'}} ticks/s</label>
+         <label class="col-form-label col-form-label-sm">x{{tickService.speed | number : '1.2-2'}}</label>
       </span>
    </div>
 </div>

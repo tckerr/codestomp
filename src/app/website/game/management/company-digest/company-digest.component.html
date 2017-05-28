@@ -1,18 +1,11 @@
-<div class="card">
-   <div class="card-block p-2">
-      <table class="table table-sm small">
-         <thead>
-         <tr>
-            <th>Funds ({{codeProfitAccumulatorService.profitPerTick | currency: 'USD':true}}/t)</th>
-            <th>Customers ({{customerAccumulatorService.customersPerTick | number: '1.2-2'}}/t)</th>
-         </tr>
-         </thead>
-         <tbody>
-         <tr>
-            <td>{{fundsService.funds.balance | currency:'USD':true }}</td>
-            <td>{{customerService.customers.balance | number:'1.0-0'}}</td>
-         </tr>
-         </tbody>
-      </table>
+<div class="row">
+   <div class="col-2 pr-0">
+      <app-date-digest></app-date-digest>
+   </div>
+   <div class="col-2 pl-1 pr-0">
+      <app-funds-digest></app-funds-digest>
+   </div>
+   <div class="col-5 pl-1 pr-0">
+      <app-customers-digest></app-customers-digest>
    </div>
 </div>

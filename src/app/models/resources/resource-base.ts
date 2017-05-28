@@ -26,4 +26,8 @@ export class ResourceBase {
       this.balance -= count;
       this.$source.next(new ResourceUpdate(oldVal, this.balance, this.totalAccumulated, this.balance - oldVal, this));
    }
+
+   public get $balanceFloored(){
+      return Math.floor(this.balance);
+   }
 }

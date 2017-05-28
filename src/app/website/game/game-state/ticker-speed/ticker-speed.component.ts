@@ -17,23 +17,38 @@ export class TickerSpeedComponent implements OnInit {
    }
 
    private pause(): void {
-      this.tickService.stop();
       this.logger.gameLog('Paused...');
+      this.tickService.stop();
+   }
+
+   private step(): void {
+      this.logger.gameLog('Stepping forward...');
+      this.tickService.step();
    }
 
    private resume(): void {
-      this.tickService.start();
       this.logger.gameLog('Resumed!');
+      this.tickService.start();
    }
 
    private increaseSpeed(): void {
       this.tickService.faster();
-      this.logger.gameLog(`Speeding up to ${this.tickService.speed} ticks/s`);
+      this.logger.gameLog(`Speeding up to ${this.tickService.speed}`);
    }
 
    private decreaseSpeed(): void {
       this.tickService.slower();
-      this.logger.gameLog(`Slowing down to ${this.tickService.speed} ticks/s`);
+      this.logger.gameLog(`Slowing down to ${this.tickService.speed}`);
+   }
+
+   private increaseTps(): void {
+      this.tickService.increaseTps();
+      this.logger.gameLog(`Increasing resolution to ${this.tickService.tps} ticks/s`);
+   }
+
+   private decreaseTps(): void {
+      this.tickService.decreaseTps();
+      this.logger.gameLog(`Slowing down to ${this.tickService.tps} ticks/s`);
    }
 
 }

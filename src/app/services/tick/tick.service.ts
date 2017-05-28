@@ -7,35 +7,54 @@ import 'rxjs/add/observable/timer';
 import {environment} from '../../../environments/environment';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
-import {Moment, parseZone} from 'moment';
 import {GameStorageService} from '../game-storage.service';
 import {LoggerService} from '../logger-service';
 
 @Injectable()
 export class TickService implements Pipeline {
-   private tickerIntervalMs: number;
+   public tickerIntervalMs: number;
+   public ticksPerHour: number;
+   public tickToMsMap: number;
    private subscription: Subscription;
    private timer: Observable<number>;
-   private baseDate: Moment;
-   private timeUnit: string;
    private source = new Subject<Tick>();
    public pipeline = this.source.asObservable();
    private intervalIncrementDelta: number;
    private minimumInterval: number;
+   private speedMultiplier: number;
+   private msInAnHour: number;
+   private incrementingSub: Subscription;
+   private latest: moment.Moment;
+   private tickToMsMapCached: number;
 
    constructor(private gameStorageService: GameStorageService,
                private logger: LoggerService) {
       this.tickerIntervalMs = environment.gameSettings.ticker.defaultIntervalMs;
       this.intervalIncrementDelta = environment.gameSettings.ticker.intervalIncrementDelta;
       this.minimumInterval = environment.gameSettings.ticker.minimumInterval;
-      this.timeUnit = environment.gameSettings.ticker.timeUnit;
-      this.baseDate = parseZone(environment.gameSettings.startTime);
+      this.speedMultiplier = environment.gameSettings.ticker.speedMultiplier;
+      this.msInAnHour = environment.gameSettings.ticker.msInAnHour;
+      this.tickToMsMap = environment.gameSettings.ticker.tickToMsMap;
    }
 
-   start() {
+   start(offset: number = 0) {
       this.stop();
-      this.timer = Observable.timer(0, this.tickerIntervalMs);
-      this.subscription = this.timer.subscribe(() => this.generateTick());
+      this.timer = Observable.timer(offset - moment().diff(this.latest, 'ms'), this.tickerIntervalMs);
+      this.tickToMsMapCached = this.tickToMsMap;
+      this.subscription = this.timer.subscribe(() => this.generateTick(this.tickToMsMapCached));
+   }
+
+   step(){
+      this.generateTick(this.tickToMsMapCached);
+   }
+
+   continueWithUpdates(){
+      this.incrementingSub && this.incrementingSub.unsubscribe();
+      let cachedInterval = this.tickerIntervalMs;
+      this.incrementingSub = this.timer.take(1).subscribe(() => {
+         this.start(cachedInterval);
+         this.incrementingSub.unsubscribe();
+      })
    }
 
    stop() {
@@ -43,17 +62,38 @@ export class TickService implements Pipeline {
          this.subscription.unsubscribe();
    }
 
+   increaseTps() {
+      let newValue = Math.max(this.minimumInterval, this.tickerIntervalMs - this.intervalIncrementDelta);
+      this.setNewTps(newValue);
+      this.continueWithUpdates();
+   }
+
+   decreaseTps() {
+      let newValue = this.tickerIntervalMs + this.intervalIncrementDelta;
+      this.setNewTps(newValue);
+      this.continueWithUpdates();
+   }
+
+   private setNewTps(newValue: number) {
+      this.tickerIntervalMs = newValue;
+      this.setNewSpeed();
+   }
+
+   private setNewSpeed() {
+      this.tickToMsMap = this.msInAnHour * this.speedMultiplier * this.tickerIntervalMs;
+      this.ticksPerHour = this.msInAnHour / this.tickToMsMap;
+   }
+
    faster() {
-      this.tickerIntervalMs = Math.max(this.minimumInterval, this.tickerIntervalMs - this.intervalIncrementDelta);
-      if (!this.paused)
-         this.start();
+      this.speedMultiplier *= 2;
+      this.setNewSpeed();
+      this.continueWithUpdates();
    }
 
    slower() {
-      this.tickerIntervalMs += this.intervalIncrementDelta;
-      this.timer = Observable.timer(0, this.tickerIntervalMs);
-      if (!this.paused)
-         this.start();
+      this.speedMultiplier /= 2;
+      this.setNewSpeed();
+      this.continueWithUpdates();
    }
 
    public get paused() {
@@ -61,14 +101,21 @@ export class TickService implements Pipeline {
    }
 
    public get speed() {
+      return this.speedMultiplier / environment.gameSettings.ticker.speedDelta;
+   }
+
+   public get tps() {
       return Math.round(100000 / this.tickerIntervalMs) / 100;
    }
 
-   private generateTick() {
+   private generateTick(tickToMsMapCached) {
       let index = this.incrementIndex();
-      let date = this.generateDate(index);
-      let tick = new Tick(index, date);
-      //this.logger.gameLog(tick.index, tick.date.format("LLL"));
+      let date = this.generateDate(tickToMsMapCached);
+      let tick = new Tick(index, date, tickToMsMapCached);
+      if(this.latest){
+         console.log("Time since last tick:", moment().diff(this.latest, 'ms'))
+      }
+      this.latest = moment();
       this.source.next(tick);
    }
 
@@ -77,10 +124,12 @@ export class TickService implements Pipeline {
       return this.gameStorageService.game.tick;
    }
 
-   private generateDate(index: number) {
+   private generateDate(tickToMsMapCached) {
       let durationCtor = {};
-      durationCtor[this.timeUnit] = index;
-      let tempDate = moment(this.baseDate);
-      return tempDate.add(durationCtor);
+      // TODO: store old date in game data
+      durationCtor["ms"] = tickToMsMapCached;
+      let newDate = moment(this.gameStorageService.game.time).add(durationCtor);
+      this.gameStorageService.game.time = newDate.format();
+      return newDate;
    }
 }

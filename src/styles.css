@@ -47,3 +47,7 @@ html, body {
    -o-transition: none;
    transition: none;
 }
+
+.card-digest{
+   height: 85px;
+}

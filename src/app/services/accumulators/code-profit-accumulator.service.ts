@@ -4,6 +4,7 @@ import {CustomerService} from '../resource-services/customer.service';
 import {Subscription} from 'rxjs/Subscription';
 import {FundService} from '../resource-services/fund.service';
 import {ConfigurationService} from '../configuration.service';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class CodeProfitAccumulatorService implements OnDestroy {
@@ -20,15 +21,21 @@ export class CodeProfitAccumulatorService implements OnDestroy {
    }
 
    public start() {
-      this.sub = this.tickService.pipeline.subscribe(() => {
-         let growth = this.profitPerTick;
+      this.sub = this.tickService.pipeline.subscribe((tick) => {
+         let growth = this.profitPerMs(tick.msElapsed);
          if (growth > 0)
             this.fundService.add(growth);
       })
    }
 
-   private get profitPerTick() {
-      return this.customerService.customers.balance * this.config.customersToProfitGrowthRate;
+   private profitPerMs(ms: number) {
+      return ms * this.customerService.customers.$balanceFloored * this.config.customersToProfitGrowthRate;
    }
+
+   private get profitPerHr() {
+      return this.profitPerMs(1000 * 60 * 60);
+   }
+
+
 
 }

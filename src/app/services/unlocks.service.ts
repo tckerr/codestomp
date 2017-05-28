@@ -21,7 +21,7 @@ export class UnlocksService {
    }
 
    private checkUnlocks() {
-      if (this.unlocks.deployments == 0 && this.config.deploymentsWhenTotalCodeGte <= this.codeService.total) {
+      if (this.unlocks.deployments == 0 && this.config.deploymentsWhenTestedCodeGte <= this.codeService.tested.totalAccumulated) {
          this.gameStorageService.game.company.unlocks.deployments++;
          this.logger.gameLog('Deployments unlocked!');
       }

@@ -10,7 +10,7 @@ import {GameComponent} from './website/game/game.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NewGameComponent} from './website/new-game/new-game.component';
 import {GameStateComponent} from './website/game/game-state/game-state.component';
-import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertConfig, NgbCalendar, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {IdGeneratorService} from './services/id-generator.service';
 import {LoggerService} from './services/logger-service';
 import {LogHistoryComponent} from './website/game/log-history/log-history.component';
@@ -36,6 +36,9 @@ import {DevelopmentActionsComponent} from './website/game/management/business-un
 import {CompanyDigestComponent} from './website/game/management/company-digest/company-digest.component';
 import {CommitGeneratorService} from './commit-generator.service';
 import {UnlocksService} from './services/unlocks.service';
+import { FundsDigestComponent } from './website/game/management/company-digest/funds-digest/funds-digest.component';
+import { DateDigestComponent } from './website/game/management/company-digest/date-digest/date-digest.component';
+import { CustomersDigestComponent } from './website/game/management/company-digest/customers-digest/customers-digest.component';
 
 const appRoutes: Routes = [
    {
@@ -99,13 +102,16 @@ const appRoutes: Routes = [
       DebugComponent,
       DevelopmentActionsComponent,
       CompanyDigestComponent,
+      FundsDigestComponent,
+      DateDigestComponent,
+      CustomersDigestComponent,
    ],
    imports: [
       BrowserModule,
       FormsModule,
       HttpModule,
       RouterModule.forRoot(appRoutes),
-      NgbModule
+      NgbModule.forRoot()
    ],
    providers: [
       TickService,

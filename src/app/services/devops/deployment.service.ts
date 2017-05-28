@@ -45,7 +45,8 @@ export class DeploymentService {
    }
 
    private moveToDeployed() {
-      let count = Math.min(this.config.deployChunk, this.codeService.deploying.balance);
+      let offset = this.tickService.tickerIntervalMs;
+      let count = Math.min(offset/this.config.deployChunk, this.codeService.deploying.balance);
       this.codeService.moveDeployingToDeployed(count);
    }
 }

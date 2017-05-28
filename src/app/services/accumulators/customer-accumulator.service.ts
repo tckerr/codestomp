@@ -4,6 +4,7 @@ import {CodeService} from '../resource-services/code.service';
 import {Subscription} from 'rxjs/Subscription';
 import {CustomerService} from '../resource-services/customer.service';
 import {ConfigurationService} from '../configuration.service';
+import {Tick} from '../../models/tick';
 
 @Injectable()
 export class CustomerAccumulatorService implements OnDestroy {
@@ -20,18 +21,43 @@ export class CustomerAccumulatorService implements OnDestroy {
    }
 
    public start() {
-      this.sub = this.tickService.pipeline.subscribe(() => {
-         let growth = this.customersPerTick;
+      this.sub = this.tickService.pipeline.subscribe((tick: Tick) => {
+         let growth = this.customerGrowthForMs(tick.msElapsed);
          if (growth > 0)
             this.customerService.add(growth || 0);
       })
    }
 
-   public get customersPerTick() {
+   public customerGrowthForMs(ms) {
       let netCodeBalance = this.codeService.prod.balance - this.codeService.bugs.balance;
-      let growthFromCode = netCodeBalance * this.config.customersToDeployedCodeGrowthRate;
-      let growthFromWordOfMouth = this.customerService.customers.balance * this.config.wordOfMouthGrowthRate;
-      return (growthFromCode + growthFromWordOfMouth) || 0;
+      let growthCeiling = this.growthCeiling(netCodeBalance);
+      let growthTarget = Math.min(growthCeiling, netCodeBalance);
+      let growthFromCode = this.growthFromCode(growthTarget, ms);
+      let growthFromWordOfMouth = this.growthFromWordOfMouth(growthTarget, ms);
+      return Math.min(growthCeiling, (growthFromCode + growthFromWordOfMouth) || 0);
+   }
+
+   public get customersPerHr() {
+      return this.customerGrowthForMs(1000 * 60 * 60);
+   }
+
+   private growthFromWordOfMouth(growthTarget: number,ms: number) {
+      let share = this.config.wordOfMouthGrowthShare;
+      let growthRate = this.config.wordOfMouthGrowthRate;
+      return ms * share * growthTarget * growthRate;
+   }
+
+   private growthFromCode(growthTarget: number, ms: number) {
+      let share = this.config.customersToDeployedCodeGrowthShare;
+      let growthRate = this.config.customersToDeployedCodeGrowthRate;
+      return ms * share * growthTarget * growthRate;
+   }
+
+   private growthCeiling(netCodeBalance): number {
+      let capPct = this.config.customersCapAsPercentOfCode;
+      let cap = capPct * netCodeBalance;
+      let eligible = cap - this.customerService.customers.balance;
+      return eligible;
    }
 
 

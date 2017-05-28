@@ -1,0 +1,21 @@
+<div class="card-group">
+   <div class="card card-digest">
+      <div class="card-header p-1 pl-2">
+         Customers
+      </div>
+      <div class="card-block p-2">
+         <h2 class="d-inline">{{customerService.customers.$balanceFloored | number:'1.0-0'}}</h2>
+         <small class="text-muted">
+
+            <span>({{customerAccumulatorService.customersPerHr | number: '1.2-2'}}/hr)</span>
+         </small>
+      </div>
+   </div>
+   <div class="card card-digest">
+      <div class="card-header p-1 pl-2">
+         Something else
+      </div>
+      <div class="card-block p-2">
+      </div>
+   </div>
+</div>
