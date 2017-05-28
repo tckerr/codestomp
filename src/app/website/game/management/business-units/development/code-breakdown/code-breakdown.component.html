@@ -1,0 +1,21 @@
+<div class="progress" *ngIf="codeService.total > 0">
+   <div
+      class="progress-bar bg-info"
+      role="progressbar"
+      [style.width]="pushedPercent">Pushed ({{pushed}})</div>
+   <div
+      class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+      role="progressbar"
+      [style.width]="deployingPercent">Deploying ({{deploying}})</div>
+   <div
+      class="progress-bar bg-success"
+      role="progressbar"
+      [style.width]="prodPercent"
+      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">Production ({{prod}})</div>
+</div>
+<div class="progress" *ngIf="codeService.total == 0">
+   <div
+      class="progress-bar bg-faded"
+      role="progressbar"
+      style="width: 100%"></div>
+</div>

@@ -13,12 +13,29 @@ import {GameStateComponent} from './website/game/game-state/game-state.component
 import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {IdGeneratorService} from './services/id-generator.service';
 import {LoggerService} from './services/logger-service';
-import { LogHistoryComponent } from './website/game/log-history/log-history.component';
-import { TickerSpeedComponent } from './website/game/game-state/ticker-speed/ticker-speed.component';
-import { ManagementComponent } from './website/game/management/management.component';
+import {LogHistoryComponent} from './website/game/log-history/log-history.component';
+import {TickerSpeedComponent} from './website/game/game-state/ticker-speed/ticker-speed.component';
+import {ManagementComponent} from './website/game/management/management.component';
 import {DevelopmentComponent} from './website/game/management/business-units/development/development.component';
-import { HRComponent } from './website/game/management/business-units/hr/hr.component';
+import {HRComponent} from './website/game/management/business-units/hr/hr.component';
 import {BusinessUnits} from './models/business-units/business-units.enum';
+import {GameSeedGeneratorService} from './services/game-seed-generator.service';
+import {DeveloperComponent} from './website/game/management/business-units/development/developer/developer.component';
+import {CodeService} from './services/resource-services/code.service';
+import {DeploymentService} from './services/devops/deployment.service';
+import {CustomerAccumulatorService} from './services/accumulators/customer-accumulator.service';
+import { CodeBreakdownComponent } from './website/game/management/business-units/development/code-breakdown/code-breakdown.component';
+import {AccumulationAggregatorService} from 'app/services/accumulators/accumulation-aggregator.service';
+import {CodeProfitAccumulatorService} from './services/accumulators/code-profit-accumulator.service';
+import {CustomerService} from './services/resource-services/customer.service';
+import {FundService} from './services/resource-services/fund.service';
+import { DebugComponent } from './website/game/management/business-units/debug/debug.component';
+import {ConfigurationService} from './services/configuration.service';
+import {DebugService} from './services/debug.service';
+import { DevelopmentActionsComponent } from './website/game/management/business-units/development/development-actions/development-actions.component';
+import { CompanyDigestComponent } from './website/game/management/company-digest/company-digest.component';
+import {CommitGeneratorService} from './commit-generator.service';
+import {UnlocksService} from './services/unlocks.service';
 
 const appRoutes: Routes = [
    {
@@ -45,15 +62,19 @@ const appRoutes: Routes = [
             children: [
                {
                   path: '',
-                  redirectTo: 'development',
+                  redirectTo: BusinessUnits.Development,
                   pathMatch: 'full'
                },
                {
-                  path: BusinessUnits.Development.toLocaleString(),
+                  path: BusinessUnits.Development,
                   component: DevelopmentComponent
                },
                {
-                  path: BusinessUnits.HR.toLocaleString(),
+                  path: BusinessUnits.Debug,
+                  component: DebugComponent
+               },
+               {
+                  path: BusinessUnits.HR,
                   component: HRComponent
                }
             ]
@@ -72,7 +93,12 @@ const appRoutes: Routes = [
       TickerSpeedComponent,
       ManagementComponent,
       DevelopmentComponent,
-      HRComponent
+      HRComponent,
+      DeveloperComponent,
+      CodeBreakdownComponent,
+      DebugComponent,
+      DevelopmentActionsComponent,
+      CompanyDigestComponent,
    ],
    imports: [
       BrowserModule,
@@ -86,7 +112,19 @@ const appRoutes: Routes = [
       GameStorageService,
       NgbAlertConfig,
       IdGeneratorService,
-      LoggerService
+      LoggerService,
+      GameSeedGeneratorService,
+      CodeService,
+      DeploymentService,
+      CustomerAccumulatorService,
+      AccumulationAggregatorService,
+      CodeProfitAccumulatorService,
+      CustomerService,
+      FundService,
+      ConfigurationService,
+      DebugService,
+      CommitGeneratorService,
+      UnlocksService
    ],
    bootstrap: [AppComponent]
 })

@@ -23,7 +23,6 @@ export class LoggerService {
    public gameLog(...args: any[]): void {
       let id = this.idGeneratorService.generate();
       let logItem = new LogItem(id, args);
-      this.source.next(logItem);
       this.gameSource.next(logItem);
    }
 

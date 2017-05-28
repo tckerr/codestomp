@@ -68,8 +68,7 @@ export class TickService implements Pipeline {
       let index = this.incrementIndex();
       let date = this.generateDate(index);
       let tick = new Tick(index, date);
-      this.logger.log(tick);
-      this.logger.gameLog(tick.index, tick.date.format("LLL"));
+      //this.logger.gameLog(tick.index, tick.date.format("LLL"));
       this.source.next(tick);
    }
 
@@ -81,7 +80,6 @@ export class TickService implements Pipeline {
    private generateDate(index: number){
       let durationCtor = {};
       durationCtor[this.timeUnit] = index;
-      console.log("Hours:", durationCtor);
       let tempDate = moment(this.baseDate);
       return tempDate.add(durationCtor);
    }

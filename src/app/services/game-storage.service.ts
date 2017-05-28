@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Game} from '../models/game';
-import {environment} from '../../environments/environment';
-import {IdGeneratorService} from './id-generator.service';
 import {LoggerService} from './logger-service';
 import {Subject} from 'rxjs/Subject';
-import {BusinessUnits} from '../models/business-units/business-units.enum';
+import {GameSeedGeneratorService} from './game-seed-generator.service';
 
 @Injectable()
 export class GameStorageService {
@@ -13,17 +11,33 @@ export class GameStorageService {
    private loadedSource = new Subject();
    public loadedPipeline = this.loadedSource.asObservable();
 
-   constructor(private idGeneratorService: IdGeneratorService,
+   constructor(private gameSeedGenerator: GameSeedGeneratorService,
                private logger: LoggerService) {
    }
 
    load(gameId: string) {
       let gameData = localStorage.getItem(gameId);
+      this.traceLoad(gameData, gameId);
       if (!gameData)
          throw Error(`Game does not exist: ${gameId}`);
       this.game = new Game(JSON.parse(gameData));
       this.loadedSource.next();
-      this.logger.log('Loaded', this.game);
+   }
+
+   private traceLoad(gameData: string, gameId: string) {
+      this.logger.gameLog('Loading...', gameId);
+      console.group("Loading");
+      console.log(gameData);
+      console.log(JSON.parse(gameData));
+      console.groupEnd();
+   }
+
+   private traceSave(game: Game) {
+      this.logger.gameLog('Saving...', this.game.id);
+      console.group("Saving");
+      console.log(game);
+      console.log(this.toJson(game));
+      console.groupEnd();
    }
 
    public verify(gameId: string) {
@@ -34,15 +48,23 @@ export class GameStorageService {
    }
 
    public create() {
-      let seed = this.defaultSeed();
+      let seed = this.gameSeedGenerator.defaultSeed();
       this.game = new Game(seed);
       this.save();
       return this.game.id;
    }
 
    public save() {
-      this.logger.gameLog('Saving...', this.game.id);
-      localStorage.setItem(this.game.id, JSON.stringify(this.game));
+      this.traceSave(this.game);
+      localStorage.setItem(this.game.id, this.toJson(this.game));
+   }
+
+   private toJson(game: Game) {
+      return JSON.stringify(game, (k, v) => {
+         if (k.indexOf("$") >= 0)
+            return undefined;
+         return v;
+      });
    }
 
    public clear() {
@@ -50,26 +72,4 @@ export class GameStorageService {
       localStorage.clear();
    }
 
-   private defaultSeed(): any {
-      return {
-         id: 'csgm_' + this.idGeneratorService.generate(),
-         tick: 0,
-         company: {
-            name: environment.gameSettings.defaults.companyName,
-            businessUnits: [
-               {
-                  id: BusinessUnits.HR,
-                  name: 'Human Resources',
-                  active: false
-               },
-               {
-                  id: BusinessUnits.Development,
-                  name: 'Development',
-                  active: true,
-                  spacesVsTabs: 'spaces'
-               }
-            ]
-         }
-      }
-   }
 }

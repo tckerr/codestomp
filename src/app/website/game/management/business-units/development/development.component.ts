@@ -3,6 +3,7 @@ import {GameStorageService} from '../../../../../services/game-storage.service';
 import {Subscription} from 'rxjs/Subscription';
 import {BusinessUnits} from '../../../../../models/business-units/business-units.enum';
 import {DevelopmentBusinessUnit} from '../../../../../models/business-units/development-business-unit';
+import {ConfigurationService} from '../../../../../services/configuration.service';
 
 @Component({
    selector: 'app-development',
@@ -12,7 +13,8 @@ import {DevelopmentBusinessUnit} from '../../../../../models/business-units/deve
 export class DevelopmentComponent implements OnInit, OnDestroy {
    private routeParamsSubscription: Subscription;
 
-   constructor(private gameStorageService: GameStorageService) {
+   constructor(private gameStorageService: GameStorageService,
+               private config: ConfigurationService) {
    }
 
    ngOnInit() {
@@ -22,7 +24,7 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
       this.routeParamsSubscription && this.routeParamsSubscription.unsubscribe();
    }
 
-   private get businessUnit() : DevelopmentBusinessUnit {
+   private get businessUnit(): DevelopmentBusinessUnit {
       let businessUnits = this.gameStorageService.game.company.businessUnits;
       for (let i = 0; i < businessUnits.length; ++i) {
          if (businessUnits[i].id == BusinessUnits.Development)

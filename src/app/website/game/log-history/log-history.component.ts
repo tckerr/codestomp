@@ -15,8 +15,15 @@ export class LogHistoryComponent implements OnInit, OnDestroy {
    private saveSub: Subscription;
 
    constructor(private logger: LoggerService, private gameStorage: GameStorageService) {
-      this.logSub = this.logger.gamePipeline.subscribe(l => this.logs.push(l));
+      this.logSub = this.logger.gamePipeline.subscribe(l => this.saveLog(l));
       this.saveSub = this.gameStorage.loadedPipeline.subscribe(() => this.logs = []);
+   }
+
+   private saveLog(l) {
+      this.logs.push(l);
+      if(this.logs.length > 100){
+         this.logs = this.logs.slice(40, this.logs.length);
+      }
    }
 
    ngOnInit() {

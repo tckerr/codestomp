@@ -1,14 +1,49 @@
-::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
-::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); }
+::-webkit-scrollbar {
+   width: 12px;
+   height: 12px;
+}
 
-.mw-100{
-max-width: 100%;
+::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgba(0, 0, 0, 0.5);
+}
+
+.mw-100 {
+   max-width: 100%;
 }
 
 html, body {
    padding: 0;
    margin: 0;
    height: 100%;
-   background-color: #eee!important;
+   background-color: #eee !important;
+}
+
+.btn-interactive {
+   -webkit-transition: none;
+   -moz-transition: none;
+   -ms-transition: none;
+   -o-transition: none;
+   transition: none;
+}
+
+.btn-interactive:active {
+   transform: translateY(2px);
+   -webkit-transition: none;
+   -moz-transition: none;
+   -ms-transition: none;
+   -o-transition: none;
+   transition: none;
+}
+
+.btn-interactive:not(active) {
+   transform: translateY(0px);
+   -webkit-transition: none;
+   -moz-transition: none;
+   -ms-transition: none;
+   -o-transition: none;
+   transition: none;
 }

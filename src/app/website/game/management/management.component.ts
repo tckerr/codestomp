@@ -27,4 +27,8 @@ export class ManagementComponent implements OnInit {
       return results;
    }
 
+   private get cps(){
+      return
+   }
+
 }

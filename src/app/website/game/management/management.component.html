@@ -1,8 +1,8 @@
-<div class="container-fluid mt-3">
-   <div class="card">
-      <div class="card-header pt-1 pb-1">{{company.name}}</div>
-      <div class="card-block">
-         <ul class="nav nav-pills">
+<div class="container-fluid mt-2 pr-2 pl-2">
+   <app-company-digest></app-company-digest>
+   <div class="card mt-2">
+      <div class="card-header small pt-2" *ngIf="activeBusinessUnits.length > 1">
+         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item" *ngFor="let unit of activeBusinessUnits">
                <a
                   class="nav-link"
@@ -11,6 +11,8 @@
             </li>
          </ul>
       </div>
+      <div class="card-block p-2">
+         <router-outlet></router-outlet>
+      </div>
    </div>
-   <router-outlet></router-outlet>
 </div>

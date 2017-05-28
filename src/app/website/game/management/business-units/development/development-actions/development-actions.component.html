@@ -1,0 +1,13 @@
+<button
+   class="btn btn-info btn-sm btn-interactive h-100 p-1"
+   (click)="writeCode(config.codePerClick)">
+   <span>Write some code</span>
+</button>
+<button
+   *ngIf="unlocksService.unlocks.deployments > 0"
+   class="btn btn-success btn-sm btn-interactive h-100 p-1"
+   (click)="deploy()"
+   [disabled]="!canDeploy">
+   <span *ngIf="canDeploy">Ship it <i class="fa fa-ship"></i></span>
+   <span *ngIf="!canDeploy">{{deployBlockReason}}</span>
+</button>

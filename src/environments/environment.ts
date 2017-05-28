@@ -8,10 +8,20 @@ export const environment = {
    localStorageNamespace: 'codestomp',
    gameSettings: {
       defaults: {
-         companyName: "T-Corp"
+         companyName: "T-Corp",
+         startingFunds: 0,
+         codePerClick: 50,
+         deployThreshold: 500,
+         deployChunk: 10,
+         customersToDeployedCodeGrowthRate: .0001,
+         wordOfMouthGrowthRate: .0001,
+         customersToProfitGrowthRate: .001,
+      },
+      unlockThresholds: {
+         deploymentsWhenTotalCodeGte: 300
       },
       ticker: {
-         defaultIntervalMs: 1000,
+         defaultIntervalMs: 200,
          intervalIncrementDelta: 100,
          minimumInterval: 100,
          timeUnit: "hours"

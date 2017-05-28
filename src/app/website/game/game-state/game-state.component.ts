@@ -22,7 +22,6 @@ export class GameStateComponent implements OnInit {
 
    ngOnInit() {
       this.gameId = this.gameStorageService.game.id;
-      this.loadGame(this.gameId);
       this.selectedGameId = this.gameId;
    }
 
