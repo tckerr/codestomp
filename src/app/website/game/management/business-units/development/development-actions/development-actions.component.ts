@@ -23,18 +23,22 @@ export class DevelopmentActionsComponent implements OnInit {
       this.codeService.write(val);
    }
 
+   private testCode(val: number = 1) {
+      this.codeService.test(val);
+   }
+
    private deploy() {
       this.deploymentService.deploy();
    }
 
    private get canDeploy(){
-      return !this.deploymentService.deploying && this.codeService.pushed.balance >= this.config.deployThreshold
+      return !this.deploymentService.deploying && this.codeService.tested.balance >= this.config.deployThreshold
    }
 
    private get deployBlockReason(){
       if (this.deploymentService.deploying)
-         return "Deploying..."
-      let remaining = this.config.deployThreshold - this.codeService.pushed.balance;
+         return "Deploying...";
+      let remaining = this.config.deployThreshold - this.codeService.tested.balance;
       return `${remaining} more to release`
    }
 

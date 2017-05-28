@@ -28,9 +28,10 @@ export class CustomerAccumulatorService implements OnDestroy {
    }
 
    public get customersPerTick() {
-      let growthFromCode = this.codeService.prod.balance * this.config.customersToDeployedCodeGrowthRate;
+      let netCodeBalance = this.codeService.prod.balance - this.codeService.bugs.balance;
+      let growthFromCode = netCodeBalance * this.config.customersToDeployedCodeGrowthRate;
       let growthFromWordOfMouth = this.customerService.customers.balance * this.config.wordOfMouthGrowthRate;
-      return growthFromCode + growthFromWordOfMouth;
+      return (growthFromCode + growthFromWordOfMouth) || 0;
    }
 
 

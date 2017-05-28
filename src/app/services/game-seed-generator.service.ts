@@ -15,6 +15,7 @@ export class GameSeedGeneratorService {
          company: {
             name: environment.gameSettings.defaults.companyName,
             unlocks: {
+               manualTesting: 0,
                deployments: 0
             },
             resources: {
@@ -27,6 +28,10 @@ export class GameSeedGeneratorService {
                      balance: 0,
                      totalAccumulated: 0
                   },
+                  tested: {
+                     balance: 0,
+                     totalAccumulated: 0
+                  },
                   deploying: {
                      balance: 0,
                      totalAccumulated: 0
@@ -35,6 +40,10 @@ export class GameSeedGeneratorService {
                      balance: 0,
                      totalAccumulated: 0
                   },
+                  bugs: {
+                     balance: 0,
+                     totalAccumulated: 0
+                  }
                },
                customers: {
                   balance: 0,

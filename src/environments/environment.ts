@@ -11,14 +11,17 @@ export const environment = {
          companyName: "T-Corp",
          startingFunds: 0,
          codePerClick: 50,
+         manualTestsPerClick: 50,
          deployThreshold: 500,
          deployChunk: 10,
+         bugsPercentage: .05,
          customersToDeployedCodeGrowthRate: .0001,
          wordOfMouthGrowthRate: .0001,
          customersToProfitGrowthRate: .001,
       },
       unlockThresholds: {
-         deploymentsWhenTotalCodeGte: 300
+         deploymentsWhenTotalCodeGte: 700,
+         manualTestingWhenTotalCodeGte: 300
       },
       ticker: {
          defaultIntervalMs: 200,

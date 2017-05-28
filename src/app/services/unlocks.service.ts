@@ -25,6 +25,10 @@ export class UnlocksService {
          this.gameStorageService.game.company.unlocks.deployments++;
          this.logger.gameLog("Deployments unlocked!");
       }
+      if (this.unlocks.manualTesting == 0 && this.config.manualTestingWhenTotalCodeGte <= this.codeService.total){
+         this.gameStorageService.game.company.unlocks.manualTesting++;
+         this.logger.gameLog("Manual testing unlocked!");
+      }
 
    }
 }

@@ -21,13 +21,12 @@ export class DeploymentService  {
       private logger: LoggerService) {
    }
 
-
    public deploy(): void {
       if (this.deploying)
          throw Error('You are already deploying!');
 
       this.deploying = true;
-      let linesOfCodeToDeploy = this.codeService.movePushedToDeploying();
+      let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying();
       this.logger.gameLog(`Beginning deployment of ${linesOfCodeToDeploy} lines of code...`);
       this.source.next();
       this.tickService.pipeline

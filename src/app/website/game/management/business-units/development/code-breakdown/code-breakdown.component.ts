@@ -24,6 +24,14 @@ export class CodeBreakdownComponent implements OnInit {
      return 100 * this.codeService.prod.balance / (this.codeService.total || 1) + "%";
   }
 
+  public get testedPercent(): string {
+     return 100 * this.codeService.tested.balance / (this.codeService.total || 1) + "%";
+  }
+
+  public get bugsPercent(): string {
+     return 100 * this.codeService.bugs.balance / (this.codeService.total || 1) + "%";
+  }
+
   public get pushed(){
      return this.codeService.pushed.balance;
   }
@@ -34,6 +42,14 @@ export class CodeBreakdownComponent implements OnInit {
 
   public get prod(){
      return this.codeService.prod.balance;
+  }
+
+  public get tested(){
+     return this.codeService.tested.balance;
+  }
+
+  public get bugs(){
+     return this.codeService.bugs.balance;
   }
 
 }
