@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {CodeService} from '../../services/resource-services/code.service';
 import {AccumulationAggregatorService} from '../../services/accumulators/accumulation-aggregator.service';
+import {GeneratorAggregatorService} from '../../services/generators/generator-aggregator.service';
 
 @Component({
    selector: 'app-game',
@@ -19,6 +20,7 @@ export class GameComponent implements OnInit, OnDestroy {
                private gameStorageService: GameStorageService,
                private route: ActivatedRoute,
                private codeService: CodeService,
+               private genAggregator: GeneratorAggregatorService,
                private accAggregator: AccumulationAggregatorService) {
    }
 
@@ -33,6 +35,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameStorageService.load(this.gameId);
       this.tickService.start();
       this.accAggregator.start();
+      this.genAggregator.start();
       this.codeService.resetDeployment();
    }
 

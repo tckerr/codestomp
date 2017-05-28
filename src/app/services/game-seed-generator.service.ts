@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {IdGeneratorService} from './id-generator.service';
 import {environment} from '../../environments/environment';
 import {BusinessUnits} from '../models/business-units/business-units.enum';
-import {parseZone} from 'moment';
+import * as moment from 'moment';
 
 @Injectable()
 export class GameSeedGeneratorService {
@@ -14,7 +14,7 @@ export class GameSeedGeneratorService {
       return {
          id: 'csgm_' + this.idGeneratorService.generate(),
          tick: 0,
-         time: parseZone(environment.gameSettings.startTime).format(),
+         time: moment(environment.gameSettings.startTime).format(),
          company: {
             name: environment.gameSettings.defaults.companyName,
             unlocks: {
@@ -69,7 +69,7 @@ export class GameSeedGeneratorService {
                   name: 'Development',
                   active: true,
                   spacesVsTabs: 'spaces',
-                  developers: []
+                  staff: []
                }
             ]
          }

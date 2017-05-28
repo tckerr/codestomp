@@ -23,7 +23,6 @@ let perMonth = perYear / 12;
 
 export const environment = {
    production: false,
-   localStorageNamespace: 'codestomp',
    gameSettings: {
       defaults: {
          companyName: "T-Corp",
@@ -31,8 +30,10 @@ export const environment = {
          codePerClick: 100,
          manualTestsPerClick: 100,
          deployThreshold: 60,
-         deployChunk: 50,
          bugsPercentage: .05,
+
+         // devops growth rates
+         deployChunkRate: 50/perHour,
 
          // customer growth in ms
          customersToDeployedCodeGrowthRate: .001/perHour,

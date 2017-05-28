@@ -6,7 +6,7 @@ export class DevelopmentBusinessUnit implements IBusinessUnit {
    public name: string;
    public id: string;
    public active: boolean;
-   private developers: Developer[] = [];
+   public staff: Developer[] = [];
 
    constructor(json: any) {
       this.name = json.name;
@@ -14,7 +14,7 @@ export class DevelopmentBusinessUnit implements IBusinessUnit {
       this.active = json.active;
       this.spacesVsTabs = json.spacesVsTabs;
       for (let i = 0; i < json.developers.length; i++) {
-         this.developers.push(new Developer(json.developers[i]))
+         this.staff.push(new Developer(json.developers[i]))
       }
    }
 }

@@ -10,7 +10,7 @@ import {GameComponent} from './website/game/game.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NewGameComponent} from './website/new-game/new-game.component';
 import {GameStateComponent} from './website/game/game-state/game-state.component';
-import {NgbAlertConfig, NgbCalendar, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {IdGeneratorService} from './services/id-generator.service';
 import {LoggerService} from './services/logger-service';
 import {LogHistoryComponent} from './website/game/log-history/log-history.component';
@@ -39,6 +39,11 @@ import {UnlocksService} from './services/unlocks.service';
 import { FundsDigestComponent } from './website/game/management/company-digest/funds-digest/funds-digest.component';
 import { DateDigestComponent } from './website/game/management/company-digest/date-digest/date-digest.component';
 import { CustomersDigestComponent } from './website/game/management/company-digest/customers-digest/customers-digest.component';
+import { DevelopmentStaffComponent } from './website/game/management/business-units/development/development-staff/development-staff.component';
+import { DevelopmentHiringComponent } from './website/game/management/business-units/development/development-hiring/development-hiring.component';
+import {GraduateDeveloperGeneratorService} from './services/generators/graduate-developer-generator.service';
+import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
+import {DeveloperHiringPoolService} from './services/hiring-pools/developer-hiring-pool.service';
 
 const appRoutes: Routes = [
    {
@@ -97,7 +102,6 @@ const appRoutes: Routes = [
       ManagementComponent,
       DevelopmentComponent,
       HRComponent,
-      DeveloperComponent,
       CodeBreakdownComponent,
       DebugComponent,
       DevelopmentActionsComponent,
@@ -105,6 +109,8 @@ const appRoutes: Routes = [
       FundsDigestComponent,
       DateDigestComponent,
       CustomersDigestComponent,
+      DevelopmentStaffComponent,
+      DevelopmentHiringComponent,
    ],
    imports: [
       BrowserModule,
@@ -130,7 +136,10 @@ const appRoutes: Routes = [
       ConfigurationService,
       DebugService,
       CommitGeneratorService,
-      UnlocksService
+      UnlocksService,
+      GraduateDeveloperGeneratorService,
+      GeneratorAggregatorService,
+      DeveloperHiringPoolService,
    ],
    bootstrap: [AppComponent]
 })

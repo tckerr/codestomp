@@ -1,4 +1,12 @@
-<div class="card card-info card-success card-inverse card-digest">
+<div
+   class="card card-inverse card-digest"
+   [class.card-night]="!isDay"
+   [class.card-info]="isDay">
+   <span style="position: absolute; right: 6px; top: 2px;">
+      <i class="fa"
+         [class.fa-sun-o]="isDay"
+         [class.fa-moon-o]="!isDay"></i>
+   </span>
    <div class="card-block p-2">
       <div class="row">
          <div class="col-12 small">

@@ -5,8 +5,10 @@ import {environment} from '../../environments/environment';
 export class ConfigurationService {
    public codePerClick: number;
    public manualTestsPerClick: number;
-   public deployChunk: number;
    public deployThreshold: number;
+
+   //devops rates
+   public deployChunkRate: number;
 
    public customersCapAsPercentOfCode: number;
    public customersToDeployedCodeGrowthRate: number;
@@ -25,7 +27,7 @@ export class ConfigurationService {
    constructor() {
       this.codePerClick = environment.gameSettings.defaults.codePerClick;
       this.manualTestsPerClick = environment.gameSettings.defaults.manualTestsPerClick;
-      this.deployChunk = environment.gameSettings.defaults.deployChunk;
+      this.deployChunkRate = environment.gameSettings.defaults.deployChunkRate;
 
       // customer growth
       this.customersCapAsPercentOfCode = environment.gameSettings.defaults.customersCapAsPercentOfCode;

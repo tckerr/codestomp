@@ -1,12 +1,27 @@
-<div class="row">
+<div class="row mt-1">
    <div class="col-12">
-      <app-code-breakdown></app-code-breakdown>
+      <table style="height: 20px; table-layout: fixed;" class="w-100">
+        <tbody>
+          <tr>
+            <td colspan="1" class="align-middle text-center small">Code status:</td>
+            <td colspan="15" class="align-middle"><app-code-breakdown></app-code-breakdown></td>
+          </tr>
+        </tbody>
+      </table>
    </div>
 </div>
-
-<div class="row mt-2">
-   <div class="col-12 pl-3">
+<hr class="mt-2 mb-2">
+<div class="row">
+   <div class="col-12">
       <app-development-actions></app-development-actions>
    </div>
 </div>
-
+<hr class="mt-2 mb-2">
+<div class="row">
+   <div class="col-6">
+      <app-development-staff></app-development-staff>
+   </div>
+   <div class="col-6">
+      <app-development-hiring></app-development-hiring>
+   </div>
+</div>

@@ -5,6 +5,7 @@ import {CodeService} from '../resource-services/code.service';
 import 'rxjs/Rx';
 import {TickService} from 'app/services/tick/tick.service';
 import {ConfigurationService} from '../configuration.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class DeploymentService {
@@ -29,24 +30,25 @@ export class DeploymentService {
       let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying();
       this.logger.gameLog(`Beginning deployment of ${linesOfCodeToDeploy} lines of code...`);
       this.source.next();
+      let deploymentTime = moment();
       this.tickService.pipeline
          .takeWhile(() => {
             return this.codeService.deploying.balance > 0
          })
          .subscribe(
-            () => this.moveToDeployed(),
+            (tick) => this.deployCodeForMsElapsed(tick.msElapsed),
             () => {
                throw Error('Something went wrong in the deployment')
             },
             () => {
                this.deploying = false;
-               this.logger.gameLog('Done deployment!');
+               let deploymentDurationSeconds = moment().diff(deploymentTime, 's');
+               this.logger.gameLog(`Done deployment! Took ${deploymentDurationSeconds}s.`, );
             });
    }
 
-   private moveToDeployed() {
-      let offset = this.tickService.tickerIntervalMs;
-      let count = Math.min(offset/this.config.deployChunk, this.codeService.deploying.balance);
+   private deployCodeForMsElapsed(ms: number) {
+      let count = Math.min(ms * this.config.deployChunkRate, this.codeService.deploying.balance);
       this.codeService.moveDeployingToDeployed(count);
    }
 }

@@ -39,4 +39,10 @@ export class DateDigestComponent implements OnInit {
       var mmtMidnight = this.latestTickDate.clone().startOf('day');
       return this.latestTickDate.diff(mmtMidnight, 'seconds')/86400 * 100 + "%";
    }
+
+   private get isDay(){
+      var mmtMidnight = this.latestTickDate.clone().startOf('day').add(8, 'hours');
+      let diff = this.latestTickDate.diff(mmtMidnight, 'hours');
+      return diff >= 0 && diff <= 9;
+   }
 }
