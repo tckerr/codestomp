@@ -36,6 +36,11 @@ export class TickerSpeedComponent implements OnInit {
       this.logger.gameLog(`Speeding up to ${this.tickService.speed}`);
    }
 
+   private resetSpeed(): void {
+      this.tickService.resetSpeed();
+      this.logger.gameLog(`Resetting speed to ${this.tickService.speed}`);
+   }
+
    private decreaseSpeed(): void {
       this.tickService.slower();
       this.logger.gameLog(`Slowing down to ${this.tickService.speed}`);

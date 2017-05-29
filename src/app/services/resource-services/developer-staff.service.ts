@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {LoggerService} from '../logger-service';
+import {LoggerService, LogType} from '../logger-service';
 import {GameStorageService} from '../game-storage.service';
 import {DevelopmentBusinessUnit} from '../../models/business-units/development-business-unit';
 import {BusinessUnits} from '../../models/business-units/business-units.enum';
 import {QuitterNotificationService} from '../quitter-notification.service';
 import {ConfigurationService} from '../configuration.service';
+import * as Enumerable from 'linq';
+import {Staff} from '../../models/business-units/staff';
 
 @Injectable()
 export class DeveloperStaffService {
@@ -25,34 +27,27 @@ export class DeveloperStaffService {
       throw Error('Business unit not found!');
    }
 
-   public addAssociateDev() {
-      this.logger.gameLog('Hired an associate developer!');
-      this.businessUnit.staff.associateDeveloper++;
+   private getStaffByDisplayName(displayName: string){
+      for (let staff of this.businessUnit.staff) {
+         if (staff.displayName == displayName){
+            return staff;
+         }
+      }
+      throw Error("Staff type not found! " + displayName);
    }
 
-   public addJuniorDev() {
-      this.logger.gameLog('Hired a junior developer!');
-      this.businessUnit.staff.juniorDeveloper++;
+   public hire(displayName: string){
+      let staff = this.getStaffByDisplayName(displayName);
+      staff.hired++;
+      this.logger.gameLog(`New hire: ${staff.displayName}!`, LogType.Success);
    }
 
-   public addSeniorDev() {
-      this.logger.gameLog('Hired a senior developer!');
-      this.businessUnit.staff.seniorDeveloper++;
-   }
-
-   public addQaAnalyst() {
-      this.logger.gameLog('Hired a QA analyst!');
-      this.businessUnit.staff.qaAnalyst++;
-   }
-
-   public addSeniorQaAnalyst() {
-      this.logger.gameLog('Hired a senior QA analyst!');
-      this.businessUnit.staff.seniorQaAnalyst++;
-   }
-
-   public addQaAutomationEngineer() {
-      this.logger.gameLog('Hired a QA automation engineer!');
-      this.businessUnit.staff.qaAutomationEngineer++;
+   public fire(displayName: string){
+      let staff = this.getStaffByDisplayName(displayName);
+      if(staff.hired <= 0)
+         throw Error("Cannot fire staff... none exist!");
+      staff.hired--;
+      this.logger.gameLog(`Fired: ${staff.displayName}!`, LogType.Success);
    }
 
    public get staff() {
@@ -62,48 +57,20 @@ export class DeveloperStaffService {
    // TODO: move to diff class
    // TODO: offset quit chance with time
    public chanceRandomQuit(ms: number){
-      if(!this.businessUnit.$totalStaff)
+      let businessUnit = this.businessUnit;
+      if(!businessUnit.$totalStaff)
          return;
 
       if(Math.random() > (ms * this.config.quitChanceOnLackOfPayment))
          return;
 
-      let keys = Object.keys(this.businessUnit.staff);
-      while (keys) {
-         let type = keys[Math.floor(Math.random() * keys.length)];
-         if (this.businessUnit.staff[type]){
-            this.quitType(type);
-            break;
-         }
-         let index = keys.indexOf(type);
-         keys.splice(index, 1);
-      }
+      let hasHired = Enumerable.from(businessUnit.staff).where(s => s.hired > 0).toArray();
+      let choice = hasHired[Math.floor(Math.random() * hasHired.length)];
+      this.quitType(choice);
    }
 
-   private quitType(type: string) {
-      this.businessUnit.staff[type]--;
-      let message = "";
-      switch (type) {
-         case "associateDeveloper":
-            message = "An Associate Developer";
-            break;
-         case "juniorDeveloper":
-            message = "A Junior Developer";
-            break;
-         case "seniorDeveloper":
-            message = "A Senior Developer";
-            break;
-         case "qaAnalyst":
-            message = "A QA Analyst";
-            break;
-         case "seniorQaAnalyst":
-            message = "A Senior QA Analyst";
-            break;
-         case "qaAutomationEngineer":
-            message = "A QA Automation Engineer";
-            break;
-      }
-      this.quitterNotificationService.newQuitter(message, "lack of payment");
+   private quitType(staff: Staff) {
+      staff.hired--;
+      this.quitterNotificationService.newQuitter(`One ${staff.displayName}`, "lack of payment");
    }
-
 }

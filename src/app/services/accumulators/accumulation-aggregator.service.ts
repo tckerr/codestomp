@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {CustomerAccumulatorService} from './customer-accumulator.service';
 import {CodeProfitAccumulatorService} from './code-profit-accumulator.service';
-import {DeveloperCodeAccumulatorService} from './developer-code-accumulator.service';
+import {StaffActionAccumulatorService} from './staff-actions/staff-action-accumulator.service';
 import {StaffSalaryAccumulatorService} from './staff-salary-accumulator.service';
 
 @Injectable()
 export class AccumulationAggregatorService {
 
    constructor(private customerAccumulator: CustomerAccumulatorService,
-               private developerCodeAccumulator: DeveloperCodeAccumulatorService,
+               private developerCodeAccumulator: StaffActionAccumulatorService,
                private staffSalaryAccumulatorService: StaffSalaryAccumulatorService,
                private codeProfitAccumulator: CodeProfitAccumulatorService) {
    }

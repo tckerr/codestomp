@@ -20,7 +20,7 @@ import {DevelopmentComponent} from './website/game/management/business-units/dev
 import {HRComponent} from './website/game/management/business-units/hr/hr.component';
 import {GameSeedGeneratorService} from './services/game-seed-generator.service';
 import {CodeService} from './services/resource-services/code.service';
-import {DeploymentService} from './services/devops/deployment.service';
+import {DeploymentExecutor} from './services/devops/deployment-executor.service';
 import {CustomerAccumulatorService} from './services/accumulators/customer-accumulator.service';
 import {CodeBreakdownComponent} from './website/game/management/business-units/development/code-breakdown/code-breakdown.component';
 import {AccumulationAggregatorService} from 'app/services/accumulators/accumulation-aggregator.service';
@@ -39,15 +39,19 @@ import {DateDigestComponent} from './website/game/management/company-digest/date
 import {CustomersDigestComponent} from './website/game/management/company-digest/customers-digest/customers-digest.component';
 import {DevelopmentStaffComponent} from './website/game/management/business-units/development/development-staff/development-staff.component';
 import {DevelopmentHiringComponent} from './website/game/management/development-hiring/development-hiring.component';
-import {GraduateDeveloperGeneratorService} from './services/generators/graduate-developer-generator.service';
+import {TalentGeneratorService} from './services/generators/talent-generator-service';
 import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
 import {DeveloperHiringPoolService} from './services/hiring-pools/developer-hiring-pool.service';
 import {BusinessUnits} from './models/business-units/business-units.enum';
 import {DeveloperStaffService} from './services/resource-services/developer-staff.service';
-import {DeveloperCodeAccumulatorService} from './services/accumulators/developer-code-accumulator.service';
+import {StaffActionAccumulatorService} from './services/accumulators/staff-actions/staff-action-accumulator.service';
 import {StaffSalaryAccumulatorService} from './services/accumulators/staff-salary-accumulator.service';
 import {QuitterNotificationService} from './services/quitter-notification.service';
 import { AlertsDigestComponent } from './website/game/management/company-digest/alerts-digest/alerts-digest.component';
+import { TalentCapacityBreakdownComponent } from './website/game/management/development-hiring/talent-capacity-breakdown/talent-capacity-breakdown.component';
+import {CodeWritingService} from './services/accumulators/staff-actions/development/code-writing.service';
+import {CodeTestingService} from './services/accumulators/staff-actions/development/code-testing.service';
+import {CodeDeploymentService} from './services/accumulators/staff-actions/development/code-deployment.service';
 
 const appRoutes: Routes = [
    {
@@ -111,6 +115,7 @@ const appRoutes: Routes = [
       DevelopmentStaffComponent,
       DevelopmentHiringComponent,
       AlertsDigestComponent,
+      TalentCapacityBreakdownComponent,
    ],
    imports: [
       BrowserModule,
@@ -127,7 +132,7 @@ const appRoutes: Routes = [
       LoggerService,
       GameSeedGeneratorService,
       CodeService,
-      DeploymentService,
+      DeploymentExecutor,
       CustomerAccumulatorService,
       AccumulationAggregatorService,
       CodeProfitAccumulatorService,
@@ -137,13 +142,16 @@ const appRoutes: Routes = [
       DebugService,
       CommitGeneratorService,
       UnlocksService,
-      GraduateDeveloperGeneratorService,
+      TalentGeneratorService,
       GeneratorAggregatorService,
       DeveloperHiringPoolService,
       DeveloperStaffService,
-      DeveloperCodeAccumulatorService,
+      StaffActionAccumulatorService,
       StaffSalaryAccumulatorService,
-      QuitterNotificationService
+      QuitterNotificationService,
+      CodeWritingService,
+      CodeTestingService,
+      CodeDeploymentService,
    ],
    bootstrap: [AppComponent]
 })

@@ -18,6 +18,13 @@
          <label class="col-form-label col-form-label-sm">{{tickService.tps | number : '1.2-2'}} ticks/s</label>
       </span>
    </div>
+   <div class="input-group input-group-sm mr-1">
+      <button
+         (click)="resetSpeed()"
+         class="btn btn-sm btn-warning">
+         <i class="fa fa-undo"></i>
+      </button>
+   </div>
     <div class="input-group input-group-sm mr-1">
       <button
          (click)="decreaseSpeed()"
@@ -61,7 +68,7 @@
          <i class="fa fa-forward"></i>
       </button>
    </div>
-   <div class="input-group input-group-sm">
+   <div class="input-group input-group-sm mr-1">
       <span class="input-group-addon p-1">
          <label class="col-form-label col-form-label-sm">x{{tickService.speed | number : '1.2-2'}}</label>
       </span>

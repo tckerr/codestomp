@@ -11,26 +11,10 @@ export class ConfigurationService {
    // devops rates
    public deployThreshold = environment.gameSettings.defaults.deployThreshold;
    public deployChunkRate = environment.gameSettings.defaults.deployChunkRate;
+   public deployAmountPerMs = environment.gameSettings.defaults.deployAmountPerMs;
    public bugsPercentage = environment.gameSettings.defaults.bugsPercentage;
 
-   // dev staff performance rates
-   public associateDeveloperCodeGrowthRate = environment.gameSettings.defaults.associateDeveloperCodeGrowthRate;
-   public juniorDeveloperCodeGrowthRate = environment.gameSettings.defaults.juniorDeveloperCodeGrowthRate;
-   public seniorDeveloperCodeGrowthRate = environment.gameSettings.defaults.seniorDeveloperCodeGrowthRate;
-
-   public qaAnalystTestRate = environment.gameSettings.defaults.qaAnalystTestRate;
-   public seniorQaAnalystTestRate = environment.gameSettings.defaults.seniorQaAnalystTestRate;
-   public qaAutomationEngineerTestRate = environment.gameSettings.defaults.qaAutomationEngineerTestRate;
-
    public quitChanceOnLackOfPayment = environment.gameSettings.defaults.quitChanceOnLackOfPayment;
-
-   //salary
-   public associateDeveloperSalary = environment.gameSettings.defaults.associateDeveloperSalary;
-   public juniorDeveloperSalary = environment.gameSettings.defaults.juniorDeveloperSalary;
-   public seniorDeveloperSalary = environment.gameSettings.defaults.seniorDeveloperSalary;
-   public associateQaAnalystSalary = environment.gameSettings.defaults.associateQaAnalystSalary;
-   public seniorQaAnalystSalary = environment.gameSettings.defaults.seniorQaAnalystSalary;
-   public qaAutomationEngineerSalary = environment.gameSettings.defaults.qaAutomationEngineerSalary;
 
    // customer growth
    public customersCapAsPercentOfCode = environment.gameSettings.defaults.customersCapAsPercentOfCode;
@@ -43,7 +27,8 @@ export class ConfigurationService {
    public customersToProfitGrowthRate = environment.gameSettings.defaults.customersToProfitGrowthRate;
 
    // job markets
-   public newGraduatesIntervalMs = environment.gameSettings.defaults.newGraduatesIntervalMs;
+   public talentGenerationPerMs = environment.gameSettings.defaults.talentGenerationPerMs;
+   public talentGenerationCap = environment.gameSettings.defaults.talentGenerationCap;
 
    // unlocks
    public deploymentsWhenTestedCodeGte = environment.gameSettings.unlockThresholds.deploymentsWhenTestedCodeGte;

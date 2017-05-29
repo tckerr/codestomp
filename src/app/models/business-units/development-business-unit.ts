@@ -1,33 +1,26 @@
 import {IBusinessUnit} from './ibusiness-unit';
+import {Staff} from './staff';
 
 export class DevelopmentBusinessUnit implements IBusinessUnit {
    public spacesVsTabs: string;
    public name: string;
    public id: string;
    public active: boolean;
-   public staff: {
-      associateDeveloper: number,
-      juniorDeveloper: number,
-      seniorDeveloper: number,
-      qaAnalyst: number,
-      seniorQaAnalyst: number,
-      qaAutomationEngineer: number
-   };
+   public staff: Staff[] = [];
 
    constructor(json: any) {
       this.name = json.name;
       this.id = json.id;
       this.active = json.active;
       this.spacesVsTabs = json.spacesVsTabs;
-      this.staff = json.staff;
+      for (let staff of json.staff) {
+         this.staff.push(new Staff(staff));
+      }
    }
 
    public get $totalStaff() {
-      return this.staff.associateDeveloper +
-         this.staff.juniorDeveloper +
-         this.staff.seniorDeveloper +
-         this.staff.qaAnalyst +
-         this.staff.seniorQaAnalyst +
-         this.staff.qaAutomationEngineer;
+      let total = 0;
+      this.staff.forEach((s) => total += s.hired);
+      return total;
    }
 }

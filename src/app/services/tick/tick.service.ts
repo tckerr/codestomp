@@ -96,6 +96,12 @@ export class TickService implements Pipeline {
       this.continueWithUpdates();
    }
 
+   resetSpeed() {
+      this.speedMultiplier = environment.gameSettings.ticker.speedMultiplier;
+      this.setNewSpeed();
+      this.continueWithUpdates();
+   }
+
    public get paused() {
       return !this.subscription || this.subscription.closed;
    }

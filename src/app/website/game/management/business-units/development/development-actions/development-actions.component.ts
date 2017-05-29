@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CodeService} from '../../../../../../services/resource-services/code.service';
-import {DeploymentService} from '../../../../../../services/devops/deployment.service';
+import {DeploymentExecutor} from '../../../../../../services/devops/deployment-executor.service';
 import {ConfigurationService} from 'app/services/configuration.service';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
 import {CommitGeneratorService} from '../../../../../../commit-generator.service';
 import {LoggerService} from '../../../../../../services/logger-service';
+import {TickService} from '../../../../../../services/tick/tick.service';
 
 @Component({
    selector: 'app-development-actions',
@@ -14,9 +15,10 @@ import {LoggerService} from '../../../../../../services/logger-service';
 export class DevelopmentActionsComponent implements OnInit {
 
    constructor(private codeService: CodeService,
-               private deploymentService: DeploymentService,
+               private deploymentService: DeploymentExecutor,
                private unlocksService: UnlocksService,
                private logger: LoggerService,
+               private ticker: TickService,
                private commitGeneratorService: CommitGeneratorService,
                private config: ConfigurationService) {
    }
@@ -35,18 +37,19 @@ export class DevelopmentActionsComponent implements OnInit {
    }
 
    private deploy() {
-      this.deploymentService.deploy();
+      let count = this.codeService.tested.balance;
+      this.ticker.pipeline.take(1).subscribe(t => this.deploymentService.deploy(count, t.date))
    }
 
    private get canDeploy() {
-      return !this.deploymentService.deploying && this.codeService.tested.balance >= this.config.deployThreshold
+      return this.deploymentService.canDeploy
    }
 
    private get deployBlockReason() {
       if (this.deploymentService.deploying)
          return 'Deploying...';
       let remaining = this.config.deployThreshold - this.codeService.tested.balance;
-      return `${remaining} more to release`
+      return `${Math.floor(remaining)} more to release`
    }
 
 }

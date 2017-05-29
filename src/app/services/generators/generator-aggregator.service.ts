@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {GraduateDeveloperGeneratorService} from './graduate-developer-generator.service';
+import {TalentGeneratorService} from './talent-generator-service';
 
 @Injectable()
 export class GeneratorAggregatorService {
 
-  constructor(private graduateDeveloperGenerator: GraduateDeveloperGeneratorService) { }
+  constructor(private jobMarketCandidateGeneratorService: TalentGeneratorService) { }
 
   public start(){
-     this.graduateDeveloperGenerator.start();
+     this.jobMarketCandidateGeneratorService.start();
   }
 
 }

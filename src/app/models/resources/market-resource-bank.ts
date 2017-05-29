@@ -1,9 +1,10 @@
 import {HiringCandidatePoolResource} from './hiring-candidate-pool-resource';
 
 export class MarketResourceBank {
-   public graduateDevelopers: HiringCandidatePoolResource;
+   public talent: HiringCandidatePoolResource;
 
    constructor(json: any) {
-      this.graduateDevelopers = new HiringCandidatePoolResource(json.graduateDevelopers);
+      this.talent = new HiringCandidatePoolResource(json.talent);
    }
 }
+

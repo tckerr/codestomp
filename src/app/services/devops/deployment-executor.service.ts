@@ -8,10 +8,9 @@ import {ConfigurationService} from '../configuration.service';
 import * as moment from 'moment';
 
 @Injectable()
-export class DeploymentService {
-   ngOnInit(): void {
-   }
+export class DeploymentExecutor {
 
+   public lastDeploymentTime: moment.Moment = moment.min();
    private source = new Subject();
    public pipeline = this.source.asObservable();
    public deploying: boolean = false;
@@ -22,33 +21,41 @@ export class DeploymentService {
                private logger: LoggerService) {
    }
 
-   public deploy(): void {
+   public get canDeploy(){
+      return !this.deploying && this.codeService.tested.balance >= this.config.deployThreshold
+   }
+
+   public deploy(count: number, time: moment.Moment, rate: number = this.config.deployChunkRate): void {
       if (this.deploying)
          throw Error('You are already deploying!');
 
       this.deploying = true;
-      let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying();
+      let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying(count);
       this.logger.gameLog(`Beginning deployment of ${Math.floor(linesOfCodeToDeploy)} lines of code...`);
       this.source.next();
-      let deploymentTime = moment();
+      this.lastDeploymentTime = time; // TODO: store in company
+      let lastDate = time;
       this.tickService.pipeline
          .takeWhile(() => {
             return this.codeService.deploying.balance > 0
          })
          .subscribe(
-            (tick) => this.deployCodeForMsElapsed(tick.msElapsed),
+            (tick) => {
+               lastDate = tick.date;
+               this.deployCodeForMsElapsed(tick.msElapsed, rate);
+            },
             () => {
                throw Error('Something went wrong in the deployment')
             },
             () => {
                this.deploying = false;
-               let deploymentDurationSeconds = moment().diff(deploymentTime, 's');
-               this.logger.gameLog(`Done deployment! Took ${deploymentDurationSeconds}s.`, );
+               let deploymentDurationHours = lastDate.diff(this.lastDeploymentTime, 'hours');
+               this.logger.gameLog(`Done deployment! Took ${deploymentDurationHours} hrs.`, );
             });
    }
 
-   private deployCodeForMsElapsed(ms: number) {
-      let count = Math.min(ms * this.config.deployChunkRate, this.codeService.deploying.balance);
+   private deployCodeForMsElapsed(ms: number, rate:number) {
+      let count = Math.min(ms * rate, this.codeService.deploying.balance);
       this.codeService.moveDeployingToDeployed(count);
    }
 }

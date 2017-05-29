@@ -25,6 +25,50 @@ export const perMonth = perYear / 12;
 export const environment = {
    production: false,
    gameSettings: {
+      talentHiringCosts:{
+         associate: 1,
+         junior: 2,
+         senior: 3,
+      },
+      businessUnits: {
+         development: {
+            staff: {
+               special: {
+                  devopsEngineer: "Automates deployments on a regular schedule"
+               },
+               baseSalaryPerMs: {
+                  associateDeveloper: 50000 / perYear,
+                  juniorDeveloper: 85000 / perYear,
+                  seniorDeveloper: 125000 / perYear,
+                  associateQaAnalyst: 40000 / perYear,
+                  juniorQaAnalyst: 55000 / perYear,
+                  seniorQaAnalyst: 70000 / perYear,
+                  qaAutomationEngineer: 100000 / perYear,
+                  devopsEngineer: 100000 / perYear,
+               },
+               codePerMs: {
+                  associateDeveloper: 15 / perHour,
+                  juniorDeveloper: 45 / perHour,
+                  seniorDeveloper: 90 / perHour,
+                  associateQaAnalyst: 0,
+                  juniorQaAnalyst: 0,
+                  seniorQaAnalyst: 0,
+                  qaAutomationEngineer: 0,
+                  devopsEngineer: 3/perHour
+               },
+               testingPerMs: {
+                  associateDeveloper: 0,
+                  juniorDeveloper: 0,
+                  seniorDeveloper: 0,
+                  associateQaAnalyst: 10 / perHour,
+                  juniorQaAnalyst: 25 / perHour,
+                  seniorQaAnalyst: 45 / perHour,
+                  qaAutomationEngineer: 70 / perHour,
+                  devopsEngineer: 0
+               }
+            }
+         }
+      },
       defaults: {
          companyName: 'T-Corp',
          startingFunds: 0,
@@ -32,19 +76,15 @@ export const environment = {
          manualTestsPerClick: 100,
          deployThreshold: 60,
          bugsPercentage: .05,
-         quitChanceOnLackOfPayment: .6/perHour,
+         quitChanceOnLackOfPayment: .6 / perHour,
 
          // devops growth rates
-         deployChunkRate: 50 / perHour,
-         associateDeveloperCodeGrowthRate: 15 / perHour,
-         juniorDeveloperCodeGrowthRate: 45 / perHour,
-         seniorDeveloperCodeGrowthRate: 90 / perHour,
-         qaAnalystTestRate: 10 / perHour,
-         seniorQaAnalystTestRate: 30 / perHour,
-         qaAutomationEngineerTestRate: 60 / perHour, // TODO: not even a test rate thing
+         deployChunkRate: 67 / perHour,
+         deployAmountPerMs: 30 / perHour,
 
          // job markets
-         newGraduatesIntervalMs: perDay / 2,
+         talentGenerationPerMs: 3 / perDay,
+         talentGenerationCap: 50, // TODO: make a growth
 
          // customer growth in ms
          customersToDeployedCodeGrowthRate: .001 / perHour,
@@ -52,14 +92,6 @@ export const environment = {
          customersToDeployedCodeGrowthShare: .8,
          wordOfMouthGrowthRate: .000005 / perHour,
          wordOfMouthGrowthShare: .2,
-
-         //salaries
-         associateDeveloperSalary: 50000 / perYear,
-         juniorDeveloperSalary: 85000 / perYear,
-         seniorDeveloperSalary: 125000 / perYear,
-         associateQaAnalystSalary: 40000 / perYear,
-         seniorQaAnalystSalary: 70000 / perYear,
-         qaAutomationEngineerSalary: 100000 / perYear,
 
          customersToProfitGrowthRate: 15 / perMonth,
       },

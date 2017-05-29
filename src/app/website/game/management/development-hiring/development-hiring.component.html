@@ -1,24 +1,15 @@
 <div class="card mt-1">
-   <div class="card-header small pt-2">
-      Development Job Market
+   <div class="card-header small pt-3 pb-1">
+      <h6>Development Job Market</h6>
    </div>
    <div class="card-block p-2">
       <div class="row">
+         <div class="col-12 mb-2">
+            <app-talent-capacity-breakdown [hoveredCost]="activeTalentCost"></app-talent-capacity-breakdown>
+         </div>
+      </div>
+      <div class="row">
          <div class="col-12">
-
-            <!--<div class="row h-100" *ngIf="!hireMode">-->
-            <!--<div class="col-12 text-center d-flex">-->
-            <!--<div class='w-100 flex-center'>-->
-            <!--<div class="m-auto">-->
-            <!--<p>Your budding tech company has attracted some local talent.</p>-->
-            <!--<button-->
-            <!--(click)="showHires()"-->
-            <!--class="btn btn-info">Start hiring-->
-            <!--</button>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
 
             <div class="row h-100">
                <div class="col-5 pr-0">
@@ -34,9 +25,9 @@
                   </div>
                </div>
                <div class="col-7 pl-1" *ngIf="activeHireType">
-                  <div class="card">
+                  <div class="card bg-faded">
                      <div class="card-block p-1">
-                        <div class="row">
+                        <div class="row small">
                            <div class="col-3 text-right">
                               Coding
                            </div>
@@ -50,26 +41,46 @@
                               <span class="badge badge-default">{{activeHireType.qaph | number: '1.0-0'}}/hr</span>
                            </div>
                         </div>
-                     </div>
-                     <div class="row ">
-                        <div class="col-3 text-right">
-                           Salary
-                        </div>
-                        <div class="col-8 ">
+                        <div class="row small">
+                           <div class="col-3 text-right">
+                              Salary
+                           </div>
+                           <div class="col-8 ">
                               <span
                                  class="badge badge-default">
                                  <span>{{activeHireType.salary | currency: "USD":true}}/yr </span>
                                  <span>({{activeHireType.salaryPerHour | currency: "USD":true}}/hr)</span>
                               </span>
+                           </div>
                         </div>
-                     </div>
-                     <div class="row small m-2 mb-1">
-                        <div class="col-12 text-center">
-                           <button class="btn btn-success btn-block btn-sm btn-interactive"
-                                   (click)="activeHireType.hire()"
-                                   [disabled]="activeHireType.count() <= 0">
-                              <span>Hire ({{activeHireType.count()}} available)</span>
-                           </button>
+                        <div class="row small">
+                           <div class="col-3 text-right">
+                              Cost
+                           </div>
+                           <div class="col-7 ">
+                              <span
+                                 class="badge badge-danger">
+                                 <span>{{activeHireType.talentCost}} talent</span>
+                              </span>
+                           </div>
+                        </div>
+                        <div class="row mt-2" *ngIf="activeHireType.special">
+                           <div class="col-12 text-center">
+                              <div class="w-100 pt-1" style="border-top:1px solid #ddd">
+                                 <small class="text-muted">{{activeHireType.special}}</small>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row small m-2 mb-1">
+                           <div class="col-12 text-center">
+                              <button class="btn btn-success btn-block btn-sm btn-interactive"
+                                      (mouseenter)="activeTalentCost = activeHireType.talentCost"
+                                      (mouseleave)="resetCost()"
+                                      (click)="activeHireType.hire()"
+                                      [disabled]="activeHireType.count() <= 0 && resetCost()">
+                                 <span>Hire ({{activeHireType.count()}} max)</span>
+                              </button>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -78,5 +89,5 @@
          </div>
       </div>
    </div>
-</div>
 
+</div>

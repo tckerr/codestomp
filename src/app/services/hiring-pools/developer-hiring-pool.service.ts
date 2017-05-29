@@ -1,48 +1,38 @@
 import {Injectable} from '@angular/core';
-import {GraduateDeveloperGeneratorService} from '../generators/graduate-developer-generator.service';
+import {TalentGeneratorService} from '../generators/talent-generator-service';
 import {LoggerService} from '../logger-service';
 import {DeveloperStaffService} from '../resource-services/developer-staff.service';
+import {ExperienceLevel, StaffType} from '../../models/definitions/staff-definitions';
 
 @Injectable()
 export class DeveloperHiringPoolService {
 
-   constructor(private graduateDeveloperGeneratorService: GraduateDeveloperGeneratorService,
+   constructor(private talentGeneratorService: TalentGeneratorService,
                private developerStaffService: DeveloperStaffService,
                private logger: LoggerService) {
    }
 
-   public get candidates(){
-      return this.graduateDeveloperGeneratorService.available;
+   // TODO: can these methods be moved up or removed?
+
+   public get totalTalent(){
+      return this.talentGeneratorService.totalTalent;
    }
 
-   public addAssociateDev() {
-      this.graduateDeveloperGeneratorService.hire();
-      this.developerStaffService.addAssociateDev();
+   public get talentCap(){
+      return this.talentGeneratorService.talentCap;
    }
 
-   public addJuniorDev() {
-      this.graduateDeveloperGeneratorService.hire();
-      this.developerStaffService.addJuniorDev();
+   public getCostForExperience(experienceLevel: ExperienceLevel){
+      return this.talentGeneratorService.getCostForExperience(experienceLevel);
    }
 
-   public addSeniorDev() {
-      this.graduateDeveloperGeneratorService.hire();
-      this.developerStaffService.addSeniorDev();
+   public maxHires(experienceLevel: ExperienceLevel){
+      return this.talentGeneratorService.maxHires(experienceLevel);
    }
 
-   public addQaAnalyst() {
-      this.graduateDeveloperGeneratorService.hire();
-      this.developerStaffService.addQaAnalyst();
-   }
-
-   public addSeniorQaAnalyst() {
-      this.graduateDeveloperGeneratorService.hire();
-      this.developerStaffService.addSeniorQaAnalyst();
-   }
-
-   public addQaAutomationEngineer() {
-      this.graduateDeveloperGeneratorService.hire();
-      this.developerStaffService.addQaAutomationEngineer();
+   public hire(staffName: string, experienceLevel: ExperienceLevel) {
+      this.talentGeneratorService.hire(experienceLevel);
+      this.developerStaffService.hire(staffName);
    }
 
 }

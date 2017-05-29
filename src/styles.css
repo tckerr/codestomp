@@ -57,3 +57,7 @@ html, body {
    flex-direction: column;
    justify-content: center;
 }
+
+a , button{
+   cursor: pointer;
+}

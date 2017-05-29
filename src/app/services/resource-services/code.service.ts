@@ -12,7 +12,7 @@ export class CodeService {
    }
 
    public write(count: number = 1): void {
-      this.gameStorageService.game.company.resources.code.pushed.add(count);
+      this.code.pushed.add(count);
    }
 
    public test(count: number = 1): void {
@@ -26,11 +26,11 @@ export class CodeService {
       return amount;
    }
 
-   public moveTestedToDeploying() {
-      let lines = this.code.tested.balance;
-      this.code.deploying.add(lines);
-      this.code.tested.remove(lines);
-      return lines;
+   public moveTestedToDeploying(count: number) {
+      let amount = Math.min(count, this.code.tested.balance);
+      this.code.deploying.add(amount);
+      this.code.tested.remove(amount);
+      return amount;
    }
 
    public resetDeployment() {

@@ -1,0 +1,14 @@
+<div class="progress">
+   <div
+      class="progress-bar bg-success"
+      role="progressbar"
+      [style.width]="availablePct">
+      <span *ngIf="effectiveAvailable > .2">Available </span><span>({{available | number: '1.0-0'}})</span>
+   </div>
+   <div
+      *ngIf="hoveredCost > 0"
+      class="progress-bar bg-danger"
+      role="progressbar"
+      [style.width]="costPct">{{hoveredCost}}
+   </div>
+</div>

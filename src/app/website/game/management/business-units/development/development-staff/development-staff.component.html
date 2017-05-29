@@ -1,5 +1,28 @@
 <div class="row">
-   <div class="col-12">
-      Associates: <span class="badge badge-default">{{associateCount}}</span>
+   <div class="col-4">
+      <div class="list-group">
+         <div *ngFor="let staff of devStaff" class="list-group-item small p-1">
+            <div class="col-2 text-right">
+               <span class="badge badge-default">{{staff.hired}}</span>
+            </div>
+            <div class="col-7">
+               <span>{{staff.displayName}}</span>
+            </div>
+            <div class="col-3 text-right pr-1">
+               <ng-template #fireTemplate class="p-0">
+                  <small class="p-0 m-0">Fire 1 {{staff.displayName}}</small>
+               </ng-template>
+               <span [ngbTooltip]="fireTemplate">
+                  <button
+                     class="btn btn-danger btn-sm p-1 small"
+                     style="font-size: .7rem"
+                     (click)="fire(staff.displayName)"
+                     [disabled]="staff.hired <= 0">
+                     Fire <i class="fa fa-times-circle"></i>
+                  </button>
+               </span>
+            </div>
+         </div>
+      </div>
    </div>
 </div>
