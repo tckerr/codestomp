@@ -1,0 +1,14 @@
+.w-300-px{
+   width: 300px!important;
+}
+.btn-popover.btn-success:disabled{
+   opacity: 1;
+   background-color: rgba(92, 184, 92, .65)!important;
+   border-color: rgba(92, 184, 92, .65)!important;
+}
+
+.btn-popover.btn-danger:disabled{
+   opacity: 1;
+   background-color: rgba(217,83,79, .65)!important;
+   border-color: rgba(217,83,79, .65)!important;
+}

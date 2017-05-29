@@ -52,7 +52,7 @@ export class TalentGeneratorService {
    public getCostForExperience(experience: ExperienceLevel) {
       switch (experience) {
          case ExperienceLevel.Intern:
-            return 0;
+            return environment.gameSettings.talentHiringCosts.intern;
          case ExperienceLevel.Associate:
             return environment.gameSettings.talentHiringCosts.associate;
          case ExperienceLevel.Junior:

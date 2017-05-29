@@ -30,7 +30,7 @@ export class CodeDeploymentService implements TickExecutor {
       if (!this.executor.canDeploy)
          return false;
 
-      let timeSinceLastDeploy = tick.date.diff(this.executor.lastDeploymentTime, "hours");
+      let timeSinceLastDeploy = tick.date.diff(this.executor.lastDeployedDate, "hours");
       let hasBeenAtLeast12Hours = timeSinceLastDeploy >= 12;
       if(!hasBeenAtLeast12Hours)
          return false;

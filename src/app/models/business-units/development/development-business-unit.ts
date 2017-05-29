@@ -1,11 +1,13 @@
-import {IBusinessUnit} from './ibusiness-unit';
-import {Staff} from './staff';
+import {IBusinessUnit} from '../ibusiness-unit';
+import {Staff} from '../staff';
+import {DeploymentInfo} from './deployment-info';
 
 export class DevelopmentBusinessUnit implements IBusinessUnit {
    public spacesVsTabs: string;
    public name: string;
    public id: string;
    public active: boolean;
+   public deploymentInfo: DeploymentInfo;
    public staff: Staff[] = [];
 
    constructor(json: any) {
@@ -16,6 +18,7 @@ export class DevelopmentBusinessUnit implements IBusinessUnit {
       for (let staff of json.staff) {
          this.staff.push(new Staff(staff));
       }
+      this.deploymentInfo = new DeploymentInfo(json.deploymentInfo);
    }
 
    public get $totalStaff() {

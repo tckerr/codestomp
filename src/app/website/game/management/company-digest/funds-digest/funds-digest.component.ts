@@ -22,5 +22,11 @@ export class FundsDigestComponent implements OnInit {
       return this.codeProfitAccumulatorService.profitPerHr
          - this.staffSalaryAccumulatorService.costsPerHour;
    }
+   public get bgColor() {
+      let pph = this.profitPerHour;
+      if (this.fundsService.funds.balance <= 0 || (pph < 0 && this.fundsService.funds.balance < Math.abs(pph)))
+         return 'card-danger';
+      return pph > 0 ? 'card-success' : "card-warning"
+   }
 
 }

@@ -52,6 +52,8 @@ import { TalentCapacityBreakdownComponent } from './website/game/management/deve
 import {CodeWritingService} from './services/accumulators/staff-actions/development/code-writing.service';
 import {CodeTestingService} from './services/accumulators/staff-actions/development/code-testing.service';
 import {CodeDeploymentService} from './services/accumulators/staff-actions/development/code-deployment.service';
+import {DevelopmentBusinessUnitAccessorService} from './services/resource-services/development-business-unit-accessor.service';
+import {BugFixingService} from './services/accumulators/staff-actions/development/bug-fixing.service';
 
 const appRoutes: Routes = [
    {
@@ -152,6 +154,8 @@ const appRoutes: Routes = [
       CodeWritingService,
       CodeTestingService,
       CodeDeploymentService,
+      DevelopmentBusinessUnitAccessorService,
+      BugFixingService,
    ],
    bootstrap: [AppComponent]
 })

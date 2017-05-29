@@ -25,7 +25,8 @@ export const perMonth = perYear / 12;
 export const environment = {
    production: false,
    gameSettings: {
-      talentHiringCosts:{
+      talentHiringCosts: {
+         intern: 1,
          associate: 1,
          junior: 2,
          senior: 3,
@@ -34,9 +35,11 @@ export const environment = {
          development: {
             staff: {
                special: {
-                  devopsEngineer: "Automates deployments on a regular schedule"
+                  devopsEngineer: 'Automates deployments on a regular schedule',
+                  developmentIntern: 'Fixes bugs... basically for free',
                },
                baseSalaryPerMs: {
+                  developmentIntern: 10000 / perYear,
                   associateDeveloper: 50000 / perYear,
                   juniorDeveloper: 85000 / perYear,
                   seniorDeveloper: 125000 / perYear,
@@ -47,6 +50,7 @@ export const environment = {
                   devopsEngineer: 100000 / perYear,
                },
                codePerMs: {
+                  developmentIntern: -2 / perHour,
                   associateDeveloper: 15 / perHour,
                   juniorDeveloper: 45 / perHour,
                   seniorDeveloper: 90 / perHour,
@@ -54,9 +58,10 @@ export const environment = {
                   juniorQaAnalyst: 0,
                   seniorQaAnalyst: 0,
                   qaAutomationEngineer: 0,
-                  devopsEngineer: 3/perHour
+                  devopsEngineer: 0
                },
                testingPerMs: {
+                  developmentIntern: 0,
                   associateDeveloper: 0,
                   juniorDeveloper: 0,
                   seniorDeveloper: 0,
@@ -65,6 +70,17 @@ export const environment = {
                   seniorQaAnalyst: 45 / perHour,
                   qaAutomationEngineer: 70 / perHour,
                   devopsEngineer: 0
+               },
+               bugFixesPerMs: {
+                  developmentIntern: 3 / perHour,
+                  associateDeveloper: 0,
+                  juniorDeveloper: 0,
+                  seniorDeveloper: 0,
+                  associateQaAnalyst: 0,
+                  juniorQaAnalyst: 0,
+                  seniorQaAnalyst: 0,
+                  qaAutomationEngineer: 0,
+                  devopsEngineer: 0
                }
             }
          }
@@ -72,8 +88,8 @@ export const environment = {
       defaults: {
          companyName: 'T-Corp',
          startingFunds: 0,
-         codePerClick: 100,
-         manualTestsPerClick: 100,
+         codePerClick: 10,
+         manualTestsPerClick: 10,
          deployThreshold: 60,
          bugsPercentage: .05,
          quitChanceOnLackOfPayment: .6 / perHour,
@@ -87,7 +103,7 @@ export const environment = {
          talentGenerationCap: 50, // TODO: make a growth
 
          // customer growth in ms
-         customersToDeployedCodeGrowthRate: .001 / perHour,
+         customersToDeployedCodeGrowthRate: .005 / perHour,
          customersCapAsPercentOfCode: .5,
          customersToDeployedCodeGrowthShare: .8,
          wordOfMouthGrowthRate: .000005 / perHour,
@@ -98,7 +114,8 @@ export const environment = {
       unlockThresholds: {
          deploymentsWhenTestedCodeGte: 20,
          manualTestingWhenTotalCodeGte: 20,
-         unlockDevHiringWhenFundsGte: 20
+         unlockDevHiringWhenFundsGte: [10, 100, 500, 3000],
+         unlockBugFixesWhenBugsGte: 1,
       },
       ticker: {
          defaultIntervalMs: tickInterval,

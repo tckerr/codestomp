@@ -61,3 +61,18 @@ html, body {
 a , button{
    cursor: pointer;
 }
+
+.bg-disabled{
+   background-color: #d6d6d6!important;
+}
+
+.top-corner-icon{
+   position: absolute;
+   right: 6px;
+   top: 2px;
+}
+.top-corner-icon-adjusted{
+   position: absolute;
+   right: 5px;
+   top: 4px;
+}

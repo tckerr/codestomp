@@ -34,5 +34,6 @@ export class ConfigurationService {
    public deploymentsWhenTestedCodeGte = environment.gameSettings.unlockThresholds.deploymentsWhenTestedCodeGte;
    public manualTestingWhenTotalCodeGte = environment.gameSettings.unlockThresholds.manualTestingWhenTotalCodeGte;
    public unlockDevHiringWhenFundsGte = environment.gameSettings.unlockThresholds.unlockDevHiringWhenFundsGte;
+   public unlockBugFixesWhenBugsGte = environment.gameSettings.unlockThresholds.unlockBugFixesWhenBugsGte;
 
 }

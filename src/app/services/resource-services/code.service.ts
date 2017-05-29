@@ -19,10 +19,21 @@ export class CodeService {
       this.movePushedToTested(count);
    }
 
+   public bugFix(count: number = 1): void {
+      this.moveBugsToProd(count);
+   }
+
    public movePushedToTested(count: number) {
       let amount = Math.min(count, this.code.pushed.balance);
       this.code.tested.add(amount);
       this.code.pushed.remove(amount);
+      return amount;
+   }
+
+   public moveBugsToProd(count: number) {
+      let amount = Math.min(count, this.code.bugs.balance);
+      this.code.prod.add(amount);
+      this.code.bugs.remove(amount);
       return amount;
    }
 

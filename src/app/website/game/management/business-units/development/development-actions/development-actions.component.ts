@@ -36,6 +36,10 @@ export class DevelopmentActionsComponent implements OnInit {
       this.codeService.test(val);
    }
 
+   private fixBugs(val: number = 1) {
+      this.codeService.bugFix(val);
+   }
+
    private deploy() {
       let count = this.codeService.tested.balance;
       this.ticker.pipeline.take(1).subscribe(t => this.deploymentService.deploy(count, t.date))
@@ -49,7 +53,7 @@ export class DevelopmentActionsComponent implements OnInit {
       if (this.deploymentService.deploying)
          return 'Deploying...';
       let remaining = this.config.deployThreshold - this.codeService.tested.balance;
-      return `${Math.floor(remaining)} more to release`
+      return `Need ${Math.floor(remaining)} more`
    }
 
 }

@@ -14,24 +14,24 @@ export class CodeBreakdownComponent implements OnInit {
    ngOnInit() {
    }
 
-   public get pushedPercent(): string {
-      return 100 * this.codeService.pushed.balance / (this.codeService.total || 1) + '%';
+   public get pushedPercent(): number {
+      return 100 * this.codeService.pushed.balance / (this.codeService.total || 1);
    }
 
-   public get deployingPercent(): string {
-      return 100 * this.codeService.deploying.balance / (this.codeService.total || 1) + '%';
+   public get deployingPercent(): number {
+      return 100 * this.codeService.deploying.balance / (this.codeService.total || 1);
    }
 
-   public get prodPercent(): string {
-      return 100 * this.codeService.prod.balance / (this.codeService.total || 1) + '%';
+   public get prodPercent(): number {
+      return 100 * this.codeService.prod.balance / (this.codeService.total || 1);
    }
 
-   public get testedPercent(): string {
-      return 100 * this.codeService.tested.balance / (this.codeService.total || 1) + '%';
+   public get testedPercent(): number {
+      return 100 * this.codeService.tested.balance / (this.codeService.total || 1);
    }
 
-   public get bugsPercent(): string {
-      return 100 * this.codeService.bugs.balance / (this.codeService.total || 1) + '%';
+   public get bugsPercent(): number {
+      return 100 * this.codeService.bugs.balance / (this.codeService.total || 1);
    }
 
    public get pushed() {

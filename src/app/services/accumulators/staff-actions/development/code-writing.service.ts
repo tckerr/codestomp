@@ -14,7 +14,7 @@ export class CodeWritingService implements TickExecutor {
 
    public execute(tick: Tick) {
       let growth = this.codeWrittenForMs(tick.msElapsed);
-      if (growth > 0)
+      if (growth != 0)
          this.codeService.write(growth);
    }
 

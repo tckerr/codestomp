@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameStorageService} from '../../../../../services/game-storage.service';
 import {Subscription} from 'rxjs/Subscription';
 import {BusinessUnits} from '../../../../../models/business-units/business-units.enum';
-import {DevelopmentBusinessUnit} from '../../../../../models/business-units/development-business-unit';
+import {DevelopmentBusinessUnit} from '../../../../../models/business-units/development/development-business-unit';
 import {ConfigurationService} from '../../../../../services/configuration.service';
 import {UnlocksService} from '../../../../../services/unlocks.service';
 

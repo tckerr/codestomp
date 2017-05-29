@@ -1,37 +1,60 @@
-<div class="progress" *ngIf="codeService.total > 0">
+<div class="progress " *ngIf="codeService.total > 0" style="height: 50px; white-space: nowrap; cursor: pointer">
    <div
-      class="progress-bar bg-info"
+      class="progress-bar bg-info h-100 pt-3 in"
       role="progressbar"
-      [style.width]="pushedPercent">Pushed ({{pushed | number: '1.0-0'}})
+      [style.width]="pushedPercent+'%'"
+      ngbTooltip="Pushed: {{pushed | number: '1.0-0'}}">
+      <strong>
+         <span *ngIf="pushedPercent > 10">Pushed </span>
+         <span *ngIf="pushedPercent > 5">({{pushed | number: '1.0-0'}})</span>
+      </strong>
    </div>
    <div
-      class="progress-bar bg-primary"
+      class="progress-bar bg-primary h-100 pt-3"
       role="progressbar"
-      [style.width]="testedPercent">Tested ({{tested | number: '1.0-0'}})
+      ngbTooltip="Tested: {{tested | number: '1.0-0'}}"
+      [style.width]="testedPercent+'%'">
+      <strong>
+         <span *ngIf="testedPercent > 10">Tested </span>
+         <span *ngIf="testedPercent > 5">({{tested | number: '1.0-0'}})</span>
+      </strong>
    </div>
    <div
-      class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+      class="progress-bar bg-warning progress-bar-striped progress-bar-animated h-100 pt-3"
       role="progressbar"
-      [style.width]="deployingPercent">Deploying ({{deploying | number: '1.0-0'}})
+      ngbTooltip="Deploying: {{deploying | number: '1.0-0'}}"
+      [style.width]="deployingPercent+'%'">
+      <strong>
+         <span *ngIf="deployingPercent > 10">Deploying </span>
+         <span *ngIf="deployingPercent > 5">({{deploying | number: '1.0-0'}})</span>
+      </strong>
    </div>
    <div
-      class="progress-bar bg-success"
+      class="progress-bar bg-success h-100 pt-3"
       role="progressbar"
-      [style.width]="prodPercent"
-      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">Production ({{prod
-      | number: '1.0-0'}})
+      ngbTooltip="Production: {{prod | number: '1.0-0'}}"
+      [style.width]="prodPercent+'%'"
+      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">
+      <strong>
+         <span *ngIf="prodPercent > 10">Production </span>
+         <span *ngIf="prodPercent > 5">({{prod | number: '1.0-0'}})</span>
+      </strong>
    </div>
    <div
-      class="progress-bar bg-danger"
+      class="progress-bar bg-danger h-100 pt-3"
       role="progressbar"
-      [style.width]="bugsPercent"
-      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">Bugs ({{bugs |
-      number: '1.0-0'}})
+      ngbTooltip="Bugs: {{bugs | number: '1.0-0'}}"
+      [style.width]="bugsPercent+'%'"
+      [ngClass]="{'progress-bar-striped progress-bar-animated': codeService.deploying.balance != 0}">
+      <strong>
+         <span *ngIf="bugsPercent > 10">Bugs </span>
+         <span *ngIf="bugsPercent > 5">({{bugs | number: '1.0-0'}})</span>
+      </strong>
    </div>
 </div>
-<div class="progress" *ngIf="codeService.total == 0">
+<div class="progress " style="height: 50px;" *ngIf="codeService.total == 0">
    <div
-      class="progress-bar bg-faded"
+      class="progress-bar bg-faded h-100 pt-3"
       role="progressbar"
       style="width: 100%"></div>
 </div>

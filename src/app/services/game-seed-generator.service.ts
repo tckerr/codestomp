@@ -27,7 +27,8 @@ export class GameSeedGeneratorService {
             unlocks: {
                manualTesting: 0,
                deployments: 0,
-               devHiring: 0
+               devHiring: 0,
+               bugFixes: 0,
             },
             resources: {
                funds: {
@@ -76,10 +77,13 @@ export class GameSeedGeneratorService {
                   id: BusinessUnits.Development,
                   name: 'Development',
                   active: true,
-                  spacesVsTabs: 'spaces',
+                  deploymentInfo: {
+                     lastDeployUtc: moment.min().format(),
+                     deployCount: 0,
+                  },
                   staff: [
                      {
-                        displayName: "Associate Developer",
+                        displayName: 'Associate Developer',
                         type: StaffType.Developer,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.associateDeveloper,
@@ -87,10 +91,24 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.associateDeveloper,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.associateDeveloper,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.associateDeveloper
                         }
                      },
                      {
-                        displayName: "Junior Developer",
+                        displayName: 'Development Intern',
+                        type: StaffType.Developer,
+                        experience: ExperienceLevel.Intern,
+                        special: environment.gameSettings.businessUnits.development.staff.special.developmentIntern,
+                        baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.developmentIntern,
+                        hired: 0,
+                        typeDetails: {
+                           codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.developmentIntern,
+                           testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.developmentIntern,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.developmentIntern,
+                        }
+                     },
+                     {
+                        displayName: 'Junior Developer',
                         type: StaffType.Developer,
                         experience: ExperienceLevel.Junior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.juniorDeveloper,
@@ -98,10 +116,11 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.juniorDeveloper,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.juniorDeveloper,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.juniorDeveloper,
                         }
                      },
                      {
-                        displayName: "Senior Developer",
+                        displayName: 'Senior Developer',
                         type: StaffType.Developer,
                         experience: ExperienceLevel.Senior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.seniorDeveloper,
@@ -109,10 +128,11 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.seniorDeveloper,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.seniorDeveloper,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.seniorDeveloper,
                         }
                      },
                      {
-                        displayName: "Associate QA Analyst",
+                        displayName: 'Associate QA Analyst',
                         type: StaffType.QA,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.associateQaAnalyst,
@@ -120,10 +140,11 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.associateQaAnalyst,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.associateQaAnalyst,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.associateQaAnalyst,
                         }
                      },
                      {
-                        displayName: "Junior QA Analyst",
+                        displayName: 'Junior QA Analyst',
                         type: StaffType.QA,
                         experience: ExperienceLevel.Junior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.juniorQaAnalyst,
@@ -131,10 +152,12 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.juniorQaAnalyst,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.juniorQaAnalyst,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.juniorQaAnalyst,
+
                         }
                      },
                      {
-                        displayName: "Senior QA Analyst",
+                        displayName: 'Senior QA Analyst',
                         type: StaffType.QA,
                         experience: ExperienceLevel.Senior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.seniorQaAnalyst,
@@ -142,10 +165,12 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.seniorQaAnalyst,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.seniorQaAnalyst,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.seniorQaAnalyst,
+
                         }
                      },
                      {
-                        displayName: "QA Automation Engineer",
+                        displayName: 'QA Automation Engineer',
                         type: StaffType.QA,
                         experience: ExperienceLevel.Senior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.qaAutomationEngineer,
@@ -153,10 +178,11 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.qaAutomationEngineer,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.qaAutomationEngineer,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.qaAutomationEngineer,
                         }
                      },
                      {
-                        displayName: "Dev Ops Engineer",
+                        displayName: 'Dev Ops Engineer',
                         type: StaffType.DevOps,
                         special: environment.gameSettings.businessUnits.development.staff.special.devopsEngineer,
                         experience: ExperienceLevel.Senior,
@@ -165,6 +191,7 @@ export class GameSeedGeneratorService {
                         typeDetails: {
                            codePerMs: environment.gameSettings.businessUnits.development.staff.codePerMs.devopsEngineer,
                            testingPerMs: environment.gameSettings.businessUnits.development.staff.testingPerMs.devopsEngineer,
+                           bugFixesPerMs: environment.gameSettings.businessUnits.development.staff.bugFixesPerMs.devopsEngineer,
                         }
                      }
                   ]

@@ -14,14 +14,27 @@
             <div class="row h-100">
                <div class="col-5 pr-0">
                   <div class="list-group small">
-                     <button *ngFor="let hireType of devHireTypes"
-                             class="list-group-item list-group-item-action p-1"
-                             [class.active]="activeHireType && activeHireType.id == hireType.id"
-                             [disabled]="!hireType.unlocked"
-                             (click)="activeHireType = hireType">
-                        <span>{{hireType.displayName}}</span>
-                        <i *ngIf="!hireType.unlocked" class="fa fa-lock ml-1"></i>
-                     </button>
+                     <ng-container *ngFor="let hireType of devHireTypes">
+                        <button *ngIf="hireType.unlocked()"
+                                class="list-group-item list-group-item-action p-1"
+                                [class.active]="activeHireType && activeHireType.id == hireType.id"
+                                (click)="activeHireType = hireType">
+                           <span>{{hireType.displayName}}</span>
+                        </button>
+                        <span
+                           ngbPopover="Not available until you've earned more funds."
+                           placement="left"
+                           triggers="mouseenter:mouseleave">
+                           <button *ngIf="!hireType.unlocked()"
+                                   class="list-group-item list-group-item-action p-1 bg-disabled"
+                                   [class.active]="activeHireType && activeHireType.id == hireType.id"
+                                   disabled
+                                   (click)="activeHireType = hireType">
+                              <span>{{hireType.getPreviewName()}}</span>
+                              <i class="fa fa-lock ml-1"></i>
+                           </button>
+                        </span>
+                     </ng-container>
                   </div>
                </div>
                <div class="col-7 pl-1" *ngIf="activeHireType">

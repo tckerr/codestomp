@@ -1,4 +1,4 @@
-import {DevelopmentBusinessUnit} from './development-business-unit';
+import {DevelopmentBusinessUnit} from './development/development-business-unit';
 import {BusinessUnits} from './business-units.enum';
 import {BaseBusinessUnit} from './base-business-unit';
 

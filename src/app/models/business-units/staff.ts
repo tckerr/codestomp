@@ -3,7 +3,7 @@ import {IStaff} from './istaff';
 export class Staff implements IStaff{
    public displayName: string;
    public type: string;
-   public experience: string;
+   public experience: number;
    public special: string;
    public baseSalaryPerMs: number;
    public hired: number;

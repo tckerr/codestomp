@@ -6,11 +6,11 @@ import 'rxjs/Rx';
 import {TickService} from 'app/services/tick/tick.service';
 import {ConfigurationService} from '../configuration.service';
 import * as moment from 'moment';
+import {DevelopmentBusinessUnitAccessorService} from '../resource-services/development-business-unit-accessor.service';
 
 @Injectable()
 export class DeploymentExecutor {
 
-   public lastDeploymentTime: moment.Moment = moment.min();
    private source = new Subject();
    public pipeline = this.source.asObservable();
    public deploying: boolean = false;
@@ -18,7 +18,17 @@ export class DeploymentExecutor {
    constructor(private codeService: CodeService,
                private tickService: TickService,
                private config: ConfigurationService,
+               private devAccessor: DevelopmentBusinessUnitAccessorService,
                private logger: LoggerService) {
+
+   }
+
+   public set lastDeployedDate(date: moment.Moment){
+      this.devAccessor.businessUnit.deploymentInfo.lastDeployUtc = date.format();
+   }
+
+   public get lastDeployedDate(){
+      return moment(this.devAccessor.businessUnit.deploymentInfo.lastDeployUtc);
    }
 
    public get canDeploy(){
@@ -33,7 +43,7 @@ export class DeploymentExecutor {
       let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying(count);
       this.logger.gameLog(`Beginning deployment of ${Math.floor(linesOfCodeToDeploy)} lines of code...`);
       this.source.next();
-      this.lastDeploymentTime = time; // TODO: store in company
+      this.lastDeployedDate = time; // TODO: store in company
       let lastDate = time;
       this.tickService.pipeline
          .takeWhile(() => {
@@ -49,7 +59,8 @@ export class DeploymentExecutor {
             },
             () => {
                this.deploying = false;
-               let deploymentDurationHours = lastDate.diff(this.lastDeploymentTime, 'hours');
+               let deploymentDurationHours = lastDate.diff(this.lastDeployedDate, 'hours');
+               this.devAccessor.businessUnit.deploymentInfo.deployCount++;
                this.logger.gameLog(`Done deployment! Took ${deploymentDurationHours} hrs.`, );
             });
    }

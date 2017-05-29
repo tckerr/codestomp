@@ -1,34 +1,22 @@
 import {Injectable} from '@angular/core';
 import {LoggerService, LogType} from '../logger-service';
-import {GameStorageService} from '../game-storage.service';
-import {DevelopmentBusinessUnit} from '../../models/business-units/development-business-unit';
-import {BusinessUnits} from '../../models/business-units/business-units.enum';
 import {QuitterNotificationService} from '../quitter-notification.service';
 import {ConfigurationService} from '../configuration.service';
 import * as Enumerable from 'linq';
 import {Staff} from '../../models/business-units/staff';
+import {DevelopmentBusinessUnitAccessorService} from './development-business-unit-accessor.service';
 
 @Injectable()
 export class DeveloperStaffService {
 
-   constructor(private gameStorageService: GameStorageService,
-               private quitterNotificationService: QuitterNotificationService,
+   constructor(private quitterNotificationService: QuitterNotificationService,
                private config: ConfigurationService,
+               private devAccessor: DevelopmentBusinessUnitAccessorService,
                private logger: LoggerService) {
    }
 
-   //TODO: a class, also remove from DevelopmentComponent
-   private get businessUnit(): DevelopmentBusinessUnit {
-      let businessUnits = this.gameStorageService.game.company.businessUnits;
-      for (let i = 0; i < businessUnits.length; ++i) {
-         if (businessUnits[i].id == BusinessUnits.Development)
-            return (<DevelopmentBusinessUnit>businessUnits[i]);
-      }
-      throw Error('Business unit not found!');
-   }
-
    private getStaffByDisplayName(displayName: string){
-      for (let staff of this.businessUnit.staff) {
+      for (let staff of this.devAccessor.businessUnit.staff) {
          if (staff.displayName == displayName){
             return staff;
          }
@@ -51,13 +39,16 @@ export class DeveloperStaffService {
    }
 
    public get staff() {
-      return this.businessUnit.staff;
+      return Enumerable
+         .from(this.devAccessor.businessUnit.staff)
+         .orderBy(n => n.experience)
+         .toArray();
    }
 
    // TODO: move to diff class
    // TODO: offset quit chance with time
    public chanceRandomQuit(ms: number){
-      let businessUnit = this.businessUnit;
+      let businessUnit = this.devAccessor.businessUnit;
       if(!businessUnit.$totalStaff)
          return;
 

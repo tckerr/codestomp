@@ -7,6 +7,7 @@ import {CodeWritingService} from './development/code-writing.service';
 import {TickExecutor} from '../../interfaces/tick-executor';
 import {CodeTestingService} from 'app/services/accumulators/staff-actions/development/code-testing.service';
 import {CodeDeploymentService} from './development/code-deployment.service';
+import {BugFixingService} from './development/bug-fixing.service';
 
 @Injectable()
 export class StaffActionAccumulatorService implements OnDestroy {
@@ -16,8 +17,10 @@ export class StaffActionAccumulatorService implements OnDestroy {
    constructor(private codeWritingService: CodeWritingService,
                private codeTestingService: CodeTestingService,
                private codeDeploymentService: CodeDeploymentService,
+               private bugFixingService: BugFixingService,
                private tickService: TickService) {
       this.executors = [
+         bugFixingService,
          codeTestingService,
          codeDeploymentService,
          codeWritingService,

@@ -1,4 +1,6 @@
-<div class="card card-inverse card-success card-digest">
+<div
+   [ngClass]="bgColor"
+   class="card card-inverse card-digest">
    <div class="card-block p-2">
       <h3 class="card-title">{{fundsService.funds.balance | currency:'USD':true }}</h3>
       <div>({{profitPerHour | currency: 'USD':true}}/hr)</div>

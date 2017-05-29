@@ -4,10 +4,18 @@ export class StaffType {
    public static readonly DevOps = "devops";
 }
 
-export class ExperienceLevel {
-   public static readonly Intern = "intern";
-   public static readonly Associate = "associate";
-   public static readonly Junior = "junior";
-   public static readonly Senior = "senior";
+export enum ExperienceLevel {
+   Intern,
+   Associate,
+   Junior,
+   Senior
 }
 
+//
+// export class ExperienceLevel {
+//    public static readonly Intern = "intern";
+//    public static readonly Associate = "associate";
+//    public static readonly Junior = "junior";
+//    public static readonly Senior = "senior";
+// }
+//
