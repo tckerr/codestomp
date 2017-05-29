@@ -18,7 +18,6 @@ import {TickerSpeedComponent} from './website/game/game-state/ticker-speed/ticke
 import {ManagementComponent} from './website/game/management/management.component';
 import {DevelopmentComponent} from './website/game/management/business-units/development/development.component';
 import {HRComponent} from './website/game/management/business-units/hr/hr.component';
-import {BusinessUnits} from './models/business-units/business-units.enum';
 import {GameSeedGeneratorService} from './services/game-seed-generator.service';
 import {CodeService} from './services/resource-services/code.service';
 import {DeploymentService} from './services/devops/deployment.service';
@@ -43,6 +42,12 @@ import {DevelopmentHiringComponent} from './website/game/management/development-
 import {GraduateDeveloperGeneratorService} from './services/generators/graduate-developer-generator.service';
 import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
 import {DeveloperHiringPoolService} from './services/hiring-pools/developer-hiring-pool.service';
+import {BusinessUnits} from './models/business-units/business-units.enum';
+import {DeveloperStaffService} from './services/resource-services/developer-staff.service';
+import {DeveloperCodeAccumulatorService} from './services/accumulators/developer-code-accumulator.service';
+import {StaffSalaryAccumulatorService} from './services/accumulators/staff-salary-accumulator.service';
+import {QuitterNotificationService} from './services/quitter-notification.service';
+import { AlertsDigestComponent } from './website/game/management/company-digest/alerts-digest/alerts-digest.component';
 
 const appRoutes: Routes = [
    {
@@ -60,32 +65,20 @@ const appRoutes: Routes = [
       children: [
          {
             path: '',
-            redirectTo: 'management',
-            pathMatch: 'full'
-         },
-         {
-            path: 'management',
             component: ManagementComponent,
             children: [
                {
                   path: '',
+                  pathMatch: 'full',
                   redirectTo: BusinessUnits.Development,
-                  pathMatch: 'full'
                },
                {
                   path: BusinessUnits.Development,
                   component: DevelopmentComponent,
-                  children: [
-                     {
-                        path: 'dev',
-                        component: DateDigestComponent,
-                        outlet: 'devHiring'
-                     }
-                  ]
                },
                {
                   path: BusinessUnits.Debug,
-                  component: DebugComponent
+                  component: DebugComponent,
                },
                {
                   path: BusinessUnits.HR,
@@ -117,6 +110,7 @@ const appRoutes: Routes = [
       CustomersDigestComponent,
       DevelopmentStaffComponent,
       DevelopmentHiringComponent,
+      AlertsDigestComponent,
    ],
    imports: [
       BrowserModule,
@@ -146,6 +140,10 @@ const appRoutes: Routes = [
       GraduateDeveloperGeneratorService,
       GeneratorAggregatorService,
       DeveloperHiringPoolService,
+      DeveloperStaffService,
+      DeveloperCodeAccumulatorService,
+      StaffSalaryAccumulatorService,
+      QuitterNotificationService
    ],
    bootstrap: [AppComponent]
 })

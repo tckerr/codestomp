@@ -6,7 +6,7 @@ export class CommitGeneratorService {
    constructor() {
    }
 
-   public generate() {
+   public generate() : string {
       let items = this.messages();
       let choice = items[Math.floor(Math.random() * items.length)];
       return `git commit -am '${choice}'`;

@@ -32,7 +32,7 @@ export class CodeProfitAccumulatorService implements OnDestroy {
       return ms * this.customerService.customers.$balanceFloored * this.config.customersToProfitGrowthRate;
    }
 
-   private get profitPerHr() {
+   public get profitPerHr() {
       return this.profitPerMs(1000 * 60 * 60);
    }
 

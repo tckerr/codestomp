@@ -1,44 +1,48 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {Developer} from '../../models/developer';
+import {Injectable} from '@angular/core';
 import {GraduateDeveloperGeneratorService} from '../generators/graduate-developer-generator.service';
-import {Subscription} from 'rxjs/Subscription';
 import {LoggerService} from '../logger-service';
+import {DeveloperStaffService} from '../resource-services/developer-staff.service';
 
 @Injectable()
-export class DeveloperHiringPoolService implements OnDestroy {
+export class DeveloperHiringPoolService {
 
    constructor(private graduateDeveloperGeneratorService: GraduateDeveloperGeneratorService,
+               private developerStaffService: DeveloperStaffService,
                private logger: LoggerService) {
    }
 
-   private sub: Subscription;
-   public pool: Developer[] = [];
-   public maxSize: number = 5; // TODO: config
-
-   public get hasRoom() {
-      return this.pool.length < this.maxSize;
+   public get candidates(){
+      return this.graduateDeveloperGeneratorService.available;
    }
 
-   public add(dev: Developer) {
-      if (!this.hasRoom)
-         throw Error('Out of room, can\'t add a dev!');
-      this.pool.push(dev);
+   public addAssociateDev() {
+      this.graduateDeveloperGeneratorService.hire();
+      this.developerStaffService.addAssociateDev();
    }
 
-   public listen() {
-      this.sub = this.graduateDeveloperGeneratorService
-         .pipeline.subscribe(d => this.acceptDeveloper(d))
+   public addJuniorDev() {
+      this.graduateDeveloperGeneratorService.hire();
+      this.developerStaffService.addJuniorDev();
    }
 
-   private acceptDeveloper(dev: Developer) {
-      if (this.hasRoom) {
-         this.add(dev);
-         this.logger.gameLog(`A new developer joined the job market: '${dev.name}'`)
-      }
+   public addSeniorDev() {
+      this.graduateDeveloperGeneratorService.hire();
+      this.developerStaffService.addSeniorDev();
    }
 
-   ngOnDestroy(): void {
-      throw new Error('Method not implemented.');
+   public addQaAnalyst() {
+      this.graduateDeveloperGeneratorService.hire();
+      this.developerStaffService.addQaAnalyst();
+   }
+
+   public addSeniorQaAnalyst() {
+      this.graduateDeveloperGeneratorService.hire();
+      this.developerStaffService.addSeniorQaAnalyst();
+   }
+
+   public addQaAutomationEngineer() {
+      this.graduateDeveloperGeneratorService.hire();
+      this.developerStaffService.addQaAutomationEngineer();
    }
 
 }

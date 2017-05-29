@@ -3,57 +3,51 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ConfigurationService {
-   public codePerClick: number;
-   public manualTestsPerClick: number;
-   public deployThreshold: number;
 
-   //devops rates
-   public deployChunkRate: number;
+   // manual input rates
+   public codePerClick = environment.gameSettings.defaults.codePerClick;
+   public manualTestsPerClick = environment.gameSettings.defaults.manualTestsPerClick;
 
-   public customersCapAsPercentOfCode: number;
-   public customersToDeployedCodeGrowthRate: number;
-   public customersToDeployedCodeGrowthShare: number;
-   public wordOfMouthGrowthRate: number;
-   public wordOfMouthGrowthShare: number;
+   // devops rates
+   public deployThreshold = environment.gameSettings.defaults.deployThreshold;
+   public deployChunkRate = environment.gameSettings.defaults.deployChunkRate;
+   public bugsPercentage = environment.gameSettings.defaults.bugsPercentage;
 
-   public customersToProfitGrowthRate: number;
+   // dev staff performance rates
+   public associateDeveloperCodeGrowthRate = environment.gameSettings.defaults.associateDeveloperCodeGrowthRate;
+   public juniorDeveloperCodeGrowthRate = environment.gameSettings.defaults.juniorDeveloperCodeGrowthRate;
+   public seniorDeveloperCodeGrowthRate = environment.gameSettings.defaults.seniorDeveloperCodeGrowthRate;
 
-   public newGraduatesIntervalMs: number;
+   public qaAnalystTestRate = environment.gameSettings.defaults.qaAnalystTestRate;
+   public seniorQaAnalystTestRate = environment.gameSettings.defaults.seniorQaAnalystTestRate;
+   public qaAutomationEngineerTestRate = environment.gameSettings.defaults.qaAutomationEngineerTestRate;
 
-   public bugsPercentage: number;
+   public quitChanceOnLackOfPayment = environment.gameSettings.defaults.quitChanceOnLackOfPayment;
+
+   //salary
+   public associateDeveloperSalary = environment.gameSettings.defaults.associateDeveloperSalary;
+   public juniorDeveloperSalary = environment.gameSettings.defaults.juniorDeveloperSalary;
+   public seniorDeveloperSalary = environment.gameSettings.defaults.seniorDeveloperSalary;
+   public associateQaAnalystSalary = environment.gameSettings.defaults.associateQaAnalystSalary;
+   public seniorQaAnalystSalary = environment.gameSettings.defaults.seniorQaAnalystSalary;
+   public qaAutomationEngineerSalary = environment.gameSettings.defaults.qaAutomationEngineerSalary;
+
+   // customer growth
+   public customersCapAsPercentOfCode = environment.gameSettings.defaults.customersCapAsPercentOfCode;
+   public customersToDeployedCodeGrowthRate = environment.gameSettings.defaults.customersToDeployedCodeGrowthRate;
+   public customersToDeployedCodeGrowthShare = environment.gameSettings.defaults.customersToDeployedCodeGrowthShare;
+   public wordOfMouthGrowthRate = environment.gameSettings.defaults.wordOfMouthGrowthRate;
+   public wordOfMouthGrowthShare = environment.gameSettings.defaults.wordOfMouthGrowthShare;
+
+   // funds growth
+   public customersToProfitGrowthRate = environment.gameSettings.defaults.customersToProfitGrowthRate;
+
+   // job markets
+   public newGraduatesIntervalMs = environment.gameSettings.defaults.newGraduatesIntervalMs;
 
    // unlocks
-   public deploymentsWhenTestedCodeGte: number;
-   public manualTestingWhenTotalCodeGte: number;
-   public unlockDevHiringWhenFundsGte: number;
-
-   constructor() {
-      this.codePerClick = environment.gameSettings.defaults.codePerClick;
-      this.manualTestsPerClick = environment.gameSettings.defaults.manualTestsPerClick;
-      this.deployChunkRate = environment.gameSettings.defaults.deployChunkRate;
-
-      // customer growth
-      this.customersCapAsPercentOfCode = environment.gameSettings.defaults.customersCapAsPercentOfCode;
-
-      this.customersToDeployedCodeGrowthRate = environment.gameSettings.defaults.customersToDeployedCodeGrowthRate;
-      this.customersToDeployedCodeGrowthShare = environment.gameSettings.defaults.customersToDeployedCodeGrowthShare;
-      this.wordOfMouthGrowthRate = environment.gameSettings.defaults.wordOfMouthGrowthRate;
-      this.wordOfMouthGrowthShare = environment.gameSettings.defaults.wordOfMouthGrowthShare;
-
-      // funds growth
-      this.customersToProfitGrowthRate = environment.gameSettings.defaults.customersToProfitGrowthRate;
-
-      // job markets
-      this.newGraduatesIntervalMs = environment.gameSettings.defaults.newGraduatesIntervalMs;
-
-
-      this.deployThreshold = environment.gameSettings.defaults.deployThreshold;
-      this.bugsPercentage = environment.gameSettings.defaults.bugsPercentage;
-
-      this.deploymentsWhenTestedCodeGte = environment.gameSettings.unlockThresholds.deploymentsWhenTestedCodeGte;
-      this.manualTestingWhenTotalCodeGte = environment.gameSettings.unlockThresholds.manualTestingWhenTotalCodeGte;
-      this.unlockDevHiringWhenFundsGte = environment.gameSettings.unlockThresholds.unlockDevHiringWhenFundsGte;
-   }
-
+   public deploymentsWhenTestedCodeGte = environment.gameSettings.unlockThresholds.deploymentsWhenTestedCodeGte;
+   public manualTestingWhenTotalCodeGte = environment.gameSettings.unlockThresholds.manualTestingWhenTotalCodeGte;
+   public unlockDevHiringWhenFundsGte = environment.gameSettings.unlockThresholds.unlockDevHiringWhenFundsGte;
 
 }

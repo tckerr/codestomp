@@ -76,7 +76,14 @@ export class GameSeedGeneratorService {
                   name: 'Development',
                   active: true,
                   spacesVsTabs: 'spaces',
-                  staff: []
+                  staff: {
+                     associateDeveloper: 0,
+                     juniorDeveloper: 0,
+                     seniorDeveloper: 0,
+                     qaAnalyst: 0,
+                     seniorQaAnalyst: 0,
+                     qaAutomationEngineer: 0,
+                  }
                }
             ]
          }

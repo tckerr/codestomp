@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DeveloperStaffService} from '../../../../../../services/resource-services/developer-staff.service';
 
 @Component({
   selector: 'app-development-staff',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DevelopmentStaffComponent implements OnInit {
 
-  constructor() { }
+  constructor(private developerStaffService: DeveloperStaffService,) { }
 
   ngOnInit() {
+  }
+
+  private get associateCount(){
+     return this.developerStaffService.staff.associateDeveloper;
   }
 
 }

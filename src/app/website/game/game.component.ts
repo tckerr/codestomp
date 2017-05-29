@@ -6,7 +6,6 @@ import {Subscription} from 'rxjs/Subscription';
 import {CodeService} from '../../services/resource-services/code.service';
 import {AccumulationAggregatorService} from '../../services/accumulators/accumulation-aggregator.service';
 import {GeneratorAggregatorService} from '../../services/generators/generator-aggregator.service';
-import {DeveloperHiringPoolService} from '../../services/hiring-pools/developer-hiring-pool.service';
 
 @Component({
    selector: 'app-game',
@@ -22,7 +21,6 @@ export class GameComponent implements OnInit, OnDestroy {
                private route: ActivatedRoute,
                private codeService: CodeService,
                private genAggregator: GeneratorAggregatorService,
-               private developerHiringPool: DeveloperHiringPoolService,
                private accAggregator: AccumulationAggregatorService) {
    }
 
@@ -38,7 +36,6 @@ export class GameComponent implements OnInit, OnDestroy {
       this.tickService.start();
       this.accAggregator.start();
       this.genAggregator.start();
-      this.developerHiringPool.listen(),
       this.codeService.resetDeployment();
    }
 

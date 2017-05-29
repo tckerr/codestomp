@@ -3,6 +3,8 @@ import {CodeService} from '../../../../../../services/resource-services/code.ser
 import {DeploymentService} from '../../../../../../services/devops/deployment.service';
 import {ConfigurationService} from 'app/services/configuration.service';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
+import {CommitGeneratorService} from '../../../../../../commit-generator.service';
+import {LoggerService} from '../../../../../../services/logger-service';
 
 @Component({
    selector: 'app-development-actions',
@@ -14,6 +16,8 @@ export class DevelopmentActionsComponent implements OnInit {
    constructor(private codeService: CodeService,
                private deploymentService: DeploymentService,
                private unlocksService: UnlocksService,
+               private logger: LoggerService,
+               private commitGeneratorService: CommitGeneratorService,
                private config: ConfigurationService) {
    }
 
@@ -21,6 +25,8 @@ export class DevelopmentActionsComponent implements OnInit {
    }
 
    private writeCode(val: number = 1) {
+      let commit = this.commitGeneratorService.generate();
+      this.logger.gameLog(commit);
       this.codeService.write(val);
    }
 

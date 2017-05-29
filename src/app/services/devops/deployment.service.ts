@@ -28,7 +28,7 @@ export class DeploymentService {
 
       this.deploying = true;
       let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying();
-      this.logger.gameLog(`Beginning deployment of ${linesOfCodeToDeploy} lines of code...`);
+      this.logger.gameLog(`Beginning deployment of ${Math.floor(linesOfCodeToDeploy)} lines of code...`);
       this.source.next();
       let deploymentTime = moment();
       this.tickService.pipeline

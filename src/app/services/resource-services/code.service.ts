@@ -8,15 +8,10 @@ import {ConfigurationService} from '../configuration.service';
 export class CodeService {
 
    constructor(private gameStorageService: GameStorageService,
-               private commitGeneratorService: CommitGeneratorService,
-               private config: ConfigurationService,
-               private logger: LoggerService) {
+               private config: ConfigurationService) {
    }
 
    public write(count: number = 1): void {
-      //this.logger.gameLog(`Wrote ${count} lines of code`);
-      let commit = this.commitGeneratorService.generate();
-      this.logger.gameLog(commit);
       this.gameStorageService.game.company.resources.code.pushed.add(count);
    }
 

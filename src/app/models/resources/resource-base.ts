@@ -21,10 +21,15 @@ export class ResourceBase {
       this.$source.next(new ResourceUpdate(oldVal, this.balance, this.totalAccumulated, this.balance - oldVal, this));
    }
 
-   remove(count: number) {
+   remove(count: number, strict: boolean = false) {
       let oldVal = this.balance;
-      this.balance -= count;
+      let surplusOrDeficit = this.balance - count;
+      if ( strict && surplusOrDeficit < 0 )
+         throw Error("Not enough resources!");
+      let effectiveNewbalance = Math.max(0, surplusOrDeficit);
+      this.balance = effectiveNewbalance;
       this.$source.next(new ResourceUpdate(oldVal, this.balance, this.totalAccumulated, this.balance - oldVal, this));
+      return surplusOrDeficit; // surplus or deficit
    }
 
    public get $balanceFloored(){

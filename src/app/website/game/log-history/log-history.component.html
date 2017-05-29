@@ -1,9 +1,15 @@
 <div class="h-100 p-0 log-history-container">
-   <div class="mw-100 p-0" class="log-history-content">
+   <div class="mw-100 p-0" class="log-history-content list-group">
       <ng-container *ngFor="let log of logs; let odd = odd;">
-         <div class="mw-100 d-block log-history-item p-1 small"
-              [class.odd]="odd">
-            <span class="mw-100 p-0" *ngFor="let line of log.args">{{line}} </span>
+         <div class="mw-100 d-block log-history-item p-1 small list-group-item"
+              [ngClass]="{
+                  'list-group-item-warning': log.logType == LogType.Warning,
+                  'bg-faded': log.logType == LogType.Trace,
+                  'list-group-item-success': log.logType == LogType.Success,
+                  'list-group-item-info': log.logType == LogType.Info,
+                  'list-group-item-danger': log.logType == LogType.Error
+              }">
+            <span class="mw-100 p-0">{{log.message}}</span>
          </div>
       </ng-container>
    </div>

@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {BusinessUnits} from '../../../../../models/business-units/business-units.enum';
 import {DevelopmentBusinessUnit} from '../../../../../models/business-units/development-business-unit';
 import {ConfigurationService} from '../../../../../services/configuration.service';
+import {UnlocksService} from '../../../../../services/unlocks.service';
 
 @Component({
    selector: 'app-development',
@@ -14,6 +15,7 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
    private routeParamsSubscription: Subscription;
 
    constructor(private gameStorageService: GameStorageService,
+               private unlocks: UnlocksService,
                private config: ConfigurationService) {
    }
 

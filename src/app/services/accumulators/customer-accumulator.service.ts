@@ -24,7 +24,7 @@ export class CustomerAccumulatorService implements OnDestroy {
       this.sub = this.tickService.pipeline.subscribe((tick: Tick) => {
          let growth = this.customerGrowthForMs(tick.msElapsed);
          if (growth > 0)
-            this.customerService.add(growth || 0);
+            this.customerService.add(growth);
       })
    }
 

@@ -25,7 +25,7 @@ export class GameStorageService {
    }
 
    private traceLoad(gameData: string, gameId: string) {
-      this.logger.gameLog('Loading...', gameId);
+      this.logger.gameLog('Loading... ' + gameId);
       console.group('Loading');
       console.log(gameData);
       console.log(JSON.parse(gameData));
@@ -33,7 +33,7 @@ export class GameStorageService {
    }
 
    private traceSave(game: Game) {
-      this.logger.gameLog('Saving...', this.game.id);
+      this.logger.gameLog('Saving...' + this.game.id);
       console.group('Saving');
       console.log(game);
       console.log(this.toJson(game));

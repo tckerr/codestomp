@@ -16,36 +16,52 @@ let msPerTick = msInAnHour * speedMultiplier * tickInterval;
 let ticksPerHour = msInAnHour / msPerTick;
 
 // convenience
-let perHour = msInAnHour;
-let perDay = perHour * 24;
-let perYear = perDay * 365;
-let perMonth = perYear / 12;
+export const perHour = msInAnHour;
+export const perMinute = perHour / 60;
+export const perDay = perHour * 24;
+export const perYear = perDay * 365;
+export const perMonth = perYear / 12;
 
 export const environment = {
    production: false,
    gameSettings: {
       defaults: {
-         companyName: "T-Corp",
+         companyName: 'T-Corp',
          startingFunds: 0,
          codePerClick: 100,
          manualTestsPerClick: 100,
          deployThreshold: 60,
          bugsPercentage: .05,
+         quitChanceOnLackOfPayment: .6/perHour,
 
          // devops growth rates
-         deployChunkRate: 50/perHour,
+         deployChunkRate: 50 / perHour,
+         associateDeveloperCodeGrowthRate: 15 / perHour,
+         juniorDeveloperCodeGrowthRate: 45 / perHour,
+         seniorDeveloperCodeGrowthRate: 90 / perHour,
+         qaAnalystTestRate: 10 / perHour,
+         seniorQaAnalystTestRate: 30 / perHour,
+         qaAutomationEngineerTestRate: 60 / perHour, // TODO: not even a test rate thing
 
          // job markets
-         newGraduatesIntervalMs: perDay/2,
+         newGraduatesIntervalMs: perDay / 2,
 
          // customer growth in ms
-         customersToDeployedCodeGrowthRate: .001/perHour,
+         customersToDeployedCodeGrowthRate: .001 / perHour,
          customersCapAsPercentOfCode: .5,
          customersToDeployedCodeGrowthShare: .8,
-         wordOfMouthGrowthRate: .000005/perHour,
+         wordOfMouthGrowthRate: .000005 / perHour,
          wordOfMouthGrowthShare: .2,
 
-         customersToProfitGrowthRate: 5/perMonth,
+         //salaries
+         associateDeveloperSalary: 50000 / perYear,
+         juniorDeveloperSalary: 85000 / perYear,
+         seniorDeveloperSalary: 125000 / perYear,
+         associateQaAnalystSalary: 40000 / perYear,
+         seniorQaAnalystSalary: 70000 / perYear,
+         qaAutomationEngineerSalary: 100000 / perYear,
+
+         customersToProfitGrowthRate: 15 / perMonth,
       },
       unlockThresholds: {
          deploymentsWhenTestedCodeGte: 20,
@@ -63,7 +79,7 @@ export const environment = {
          minimumInterval: 50 // this is a performance consideration, since we have at least 2ms overhead
       },
       askBeforeClear: false,
-      startTime: "2050-01-01 00:00"
+      startTime: '2050-01-01 00:00'
    }
 };
 
