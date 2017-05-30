@@ -13,6 +13,7 @@ export class ConfigurationService {
    public deployChunkRate = environment.gameSettings.defaults.deployChunkRate;
    public deployAmountPerMs = environment.gameSettings.defaults.deployAmountPerMs;
    public bugsPercentage = environment.gameSettings.defaults.bugsPercentage;
+   public testsFailurePercentage = environment.gameSettings.defaults.testsFailurePercentage;
 
    public quitChanceOnLackOfPayment = environment.gameSettings.defaults.quitChanceOnLackOfPayment;
 

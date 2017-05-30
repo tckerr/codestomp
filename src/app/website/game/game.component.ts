@@ -35,7 +35,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameStorageService.load(this.gameId);
       this.tickService.start();
       this.accAggregator.start();
-      this.genAggregator.start();
+      this.genAggregator.generate();
       this.codeService.resetDeployment();
    }
 

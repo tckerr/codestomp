@@ -5,9 +5,10 @@ import {Subscription} from 'rxjs/Subscription';
 import {CustomerService} from '../resource-services/customer.service';
 import {ConfigurationService} from '../configuration.service';
 import {Tick} from '../../models/tick';
+import {IAccumulator} from 'app/services/accumulators/iaccumulator';
 
 @Injectable()
-export class CustomerAccumulatorService implements OnDestroy {
+export class CustomerAccumulatorService implements OnDestroy, IAccumulator {
    private sub: Subscription;
 
    constructor(private codeService: CodeService,

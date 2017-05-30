@@ -13,7 +13,7 @@ export class TalentGeneratorService {
                private gameStorageService: GameStorageService) {
    }
 
-   public start() {
+   public generate() {
       this.tickService.pipeline.subscribe(
          tick => {
             let newCount = tick.msElapsed * this.config.talentGenerationPerMs;

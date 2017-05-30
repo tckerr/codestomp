@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {TalentGeneratorService} from '../generators/talent-generator-service';
 import {LoggerService} from '../logger-service';
 import {DeveloperStaffService} from '../resource-services/developer-staff.service';
-import {ExperienceLevel, StaffType} from '../../models/definitions/staff-definitions';
+import {ExperienceLevel} from '../../models/definitions/staff-definitions';
 
 @Injectable()
 export class DeveloperHiringPoolService {
 
    constructor(private talentGeneratorService: TalentGeneratorService,
                private developerStaffService: DeveloperStaffService,
-               private logger: LoggerService) {
+   ) {
    }
 
    // TODO: can these methods be moved up or removed?

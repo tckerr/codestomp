@@ -1,18 +1,38 @@
 debug
-human relations
-development
-marketing
-sales
-product
-support
-legal
-facilities
-compliance
-accounting
-finance
-network and security
-information technology
-account management
-executive management
-public relations
-operations
+
+executive management - just perks for other stuff, nothing big, potentially investment early on?
+human relations - employee dissatisfaction, productivity
+recruiting - automates hiring, building talent
+development - build product
+procurement - spend $$ to get stuff
+marketing/sales - increase the value of customers
+customer support - need more issues for this to be relevant
+accounting - detailed view into finances (no actual purpose?) - tax events
+IT/network/security - prevents security breaches
+
+
+chopping block
+   - finance, all just in accounting
+   - operations - redundant (devops)
+   - compliance/legal
+   - facilities - may be too complicated
+   - product (product is abstract so not sure about this)
+   - account management - enterprise clients (what does this mean?)
+   - public relations - any use?
+
+--
+
+concepts:
+   - internationalization - international markets?
+   - autosave
+   - signing cost
+   - regional customer caps
+   - different apps or dev teams
+   - bills
+      - hosting (relative to code)
+      - electricity
+   - security breaches (get security business unit)
+      - lose money, code, customers
+   - employee dissatisfaction
+   - multiple applications
+      - different code streams, assign teams

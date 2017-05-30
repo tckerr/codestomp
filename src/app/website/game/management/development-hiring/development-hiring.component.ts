@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DeveloperHiringPoolService} from '../../../../services/hiring-pools/developer-hiring-pool.service';
 import {perHour, perYear} from '../../../../../environments/environment';
 import {DeveloperStaffService} from '../../../../services/resource-services/developer-staff.service';
-import {ExperienceLevel} from '../../../../models/definitions/staff-definitions';
+import {ExperienceLevel, StaffType} from '../../../../models/definitions/staff-definitions';
 import {UnlocksService} from '../../../../services/unlocks.service';
 import * as Enumerable from 'linq';
 
@@ -17,6 +17,7 @@ export class DevelopmentHiringComponent implements OnInit {
    public activeHireType: string;
    private devHireTypes: any[] = [];
    private activeTalentCost: number = 0;
+   private StaffType = StaffType;
 
    constructor(private developerPool: DeveloperHiringPoolService,
                private developerStaffService: DeveloperStaffService,
@@ -30,6 +31,7 @@ export class DevelopmentHiringComponent implements OnInit {
          .from(this.developerStaffService.staff)
          .select(staff => { return {
                id: staff.displayName,
+               type: staff.type,
                displayName: staff.displayName,
                special: staff.special,
                cph: staff.typeDetails.codePerMs * perHour,

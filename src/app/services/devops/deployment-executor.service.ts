@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LoggerService} from '../logger-service';
+import {LoggerService, LogType} from '../logger-service';
 import {Subject} from 'rxjs/Subject';
 import {CodeService} from '../resource-services/code.service';
 import 'rxjs/Rx';
@@ -20,7 +20,6 @@ export class DeploymentExecutor {
                private config: ConfigurationService,
                private devAccessor: DevelopmentBusinessUnitAccessorService,
                private logger: LoggerService) {
-
    }
 
    public set lastDeployedDate(date: moment.Moment){
@@ -35,6 +34,7 @@ export class DeploymentExecutor {
       return !this.deploying && this.codeService.tested.balance >= this.config.deployThreshold
    }
 
+   // TODO: resumable deploys (page load)
    public deploy(count: number, time: moment.Moment, rate: number = this.config.deployChunkRate): void {
       if (this.deploying)
          throw Error('You are already deploying!');
@@ -42,8 +42,7 @@ export class DeploymentExecutor {
       this.deploying = true;
       let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying(count);
       this.logger.gameLog(`Beginning deployment of ${Math.floor(linesOfCodeToDeploy)} lines of code...`);
-      this.source.next();
-      this.lastDeployedDate = time; // TODO: store in company
+      this.lastDeployedDate = time;
       let lastDate = time;
       this.tickService.pipeline
          .takeWhile(() => {
@@ -61,7 +60,8 @@ export class DeploymentExecutor {
                this.deploying = false;
                let deploymentDurationHours = lastDate.diff(this.lastDeployedDate, 'hours');
                this.devAccessor.businessUnit.deploymentInfo.deployCount++;
-               this.logger.gameLog(`Done deployment! Took ${deploymentDurationHours} hrs.`, );
+               this.logger.gameLog(`Done deployment! Took ${deploymentDurationHours} hrs.`, LogType.Info);
+               this.source.next();
             });
    }
 

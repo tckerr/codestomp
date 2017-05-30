@@ -4,18 +4,21 @@ import {Staff} from '../../../../models/business-units/staff';
 import {DeveloperStaffService} from '../../../resource-services/developer-staff.service';
 import {CodeService} from '../../../resource-services/code.service';
 import {TickExecutor} from '../../../interfaces/tick-executor';
+import {ConfigurationService} from '../../../configuration.service';
 
 @Injectable()
 export class CodeTestingService implements TickExecutor {
 
    constructor(private codeService: CodeService,
+               private config: ConfigurationService,
                private developerStaff: DeveloperStaffService,) {
    }
 
    public execute(tick: Tick) {
       let growth = this.codeTestedForMs(tick.msElapsed);
+      let defaultFailureRate = this.config.testsFailurePercentage;
       if (growth > 0)
-         this.codeService.test(growth);
+         this.codeService.test(growth, defaultFailureRate);
    }
 
    private codeTestedForMs(ms: number) {

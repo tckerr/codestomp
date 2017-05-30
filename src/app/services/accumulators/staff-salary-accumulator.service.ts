@@ -5,11 +5,12 @@ import {TickService} from '../tick/tick.service';
 import {Tick} from '../../models/tick';
 import {FundService} from '../resource-services/fund.service';
 import {Staff} from '../../models/business-units/staff';
+import {IAccumulator} from 'app/services/accumulators/iaccumulator';
 
 @Injectable()
-export class StaffSalaryAccumulatorService implements OnDestroy {
+export class StaffSalaryAccumulatorService implements OnDestroy, IAccumulator {
 
-  private sub: Subscription;
+   private sub: Subscription;
 
    constructor(private developerStaff: DeveloperStaffService,
                private fundService: FundService,
@@ -29,7 +30,7 @@ export class StaffSalaryAccumulatorService implements OnDestroy {
       });
    }
 
-   public get costsPerHour(){
+   public get costsPerHour() {
       return this.salaryCostsPerMs(1000 * 60 * 60);
    }
 
@@ -40,7 +41,7 @@ export class StaffSalaryAccumulatorService implements OnDestroy {
       return total;
    }
 
-   private getSalary(staff: Staff, ms: number) : number {
+   private getSalary(staff: Staff, ms: number): number {
       // TODO: modifiers
       return staff.hired * staff.baseSalaryPerMs * ms;
    }

@@ -50,7 +50,7 @@ export const environment = {
                   devopsEngineer: 100000 / perYear,
                },
                codePerMs: {
-                  developmentIntern: -2 / perHour,
+                  developmentIntern: 1 / perHour,
                   associateDeveloper: 15 / perHour,
                   juniorDeveloper: 45 / perHour,
                   seniorDeveloper: 90 / perHour,
@@ -88,10 +88,11 @@ export const environment = {
       defaults: {
          companyName: 'T-Corp',
          startingFunds: 0,
-         codePerClick: 10,
-         manualTestsPerClick: 10,
-         deployThreshold: 60,
+         codePerClick: 5,
+         manualTestsPerClick: 5,
+         deployThreshold: 200,
          bugsPercentage: .05,
+         testsFailurePercentage: .15,
          quitChanceOnLackOfPayment: .6 / perHour,
 
          // devops growth rates
@@ -112,10 +113,10 @@ export const environment = {
          customersToProfitGrowthRate: 15 / perMonth,
       },
       unlockThresholds: {
-         deploymentsWhenTestedCodeGte: 20,
-         manualTestingWhenTotalCodeGte: 20,
-         unlockDevHiringWhenFundsGte: [10, 100, 500, 3000],
-         unlockBugFixesWhenBugsGte: 1,
+         manualTestingWhenTotalCodeGte: 70,
+         deploymentsWhenTestedCodeGte: 70, //keep this and the test one similar since the noti's line up well that way
+         unlockDevHiringWhenFundsGte: [30, 20000, 150000, 1000000],
+         unlockBugFixesWhenBugsGte: 20,
       },
       ticker: {
          defaultIntervalMs: tickInterval,
@@ -125,11 +126,11 @@ export const environment = {
          msInAnHour: msInAnHour,
          speedMultiplier: speedMultiplier,
          intervalIncrementDelta: 50,
-         minimumInterval: 50 // this is a performance consideration, since we have at least 2ms overhead
+         minimumInterval: 20 // this is a performance consideration, since we have at least 2ms overhead
       },
       askBeforeClear: false,
       startTime: '2050-01-01 00:00'
    }
 };
-
-console.log(environment)
+// TODO: the ability to choose what area of business to unlock
+console.log(environment);

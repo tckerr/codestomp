@@ -19,7 +19,13 @@
                                 class="list-group-item list-group-item-action p-1"
                                 [class.active]="activeHireType && activeHireType.id == hireType.id"
                                 (click)="activeHireType = hireType">
-                           <span>{{hireType.displayName}}</span>
+                           <span><span class="badge badge-info">
+                              <i
+                              [class.fa-keyboard-o]="hireType.type == StaffType.Developer"
+                              [class.fa-check-square-o]="hireType.type == StaffType.QA"
+                              [class.fa-ship]="hireType.type == StaffType.DevOps"
+                              class="fa"></i>
+                           </span> {{hireType.displayName}}</span>
                         </button>
                         <span
                            ngbPopover="Not available until you've earned more funds."
@@ -30,8 +36,11 @@
                                    [class.active]="activeHireType && activeHireType.id == hireType.id"
                                    disabled
                                    (click)="activeHireType = hireType">
-                              <span>{{hireType.getPreviewName()}}</span>
-                              <i class="fa fa-lock ml-1"></i>
+                              <span>
+                                 <span class="badge badge-default">
+                                    <i class="fa fa-lock"></i>
+                                 </span> {{hireType.getPreviewName()}}
+                              </span>
                            </button>
                         </span>
                      </ng-container>
@@ -72,7 +81,7 @@
                            </div>
                            <div class="col-7 ">
                               <span
-                                 class="badge badge-danger">
+                                 class="badge badge-warning">
                                  <span>{{activeHireType.talentCost}} talent</span>
                               </span>
                            </div>
@@ -86,12 +95,12 @@
                         </div>
                         <div class="row small m-2 mb-1">
                            <div class="col-12 text-center">
-                              <button class="btn btn-success btn-block btn-sm btn-interactive"
+                              <button class="btn btn-info btn-block btn-sm btn-interactive"
                                       (mouseenter)="activeTalentCost = activeHireType.talentCost"
                                       (mouseleave)="resetCost()"
                                       (click)="activeHireType.hire()"
                                       [disabled]="activeHireType.count() <= 0 && resetCost()">
-                                 <span>Hire ({{activeHireType.count()}} max)</span>
+                                 <span><i class="fa fa-user-plus"></i> Hire ({{activeHireType.count()}} max)</span>
                               </button>
                            </div>
                         </div>

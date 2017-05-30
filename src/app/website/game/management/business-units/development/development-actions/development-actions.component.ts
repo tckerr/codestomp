@@ -33,7 +33,7 @@ export class DevelopmentActionsComponent implements OnInit {
    }
 
    private testCode(val: number = 1) {
-      this.codeService.test(val);
+      this.codeService.test(val, this.config.testsFailurePercentage);
    }
 
    private fixBugs(val: number = 1) {
@@ -53,7 +53,7 @@ export class DevelopmentActionsComponent implements OnInit {
       if (this.deploymentService.deploying)
          return 'Deploying...';
       let remaining = this.config.deployThreshold - this.codeService.tested.balance;
-      return `Need ${Math.floor(remaining)} more`
+      return `Need ${Math.ceil(remaining)} more`
    }
 
 }

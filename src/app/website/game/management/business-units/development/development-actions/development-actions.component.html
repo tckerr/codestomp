@@ -6,25 +6,31 @@
 </button>
 <button
    *ngIf="unlocksService.unlocks.manualTesting > 0"
-   class="btn btn-info btn-sm btn-interactive h-100 p-3"
+   class="btn btn-info btn-popover btn-sm btn-interactive h-100 p-3"
    (click)="testCode(config.manualTestsPerClick)"
    [disabled]="codeService.pushed.balance <= 0">
+   <span
+      class="top-corner-icon-adjusted">
+      <i class="fa fa-question"
+         [ngbPopover]="testingQuestion"
+         placement="top"
+         triggers="mouseenter:mouseleave"></i>
+   </span>
    <p class="m-0 p-0" style="font-size: 30px"><i class="fa fa-check-square-o"></i></p>
    <p class="m-0 p-0">Test your code</p>
 </button>
-
 <button
    *ngIf="unlocksService.unlocks.deployments > 0"
-   class="btn btn-success btn-sm btn-interactive btn-popover h-100 p-3"
+   class="btn btn-info btn-sm btn-interactive btn-popover h-100 p-3"
    (click)="deploy()"
    [disabled]="!canDeploy">
-      <span
-         class="top-corner-icon-adjusted">
-         <i class="fa fa-question"
-            [ngbPopover]="deployQuestion"
-            placement="top"
-            triggers="mouseenter:mouseleave"></i>
-      </span>
+   <span
+      class="top-corner-icon-adjusted">
+      <i class="fa fa-question"
+         [ngbPopover]="deployQuestion"
+         placement="top"
+         triggers="mouseenter:mouseleave"></i>
+   </span>
    <p class="m-0 p-0" style="font-size: 30px; min-width:90px;"><i class="fa fa-ship"></i></p>
    <p *ngIf="canDeploy" class="m-0 p-0">Ship it to prod</p>
    <p *ngIf="!canDeploy" class="m-0 p-0">{{deployBlockReason}}</p>
@@ -34,18 +40,47 @@
    class="btn btn-danger btn-sm btn-popover btn-interactive h-100 p-3"
    (click)="fixBugs()"
    [disabled]="codeService.bugs.balance <= 0">
-      <span
-         class="top-corner-icon-adjusted">
-         <i class="fa fa-question"
-            [ngbPopover]="bugsQuestion"
-            placement="top"
-            triggers="mouseenter:mouseleave"></i>
-      </span>
+   <span
+      class="top-corner-icon-adjusted">
+      <i class="fa fa-question"
+         [ngbPopover]="bugsQuestion"
+         placement="top"
+         triggers="mouseenter:mouseleave"></i>
+   </span>
    <p class="m-0 p-0" style="font-size: 30px"><i class="fa fa-bug"></i></p>
    <p class="m-0 p-0">Fix some bugs</p>
 </button>
 
 
+<ng-template #testingQuestion>
+   <p class="p-0 m-0 w-300-px">
+      <small style="color:black">
+         All code must be tested before it is deployed.
+      </small>
+   </p>
+   <p class="p-0 m-0 w-300-px">
+      <small style="color:black">
+         <strong>Remember, not all tested code works!</strong>
+      </small>
+   </p>
+</ng-template>
+<ng-template #deployQuestion>
+   <p class="p-0 m-0 w-300-px">
+      <small style="color:black">
+         Tested code must be deployed to production
+      </small>
+   </p>
+   <p class="p-0 m-0 w-300-px">
+      <small style="color:black">
+         before any funds can be earned from it.
+      </small>
+   </p>
+   <p class="p-0 m-0 w-300-px">
+      <small style="color:black">
+         <strong>Deploy fast and often!</strong>
+      </small>
+   </p>
+</ng-template>
 <ng-template #bugsQuestion>
    <p class="p-0 m-0 w-300-px">
       <small style="color:black">
@@ -55,25 +90,6 @@
    <p class="p-0 m-0 w-300-px">
       <small style="color:black">
          <strong>Squash bugs to grow faster!</strong>
-      </small>
-   </p>
-</ng-template>
-
-
-<ng-template #deployQuestion>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         Tested code must be deployed to production
-      </small>
-   </p>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         before any funds can be earned.
-      </small>
-   </p>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         <strong>Deploy fast and often!</strong>
       </small>
    </p>
 </ng-template>

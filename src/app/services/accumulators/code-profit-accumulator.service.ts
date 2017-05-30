@@ -4,10 +4,10 @@ import {CustomerService} from '../resource-services/customer.service';
 import {Subscription} from 'rxjs/Subscription';
 import {FundService} from '../resource-services/fund.service';
 import {ConfigurationService} from '../configuration.service';
-import {environment} from '../../../environments/environment';
+import {IAccumulator} from './iaccumulator';
 
 @Injectable()
-export class CodeProfitAccumulatorService implements OnDestroy {
+export class CodeProfitAccumulatorService implements OnDestroy, IAccumulator {
    private sub: Subscription;
 
    constructor(private tickService: TickService,

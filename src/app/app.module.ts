@@ -54,6 +54,8 @@ import {CodeTestingService} from './services/accumulators/staff-actions/developm
 import {CodeDeploymentService} from './services/accumulators/staff-actions/development/code-deployment.service';
 import {DevelopmentBusinessUnitAccessorService} from './services/resource-services/development-business-unit-accessor.service';
 import {BugFixingService} from './services/accumulators/staff-actions/development/bug-fixing.service';
+import {SpecialEventGeneratorService} from './services/generators/special-events/special-event-generator.service';
+import {NotificationService} from './services/generators/special-events/notification.service';
 
 const appRoutes: Routes = [
    {
@@ -156,6 +158,8 @@ const appRoutes: Routes = [
       CodeDeploymentService,
       DevelopmentBusinessUnitAccessorService,
       BugFixingService,
+      SpecialEventGeneratorService,
+      NotificationService
    ],
    bootstrap: [AppComponent]
 })

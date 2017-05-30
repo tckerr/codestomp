@@ -15,17 +15,17 @@ export class CodeService {
       this.code.pushed.add(count);
    }
 
-   public test(count: number = 1): void {
-      this.movePushedToTested(count);
+   public test(count: number = 1, errorRate: number): void {
+      this.movePushedToTested(count, errorRate);
    }
 
    public bugFix(count: number = 1): void {
       this.moveBugsToProd(count);
    }
 
-   public movePushedToTested(count: number) {
+   public movePushedToTested(count: number, errorRate: number) {
       let amount = Math.min(count, this.code.pushed.balance);
-      this.code.tested.add(amount);
+      this.code.tested.add(amount * (1 - errorRate));
       this.code.pushed.remove(amount);
       return amount;
    }

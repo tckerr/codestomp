@@ -65,6 +65,9 @@ a , button{
 .bg-disabled{
    background-color: #d6d6d6!important;
 }
+.bg-nighttime{
+   background-color: #7891a7 !important;
+}
 
 .top-corner-icon{
    position: absolute;

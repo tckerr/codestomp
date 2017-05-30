@@ -1,16 +1,16 @@
 <div class="progress " *ngIf="codeService.total > 0" style="height: 50px; white-space: nowrap; cursor: pointer">
    <div
-      class="progress-bar bg-info h-100 pt-3 in"
+      class="progress-bar bg-disabled h-100 pt-3 in"
       role="progressbar"
       [style.width]="pushedPercent+'%'"
-      ngbTooltip="Pushed: {{pushed | number: '1.0-0'}}">
+      ngbTooltip="New: {{pushed | number: '1.0-0'}}">
       <strong>
-         <span *ngIf="pushedPercent > 10">Pushed </span>
+         <span *ngIf="pushedPercent > 10">New </span>
          <span *ngIf="pushedPercent > 5">({{pushed | number: '1.0-0'}})</span>
       </strong>
    </div>
    <div
-      class="progress-bar bg-primary h-100 pt-3"
+      class="progress-bar bg-nighttime h-100 pt-3"
       role="progressbar"
       ngbTooltip="Tested: {{tested | number: '1.0-0'}}"
       [style.width]="testedPercent+'%'">
@@ -30,7 +30,7 @@
       </strong>
    </div>
    <div
-      class="progress-bar bg-success h-100 pt-3"
+      class="progress-bar bg-info h-100 pt-3"
       role="progressbar"
       ngbTooltip="Production: {{prod | number: '1.0-0'}}"
       [style.width]="prodPercent+'%'"

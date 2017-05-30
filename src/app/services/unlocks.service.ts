@@ -3,10 +3,13 @@ import {GameStorageService} from './game-storage.service';
 import {TickService} from './tick/tick.service';
 import {ConfigurationService} from './configuration.service';
 import {CodeService} from './resource-services/code.service';
-import {LoggerService} from './logger-service';
+import {LoggerService, LogType} from './logger-service';
 import {FundService} from './resource-services/fund.service';
 import {Unlocks} from '../models/unlocks';
 import {ExperienceLevel} from '../models/definitions/staff-definitions';
+import {SpecialEventGeneratorService} from './generators/special-events/special-event-generator.service';
+import {SpecialEventDisplayType} from '../models/special-event';
+import {NotificationService} from './generators/special-events/notification.service';
 
 @Injectable()
 export class UnlocksService {
@@ -16,6 +19,7 @@ export class UnlocksService {
                private codeService: CodeService,
                private fundService: FundService,
                private logger: LoggerService,
+               private notificationService: NotificationService,
                private tickService: TickService) {
       this.tickService.pipeline.subscribe(() => this.checkUnlocks())
    }
@@ -27,21 +31,26 @@ export class UnlocksService {
    private checkUnlocks() {
       if (this.unlocks.deployments == 0 && this.config.deploymentsWhenTestedCodeGte <= this.codeService.tested.totalAccumulated) {
          this.gameStorageService.game.company.unlocks.deployments++;
-         this.logger.gameLog('Deployments unlocked!');
+         this.notificationService.notify(
+            'Just a little more...', 'You\'ve almost got enough for your app. Get ready to ship code to production!', LogType.Info);
       }
       if (this.unlocks.manualTesting == 0 && this.config.manualTestingWhenTotalCodeGte <= this.codeService.total) {
          this.gameStorageService.game.company.unlocks.manualTesting++;
-         this.logger.gameLog('Manual testing unlocked!');
+         this.notificationService.notify(
+            'Time to test', 'Boring, we know. But testing is important!', LogType.Info);
       }
-      if (this.unlocks.devHiring <= 3) {
+      if (this.unlocks.bugFixes > 0 && this.unlocks.devHiring <= 3) {
          if(this.config.unlockDevHiringWhenFundsGte[this.unlocks.devHiring] <= this.fundService.funds.totalAccumulated){
             this.gameStorageService.game.company.unlocks.devHiring++;
-            this.logger.gameLog(`Hiring tier ${this.unlocks.devHiring} unlocked!`);
+            let message = `Development Hiring tier ${this.unlocks.devHiring} unlocked`;
+            this.notificationService.notify(
+               message, 'You\'ve got a whole new set of options, although they\'re surely expensive....', LogType.Success);
          }
       }
       if (this.unlocks.bugFixes == 0 && this.config.unlockBugFixesWhenBugsGte <= this.codeService.bugs.totalAccumulated) {
          this.gameStorageService.game.company.unlocks.bugFixes++;
-         this.logger.gameLog('Bug fixing unlocked!');
+         this.notificationService.notify(
+            'Bugs! Oh my!', 'There\'s some bugs in production. Fix them!', LogType.Error);
       }
    }
 
