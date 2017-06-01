@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {DeveloperHiringPoolService} from '../../../../services/hiring-pools/developer-hiring-pool.service';
 import {perHour, perYear} from '../../../../../environments/environment';
 import {DeveloperStaffService} from '../../../../services/resource-services/developer-staff.service';
-import {ExperienceLevel, StaffType} from '../../../../models/definitions/staff-definitions';
+import {StaffType} from '../../../../models/definitions/staff-definitions';
 import {UnlocksService} from '../../../../services/unlocks.service';
 import * as Enumerable from 'linq';
+import {TalentService} from "../../../../services/resource-services/talent.service";
 
 
 @Component({
@@ -19,7 +19,7 @@ export class DevelopmentHiringComponent implements OnInit {
    private activeTalentCost: number = 0;
    private StaffType = StaffType;
 
-   constructor(private developerPool: DeveloperHiringPoolService,
+   constructor(private talentService: TalentService,
                private developerStaffService: DeveloperStaffService,
                private unlocksService: UnlocksService,
    ) {
@@ -37,12 +37,12 @@ export class DevelopmentHiringComponent implements OnInit {
                cph: staff.typeDetails.codePerMs * perHour,
                salary: staff.baseSalaryPerMs * perYear,
                salaryPerHour: staff.baseSalaryPerMs * perHour,
-               talentCost: this.developerPool.getCostForExperience(staff.experience),
+               talentCost: this.talentService.getCostForExperience(staff.experience),
                qaph: staff.typeDetails.testingPerMs * perHour,
-               hire: () => this.developerPool.hire(staff.displayName, staff.experience),
+               hire: () => this.developerStaffService.hire(staff.displayName, staff.experience),
                unlocked: () => this.unlocksService.devStaffAtExperienceIsUnlocked(staff.experience),
                getPreviewName: () => this.getPreviewName(staff),
-               count: () => this.developerPool.maxHires(staff.experience)}})
+               count: () => this.talentService.maxHires(staff.experience)}})
          .toArray();
    }
 

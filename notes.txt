@@ -23,6 +23,7 @@ chopping block
 --
 
 concepts:
+   - upgrades for clicking
    - internationalization - international markets?
    - autosave
    - signing cost

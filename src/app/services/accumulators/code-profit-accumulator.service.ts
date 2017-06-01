@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {FundService} from '../resource-services/fund.service';
 import {ConfigurationService} from '../configuration.service';
 import {IAccumulator} from './iaccumulator';
+import {perHour} from "../../../environments/environment";
 
 @Injectable()
 export class CodeProfitAccumulatorService implements OnDestroy, IAccumulator {
@@ -33,9 +34,7 @@ export class CodeProfitAccumulatorService implements OnDestroy, IAccumulator {
    }
 
    public get profitPerHr() {
-      return this.profitPerMs(1000 * 60 * 60);
+      return this.profitPerMs(perHour);
    }
-
-
-
+   x
 }

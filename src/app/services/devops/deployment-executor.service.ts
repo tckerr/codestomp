@@ -46,7 +46,7 @@ export class DeploymentExecutor {
       let lastDate = time;
       this.tickService.pipeline
          .takeWhile(() => {
-            return this.codeService.deploying.balance > 0
+            return this.codeService.deploying.balance > 0 //TODO: deployment key for separate deploys
          })
          .subscribe(
             (tick) => {

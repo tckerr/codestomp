@@ -6,6 +6,7 @@ import {UnlocksService} from '../../../../../../services/unlocks.service';
 import {CommitGeneratorService} from '../../../../../../commit-generator.service';
 import {LoggerService} from '../../../../../../services/logger-service';
 import {TickService} from '../../../../../../services/tick/tick.service';
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
    selector: 'app-development-actions',
@@ -13,6 +14,7 @@ import {TickService} from '../../../../../../services/tick/tick.service';
    styleUrls: ['./development-actions.component.css']
 })
 export class DevelopmentActionsComponent implements OnInit {
+   private queuedDeploy: Subscription;
 
    constructor(private codeService: CodeService,
                private deploymentService: DeploymentExecutor,
@@ -41,8 +43,12 @@ export class DevelopmentActionsComponent implements OnInit {
    }
 
    private deploy() {
-      let count = this.codeService.tested.balance;
-      this.ticker.pipeline.take(1).subscribe(t => this.deploymentService.deploy(count, t.date))
+      if (!this.canDeploy){
+         return 0;
+      }
+      let count = this.config.deployThreshold;
+      this.queuedDeploy && this.queuedDeploy.unsubscribe();
+      this.queuedDeploy = this.ticker.pipeline.take(1).subscribe(t => this.deploymentService.deploy(count, t.date));
    }
 
    private get canDeploy() {

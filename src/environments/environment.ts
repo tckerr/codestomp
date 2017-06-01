@@ -10,7 +10,7 @@ let speedMultiplier = .001;
 let tickInterval = 20;//*50;
 
 //
-let msInAMinute = 60000;
+let msInAMinute = 60 * 1000;
 let msInAnHour = msInAMinute * 60;
 let msPerTick = msInAnHour * speedMultiplier * tickInterval;
 let ticksPerHour = msInAnHour / msPerTick;
@@ -88,8 +88,8 @@ export const environment = {
       defaults: {
          companyName: 'T-Corp',
          startingFunds: 0,
-         codePerClick: 5,
-         manualTestsPerClick: 5,
+         codePerClick: 50, // balanced for ~3
+         manualTestsPerClick: 50,
          deployThreshold: 200,
          bugsPercentage: .05,
          testsFailurePercentage: .15,

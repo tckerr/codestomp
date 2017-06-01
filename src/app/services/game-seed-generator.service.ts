@@ -66,7 +66,49 @@ export class GameSeedGeneratorService {
                {
                   id: BusinessUnits.HR,
                   name: 'Human Resources',
-                  active: false
+                  active: false,
+                  staff: [
+                     {
+                        displayName: "Talent Scout", // generates talent
+                        type: StaffType.TalentScout,
+                        experience: ExperienceLevel.Associate,
+                        baseSalaryPerMs: 0,
+                        hired: 0,
+                        typeDetails: {}
+                     },
+                     {
+                        displayName: "Recruiter", // auto-hire tier 1
+                        type: StaffType.Recruiter,
+                        experience: ExperienceLevel.Associate,
+                        baseSalaryPerMs: 0,
+                        hired: 0,
+                        typeDetails: {}
+                     },
+                     {
+                        displayName: "Talent Acquisition Manager", // auto-hire tier 2
+                        type: StaffType.Recruiter,
+                        experience: ExperienceLevel.Junior,
+                        baseSalaryPerMs: 0,
+                        hired: 0,
+                        typeDetails: {}
+                     },
+                     {
+                        displayName: "Corporate Trainer", // hires inside the company (optional upgrades)
+                        type: StaffType.Trainer,
+                        experience: ExperienceLevel.Associate,
+                        baseSalaryPerMs: 0,
+                        hired: 0,
+                        typeDetails: {}
+                     },
+                     {
+                        displayName: "Benefits Specialist", // internal satisfaction
+                        type: StaffType.EmployeeRetainer,
+                        experience: ExperienceLevel.Associate,
+                        baseSalaryPerMs: 0,
+                        hired: 0,
+                        typeDetails: {}
+                     }
+                  ]
                },
                {
                   id: BusinessUnits.Debug,

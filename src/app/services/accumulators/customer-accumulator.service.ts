@@ -31,11 +31,11 @@ export class CustomerAccumulatorService implements OnDestroy, IAccumulator {
 
    public customerGrowthForMs(ms) {
       let netCodeBalance = this.codeService.prod.balance - this.codeService.bugs.balance;
-      let growthCeiling = this.growthCeiling(netCodeBalance);
-      let growthTarget = Math.min(growthCeiling, netCodeBalance);
+      let deltaMax = this.getEligibleGrowth(netCodeBalance);
+      let growthTarget = Math.min(deltaMax, netCodeBalance);
       let growthFromCode = this.growthFromCode(growthTarget, ms);
       let growthFromWordOfMouth = this.growthFromWordOfMouth(growthTarget, ms);
-      return Math.min(growthCeiling, (growthFromCode + growthFromWordOfMouth) || 0);
+      return Math.min(deltaMax, (growthFromCode + growthFromWordOfMouth) || 0);
    }
 
    public get customersPerHr() {
@@ -54,7 +54,7 @@ export class CustomerAccumulatorService implements OnDestroy, IAccumulator {
       return ms * share * growthTarget * growthRate;
    }
 
-   private growthCeiling(netCodeBalance): number {
+   private getEligibleGrowth(netCodeBalance): number {
       let capPct = this.config.customersCapAsPercentOfCode;
       let cap = capPct * netCodeBalance;
       let eligible = cap - this.customerService.customers.balance;

@@ -41,7 +41,6 @@ import {DevelopmentStaffComponent} from './website/game/management/business-unit
 import {DevelopmentHiringComponent} from './website/game/management/development-hiring/development-hiring.component';
 import {TalentGeneratorService} from './services/generators/talent-generator-service';
 import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
-import {DeveloperHiringPoolService} from './services/hiring-pools/developer-hiring-pool.service';
 import {BusinessUnits} from './models/business-units/business-units.enum';
 import {DeveloperStaffService} from './services/resource-services/developer-staff.service';
 import {StaffActionAccumulatorService} from './services/accumulators/staff-actions/staff-action-accumulator.service';
@@ -56,6 +55,7 @@ import {DevelopmentBusinessUnitAccessorService} from './services/resource-servic
 import {BugFixingService} from './services/accumulators/staff-actions/development/bug-fixing.service';
 import {SpecialEventGeneratorService} from './services/generators/special-events/special-event-generator.service';
 import {NotificationService} from './services/generators/special-events/notification.service';
+import {TalentService} from "./services/resource-services/talent.service";
 
 const appRoutes: Routes = [
    {
@@ -148,7 +148,6 @@ const appRoutes: Routes = [
       UnlocksService,
       TalentGeneratorService,
       GeneratorAggregatorService,
-      DeveloperHiringPoolService,
       DeveloperStaffService,
       StaffActionAccumulatorService,
       StaffSalaryAccumulatorService,
@@ -159,7 +158,8 @@ const appRoutes: Routes = [
       DevelopmentBusinessUnitAccessorService,
       BugFixingService,
       SpecialEventGeneratorService,
-      NotificationService
+      NotificationService,
+      TalentService
    ],
    bootstrap: [AppComponent]
 })

@@ -27,8 +27,7 @@ export class TickService implements Pipeline {
    private latest: moment.Moment;
    private tickToMsMapCached: number;
 
-   constructor(private gameStorageService: GameStorageService,
-               private logger: LoggerService) {
+   constructor(private gameStorageService: GameStorageService) {
       this.tickerIntervalMs = environment.gameSettings.ticker.defaultIntervalMs;
       this.intervalIncrementDelta = environment.gameSettings.ticker.intervalIncrementDelta;
       this.minimumInterval = environment.gameSettings.ticker.minimumInterval;
@@ -52,8 +51,8 @@ export class TickService implements Pipeline {
       this.incrementingSub && this.incrementingSub.unsubscribe();
       let cachedInterval = this.tickerIntervalMs;
       this.incrementingSub = this.timer.take(1).subscribe(() => {
-         this.start(cachedInterval);
-         this.incrementingSub.unsubscribe();
+         if (!this.paused)
+            this.start(cachedInterval);
       })
    }
 
@@ -132,7 +131,6 @@ export class TickService implements Pipeline {
 
    private generateDate(tickToMsMapCached) {
       let durationCtor = {};
-      // TODO: store old date in game data
       durationCtor["ms"] = tickToMsMapCached;
       let newDate = moment(this.gameStorageService.game.time).add(durationCtor);
       this.gameStorageService.game.time = newDate.format();

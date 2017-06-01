@@ -5,6 +5,8 @@ import {ConfigurationService} from '../configuration.service';
 import * as Enumerable from 'linq';
 import {Staff} from '../../models/business-units/staff';
 import {DevelopmentBusinessUnitAccessorService} from './development-business-unit-accessor.service';
+import {TalentService} from "./talent.service";
+import {ExperienceLevel} from "../../models/definitions/staff-definitions";
 
 @Injectable()
 export class DeveloperStaffService {
@@ -12,6 +14,7 @@ export class DeveloperStaffService {
    constructor(private quitterNotificationService: QuitterNotificationService,
                private config: ConfigurationService,
                private devAccessor: DevelopmentBusinessUnitAccessorService,
+               private talentService: TalentService,
                private logger: LoggerService) {
    }
 
@@ -24,7 +27,8 @@ export class DeveloperStaffService {
       throw Error("Staff type not found! " + displayName);
    }
 
-   public hire(displayName: string){
+   public hire(displayName: string, exp: ExperienceLevel){
+      this.talentService.hire(exp);
       let staff = this.getStaffByDisplayName(displayName);
       staff.hired++;
       this.logger.gameLog(`New hire: ${staff.displayName}!`, LogType.Success);

@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {DeploymentExecutor} from '../../devops/deployment-executor.service';
-import {DevelopmentBusinessUnitAccessorService} from '../../resource-services/development-business-unit-accessor.service';
-import {CustomerService} from '../../resource-services/customer.service';
-import {IGenerator} from '../igenerator';
-import {LoggerService, LogType} from '../../logger-service';
-import {Subject} from 'rxjs/Subject';
-import {SpecialEvent, SpecialEventDisplayType} from '../../../models/special-event';
-import {NotificationService} from './notification.service';
+import {Injectable} from "@angular/core";
+import {DeploymentExecutor} from "../../devops/deployment-executor.service";
+import {DevelopmentBusinessUnitAccessorService} from "../../resource-services/development-business-unit-accessor.service";
+import {CustomerService} from "../../resource-services/customer.service";
+import {IGenerator} from "../igenerator";
+import {LogType} from "../../logger-service";
+import {Subject} from "rxjs/Subject";
+import {SpecialEvent, SpecialEventDisplayType} from "../../../models/special-event";
+import {NotificationService} from "./notification.service";
 
 @Injectable()
 export class SpecialEventGeneratorService implements IGenerator {
