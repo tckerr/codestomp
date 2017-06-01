@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {perHour, perYear} from '../../../../../environments/environment';
 import {DeveloperStaffService} from '../../../../services/resource-services/developer-staff.service';
-import {StaffType} from '../../../../models/definitions/staff-definitions';
+import {StaffCategory} from '../../../../models/definitions/staff-definitions';
 import {UnlocksService} from '../../../../services/unlocks.service';
 import * as Enumerable from 'linq';
-import {TalentService} from "../../../../services/resource-services/talent.service";
+import {TalentService} from '../../../../services/resource-services/talent.service';
 
 
 @Component({
@@ -17,20 +17,20 @@ export class DevelopmentHiringComponent implements OnInit {
    public activeHireType: string;
    private devHireTypes: any[] = [];
    private activeTalentCost: number = 0;
-   private StaffType = StaffType;
+   private StaffType = StaffCategory;
 
    constructor(private talentService: TalentService,
                private developerStaffService: DeveloperStaffService,
-               private unlocksService: UnlocksService,
-   ) {
+               private unlocksService: UnlocksService, ) {
       this.buildHireTypes();
    }
 
    private buildHireTypes() {
       this.devHireTypes = Enumerable
          .from(this.developerStaffService.staff)
-         .select(staff => { return {
-               id: staff.displayName,
+         .select(staff => {
+            return {
+               id: staff.id,
                type: staff.type,
                displayName: staff.displayName,
                special: staff.special,
@@ -39,16 +39,18 @@ export class DevelopmentHiringComponent implements OnInit {
                salaryPerHour: staff.baseSalaryPerMs * perHour,
                talentCost: this.talentService.getCostForExperience(staff.experience),
                qaph: staff.typeDetails.testingPerMs * perHour,
-               hire: () => this.developerStaffService.hire(staff.displayName, staff.experience),
+               hire: () => this.developerStaffService.hire(staff.id, staff.experience),
                unlocked: () => this.unlocksService.devStaffAtExperienceIsUnlocked(staff.experience),
                getPreviewName: () => this.getPreviewName(staff),
-               count: () => this.talentService.maxHires(staff.experience)}})
+               count: () => this.talentService.maxHires(staff.experience)
+            };
+         })
          .toArray();
    }
 
    private getPreviewName(staff) {
-      let preview = this.unlocksService.unlocks.devHiring == this.unlocksService.experienceTypeToUnlockTier(staff.experience) - 1;
-      return preview ? staff.displayName : "???";
+      const preview = this.unlocksService.unlocks.devHiring === this.unlocksService.experienceTypeToUnlockTier(staff.experience) - 1;
+      return preview ? staff.displayName : '???';
    }
 
    public resetCost() {
@@ -56,5 +58,6 @@ export class DevelopmentHiringComponent implements OnInit {
       return true;
    }
 
-   ngOnInit() {}
+   ngOnInit() {
+   }
 }

@@ -3,7 +3,7 @@ import {TickExecutor} from '../../../interfaces/tick-executor';
 import {DeveloperStaffService} from '../../../resource-services/developer-staff.service';
 import {Tick} from '../../../../models/tick';
 import {DeploymentExecutor} from '../../../devops/deployment-executor.service';
-import {StaffType} from '../../../../models/definitions/staff-definitions';
+import {StaffCategory} from '../../../../models/definitions/staff-definitions';
 import {ConfigurationService} from '../../../configuration.service';
 import * as Enumerable from 'linq';
 
@@ -37,7 +37,7 @@ export class CodeDeploymentService implements TickExecutor {
 
       return Enumerable
          .from(this.developerStaff.staff)
-         .where(s => s.hired && s.type == StaffType.DevOps)
+         .where(s => s.hired && s.type == StaffCategory.DevOps)
          .sum(s => s.hired);
    }
 

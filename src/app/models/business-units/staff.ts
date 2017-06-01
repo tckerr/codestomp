@@ -1,6 +1,7 @@
 import {IStaff} from './istaff';
 
-export class Staff implements IStaff{
+export class Staff implements IStaff {
+   public id: number;
    public displayName: string;
    public type: string;
    public experience: number;
@@ -9,7 +10,8 @@ export class Staff implements IStaff{
    public hired: number;
    public typeDetails: any;
 
-   constructor(json: any){
+   constructor(json: any) {
+      this.id = json.id;
       this.displayName = json.displayName;
       this.type = json.type;
       this.experience = json.experience;

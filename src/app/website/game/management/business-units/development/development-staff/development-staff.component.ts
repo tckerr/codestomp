@@ -3,6 +3,7 @@ import {DeveloperStaffService} from '../../../../../../services/resource-service
 import {Staff} from '../../../../../../models/business-units/staff';
 import * as Enumerable from 'linq';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
+import {StaffType} from '../../../../../../models/definitions/staff-definitions';
 
 @Component({
    selector: 'app-development-staff',
@@ -26,8 +27,8 @@ export class DevelopmentStaffComponent implements OnInit {
    }
 
    // TODO: use a more reliable id
-   public fire(displayName: string) {
-      this.developerStaffService.fire(displayName);
+   public fire(id: StaffType) {
+      this.developerStaffService.fire(id);
    }
 
 }
