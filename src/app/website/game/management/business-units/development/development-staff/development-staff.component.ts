@@ -25,6 +25,7 @@ export class DevelopmentStaffComponent implements OnInit {
          .toArray();
    }
 
+   // TODO: use a more reliable id
    public fire(displayName: string) {
       this.developerStaffService.fire(displayName);
    }
