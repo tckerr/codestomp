@@ -27,13 +27,13 @@ export class TalentService {
    }
 
 
-   public hire(experience: ExperienceLevel) {
-      let cost = this.getCostForExperience(experience);
-      let available = Math.floor(this.talent.balance / cost);
-      if (available > 0)
-         this.remove(cost);
+   public hire(experience: ExperienceLevel, count: number = 1) {
+      let individualCost = this.getCostForExperience(experience);
+      let available = Math.floor(this.talent.balance / individualCost);
+      if (available >= count)
+         this.remove(individualCost * count);
       else
-         throw Error('Cannot hire, no one available!');
+         throw Error('Cannot hire, not enough available!');
    }
 
 

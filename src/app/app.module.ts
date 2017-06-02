@@ -38,24 +38,25 @@ import {FundsDigestComponent} from './website/game/management/company-digest/fun
 import {DateDigestComponent} from './website/game/management/company-digest/date-digest/date-digest.component';
 import {CustomersDigestComponent} from './website/game/management/company-digest/customers-digest/customers-digest.component';
 import {DevelopmentStaffComponent} from './website/game/management/business-units/development/development-staff/development-staff.component';
-import {DevelopmentHiringComponent} from './website/game/management/development-hiring/development-hiring.component';
 import {TalentGeneratorService} from './services/generators/talent-generator-service';
 import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
-import {BusinessUnits} from './models/business-units/business-units.enum';
 import {DeveloperStaffService} from './services/resource-services/developer-staff.service';
 import {StaffActionAccumulatorService} from './services/accumulators/staff-actions/staff-action-accumulator.service';
 import {StaffSalaryAccumulatorService} from './services/accumulators/staff-salary-accumulator.service';
 import {QuitterNotificationService} from './services/quitter-notification.service';
 import { AlertsDigestComponent } from './website/game/management/company-digest/alerts-digest/alerts-digest.component';
-import { TalentCapacityBreakdownComponent } from './website/game/management/development-hiring/talent-capacity-breakdown/talent-capacity-breakdown.component';
 import {CodeWritingService} from './services/accumulators/staff-actions/development/code-writing.service';
 import {CodeTestingService} from './services/accumulators/staff-actions/development/code-testing.service';
 import {CodeDeploymentService} from './services/accumulators/staff-actions/development/code-deployment.service';
-import {DevelopmentBusinessUnitAccessorService} from './services/resource-services/development-business-unit-accessor.service';
 import {BugFixingService} from './services/accumulators/staff-actions/development/bug-fixing.service';
 import {SpecialEventGeneratorService} from './services/generators/special-events/special-event-generator.service';
 import {NotificationService} from './services/generators/special-events/notification.service';
 import {TalentService} from "./services/resource-services/talent.service";
+import {HiringService} from './services/hiring.service';
+import {JobMarketComponent} from './website/game/management/job-market/job-market.component';
+import {TalentCapacityBreakdownComponent} from './website/game/management/job-market/talent-capacity-breakdown/talent-capacity-breakdown.component';
+import {StaffCategegoryIconResolverService} from './services/staff-categegory-icon-resolver.service';
+import {StaffQuitDecisionService} from './services/accumulators/staff-actions/staff-quit-decision.service';
 
 const appRoutes: Routes = [
    {
@@ -78,18 +79,18 @@ const appRoutes: Routes = [
                {
                   path: '',
                   pathMatch: 'full',
-                  redirectTo: BusinessUnits.Development,
+                  redirectTo: 'development',
                },
                {
-                  path: BusinessUnits.Development,
+                  path: 'development',
                   component: DevelopmentComponent,
                },
                {
-                  path: BusinessUnits.Debug,
+                  path: 'debug',
                   component: DebugComponent,
                },
                {
-                  path: BusinessUnits.HR,
+                  path: 'hr',
                   component: HRComponent
                }
             ]
@@ -117,7 +118,7 @@ const appRoutes: Routes = [
       DateDigestComponent,
       CustomersDigestComponent,
       DevelopmentStaffComponent,
-      DevelopmentHiringComponent,
+      JobMarketComponent,
       AlertsDigestComponent,
       TalentCapacityBreakdownComponent,
    ],
@@ -155,11 +156,13 @@ const appRoutes: Routes = [
       CodeWritingService,
       CodeTestingService,
       CodeDeploymentService,
-      DevelopmentBusinessUnitAccessorService,
       BugFixingService,
       SpecialEventGeneratorService,
       NotificationService,
-      TalentService
+      TalentService,
+      HiringService,
+      StaffCategegoryIconResolverService,
+      StaffQuitDecisionService
    ],
    bootstrap: [AppComponent]
 })

@@ -6,18 +6,37 @@ import {Tick} from '../../models/tick';
 import {FundService} from '../resource-services/fund.service';
 import {Staff} from '../../models/business-units/staff';
 import {IAccumulator} from 'app/services/accumulators/iaccumulator';
-import {GameStorageService} from "../game-storage.service";
-import {perHour} from "../../../environments/environment";
-import * as Enumerable from "linq";
+import {GameStorageService} from '../game-storage.service';
+import {perHour} from '../../../environments/environment';
+import * as Enumerable from 'linq';
+import {IEnumerable} from 'linq';
+import {StaffQuitDecisionService} from './staff-actions/staff-quit-decision.service';
+import {del} from 'selenium-webdriver/http';
+
+export class PaymentObligationResult {
+   constructor(public obligation: PaymentObligation,
+               public deficit: number) {
+   }
+
+   public get deficitPercent() {
+      return this.deficit / this.obligation.amount;
+   }
+}
+
+export class PaymentObligation {
+   constructor(public amount: number,
+               public staff: Staff,) {
+   };
+}
 
 @Injectable()
 export class StaffSalaryAccumulatorService implements OnDestroy, IAccumulator {
 
    private sub: Subscription;
 
-   constructor(private developerStaff: DeveloperStaffService,
-               private fundService: FundService,
+   constructor(private fundService: FundService,
                private gameStorage: GameStorageService,
+               private staffQuitDecisionService: StaffQuitDecisionService,
                private tickService: TickService) {
    }
 
@@ -27,26 +46,44 @@ export class StaffSalaryAccumulatorService implements OnDestroy, IAccumulator {
 
    public start() {
       this.sub = this.tickService.pipeline.subscribe((tick: Tick) => {
-         let costs = this.salaryCostsForElapsedMs(tick.msElapsed);
-         let surplus = this.fundService.funds.remove(costs);
-         if (surplus < 0)
-            this.developerStaff.chanceRandomQuit(tick.msElapsed);
-         //TODO: all staff types can quit
-         // possibly, can quit for other reasons, but we don't want
-         // the chance to be multiplied by the number of reasons?
-         // if not, we need to aggregate them somewhere
+         let ms = tick.msElapsed;
+         this.paySalariesAndGetFailedObligations(ms)
+            .shuffle()
+            .forEach(failedObligationResult => this.staffQuitDecisionService.decide(ms, failedObligationResult));
       });
    }
 
-   public get costsPerHour() {
-      return this.salaryCostsForElapsedMs(perHour);
+   // TODO: allow payment strategies (i.e. underpaying everyone a lil instead of some people none)
+   private paySalariesAndGetFailedObligations(ms: number): IEnumerable<PaymentObligationResult> {
+      let results = Enumerable
+         .from(this.salaryObligationsForElapsedMs(ms))
+         .select(obligation => {
+            let delta = this.payObligation(obligation);
+            let deficit = obligation.amount + delta;
+            return new PaymentObligationResult(obligation, deficit);
+         })
+         .where(obligationResult => obligationResult.deficit > 0);
+      return results
    }
 
-   private salaryCostsForElapsedMs(ms: number) {
-      let salaryCostsPerMs = Enumerable
-         .from(this.gameStorage.game.company.businessUnits)
+   private payObligation(obligation: PaymentObligation): number {
+      let delta = this.fundService.funds.remove(obligation.amount);
+      return delta;
+   }
+
+   public get costsPerHour() {
+      let obligations = this.salaryObligationsForElapsedMs(perHour);
+      return Enumerable.from(obligations).sum(o => o.amount);
+   }
+
+   private salaryObligationsForElapsedMs(ms: number): IEnumerable<PaymentObligation> {
+      return Enumerable
+         .from(this.gameStorage.game.company.businessUnits.$asList())
          .selectMany(bu => bu.staff)
-         .sum(staff => staff.hired * staff.baseSalaryPerMs);
-      return salaryCostsPerMs * ms;
+         .selectMany(staff => Enumerable.range(0, staff.hired).select(() => staff))
+         .select(staff => {
+            let salaryCost = staff.baseSalaryPerMs * ms;
+            return new PaymentObligation(salaryCost, staff);
+         });
    }
 }

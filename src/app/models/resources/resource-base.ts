@@ -22,14 +22,14 @@ export class ResourceBase {
    }
 
    remove(count: number, strict: boolean = false) {
-      let oldVal = this.balance;
-      let surplusOrDeficit = this.balance - count;
-      if ( strict && surplusOrDeficit < 0 )
+      let previousBalance = this.balance;
+      let newBalance = this.balance - count;
+      if ( strict && newBalance < 0 )
          throw Error("Not enough resources!");
-      let effectiveNewbalance = Math.max(0, surplusOrDeficit);
-      this.balance = effectiveNewbalance;
-      this.$source.next(new ResourceUpdate(oldVal, this.balance, this.totalAccumulated, this.balance - oldVal, this));
-      return surplusOrDeficit; // surplus or deficit
+      this.balance = Math.max(0, newBalance);
+      let delta = this.balance - previousBalance;
+      this.$source.next(new ResourceUpdate(previousBalance, this.balance, this.totalAccumulated, delta, this));
+      return delta;
    }
 
    public get $balanceFloored(){

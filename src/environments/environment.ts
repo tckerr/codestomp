@@ -88,8 +88,8 @@ export const environment = {
       defaults: {
          companyName: 'T-Corp',
          startingFunds: 0,
-         codePerClick: 50, // balanced for ~3
-         manualTestsPerClick: 50,
+         codePerClick: 500, // balanced for ~3
+         manualTestsPerClick: 500,
          deployThreshold: 200,
          bugsPercentage: .05,
          testsFailurePercentage: .15,

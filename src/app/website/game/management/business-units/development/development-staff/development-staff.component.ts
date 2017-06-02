@@ -4,6 +4,7 @@ import {Staff} from '../../../../../../models/business-units/staff';
 import * as Enumerable from 'linq';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
 import {StaffType} from '../../../../../../models/definitions/staff-definitions';
+import {HiringService} from '../../../../../../services/hiring.service';
 
 @Component({
    selector: 'app-development-staff',
@@ -13,6 +14,7 @@ import {StaffType} from '../../../../../../models/definitions/staff-definitions'
 export class DevelopmentStaffComponent implements OnInit {
 
    constructor(private developerStaffService: DeveloperStaffService,
+               private hiringService: HiringService,
                private unlocksService: UnlocksService,) {
    }
 
@@ -22,13 +24,13 @@ export class DevelopmentStaffComponent implements OnInit {
    public get devStaff(): Staff[] {
       return Enumerable
          .from(this.developerStaffService.staff)
-         .where(s => this.unlocksService.devStaffAtExperienceIsUnlocked(s.experience))
+         .where(s => this.unlocksService.staffAtExperienceIsUnlocked(s.experience, "development"))
          .toArray();
    }
 
    // TODO: use a more reliable id
    public fire(id: StaffType) {
-      this.developerStaffService.fire(id);
+      this.hiringService.fire(id);
    }
 
 }

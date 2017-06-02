@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 import {TickService} from 'app/services/tick/tick.service';
 import {ConfigurationService} from '../configuration.service';
 import * as moment from 'moment';
-import {DevelopmentBusinessUnitAccessorService} from '../resource-services/development-business-unit-accessor.service';
+import {GameStorageService} from '../game-storage.service';
 
 @Injectable()
 export class DeploymentExecutor {
@@ -18,16 +18,20 @@ export class DeploymentExecutor {
    constructor(private codeService: CodeService,
                private tickService: TickService,
                private config: ConfigurationService,
-               private devAccessor: DevelopmentBusinessUnitAccessorService,
+               private gameStorageService: GameStorageService,
                private logger: LoggerService) {
    }
 
    public set lastDeployedDate(date: moment.Moment){
-      this.devAccessor.businessUnit.deploymentInfo.lastDeployUtc = date.format();
+      this.devBusinessUnit.deploymentInfo.lastDeployUtc = date.format();
+   }
+
+   private get devBusinessUnit() {
+      return this.gameStorageService.game.company.businessUnits.development;
    }
 
    public get lastDeployedDate(){
-      return moment(this.devAccessor.businessUnit.deploymentInfo.lastDeployUtc);
+      return moment(this.devBusinessUnit.deploymentInfo.lastDeployUtc);
    }
 
    public get canDeploy(){
@@ -59,7 +63,7 @@ export class DeploymentExecutor {
             () => {
                this.deploying = false;
                let deploymentDurationHours = lastDate.diff(this.lastDeployedDate, 'hours');
-               this.devAccessor.businessUnit.deploymentInfo.deployCount++;
+               this.devBusinessUnit.deploymentInfo.deployCount++;
                this.logger.gameLog(`Done deployment! Took ${deploymentDurationHours} hrs.`, LogType.Info);
                this.source.next();
             });

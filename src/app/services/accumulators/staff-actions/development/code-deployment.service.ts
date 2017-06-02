@@ -37,7 +37,7 @@ export class CodeDeploymentService implements TickExecutor {
 
       return Enumerable
          .from(this.developerStaff.staff)
-         .where(s => s.hired && s.type == StaffCategory.DevOps)
+         .where(s => s.hired && s.category == StaffCategory.DevOps)
          .sum(s => s.hired);
    }
 

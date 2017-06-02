@@ -4,5 +4,5 @@ export interface IBusinessUnit {
    id: string;
    name: string;
    active: boolean;
-   staff: Staff[]
+   staff: Staff[];
 }

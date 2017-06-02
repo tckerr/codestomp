@@ -9,6 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
 import {GameStorageService} from '../game-storage.service';
 import {LoggerService} from '../logger-service';
+import * as Enumerable from 'linq';
 
 @Injectable()
 export class TickService implements Pipeline {
@@ -40,11 +41,11 @@ export class TickService implements Pipeline {
       this.stop();
       this.timer = Observable.timer(offset - moment().diff(this.latest, 'ms'), this.tickerIntervalMs);
       this.tickToMsMapCached = this.tickToMsMap;
-      this.subscription = this.timer.subscribe(() => this.generateTick(this.tickToMsMapCached));
+      this.subscription = this.timer.subscribe(() => this.generateTick(this.tickToMsMapCached, this.tickerIntervalMs));
    }
 
    step(){
-      this.generateTick(this.tickToMsMapCached);
+      this.generateTick(this.tickToMsMapCached, this.tickerIntervalMs);
    }
 
    continueWithUpdates(){
@@ -113,13 +114,14 @@ export class TickService implements Pipeline {
       return Math.round(100000 / this.tickerIntervalMs) / 100;
    }
 
-   private generateTick(tickToMsMapCached) {
+   private generateTick(tickToMsMapCached, interval) {
       let index = this.incrementIndex();
       let date = this.generateDate(tickToMsMapCached);
-      let tick = new Tick(index, date, tickToMsMapCached);
-      if(this.latest){
-         //console.log("Time since last tick:", moment().diff(this.latest, 'ms'))
-      }
+      let msSinceLastTick = 0;
+      if(this.latest)
+         msSinceLastTick = moment().diff(this.latest, 'ms');
+      let msOverlap = msSinceLastTick - interval;
+      let tick = new Tick(index, date, tickToMsMapCached, msSinceLastTick, msOverlap);
       this.latest = moment();
       this.source.next(tick);
    }

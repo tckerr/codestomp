@@ -1,9 +1,9 @@
 import {IStaff} from './istaff';
 
-export class Staff implements IStaff {
+export abstract class Staff implements IStaff {
    public id: number;
    public displayName: string;
-   public type: string;
+   public category: string;
    public experience: number;
    public special: string;
    public baseSalaryPerMs: number;
@@ -13,7 +13,7 @@ export class Staff implements IStaff {
    constructor(json: any) {
       this.id = json.id;
       this.displayName = json.displayName;
-      this.type = json.type;
+      this.category = json.category;
       this.experience = json.experience;
       this.special = json.special;
       this.baseSalaryPerMs = json.baseSalaryPerMs;

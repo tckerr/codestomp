@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
 import {DeploymentExecutor} from "../../devops/deployment-executor.service";
-import {DevelopmentBusinessUnitAccessorService} from "../../resource-services/development-business-unit-accessor.service";
 import {CustomerService} from "../../resource-services/customer.service";
 import {IGenerator} from "../igenerator";
 import {LogType} from "../../logger-service";
 import {Subject} from "rxjs/Subject";
 import {SpecialEvent, SpecialEventDisplayType} from "../../../models/special-event";
 import {NotificationService} from "./notification.service";
+import {GameStorageService} from '../../game-storage.service';
 
 @Injectable()
 export class SpecialEventGeneratorService implements IGenerator {
@@ -17,8 +17,8 @@ export class SpecialEventGeneratorService implements IGenerator {
    // TODO: potentially separate the listener with the broadcaster to avoid circular dependencies
    constructor(private deploymentExecutor: DeploymentExecutor,
                private customerService: CustomerService,
-               private notificationService: NotificationService,
-               private devAccessor: DevelopmentBusinessUnitAccessorService,) {
+               private gameStorageService: GameStorageService,
+               private notificationService: NotificationService) {
       this.pipeline.subscribe(e => {
          if (e.isNotification)
             this.notificationService.notify(e.eventName, e.description, e.logType);
@@ -27,8 +27,9 @@ export class SpecialEventGeneratorService implements IGenerator {
 
    public generate() {
       this.deploymentExecutor.pipeline
+         .takeWhile(() => this.gameStorageService.game.company.businessUnits.development.deploymentInfo.deployCount <= 0)
          .take(1)
-         .subscribe(() => this.grandOpening())
+         .subscribe(() => this.grandOpening());
    }
 
    public fireSpecialEvent(eventName: string, description: string, buttonText: string, logType: LogType, displayType: SpecialEventDisplayType) {

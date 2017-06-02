@@ -6,9 +6,9 @@
    </div>
    <div class="row">
       <div
-         [class.col-8]="hiringUnlocked"
-         [class.pr-1]="hiringUnlocked"
-         [class.col-12]="!hiringUnlocked">
+         [class.col-8]="hiringActive"
+         [class.pr-1]="hiringActive"
+         [class.col-12]="!hiringActive">
          <div class="card mt-1">
             <div class="card-header small pt-2" *ngIf="activeBusinessUnits.length > 1">
                <ul class="nav nav-tabs card-header-tabs">
@@ -26,8 +26,8 @@
          </div>
       </div>
 
-      <div class="col-4 pl-0" *ngIf="hiringUnlocked">
-         <app-development-hiring></app-development-hiring>
+      <div class="col-4 pl-0" *ngIf="hiringActive">
+         <app-job-market [businessUnitId]="activeBusinessUnit"></app-job-market>
       </div>
    </div>
 

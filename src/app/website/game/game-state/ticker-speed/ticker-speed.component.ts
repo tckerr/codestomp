@@ -1,19 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TickService} from '../../../../services/tick/tick.service';
 import {LoggerService} from '../../../../services/logger-service';
+import * as Enumerable from 'linq';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
    selector: 'app-ticker-speed',
    templateUrl: './ticker-speed.component.html',
    styleUrls: ['./ticker-speed.component.css']
 })
-export class TickerSpeedComponent implements OnInit {
+export class TickerSpeedComponent implements OnInit, OnDestroy {
+   ngOnDestroy(): void {
+      if(this.sub)
+         this.sub.unsubscribe()
+   }
+   private averageOverlap: number = 0;
+   private sub: Subscription;
 
    constructor(private tickService: TickService,
                private logger: LoggerService) {
    }
 
    ngOnInit() {
+      this.sub = this.tickService.pipeline
+         .map(t => t.msOverlap)
+         .bufferCount(20)
+         .map(x => Enumerable.from(x).average())
+         .subscribe(average => this.averageOverlap = average);
    }
 
    private pause(): void {

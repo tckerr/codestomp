@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {IdGeneratorService} from './id-generator.service';
 import {environment} from '../../environments/environment';
-import {BusinessUnits} from '../models/business-units/business-units.enum';
 import * as moment from 'moment';
 import {ExperienceLevel, StaffCategory, StaffType} from '../models/definitions/staff-definitions';
+import * as Enumerable from 'linq';
 
 @Injectable()
 export class GameSeedGeneratorService {
@@ -27,7 +27,11 @@ export class GameSeedGeneratorService {
             unlocks: {
                manualTesting: 0,
                deployments: 0,
-               devHiring: 0,
+               hiring: {
+                  development: 0,
+                  hr: 0,
+                  debug: 0
+               },
                bugFixes: 0,
             },
             resources: {
@@ -62,16 +66,16 @@ export class GameSeedGeneratorService {
                   totalAccumulated: 0
                }
             },
-            businessUnits: [
-               {
-                  id: BusinessUnits.HR,
+            businessUnits: {
+               hr: {
+                  id: 'hr',
                   name: 'Human Resources',
                   active: false,
                   staff: [
                      {
                         id: StaffType.TalentScout,
                         displayName: 'Talent Scout', // generates talent
-                        type: StaffCategory.TalentScout,
+                        category: StaffCategory.TalentScout,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: 0,
                         hired: 0,
@@ -80,7 +84,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.Recruiter,
                         displayName: 'Recruiter', // auto-hire tier 1
-                        type: StaffCategory.Recruiter,
+                        category: StaffCategory.Recruiter,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: 0,
                         hired: 0,
@@ -89,7 +93,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.TalentAcquisitionManager,
                         displayName: 'Talent Acquisition Manager', // auto-hire tier 2
-                        type: StaffCategory.Recruiter,
+                        category: StaffCategory.Recruiter,
                         experience: ExperienceLevel.Junior,
                         baseSalaryPerMs: 0,
                         hired: 0,
@@ -98,7 +102,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.CorporateTrainer,
                         displayName: 'Corporate Trainer', // hires inside the company (optional upgrades)
-                        type: StaffCategory.Trainer,
+                        category: StaffCategory.Trainer,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: 0,
                         hired: 0,
@@ -107,7 +111,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.BenefitsSpecialist,
                         displayName: 'Benefits Specialist', // internal satisfaction
-                        type: StaffCategory.EmployeeRetainer,
+                        category: StaffCategory.EmployeeRetainer,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: 0,
                         hired: 0,
@@ -115,13 +119,13 @@ export class GameSeedGeneratorService {
                      }
                   ]
                },
-               {
-                  id: BusinessUnits.Debug,
+               debug: {
+                  id: 'debug',
                   name: 'Debug',
                   active: true
                },
-               {
-                  id: BusinessUnits.Development,
+               development: {
+                  id: 'development',
                   name: 'Development',
                   active: true,
                   deploymentInfo: {
@@ -132,7 +136,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.AssociateDeveloper,
                         displayName: 'Associate Developer',
-                        type: StaffCategory.Developer,
+                        category: StaffCategory.Developer,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.associateDeveloper,
                         hired: 0,
@@ -145,7 +149,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.DevelopmentIntern,
                         displayName: 'Development Intern',
-                        type: StaffCategory.Developer,
+                        category: StaffCategory.Developer,
                         experience: ExperienceLevel.Intern,
                         special: environment.gameSettings.businessUnits.development.staff.special.developmentIntern,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.developmentIntern,
@@ -159,7 +163,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.JuniorDeveloper,
                         displayName: 'Junior Developer',
-                        type: StaffCategory.Developer,
+                        category: StaffCategory.Developer,
                         experience: ExperienceLevel.Junior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.juniorDeveloper,
                         hired: 0,
@@ -172,7 +176,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.SeniorDeveloper,
                         displayName: 'Senior Developer',
-                        type: StaffCategory.Developer,
+                        category: StaffCategory.Developer,
                         experience: ExperienceLevel.Senior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.seniorDeveloper,
                         hired: 0,
@@ -185,7 +189,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.AssociateQaAnalyst,
                         displayName: 'Associate QA Analyst',
-                        type: StaffCategory.QA,
+                        category: StaffCategory.QA,
                         experience: ExperienceLevel.Associate,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.associateQaAnalyst,
                         hired: 0,
@@ -198,7 +202,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.JuniorQaAnalyst,
                         displayName: 'Junior QA Analyst',
-                        type: StaffCategory.QA,
+                        category: StaffCategory.QA,
                         experience: ExperienceLevel.Junior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.juniorQaAnalyst,
                         hired: 0,
@@ -212,7 +216,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.SeniorQaAnalyst,
                         displayName: 'Senior QA Analyst',
-                        type: StaffCategory.QA,
+                        category: StaffCategory.QA,
                         experience: ExperienceLevel.Senior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.seniorQaAnalyst,
                         hired: 0,
@@ -226,7 +230,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.QaAutomationEngineer,
                         displayName: 'QA Automation Engineer',
-                        type: StaffCategory.QA,
+                        category: StaffCategory.QA,
                         experience: ExperienceLevel.Senior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.qaAutomationEngineer,
                         hired: 0,
@@ -239,7 +243,7 @@ export class GameSeedGeneratorService {
                      {
                         id: StaffType.DevOpsEngineer,
                         displayName: 'Dev Ops Engineer',
-                        type: StaffCategory.DevOps,
+                        category: StaffCategory.DevOps,
                         special: environment.gameSettings.businessUnits.development.staff.special.devopsEngineer,
                         experience: ExperienceLevel.Senior,
                         baseSalaryPerMs: environment.gameSettings.businessUnits.development.staff.baseSalaryPerMs.devopsEngineer,
@@ -252,8 +256,10 @@ export class GameSeedGeneratorService {
                      }
                   ]
                }
-            ]
+            }
          }
       }
    }
+
 }
+
