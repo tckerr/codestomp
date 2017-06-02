@@ -114,10 +114,10 @@
                               <button class="btn btn-info btn-block btn-sm btn-interactive"
                                       (mouseenter)="activeTalentCost = activeHireType.talentCost * activeHireType.count()"
                                       (mouseleave)="resetCost()"
-                                      (click)="activeHireType.hire(activeHireType.count())"
-                                      [disabled]="activeHireType.count() < 1 && resetCost()">
+                                      (click)="activeHireType.hireAll()"
+                                      [disabled]="activeHireType.count() < 1">
                                  <span>
-                                    <i class="fa fa-user-plus"></i> Hire {{activeHireType.count()}}
+                                    <i class="fa fa-user-plus"></i> Hire All
                                  </span>
                               </button>
                            </div>

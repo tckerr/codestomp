@@ -34,7 +34,7 @@ export class JobMarketComponent implements OnChanges, OnInit {
       this.buildHireTypes();
    }
    ngOnChanges(changes: SimpleChanges): void {
-      this.businessUnitId = changes['businessUnitId'].currentValue;
+      this.businessUnitId = changes['businessUnitId'].currentValue || this.businessUnitId;
       this.buildHireTypes();
    }
 
@@ -56,6 +56,7 @@ export class JobMarketComponent implements OnChanges, OnInit {
                salaryPerHour: staff.baseSalaryPerMs * perHour,
                talentCost: this.talentService.getCostForExperience(staff.experience),
                hire: (count) => this.hiringService.hire(staff.id, staff.experience, count),
+               hireAll: () => this.hiringService.hire(staff.id, staff.experience, this.talentService.maxHires(staff.experience)),
                unlocked: () => this.unlocksService.staffAtExperienceIsUnlocked(staff.experience, self.businessUnitId),
                getPreviewName: () => this.getPreviewName(staff),
                count: () => this.talentService.maxHires(staff.experience)

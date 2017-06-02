@@ -63,7 +63,7 @@ export class StaffSalaryAccumulatorService implements OnDestroy, IAccumulator {
             return new PaymentObligationResult(obligation, deficit);
          })
          .where(obligationResult => obligationResult.deficit > 0);
-      return results
+      return results;
    }
 
    private payObligation(obligation: PaymentObligation): number {
@@ -80,9 +80,8 @@ export class StaffSalaryAccumulatorService implements OnDestroy, IAccumulator {
       return Enumerable
          .from(this.gameStorage.game.company.businessUnits.$asList())
          .selectMany(bu => bu.staff)
-         .selectMany(staff => Enumerable.range(0, staff.hired).select(() => staff))
          .select(staff => {
-            let salaryCost = staff.baseSalaryPerMs * ms;
+            let salaryCost = staff.hired * staff.baseSalaryPerMs * ms;
             return new PaymentObligation(salaryCost, staff);
          });
    }
