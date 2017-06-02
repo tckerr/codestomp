@@ -20,7 +20,7 @@ export class ManagementComponent implements OnInit, OnDestroy {
    @ViewChild('container') container: ElementRef;
    @ViewChild('specialEventModal') specialEventModal: ElementRef;
    private specialEventModalViewData: SpecialEvent;
-   private lastNavigatedBusinessUnit: string;
+   private lastNavigatedBusinessUnit: string = "development"; //todo: :(
 
    constructor(private gameStorageService: GameStorageService,
                private specialEventGeneratorService: SpecialEventGeneratorService,

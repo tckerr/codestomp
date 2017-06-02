@@ -37,7 +37,7 @@ import {UnlocksService} from './services/unlocks.service';
 import {FundsDigestComponent} from './website/game/management/company-digest/funds-digest/funds-digest.component';
 import {DateDigestComponent} from './website/game/management/company-digest/date-digest/date-digest.component';
 import {CustomersDigestComponent} from './website/game/management/company-digest/customers-digest/customers-digest.component';
-import {DevelopmentStaffComponent} from './website/game/management/business-units/development/development-staff/development-staff.component';
+import {StaffSummaryComponent} from './website/game/management/business-units/staff-summary/staff-summary.component';
 import {TalentGeneratorService} from './services/generators/talent-generator-service';
 import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
 import {DeveloperStaffService} from './services/resource-services/developer-staff.service';
@@ -55,7 +55,7 @@ import {TalentService} from "./services/resource-services/talent.service";
 import {HiringService} from './services/hiring.service';
 import {JobMarketComponent} from './website/game/management/job-market/job-market.component';
 import {TalentCapacityBreakdownComponent} from './website/game/management/job-market/talent-capacity-breakdown/talent-capacity-breakdown.component';
-import {StaffCategegoryIconResolverService} from './services/staff-categegory-icon-resolver.service';
+import {StaffCategoryIconResolverService} from './services/staff-category-icon-resolver.service';
 import {StaffQuitDecisionService} from './services/accumulators/staff-actions/staff-quit-decision.service';
 
 const appRoutes: Routes = [
@@ -117,7 +117,7 @@ const appRoutes: Routes = [
       FundsDigestComponent,
       DateDigestComponent,
       CustomersDigestComponent,
-      DevelopmentStaffComponent,
+      StaffSummaryComponent,
       JobMarketComponent,
       AlertsDigestComponent,
       TalentCapacityBreakdownComponent,
@@ -161,7 +161,7 @@ const appRoutes: Routes = [
       NotificationService,
       TalentService,
       HiringService,
-      StaffCategegoryIconResolverService,
+      StaffCategoryIconResolverService,
       StaffQuitDecisionService
    ],
    bootstrap: [AppComponent]

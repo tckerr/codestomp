@@ -15,6 +15,6 @@ export class BusinessUnitCollection {
    }
 
    public $asList(): IBusinessUnit[]{
-      return [this.development, this.debug];
+      return [this.development, this.debug, this.hr];
    }
 }

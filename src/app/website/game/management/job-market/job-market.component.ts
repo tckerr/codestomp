@@ -7,7 +7,7 @@ import {TalentService} from '../../../../services/resource-services/talent.servi
 import {Staff} from 'app/models/business-units/staff';
 import {HiringService} from '../../../../services/hiring.service';
 import {GameStorageService} from '../../../../services/game-storage.service';
-import {StaffCategegoryIconResolverService} from '../../../../services/staff-categegory-icon-resolver.service';
+import {StaffCategoryIconResolverService} from '../../../../services/staff-category-icon-resolver.service';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class JobMarketComponent implements OnChanges, OnInit {
    constructor(private talentService: TalentService,
                private gameStorageService: GameStorageService,
                private hiringService: HiringService,
-               private iconResolver: StaffCategegoryIconResolverService,
+               private iconResolver: StaffCategoryIconResolverService,
                private unlocksService: UnlocksService,) {
 
    }

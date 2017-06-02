@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {StaffCategory} from '../models/definitions/staff-definitions';
 
 @Injectable()
-export class StaffCategegoryIconResolverService {
+export class StaffCategoryIconResolverService {
 
   constructor() { }
 

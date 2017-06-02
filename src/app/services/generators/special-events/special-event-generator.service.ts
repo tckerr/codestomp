@@ -29,7 +29,7 @@ export class SpecialEventGeneratorService implements IGenerator {
       this.deploymentExecutor.pipeline
          .takeWhile(() => {
             let deploys = this.gameStorageService.game.company.businessUnits.development.deploymentInfo.deployCount;
-            return deploys === 1;
+            return deploys == 1;
          })
          .subscribe(() => this.grandOpening());
    }
