@@ -1,5 +1,5 @@
 import {Subject} from 'rxjs/Subject';
-import {ResourceUpdate} from './resource-update';
+import {ResourceUpdate} from '../../messaging/resource-update';
 
 export class ResourceBase {
 

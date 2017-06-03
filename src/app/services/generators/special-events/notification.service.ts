@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as alertifyjs from 'alertifyjs'
-import {LoggerService, LogType} from '../../logger-service';
+import {LoggerService} from '../../logger-service';
+import {LogType} from '../../../models/definitions/log-type';
 
 @Injectable()
 export class NotificationService {

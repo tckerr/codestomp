@@ -1,4 +1,4 @@
-import {CompanyResourceBank} from './resources/company-resource-bank';
+import {CompanyResourceBank} from './company-resource-bank';
 import {Unlocks} from './unlocks';
 import {BusinessUnitCollection} from './business-unit-collection';
 

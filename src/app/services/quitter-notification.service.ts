@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {LoggerService, LogType} from './logger-service';
+import {LoggerService} from './logger-service';
+import {LogType} from '../models/definitions/log-type';
 
 @Injectable()
 export class QuitterNotificationService {
@@ -14,7 +15,7 @@ export class QuitterNotificationService {
    public newQuitter(quitter: string = "An employee", reason: string = "poor work conditions"){
       let message = `${quitter} has quit due to ${reason}!`;
       this.source.next([quitter, reason]);
-      this.logger.gameLog(message, LogType.Error)
+      this.logger.gameLog(message, LogType.Error);
    }
 
 }

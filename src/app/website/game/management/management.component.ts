@@ -5,7 +5,7 @@ import {SpecialEventGeneratorService} from '../../../services/generators/special
 import {Subscription} from 'rxjs/Subscription';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TickService} from '../../../services/tick/tick.service';
-import {SpecialEvent} from '../../../models/special-event';
+import {SpecialEvent} from '../../../models/messaging/special-event';
 import {isNullOrUndefined} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';
 

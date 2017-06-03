@@ -4,7 +4,7 @@ import {CodeService} from '../resource-services/code.service';
 import {Subscription} from 'rxjs/Subscription';
 import {CustomerService} from '../resource-services/customer.service';
 import {ConfigurationService} from '../configuration.service';
-import {Tick} from '../../models/tick';
+import {Tick} from '../../models/tick/tick';
 import {IAccumulator} from 'app/services/accumulators/iaccumulator';
 
 @Injectable()

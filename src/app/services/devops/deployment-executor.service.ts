@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LoggerService, LogType} from '../logger-service';
+import {LoggerService} from '../logger-service';
 import {Subject} from 'rxjs/Subject';
 import {CodeService} from '../resource-services/code.service';
 import 'rxjs/Rx';
@@ -7,6 +7,7 @@ import {TickService} from 'app/services/tick/tick.service';
 import {ConfigurationService} from '../configuration.service';
 import * as moment from 'moment';
 import {GameStorageService} from '../game-storage.service';
+import {LogType} from '../../models/definitions/log-type';
 
 @Injectable()
 export class DeploymentExecutor {

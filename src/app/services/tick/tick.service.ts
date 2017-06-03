@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Pipeline} from '../interfaces/pipeline';
 import {Subject} from 'rxjs/Subject';
-import {Tick} from '../../models/tick';
+import {Tick} from '../../models/tick/tick';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import {environment} from '../../../environments/environment';

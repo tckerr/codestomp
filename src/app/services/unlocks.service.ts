@@ -3,10 +3,10 @@ import {GameStorageService} from './game-storage.service';
 import {TickService} from './tick/tick.service';
 import {ConfigurationService} from './configuration.service';
 import {CodeService} from './resource-services/code.service';
-import {LogType} from './logger-service';
 import {FundService} from './resource-services/fund.service';
 import {ExperienceLevel} from '../models/definitions/staff-definitions';
 import {NotificationService} from './generators/special-events/notification.service';
+import {LogType} from '../models/definitions/log-type';
 
 @Injectable()
 export class UnlocksService {

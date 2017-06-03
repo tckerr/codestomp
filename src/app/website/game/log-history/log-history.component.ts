@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoggerService, LogType} from '../../../services/logger-service';
+import {LoggerService} from '../../../services/logger-service';
 import {LogItem} from '../../../models/logging/log-item';
 import {Subscription} from 'rxjs/Subscription';
 import {GameStorageService} from '../../../services/game-storage.service';
+import {LogType} from '../../../models/definitions/log-type';
 
 @Component({
    selector: 'app-log-history',

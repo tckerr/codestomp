@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {CodeService} from '../../../resource-services/code.service';
 import {DeveloperStaffService} from '../../../resource-services/developer-staff.service';
-import {Tick} from '../../../../models/tick';
+import {Tick} from '../../../../models/tick/tick';
 import {TickExecutor} from '../../../interfaces/tick-executor';
 import * as Enumerable from 'linq';
-import {Staff} from '../../../../models/business-units/staff';
+import {Staff} from '../../../../models/game/company/business-units/staff';
 
 @Injectable()
 export class BugFixingService implements TickExecutor {

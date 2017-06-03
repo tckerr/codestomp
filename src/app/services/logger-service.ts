@@ -2,14 +2,7 @@ import {Injectable} from '@angular/core';
 import {LogItem} from '../models/logging/log-item';
 import {IdGeneratorService} from './id-generator.service';
 import {Subject} from 'rxjs/Subject';
-
-export enum LogType {
-   Trace,
-   Info,
-   Success,
-   Warning,
-   Error
-}
+import {LogType} from '../models/definitions/log-type';
 
 @Injectable()
 export class LoggerService {

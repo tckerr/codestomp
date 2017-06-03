@@ -1,4 +1,4 @@
-import {IResource} from './iresource';
+import {IResource} from '../game/resources/iresource';
 
 export class ResourceUpdate {
    constructor(public oldVal: number,

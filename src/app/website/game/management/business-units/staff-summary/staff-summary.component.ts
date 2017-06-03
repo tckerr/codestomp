@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Staff} from '../../../../../models/business-units/staff';
+import {Staff} from '../../../../../models/game/company/business-units/staff';
 import * as Enumerable from 'linq';
 import {UnlocksService} from '../../../../../services/unlocks.service';
 import {StaffType} from '../../../../../models/definitions/staff-definitions';
 import {HiringService} from '../../../../../services/hiring.service';
 import {GameStorageService} from "../../../../../services/game-storage.service";
-import {IBusinessUnit} from "../../../../../models/business-units/ibusiness-unit";
+import {IBusinessUnit} from "../../../../../models/game/company/business-units/ibusiness-unit";
 
 @Component({
    selector: 'app-staff-summary',

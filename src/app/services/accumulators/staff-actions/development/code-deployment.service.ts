@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {TickExecutor} from '../../../interfaces/tick-executor';
 import {DeveloperStaffService} from '../../../resource-services/developer-staff.service';
-import {Tick} from '../../../../models/tick';
+import {Tick} from '../../../../models/tick/tick';
 import {DeploymentExecutor} from '../../../devops/deployment-executor.service';
 import {StaffCategory} from '../../../../models/definitions/staff-definitions';
 import {ConfigurationService} from '../../../configuration.service';

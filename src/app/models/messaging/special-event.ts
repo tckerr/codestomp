@@ -1,5 +1,4 @@
-import {LogType} from '../services/logger-service';
-
+import {LogType} from '../definitions/log-type';
 export enum SpecialEventDisplayType {
    Modal,
    Notification

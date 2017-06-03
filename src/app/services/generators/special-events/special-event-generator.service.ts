@@ -2,11 +2,11 @@ import {Injectable} from "@angular/core";
 import {DeploymentExecutor} from "../../devops/deployment-executor.service";
 import {CustomerService} from "../../resource-services/customer.service";
 import {IGenerator} from "../igenerator";
-import {LogType} from "../../logger-service";
 import {Subject} from "rxjs/Subject";
-import {SpecialEvent, SpecialEventDisplayType} from "../../../models/special-event";
+import {SpecialEvent, SpecialEventDisplayType} from "../../../models/messaging/special-event";
 import {NotificationService} from "./notification.service";
 import {GameStorageService} from '../../game-storage.service';
+import {LogType} from '../../../models/definitions/log-type';
 
 @Injectable()
 export class SpecialEventGeneratorService implements IGenerator {

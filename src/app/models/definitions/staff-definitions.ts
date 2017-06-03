@@ -30,14 +30,4 @@ export enum StaffType {
    JuniorDeveloper,
    AssociateDeveloper,
    DevelopmentIntern,
-
 }
-
-//
-// export class ExperienceLevel {
-//    public static readonly Intern = "intern";
-//    public static readonly Associate = "associate";
-//    public static readonly Junior = "junior";
-//    public static readonly Senior = "senior";
-// }
-//

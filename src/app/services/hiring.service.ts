@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ExperienceLevel, StaffType} from '../models/definitions/staff-definitions';
-import {LoggerService, LogType} from './logger-service';
+import {LoggerService} from './logger-service';
 import {TalentService} from './resource-services/talent.service';
 import {GameStorageService} from './game-storage.service';
 import * as Enumerable from 'linq';
+import {LogType} from '../models/definitions/log-type';
 
 @Injectable()
 export class HiringService {

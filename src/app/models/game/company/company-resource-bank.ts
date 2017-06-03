@@ -1,6 +1,6 @@
-import {FundsResource} from './funds-resource';
-import {CustomerResource} from './customer-resource';
-import {CodeBank} from './code-bank';
+import {FundsResource} from '../resources/funds/funds-resource';
+import {CustomerResource} from '../resources/customer/customer-resource';
+import {CodeBank} from '../resources/code/code-bank';
 
 export class CompanyResourceBank {
    public funds: FundsResource;

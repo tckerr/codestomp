@@ -1,4 +1,4 @@
-import {HiringCandidatePoolResource} from './hiring-candidate-pool-resource';
+import {HiringCandidatePoolResource} from './resources/talent/hiring-candidate-pool-resource';
 
 export class MarketResourceBank {
    public talent: HiringCandidatePoolResource;

@@ -1,5 +1,5 @@
-import {Company} from './company';
-import {MarketResourceBank} from './resources/market-resource-bank';
+import {Company} from './game/company/company';
+import {MarketResourceBank} from './game/market-resource-bank';
 
 export class Game {
    public id: string;
