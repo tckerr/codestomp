@@ -26,7 +26,8 @@ export class GameSeedGeneratorService {
          marketResources: {
             talent: {
                balance: 0,
-               totalAccumulated: 0
+               totalAccumulated: 0,
+               canBeNegative: false
             }
          },
          unlockedFeatures: unlockedFeatures,
@@ -38,6 +39,26 @@ export class GameSeedGeneratorService {
                blocks: []
             },
             {
+               id: 'incoporation',
+               unlocked: false,
+               displayName: "Incorporation",
+               blocks: [
+                  {
+                     displayName: 'Incorporation',
+                     unlocked: false,
+                     cumulative: true,
+                     criteriaType: AchievementCriteriaType.ConcurrentCustomers,
+                     unlockWhenValueGte: 1000,
+                     unlocksFeature: UnlockableFeature.Incorporation,
+                     notification: {
+                        title: 'Your business is now a corporation!',
+                        message: 'You\'re on the road to success.',
+                        logType: LogType.Success
+                     }
+                  },
+               ]
+            },
+            {
                id: 'development',
                unlocked: true,
                displayName: 'Development Achievements',
@@ -45,6 +66,7 @@ export class GameSeedGeneratorService {
                   {
                      displayName: 'Manual Testing',
                      unlocked: false,
+                     baseline: 0,
                      criteriaType: AchievementCriteriaType.TotalPushedCodeAccumulated,
                      unlockWhenValueGte: 70,
                      unlocksFeature: UnlockableFeature.ManualTesting,
@@ -79,8 +101,9 @@ export class GameSeedGeneratorService {
                      }
                   },
                   {
-                     displayName: 'Staff',
+                     displayName: 'Development Staff',
                      unlocked: false,
+                     triggersTrack: 'incoporation',
                      criteriaType: AchievementCriteriaType.TotalProdCodeAccumulated,
                      unlockWhenValueGte: 400,
                      unlocksFeature: UnlockableFeature.DevelopmentHiringTier1,
@@ -91,22 +114,10 @@ export class GameSeedGeneratorService {
                      }
                   },
                   {
-                     displayName: 'Incorporation',
-                     unlocked: false,
-                     criteriaType: AchievementCriteriaType.ConcurrentCustomers,
-                     unlockWhenValueGte: 1000,
-                     unlocksFeature: UnlockableFeature.Incorporation,
-                     notification: {
-                        title: 'Development hiring options unlocked!',
-                        message: 'Check out the development job market for more options.',
-                        logType: LogType.Success
-                     }
-                  },
-                  {
-                     displayName: 'Staff Tier 2',
+                     displayName: 'Dev Staff Tier 2',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalFundsAccumulated,
-                     unlockWhenValueGte: 1000,
+                     unlockWhenValueGte: 3000,
                      unlocksFeature: UnlockableFeature.DevelopmentHiringTier2,
                      notification: {
                         title: 'Development hiring options unlocked!',
@@ -115,10 +126,10 @@ export class GameSeedGeneratorService {
                      }
                   },
                   {
-                     displayName: 'Staff Tier 3',
+                     displayName: 'Dev Staff Tier 3',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalFundsAccumulated,
-                     unlockWhenValueGte: 2000,
+                     unlockWhenValueGte: 10000,
                      unlocksFeature: UnlockableFeature.DevelopmentHiringTier3,
                      notification: {
                         title: 'Development hiring options unlocked!',
@@ -144,33 +155,40 @@ export class GameSeedGeneratorService {
             resources: {
                funds: {
                   balance: environment.gameSettings.defaults.startingFunds,
-                  totalAccumulated: environment.gameSettings.defaults.startingFunds
+                  totalAccumulated: environment.gameSettings.defaults.startingFunds,
+                  canBeNegative: false
                },
                code: {
                   pushed: {
                      balance: 0,
-                     totalAccumulated: 0
+                     totalAccumulated: 0,
+                     canBeNegative: false
                   },
                   tested: {
                      balance: 0,
-                     totalAccumulated: 0
+                     totalAccumulated: 0,
+                     canBeNegative: false
                   },
                   deploying: {
                      balance: 0,
-                     totalAccumulated: 0
+                     totalAccumulated: 0,
+                     canBeNegative: false
                   },
                   prod: {
                      balance: 0,
-                     totalAccumulated: 0
+                     totalAccumulated: 0,
+                     canBeNegative: false
                   },
                   bugs: {
                      balance: 0,
-                     totalAccumulated: 0
+                     totalAccumulated: 0,
+                     canBeNegative: false
                   }
                },
                customers: {
                   balance: 0,
-                  totalAccumulated: 0
+                  totalAccumulated: 0,
+                     canBeNegative: false
                }
             },
             businessUnits: {

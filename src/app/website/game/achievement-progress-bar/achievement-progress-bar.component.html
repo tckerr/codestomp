@@ -1,6 +1,6 @@
 <ng-template #progressTooltip>
    <p class="mb-0 text-center">
-      <strong>{{currentValue}}/{{max}}</strong> {{unitString}} ({{progressPercent}}%)
+      <strong>{{currentValue}}/{{max}}</strong> {{unitString}} ({{progressPercent | number:'1.0-0'}}%)
    </p>
 </ng-template>
 <div class="row" *ngIf="eligible" style="height: 20px;">
@@ -19,7 +19,7 @@
             style="padding-top: 2px!important"
             class="h-100 progress-bar bg-success"
             [style.width]="progressPercent+'%'">
-            <span>{{progressPercent}}%</span>
+            <span>{{progressPercent | number:'1.0-0'}}%</span>
          </div>
       </div>
    </div>

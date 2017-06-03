@@ -31,12 +31,6 @@ export class ConfigurationService {
    public talentGenerationPerMs = environment.gameSettings.defaults.talentGenerationPerMs;
    public talentGenerationCap = environment.gameSettings.defaults.talentGenerationCap;
 
-   // unlocks
-   public deploymentsWhenTestedCodeGte = environment.gameSettings.unlockThresholds.deploymentsWhenTestedCodeGte;
-   public manualTestingWhenTotalCodeGte = environment.gameSettings.unlockThresholds.manualTestingWhenTotalCodeGte;
-   public unlockDevHiringWhenFundsGte = environment.gameSettings.unlockThresholds.unlockDevHiringWhenFundsGte;
-   public unlockBugFixesWhenBugsGte = environment.gameSettings.unlockThresholds.unlockBugFixesWhenBugsGte;
-
    // settings
    public showWelcomeModal = environment.gameSettings.showWelcomeModal;
 

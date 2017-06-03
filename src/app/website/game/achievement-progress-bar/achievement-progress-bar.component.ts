@@ -44,7 +44,7 @@ export class AchievementProgressBarComponent implements OnInit, OnChanges {
          return 0;
       }
       let progress = this.achievementEvaluatorService.achievementProgressPercent(block);
-      return Math.floor(progress * 100);
+      return progress * 100;
    }
 
    public get currentValue() {
@@ -60,7 +60,7 @@ export class AchievementProgressBarComponent implements OnInit, OnChanges {
       if (isNullOrUndefined(block)) {
          return 100;
       }
-      return Math.floor(block.unlockWhenValueGte);
+      return Math.floor(this.achievementEvaluatorService.max(block));
    }
 
    public get blockName() {

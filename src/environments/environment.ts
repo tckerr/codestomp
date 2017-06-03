@@ -113,12 +113,6 @@ export const environment = {
 
          customersToProfitGrowthRate: 15 / perMonth,
       },
-      unlockThresholds: {
-         manualTestingWhenTotalCodeGte: 70,
-         deploymentsWhenTestedCodeGte: 70, //keep this and the test one similar since the noti's line up well that way
-         unlockDevHiringWhenFundsGte: [30, 20000, 150000, 1000000],
-         unlockBugFixesWhenBugsGte: 20,
-      },
       ticker: {
          defaultIntervalMs: tickInterval,
          speedDelta: .001,

@@ -51,6 +51,7 @@ export class StaffSalaryAccumulatorService extends TickSubscriberBase implements
    private paySalariesAndGetFailedObligations(ms: number): IEnumerable<PaymentObligationResult> {
       let results = Enumerable
          .from(this.salaryObligationsForElapsedMs(ms))
+         .where(obligation => obligation.amount > 0)
          .select(obligation => {
             let delta = this.payObligation(obligation);
             let deficit = obligation.amount + delta;

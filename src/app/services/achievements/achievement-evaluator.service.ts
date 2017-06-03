@@ -15,11 +15,16 @@ export class AchievementEvaluatorService {
    }
 
    public achievementProgressPercent(block: AchievementBlock) {
-      let value = this.valueResolver.typeToValue(block.criteriaType);
-      return value / block.unlockWhenValueGte;
+      return this.current(block) / this.max(block);
    }
 
    public current(block: AchievementBlock) {
+      if(!block.cumulative)
+         return Math.max(0, this.valueResolver.typeToValue(block.criteriaType) - block.baseline);
       return this.valueResolver.typeToValue(block.criteriaType);
+   }
+
+   public max(block: AchievementBlock) {
+      return block.unlockWhenValueGte;
    }
 }

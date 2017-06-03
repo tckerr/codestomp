@@ -12,6 +12,7 @@ export class ResourceBase {
 
    constructor(json: any) {
       this.balance = json.balance;
+      this.canBeNegative = json.canBeNegative;
       this.totalAccumulated = json.totalAccumulated;
    }
 

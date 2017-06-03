@@ -34,7 +34,6 @@ export class TickService implements Pipeline {
 
    public initialize() {
       this.tickerIntervalMs = environment.gameSettings.ticker.defaultIntervalMs;
-      this.intervalIncrementDelta = environment.gameSettings.ticker.intervalIncrementDelta;
       this.minimumInterval = environment.gameSettings.ticker.minimumInterval;
       this.speedMultiplier = environment.gameSettings.ticker.speedMultiplier;
       this.msInAnHour = environment.gameSettings.ticker.msInAnHour;
@@ -72,13 +71,13 @@ export class TickService implements Pipeline {
    }
 
    increaseTps() {
-      let newValue = Math.max(this.minimumInterval, this.tickerIntervalMs - this.intervalIncrementDelta);
+      let newValue = Math.max(this.minimumInterval, this.tickerIntervalMs / 1.1);
       this.setNewTps(newValue);
       this.continueWithUpdates();
    }
 
    decreaseTps() {
-      let newValue = this.tickerIntervalMs + this.intervalIncrementDelta;
+      let newValue = this.tickerIntervalMs * 1.1;
       this.setNewTps(newValue);
       this.continueWithUpdates();
    }

@@ -11,6 +11,6 @@ export class AchievementTrack {
       this.unlocked = json.unlocked;
       this.displayName = json.displayName;
       json.blocks
-         .forEach(b => this.blocks.push(new AchievementBlock(b)));
+         .forEach(b => this.blocks.push(new AchievementBlock(b, this)));
    }
 }
