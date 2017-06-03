@@ -1,3 +1,6 @@
 export enum AchievementCriteriaType {
-   TotalPushedCodeAccumulated
+   TotalPushedCodeAccumulated,
+   TotalTestedCodeAccumulated,
+   TotalProdCodeAccumulated,
+   TotalBugsCodeAccumulated,
 }

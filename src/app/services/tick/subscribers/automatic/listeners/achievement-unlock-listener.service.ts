@@ -11,20 +11,20 @@ import {AchievementUnlockerService} from '../../../../achievements/achievement-u
 @Injectable()
 export class AchievementUnlockListenerService extends TickSubscriberBase implements ITickSubscriber {
 
-   constructor(
-      private achievementsService: AchievementsService,
-      private valueResolver: AchievementCriteriaValueResolverService,
-      private unlocker: AchievementUnlockerService,
-   ) {
+   constructor(private achievementsService: AchievementsService,
+               private valueResolver: AchievementCriteriaValueResolverService,
+               private unlocker: AchievementUnlockerService,) {
       super();
    }
 
    subscribe(tickService: TickService) {
-      this.tickerSubscription = tickService.pipeline.subscribe(t => this.checkAchievementCriteria(t))
+      this.tickerSubscription = tickService.pipeline.subscribe(t => this.checkAchievementCriteria(t));
    }
 
    private checkAchievementCriteria(tick: Tick) {
-      this.achievementsService.pending.forEach(block => this.resolvePendingAchievement(block))
+      this.achievementsService
+         .pending
+         .forEach(block => this.resolvePendingAchievement(block));
    }
 
    private resolvePendingAchievement(block: AchievementBlock) {

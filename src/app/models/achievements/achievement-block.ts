@@ -1,5 +1,5 @@
 import {AchievementCriteriaType} from './achievement-criteria-type.enum';
-import {AchievementFeature} from './achievement-feature.enum';
+import {UnlockableFeature} from './unlockable-feature.enum';
 import {Notification} from '../messaging/notification';
 
 export class AchievementBlock {
@@ -7,7 +7,7 @@ export class AchievementBlock {
    public unlocked: boolean;
    public criteriaType: AchievementCriteriaType;
    public unlockWhenValueGte: number;
-   public unlocksFeature: AchievementFeature;
+   public unlocksFeature: UnlockableFeature;
    public notification: Notification;
 
    constructor(json: any) {

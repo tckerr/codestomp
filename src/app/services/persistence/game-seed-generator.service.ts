@@ -3,10 +3,20 @@ import {IdGeneratorService} from '../util/id-generator.service';
 import {environment} from '../../../environments/environment';
 import * as moment from 'moment';
 import {ExperienceLevel, StaffCategory, StaffType} from '../../models/definitions/staff-definitions';
-import * as Enumerable from 'linq';
 import {AchievementCriteriaType} from '../../models/achievements/achievement-criteria-type.enum';
-import {AchievementFeature} from '../../models/achievements/achievement-feature.enum';
+import {UnlockableFeature} from '../../models/achievements/unlockable-feature.enum';
 import {LogType} from '../../models/definitions/log-type';
+
+function getEnumMembers(myEnum): string[]
+{
+    let members = []
+    for(let i:number = 0; true; i++) {
+        if(myEnum[i] === undefined) break
+        members.push(myEnum[i])
+    }
+
+    return members
+}
 
 @Injectable()
 export class GameSeedGeneratorService {
@@ -15,6 +25,9 @@ export class GameSeedGeneratorService {
    }
 
    public defaultSeed(): any {
+      let unlockedFeatures = {};
+      getEnumMembers(UnlockableFeature).forEach(a => unlockedFeatures[a] = false);
+
       return {
          id: 'csgm_' + this.idGeneratorService.generate(),
          tick: 0,
@@ -25,22 +38,50 @@ export class GameSeedGeneratorService {
                totalAccumulated: 0
             }
          },
+         unlockedFeatures: unlockedFeatures,
          achievementTracks: [
             {
+               id: 'hr',
+               unlocked: true,
+               displayName: 'HR Achievements',
+               blocks: []
+            },
+            {
                id: 'development',
-               unlocked: false,
+               unlocked: true,
                displayName: 'Development Achievements',
                blocks: [
                   {
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalPushedCodeAccumulated,
                      unlockWhenValueGte: 70,
-                     unlocksFeature: AchievementFeature.ManualTesting,
-                     // TODO : doesnt need to be saved with game, unless we want versioning
+                     unlocksFeature: UnlockableFeature.ManualTesting,
+                     notification: {
+                        title: 'Time to test',
+                        message: 'Boring, we know. But testing is important!',
+                        logType: LogType.Info
+                     }
+                  },
+                  {
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.TotalTestedCodeAccumulated,
+                     unlockWhenValueGte: 70,
+                     unlocksFeature: UnlockableFeature.ManualDeployments,
                      notification: {
                         title: 'Just a little more...',
                         message: 'You\'ve almost got enough for your app. Get ready to ship code to production!',
                         logType: LogType.Info
+                     }
+                  },
+                  {
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.TotalProdCodeAccumulated,
+                     unlockWhenValueGte: 300,
+                     unlocksFeature: UnlockableFeature.ManualBugFixes,
+                     notification: {
+                        title: 'Bugs! Oh my!',
+                        message: 'Bugs are starting to pile up in production. Fix them!',
+                        logType: LogType.Error
                      }
                   }
                ]

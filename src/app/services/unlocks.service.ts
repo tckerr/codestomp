@@ -7,6 +7,7 @@ import {FundService} from './resource-services/fund.service';
 import {ExperienceLevel} from '../models/definitions/staff-definitions';
 import {NotificationService} from './notifications/notification.service';
 import {LogType} from '../models/definitions/log-type';
+import {UnlockableFeature} from '../models/achievements/unlockable-feature.enum';
 
 @Injectable()
 export class UnlocksService {
@@ -24,29 +25,24 @@ export class UnlocksService {
       return this.gameStorageService.game.company.unlocks;
    }
 
+   unlock(feature: UnlockableFeature) {
+      if (feature == UnlockableFeature.None)
+         return
+      this.gameStorageService.game.unlockedFeatures[feature] = true;
+   }
+
+   public isUnlocked(feature: UnlockableFeature){
+      return this.gameStorageService.game.unlockedFeatures[feature] === true;
+   }
+
    private checkUnlocks() {
-      if (this.unlocks.deployments == 0 && this.config.deploymentsWhenTestedCodeGte <= this.codeService.tested.totalAccumulated) {
-         this.gameStorageService.game.company.unlocks.deployments++;
-         this.notificationService.notify(
-            'Just a little more...', 'You\'ve almost got enough for your app. Get ready to ship code to production!', LogType.Info);
-      }
-      if (this.unlocks.manualTesting == 0 && this.config.manualTestingWhenTotalCodeGte <= this.codeService.total) {
-         this.gameStorageService.game.company.unlocks.manualTesting++;
-         this.notificationService.notify(
-            'Time to test', 'Boring, we know. But testing is important!', LogType.Info);
-      }
       if (this.unlocks.bugFixes > 0 && this.unlocks.hiring.development <= 3) {
          if (this.config.unlockDevHiringWhenFundsGte[this.unlocks.hiring.development] <= this.fundService.funds.totalAccumulated) {
             this.gameStorageService.game.company.unlocks.hiring.development++;
             let message = `Development Hiring tier ${this.unlocks.hiring.development} unlocked`;
-            this.notificationService.notify(
+            this.notificationService.composeAndSend(
                message, 'You\'ve got a whole new set of options, although they\'re surely expensive....', LogType.Success);
          }
-      }
-      if (this.unlocks.bugFixes == 0 && this.config.unlockBugFixesWhenBugsGte <= this.codeService.bugs.totalAccumulated) {
-         this.gameStorageService.game.company.unlocks.bugFixes++;
-         this.notificationService.notify(
-            'Bugs! Oh my!', 'Bugs are starting to pile up in production. Fix them!', LogType.Error);
       }
    }
 

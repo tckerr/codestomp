@@ -7,6 +7,7 @@ import {LoggerService} from '../../../../../../services/logging/logger-service';
 import {TickService} from '../../../../../../services/tick/tick.service';
 import {Subscription} from "rxjs/Subscription";
 import {DeploymentExecutor} from '../../../../../../services/tick/subscribers/manual/deployment-executor.service';
+import {UnlockableFeature} from '../../../../../../models/achievements/unlockable-feature.enum';
 
 @Component({
    selector: 'app-development-actions',
@@ -40,6 +41,16 @@ export class DevelopmentActionsComponent implements OnInit {
 
    private fixBugs(val: number = 1) {
       this.codeService.bugFix(val);
+   }
+
+   private get manualTestingUnlocked(){
+      return this.unlocksService.isUnlocked(UnlockableFeature.ManualTesting);
+   }
+   private get manualDeploymentsUnlocked(){
+      return this.unlocksService.isUnlocked(UnlockableFeature.ManualDeployments);
+   }
+   private get manualBugFixesUnlocked(){
+      return this.unlocksService.isUnlocked(UnlockableFeature.ManualBugFixes);
    }
 
    private deploy() {

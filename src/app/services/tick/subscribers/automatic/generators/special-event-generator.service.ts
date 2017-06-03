@@ -49,7 +49,7 @@ export class SpecialEventGeneratorService extends TickSubscriberBase implements 
    private initializeNotificationSub() {
       this.notificationSub = this.pipeline.subscribe(e => {
          if (e.isNotification)
-            this.notificationService.notify(e.eventName, e.description, e.logType);
+            this.notificationService.composeAndSend(e.eventName, e.description, e.logType);
       })
    }
 

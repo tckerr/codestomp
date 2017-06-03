@@ -7,6 +7,7 @@ import {ITickSubscriber} from './i-tick-subscriber';
 import {TalentGeneratorService} from './generators/talent-generator-service';
 import {SpecialEventGeneratorService} from './generators/special-event-generator.service';
 import {TickService} from '../../tick.service';
+import {AchievementUnlockListenerService} from './listeners/achievement-unlock-listener.service';
 
 @Injectable()
 export class TickSubscriptionAggregationService {
@@ -19,6 +20,7 @@ export class TickSubscriptionAggregationService {
                customerAccumulator: CustomerAccumulatorService,
                developerCodeAccumulator: StaffActionAccumulatorService,
                staffSalaryAccumulatorService: StaffSalaryAccumulatorService,
+               achievementUnlockListenerService: AchievementUnlockListenerService,
                codeProfitAccumulator: CodeProfitAccumulatorService) {
       this.subscribers = [
          talentGeneratorService,
@@ -26,7 +28,8 @@ export class TickSubscriptionAggregationService {
          customerAccumulator,
          developerCodeAccumulator,
          staffSalaryAccumulatorService,
-         codeProfitAccumulator
+         achievementUnlockListenerService,
+         codeProfitAccumulator,
       ]
    }
 

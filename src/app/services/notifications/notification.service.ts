@@ -1,9 +1,10 @@
-import {Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import * as alertifyjs from 'alertifyjs';
 import {LoggerService} from '../logging/logger-service';
 import {LogType} from '../../models/definitions/log-type';
 import {GameStorageService} from '../persistence/game-storage.service';
 import {Subscription} from 'rxjs/Subscription';
+import {Notification} from '../../models/messaging/notification';
 
 @Injectable()
 export class NotificationService implements OnDestroy {
@@ -20,9 +21,13 @@ export class NotificationService implements OnDestroy {
       }
    }
 
-   public notify(title: string, description: string, logType: LogType = LogType.Error) {
+   public composeAndSend(title: string, description: string, logType: LogType = LogType.Error) {
       this.logger.gameLog(`${title}: ${description}`, logType);
       this.fireNotification(title, description, logType)
+   }
+
+   public send(notification: Notification) {
+      this.composeAndSend(notification.title, notification.message, notification.logType);
    }
 
    public clearAll() {

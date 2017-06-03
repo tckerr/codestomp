@@ -5,7 +5,7 @@
    <p class="m-0 p-0">Write some code</p>
 </button>
 <button
-   *ngIf="unlocksService.unlocks.manualTesting > 0"
+   *ngIf="manualTestingUnlocked"
    class="btn btn-info btn-popover btn-sm btn-interactive h-100 p-3"
    (click)="testCode(config.manualTestsPerClick)"
    [disabled]="codeService.pushed.balance <= 0">
@@ -21,7 +21,7 @@
    <p class="m-0 p-0">Test your code</p>
 </button>
 <button
-   *ngIf="unlocksService.unlocks.deployments > 0"
+   *ngIf="manualDeploymentsUnlocked"
    class="btn btn-info btn-sm btn-interactive btn-popover h-100 p-3"
    (click)="deploy()"
    [disabled]="!canDeploy">
@@ -38,7 +38,7 @@
    <p *ngIf="!canDeploy" class="m-0 p-0">{{deployBlockReason}}</p>
 </button>
 <button
-   *ngIf="unlocksService.unlocks.bugFixes > 0"
+   *ngIf="manualBugFixesUnlocked"
    class="btn btn-danger btn-sm btn-popover btn-interactive h-100 p-3"
    (click)="fixBugs()"
    [disabled]="codeService.bugs.balance <= 0">
