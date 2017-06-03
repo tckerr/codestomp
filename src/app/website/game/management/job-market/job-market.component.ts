@@ -5,9 +5,9 @@ import {UnlocksService} from '../../../../services/unlocks.service';
 import * as Enumerable from 'linq';
 import {TalentService} from '../../../../services/resource-services/talent.service';
 import {Staff} from 'app/models/game/company/business-units/staff';
-import {HiringService} from '../../../../services/hiring.service';
-import {GameStorageService} from '../../../../services/game-storage.service';
-import {StaffCategoryIconResolverService} from '../../../../services/staff-category-icon-resolver.service';
+import {HiringService} from '../../../../services/staffing/hiring.service';
+import {GameStorageService} from '../../../../services/persistence/game-storage.service';
+import {StaffCategoryIconResolverService} from '../../../../services/staffing/staff-category-icon-resolver.service';
 
 
 @Component({

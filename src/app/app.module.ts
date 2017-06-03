@@ -5,31 +5,27 @@ import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {TickService} from './services/tick/tick.service';
-import {GameStorageService} from './services/game-storage.service';
+import {GameStorageService} from './services/persistence/game-storage.service';
 import {GameComponent} from './website/game/game.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NewGameComponent} from './website/new-game/new-game.component';
 import {GameStateComponent} from './website/game/game-state/game-state.component';
 import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {IdGeneratorService} from './services/id-generator.service';
-import {LoggerService} from './services/logger-service';
+import {IdGeneratorService} from './services/util/id-generator.service';
+import {LoggerService} from './services/logging/logger-service';
 import {LogHistoryComponent} from './website/game/log-history/log-history.component';
 import {TickerSpeedComponent} from './website/game/game-state/ticker-speed/ticker-speed.component';
 import {ManagementComponent} from './website/game/management/management.component';
 import {DevelopmentComponent} from './website/game/management/business-units/development/development.component';
 import {HRComponent} from './website/game/management/business-units/hr/hr.component';
-import {GameSeedGeneratorService} from './services/game-seed-generator.service';
+import {GameSeedGeneratorService} from './services/persistence/game-seed-generator.service';
 import {CodeService} from './services/resource-services/code.service';
-import {DeploymentExecutor} from './services/devops/deployment-executor.service';
-import {CustomerAccumulatorService} from './services/accumulators/customer-accumulator.service';
 import {CodeBreakdownComponent} from './website/game/management/business-units/development/code-breakdown/code-breakdown.component';
-import {AccumulationAggregatorService} from 'app/services/accumulators/accumulation-aggregator.service';
-import {CodeProfitAccumulatorService} from './services/accumulators/code-profit-accumulator.service';
 import {CustomerService} from './services/resource-services/customer.service';
 import {FundService} from './services/resource-services/fund.service';
 import {DebugComponent} from './website/game/management/business-units/debug/debug.component';
-import {ConfigurationService} from './services/configuration.service';
-import {DebugService} from './services/debug.service';
+import {ConfigurationService} from './services/config/configuration.service';
+import {DebugService} from './services/config/debug.service';
 import {DevelopmentActionsComponent} from './website/game/management/business-units/development/development-actions/development-actions.component';
 import {CompanyDigestComponent} from './website/game/management/company-digest/company-digest.component';
 import {CommitGeneratorService} from './commit-generator.service';
@@ -38,25 +34,28 @@ import {FundsDigestComponent} from './website/game/management/company-digest/fun
 import {DateDigestComponent} from './website/game/management/company-digest/date-digest/date-digest.component';
 import {CustomersDigestComponent} from './website/game/management/company-digest/customers-digest/customers-digest.component';
 import {StaffSummaryComponent} from './website/game/management/business-units/staff-summary/staff-summary.component';
-import {TalentGeneratorService} from './services/generators/talent-generator-service';
-import {GeneratorAggregatorService} from './services/generators/generator-aggregator.service';
-import {DeveloperStaffService} from './services/resource-services/developer-staff.service';
-import {StaffActionAccumulatorService} from './services/accumulators/staff-actions/staff-action-accumulator.service';
-import {StaffSalaryAccumulatorService} from './services/accumulators/staff-salary-accumulator.service';
-import {QuitterNotificationService} from './services/quitter-notification.service';
+import {DeveloperStaffService} from './services/staffing/developer-staff.service';
+import {QuitterNotificationService} from './services/notifications/quitter-notification.service';
 import { AlertsDigestComponent } from './website/game/management/company-digest/alerts-digest/alerts-digest.component';
-import {CodeWritingService} from './services/accumulators/staff-actions/development/code-writing.service';
-import {CodeTestingService} from './services/accumulators/staff-actions/development/code-testing.service';
-import {CodeDeploymentService} from './services/accumulators/staff-actions/development/code-deployment.service';
-import {BugFixingService} from './services/accumulators/staff-actions/development/bug-fixing.service';
-import {SpecialEventGeneratorService} from './services/generators/special-events/special-event-generator.service';
-import {NotificationService} from './services/generators/special-events/notification.service';
-import {TalentService} from "./services/resource-services/talent.service";
-import {HiringService} from './services/hiring.service';
+import {NotificationService} from './services/notifications/notification.service';
+import {TalentService} from './services/resource-services/talent.service';
+import {HiringService} from './services/staffing/hiring.service';
 import {JobMarketComponent} from './website/game/management/job-market/job-market.component';
 import {TalentCapacityBreakdownComponent} from './website/game/management/job-market/talent-capacity-breakdown/talent-capacity-breakdown.component';
-import {StaffCategoryIconResolverService} from './services/staff-category-icon-resolver.service';
-import {StaffQuitDecisionService} from './services/accumulators/staff-actions/staff-quit-decision.service';
+import {StaffCategoryIconResolverService} from './services/staffing/staff-category-icon-resolver.service';
+import {StaffQuitDecisionService} from './services/staffing/staff-quit-decision.service';
+import {DeploymentExecutor} from './services/tick/subscribers/manual/deployment-executor.service';
+import {CustomerAccumulatorService} from './services/tick/subscribers/automatic/accumulators/customer-accumulator.service';
+import {TickSubscriptionAggregationService} from './services/tick/subscribers/automatic/tick-subscription-aggregation.service';
+import {CodeProfitAccumulatorService} from './services/tick/subscribers/automatic/accumulators/code-profit-accumulator.service';
+import {TalentGeneratorService} from './services/tick/subscribers/automatic/generators/talent-generator-service';
+import {StaffActionAccumulatorService} from './services/tick/subscribers/automatic/accumulators/staff-actions/staff-action-accumulator.service';
+import {StaffSalaryAccumulatorService} from 'app/services/tick/subscribers/automatic/accumulators/staff-salary-accumulator.service';
+import {CodeWritingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/code-writing.service';
+import {CodeTestingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/code-testing.service';
+import {CodeDeploymentService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/code-deployment.service';
+import {BugFixingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/bug-fixing.service';
+import {SpecialEventGeneratorService} from './services/tick/subscribers/automatic/generators/special-event-generator.service';
 
 const appRoutes: Routes = [
    {
@@ -139,7 +138,7 @@ const appRoutes: Routes = [
       CodeService,
       DeploymentExecutor,
       CustomerAccumulatorService,
-      AccumulationAggregatorService,
+      TickSubscriptionAggregationService,
       CodeProfitAccumulatorService,
       CustomerService,
       FundService,
@@ -148,7 +147,6 @@ const appRoutes: Routes = [
       CommitGeneratorService,
       UnlocksService,
       TalentGeneratorService,
-      GeneratorAggregatorService,
       DeveloperStaffService,
       StaffActionAccumulatorService,
       StaffSalaryAccumulatorService,

@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TalentGeneratorService} from '../../../../../services/generators/talent-generator-service';
 import {TalentService} from "../../../../../services/resource-services/talent.service";
 
 @Component({

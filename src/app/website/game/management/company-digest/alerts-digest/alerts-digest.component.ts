@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {QuitterNotificationService} from '../../../../../services/quitter-notification.service';
+import {QuitterNotificationService} from '../../../../../services/notifications/quitter-notification.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({

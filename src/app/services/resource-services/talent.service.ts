@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {GameStorageService} from '../game-storage.service';
+import {GameStorageService} from '../persistence/game-storage.service';
 import {ExperienceLevel} from "../../models/definitions/staff-definitions";
 import {environment} from "../../../environments/environment";
-import {ConfigurationService} from "../configuration.service";
+import {ConfigurationService} from "../config/configuration.service";
 
 @Injectable()
 export class TalentService {

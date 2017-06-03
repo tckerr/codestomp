@@ -1,13 +1,13 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {GameStorageService} from '../../../services/game-storage.service';
+import {GameStorageService} from '../../../services/persistence/game-storage.service';
 import {UnlocksService} from '../../../services/unlocks.service';
-import {SpecialEventGeneratorService} from '../../../services/generators/special-events/special-event-generator.service';
 import {Subscription} from 'rxjs/Subscription';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TickService} from '../../../services/tick/tick.service';
 import {SpecialEvent} from '../../../models/messaging/special-event';
 import {isNullOrUndefined} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SpecialEventGeneratorService} from '../../../services/tick/subscribers/automatic/generators/special-event-generator.service';
 
 @Component({
    selector: 'app-management',

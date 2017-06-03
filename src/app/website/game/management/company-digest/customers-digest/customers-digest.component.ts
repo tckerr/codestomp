@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from '../../../../../services/resource-services/customer.service';
-import {CustomerAccumulatorService} from '../../../../../services/accumulators/customer-accumulator.service';
+import {CustomerAccumulatorService} from '../../../../../services/tick/subscribers/automatic/accumulators/customer-accumulator.service';
 
 @Component({
    selector: 'app-customers-digest',

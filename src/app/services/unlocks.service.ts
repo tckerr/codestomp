@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {GameStorageService} from './game-storage.service';
+import {GameStorageService} from './persistence/game-storage.service';
 import {TickService} from './tick/tick.service';
-import {ConfigurationService} from './configuration.service';
+import {ConfigurationService} from './config/configuration.service';
 import {CodeService} from './resource-services/code.service';
 import {FundService} from './resource-services/fund.service';
 import {ExperienceLevel} from '../models/definitions/staff-definitions';
-import {NotificationService} from './generators/special-events/notification.service';
+import {NotificationService} from './notifications/notification.service';
 import {LogType} from '../models/definitions/log-type';
 
 @Injectable()

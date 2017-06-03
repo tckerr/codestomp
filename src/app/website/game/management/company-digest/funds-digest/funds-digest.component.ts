@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FundService} from '../../../../../services/resource-services/fund.service';
-import {CodeProfitAccumulatorService} from '../../../../../services/accumulators/code-profit-accumulator.service';
-import {StaffSalaryAccumulatorService} from '../../../../../services/accumulators/staff-salary-accumulator.service';
+import {CodeProfitAccumulatorService} from '../../../../../services/tick/subscribers/automatic/accumulators/code-profit-accumulator.service';
+import {StaffSalaryAccumulatorService} from '../../../../../services/tick/subscribers/automatic/accumulators/staff-salary-accumulator.service';
 
 @Component({
    selector: 'app-funds-digest',

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Pipeline} from '../interfaces/pipeline';
+import {Pipeline} from '../pipeline';
 import {Subject} from 'rxjs/Subject';
 import {Tick} from '../../models/tick/tick';
 import {Observable} from 'rxjs/Observable';
@@ -7,8 +7,8 @@ import 'rxjs/add/observable/timer';
 import {environment} from '../../../environments/environment';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
-import {GameStorageService} from '../game-storage.service';
-import {LoggerService} from '../logger-service';
+import {GameStorageService} from '../persistence/game-storage.service';
+import {LoggerService} from '../logging/logger-service';
 import * as Enumerable from 'linq';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TickService} from '../../../../services/tick/tick.service';
-import {LoggerService} from '../../../../services/logger-service';
+import {LoggerService} from '../../../../services/logging/logger-service';
 import * as Enumerable from 'linq';
 import {Subscription} from 'rxjs/Subscription';
 

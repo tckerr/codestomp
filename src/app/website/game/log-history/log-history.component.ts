@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoggerService} from '../../../services/logger-service';
+import {LoggerService} from '../../../services/logging/logger-service';
 import {LogItem} from '../../../models/logging/log-item';
 import {Subscription} from 'rxjs/Subscription';
-import {GameStorageService} from '../../../services/game-storage.service';
+import {GameStorageService} from '../../../services/persistence/game-storage.service';
 import {LogType} from '../../../models/definitions/log-type';
 
 @Component({

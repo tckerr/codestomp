@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {CodeService} from '../../../../../../services/resource-services/code.service';
-import {DeploymentExecutor} from '../../../../../../services/devops/deployment-executor.service';
-import {ConfigurationService} from 'app/services/configuration.service';
+import {ConfigurationService} from 'app/services/config/configuration.service';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
 import {CommitGeneratorService} from '../../../../../../commit-generator.service';
-import {LoggerService} from '../../../../../../services/logger-service';
+import {LoggerService} from '../../../../../../services/logging/logger-service';
 import {TickService} from '../../../../../../services/tick/tick.service';
 import {Subscription} from "rxjs/Subscription";
+import {DeploymentExecutor} from '../../../../../../services/tick/subscribers/manual/deployment-executor.service';
 
 @Component({
    selector: 'app-development-actions',

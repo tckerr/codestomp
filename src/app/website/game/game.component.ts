@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TickService} from '../../services/tick/tick.service';
-import {GameStorageService} from '../../services/game-storage.service';
+import {GameStorageService} from '../../services/persistence/game-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {CodeService} from '../../services/resource-services/code.service';
-import {AccumulationAggregatorService} from '../../services/accumulators/accumulation-aggregator.service';
-import {GeneratorAggregatorService} from '../../services/generators/generator-aggregator.service';
+import {TickSubscriptionAggregationService} from '../../services/tick/subscribers/automatic/tick-subscription-aggregation.service';
 
 @Component({
    selector: 'app-game',
@@ -20,8 +19,7 @@ export class GameComponent implements OnInit, OnDestroy {
                private gameStorageService: GameStorageService,
                private route: ActivatedRoute,
                private codeService: CodeService,
-               private genAggregator: GeneratorAggregatorService,
-               private accAggregator: AccumulationAggregatorService) {
+               private tickSubscriptionAggregationService: TickSubscriptionAggregationService) {
    }
 
    ngOnInit() {
@@ -34,8 +32,7 @@ export class GameComponent implements OnInit, OnDestroy {
    private onGameLoad() {
       this.gameStorageService.load(this.gameId);
       this.tickService.start();
-      this.accAggregator.start();
-      this.genAggregator.generate();
+      this.tickSubscriptionAggregationService.start();
       this.codeService.resetDeployment();
    }
 

@@ -1,0 +1,55 @@
+import {Injectable} from '@angular/core';
+import {DeploymentExecutor} from '../../manual/deployment-executor.service';
+import {CustomerService} from '../../../../resource-services/customer.service';
+import {Subject} from 'rxjs/Subject';
+import {SpecialEvent, SpecialEventDisplayType} from '../../../../../models/messaging/special-event';
+import {NotificationService} from '../../../../notifications/notification.service';
+import {GameStorageService} from '../../../../persistence/game-storage.service';
+import {LogType} from '../../../../../models/definitions/log-type';
+import {ITickSubscriber} from '../i-tick-subscriber';
+import {TickService} from 'app/services/tick/tick.service';
+
+@Injectable()
+export class SpecialEventGeneratorService implements ITickSubscriber {
+
+   private source = new Subject<SpecialEvent>();
+   public pipeline = this.source.asObservable(); // TODO: simply relationship with management component
+
+   // TODO: potentially separate the listener with the broadcaster to avoid circular dependencies
+   constructor(private deploymentExecutor: DeploymentExecutor,
+               private customerService: CustomerService,
+               private gameStorageService: GameStorageService,
+               private notificationService: NotificationService) {
+      this.pipeline.subscribe(e => {
+         if (e.isNotification)
+            this.notificationService.notify(e.eventName, e.description, e.logType);
+      })
+   }
+
+   public subscribe(tickService: TickService) {
+      this.deploymentExecutor.pipeline
+         .takeWhile(() => {
+            let deploys = this.gameStorageService.game.company.businessUnits.development.deploymentInfo.deployCount;
+            return deploys == 1;
+         })
+         .subscribe(() => this.grandOpening());
+   }
+
+   public fireSpecialEvent(eventName: string, description: string, buttonText: string, logType: LogType, displayType: SpecialEventDisplayType) {
+      let specialEvent = new SpecialEvent(
+         eventName,
+         description,
+         buttonText,
+         logType,
+         displayType
+      );
+      this.source.next(specialEvent);
+   }
+
+   private grandOpening() {
+      let count = 5;
+      this.customerService.add(count);
+      let message = `Your first deployment is a success. ${count} bonus customers have signed on following the product launch!`;
+      this.fireSpecialEvent('Congratulations!', message, 'Resume', LogType.Success, SpecialEventDisplayType.Notification);
+   }
+}
