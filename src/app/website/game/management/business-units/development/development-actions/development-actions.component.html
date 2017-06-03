@@ -12,6 +12,7 @@
    <span
       class="top-corner-icon-adjusted">
       <i class="fa fa-question"
+         container="body"
          [ngbPopover]="testingQuestion"
          placement="top"
          triggers="mouseenter:mouseleave"></i>
@@ -28,6 +29,7 @@
       class="top-corner-icon-adjusted">
       <i class="fa fa-question"
          [ngbPopover]="deployQuestion"
+         container="body"
          placement="top"
          triggers="mouseenter:mouseleave"></i>
    </span>
@@ -44,6 +46,7 @@
       class="top-corner-icon-adjusted">
       <i class="fa fa-question"
          [ngbPopover]="bugsQuestion"
+         container="body"
          placement="top"
          triggers="mouseenter:mouseleave"></i>
    </span>
@@ -52,43 +55,18 @@
 </button>
 
 <ng-template #testingQuestion>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         All code must be tested before it is deployed.
-      </small>
-   </p>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         <strong>Remember, not all tested code works!</strong>
-      </small>
+   <p class="pb-0 mb-0">
+      All code must be <strong>tested</strong> before it is deployed. Remember, not all tested code works!
    </p>
 </ng-template>
 <ng-template #deployQuestion>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         Tested code must be deployed to production
-      </small>
-   </p>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         before any funds can be earned from it.
-      </small>
-   </p>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         <strong>Deploy fast and often!</strong>
-      </small>
+   <p class="pb-0 mb-0">
+      Tested code must be <strong>deployed</strong> to production before any funds can be earned from it. Deploy fast
+      and often!
    </p>
 </ng-template>
 <ng-template #bugsQuestion>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         Bugs affect customer acquisition rate negatively.
-      </small>
-   </p>
-   <p class="p-0 m-0 w-300-px">
-      <small style="color:black">
-         <strong>Squash bugs to grow faster!</strong>
-      </small>
+   <p class="pb-0 mb-0">
+      <strong>Bugs</strong> affect customer acquisition rate negatively. Squash bugs to grow faster!
    </p>
 </ng-template>

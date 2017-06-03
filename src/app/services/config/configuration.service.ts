@@ -37,4 +37,7 @@ export class ConfigurationService {
    public unlockDevHiringWhenFundsGte = environment.gameSettings.unlockThresholds.unlockDevHiringWhenFundsGte;
    public unlockBugFixesWhenBugsGte = environment.gameSettings.unlockThresholds.unlockBugFixesWhenBugsGte;
 
+   // settings
+   public showWelcomeModal = environment.gameSettings.showWelcomeModal;
+
 }

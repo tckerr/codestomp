@@ -10,6 +10,7 @@ import {ITickSubscriber} from '../i-tick-subscriber';
 import {TickService} from 'app/services/tick/tick.service';
 import {TickSubscriberBase} from '../tick-subscriber-base';
 import {Subscription} from 'rxjs/Subscription';
+import {ConfigurationService} from '../../../../config/configuration.service';
 
 @Injectable()
 export class SpecialEventGeneratorService extends TickSubscriberBase implements ITickSubscriber {
@@ -17,6 +18,7 @@ export class SpecialEventGeneratorService extends TickSubscriberBase implements 
    private source = new Subject<SpecialEvent>();
    public pipeline = this.source.asObservable();
    private notificationSub: Subscription;
+   private deploymentSub: Subscription;
 
    // TODO: simply relationship with management component
 
@@ -24,16 +26,19 @@ export class SpecialEventGeneratorService extends TickSubscriberBase implements 
    constructor(private deploymentExecutor: DeploymentExecutor,
                private customerService: CustomerService,
                private gameStorageService: GameStorageService,
+               private config: ConfigurationService,
                private notificationService: NotificationService) {
       super();
    }
 
    public subscribe(tickService: TickService) {
-      this.notificationSub = this.pipeline.subscribe(e => {
-         if (e.isNotification)
-            this.notificationService.notify(e.eventName, e.description, e.logType);
-      })
-      this.tickerSubscription = this.deploymentExecutor.pipeline
+      this.initalizeGettingStartedEvent(tickService);
+      this.initializeNotificationSub();
+      this.initializeDeploymentEventWatcher();
+   }
+
+   private initializeDeploymentEventWatcher() {
+      this.deploymentSub = this.deploymentExecutor.pipeline
          .takeWhile(() => {
             let deploys = this.gameStorageService.game.company.businessUnits.development.deploymentInfo.deployCount;
             return deploys == 1;
@@ -41,9 +46,28 @@ export class SpecialEventGeneratorService extends TickSubscriberBase implements 
          .subscribe(() => this.grandOpening());
    }
 
+   private initializeNotificationSub() {
+      this.notificationSub = this.pipeline.subscribe(e => {
+         if (e.isNotification)
+            this.notificationService.notify(e.eventName, e.description, e.logType);
+      })
+   }
+
+   private initalizeGettingStartedEvent(tickService: TickService) {
+      this.tickerSubscription = tickService.pipeline
+         .takeWhile(() => this.config.showWelcomeModal && this.gameStorageService.game.company.resources.code.pushed.totalAccumulated <= 0)
+         .take(1)
+         .subscribe(() => {
+            this.fireSpecialEvent("Welcome to Codestomp!", "Grow a business. Hold no prisoners.", "Get Started", LogType.Info, SpecialEventDisplayType.Modal);
+         });
+   }
+
    public unsubscribe(): any {
       if (this.notificationSub) {
          this.notificationSub.unsubscribe();
+      }
+      if (this.deploymentSub) {
+         this.deploymentSub.unsubscribe();
       }
       return super.unsubscribe();
    }

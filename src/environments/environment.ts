@@ -25,6 +25,7 @@ export const perMonth = perYear / 12;
 export const environment = {
    production: false,
    gameSettings: {
+      showWelcomeModal: false,
       talentHiringCosts: {
          intern: 1,
          associate: 1,
