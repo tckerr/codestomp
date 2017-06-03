@@ -41,7 +41,6 @@ export class JobMarketComponent implements OnChanges, OnInit {
 
    private buildHireTypes() {
       let self = this;
-      debugger;
       this.hireTypes = Enumerable
          .from(this.gameStorageService.game.company.businessUnits.$asList())
          .where(bu => bu.id === this.businessUnitId)

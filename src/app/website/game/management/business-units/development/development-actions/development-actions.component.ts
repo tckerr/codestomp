@@ -52,7 +52,7 @@ export class DevelopmentActionsComponent implements OnInit {
    }
 
    private get canDeploy() {
-      return this.deploymentService.canDeploy
+      return this.deploymentService.canDeploy;
    }
 
    private get deployBlockReason() {

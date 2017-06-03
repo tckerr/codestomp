@@ -131,7 +131,10 @@ export class GameSeedGeneratorService {
                   active: true,
                   deploymentInfo: {
                      lastDeployUtc: moment.min().format(),
+                     lastDeployInitiatedUtc: moment.min().format(),
                      deployCount: 0,
+                     currentDeployRate: 0,
+                     deploying: false,
                   },
                   staff: [
                      {

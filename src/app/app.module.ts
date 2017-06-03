@@ -56,6 +56,7 @@ import {CodeDeploymentService} from './services/tick/subscribers/automatic/accum
 import {BugFixingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/bug-fixing.service';
 import {SpecialEventGeneratorService} from './services/tick/subscribers/automatic/generators/special-event-generator.service';
 import {CommitGeneratorService} from './services/util/commit-generator.service';
+import {DeploymentInfoService} from './services/resource-services/deployment-info.service';
 
 const appRoutes: Routes = [
    {
@@ -160,7 +161,8 @@ const appRoutes: Routes = [
       TalentService,
       HiringService,
       StaffCategoryIconResolverService,
-      StaffQuitDecisionService
+      StaffQuitDecisionService,
+      DeploymentInfoService
    ],
    bootstrap: [AppComponent]
 })

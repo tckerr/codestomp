@@ -19,7 +19,6 @@ export class GameComponent implements OnInit, OnDestroy {
    constructor(private tickService: TickService,
                private gameStorageService: GameStorageService,
                private route: ActivatedRoute,
-               private codeService: CodeService,
                private tickSubscriptionAggregationService: TickSubscriptionAggregationService) {
    }
 
@@ -33,7 +32,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
    private onGameLoad() {
       this.tickService.flush();
-      this.codeService.resetDeployment(); // TODO: fix this by making all deployment info stored and resumable
       this.tickSubscriptionAggregationService.restart();
       this.tickService.start();
    }
