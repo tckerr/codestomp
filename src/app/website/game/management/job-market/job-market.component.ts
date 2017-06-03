@@ -76,7 +76,7 @@ export class JobMarketComponent implements OnChanges, OnInit {
                   value: Math.floor(100 * staff.typeDetails.codePerMs * perHour) / 100 + '/hr'
                },
                {
-                  displayName: 'Testing',
+                  displayName: 'ManualTesting',
                   value: Math.floor(100 * staff.typeDetails.testingPerMs * perHour) / 100 + '/hr'
                },
                {

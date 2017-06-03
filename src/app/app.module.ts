@@ -57,6 +57,10 @@ import {BugFixingService} from './services/tick/subscribers/automatic/accumulato
 import {SpecialEventGeneratorService} from './services/tick/subscribers/automatic/generators/special-event-generator.service';
 import {CommitGeneratorService} from './services/util/commit-generator.service';
 import {DeploymentInfoService} from './services/resource-services/deployment-info.service';
+import {AchievementsService} from './services/achievements/achievements.service';
+import {AchievementUnlockListenerService} from 'app/services/tick/subscribers/automatic/listeners/achievement-unlock-listener.service';
+import {AchievementUnlockerService} from './services/achievements/achievement-unlocker.service';
+import {AchievementCriteriaValueResolverService} from './services/achievements/achievement-criteria-value-resolver.service';
 
 const appRoutes: Routes = [
    {
@@ -162,7 +166,11 @@ const appRoutes: Routes = [
       HiringService,
       StaffCategoryIconResolverService,
       StaffQuitDecisionService,
-      DeploymentInfoService
+      DeploymentInfoService,
+      AchievementsService,
+      AchievementUnlockListenerService,
+      AchievementCriteriaValueResolverService,
+      AchievementUnlockerService
    ],
    bootstrap: [AppComponent]
 })

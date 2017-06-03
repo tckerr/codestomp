@@ -4,6 +4,9 @@ import {environment} from '../../../environments/environment';
 import * as moment from 'moment';
 import {ExperienceLevel, StaffCategory, StaffType} from '../../models/definitions/staff-definitions';
 import * as Enumerable from 'linq';
+import {AchievementCriteriaType} from '../../models/achievements/achievement-criteria-type.enum';
+import {AchievementFeature} from '../../models/achievements/achievement-feature.enum';
+import {LogType} from '../../models/definitions/log-type';
 
 @Injectable()
 export class GameSeedGeneratorService {
@@ -22,6 +25,27 @@ export class GameSeedGeneratorService {
                totalAccumulated: 0
             }
          },
+         achievementTracks: [
+            {
+               id: 'development',
+               unlocked: false,
+               displayName: 'Development Achievements',
+               blocks: [
+                  {
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.TotalPushedCodeAccumulated,
+                     unlockWhenValueGte: 70,
+                     unlocksFeature: AchievementFeature.ManualTesting,
+                     // TODO : doesnt need to be saved with game, unless we want versioning
+                     notification: {
+                        title: 'Just a little more...',
+                        message: 'You\'ve almost got enough for your app. Get ready to ship code to production!',
+                        logType: LogType.Info
+                     }
+                  }
+               ]
+            }
+         ],
          company: {
             name: environment.gameSettings.defaults.companyName,
             unlocks: {
@@ -125,7 +149,7 @@ export class GameSeedGeneratorService {
                   name: 'Debug',
                   icon: 'fa-code',
                   active: true,
-                  staff:[]
+                  staff: []
                },
                development: {
                   id: 'development',
@@ -265,7 +289,7 @@ export class GameSeedGeneratorService {
                }
             }
          }
-      }
+      };
    }
 
 }
