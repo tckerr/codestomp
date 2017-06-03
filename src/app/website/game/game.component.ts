@@ -4,7 +4,7 @@ import {GameStorageService} from '../../services/persistence/game-storage.servic
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {CodeService} from '../../services/resource-services/code.service';
-import {TickSubscriptionAggregationService} from '../../services/tick/subscribers/automatic/tick-subscription-aggregation.service';
+import {SubscriptionAggregationService} from '../../services/subscription-aggregation.service';
 import {NotificationService} from '../../services/notifications/notification.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class GameComponent implements OnInit, OnDestroy {
    constructor(private tickService: TickService,
                private gameStorageService: GameStorageService,
                private route: ActivatedRoute,
-               private tickSubscriptionAggregationService: TickSubscriptionAggregationService) {
+               private tickSubscriptionAggregationService: SubscriptionAggregationService) {
    }
 
    ngOnInit() {

@@ -3,24 +3,23 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-// this is the fundamental time constant
-// which essentially controls game tick > date speed
-let speedMultiplier = .001;
-// "frame rate" of the game
-let tickInterval = 20;//*50;
-
-//
-let msInAMinute = 60 * 1000;
-let msInAnHour = msInAMinute * 60;
-let msPerTick = msInAnHour * speedMultiplier * tickInterval;
-let ticksPerHour = msInAnHour / msPerTick;
-
-// convenience
-export const perHour = msInAnHour;
-export const perMinute = perHour / 60;
+// convenience (ms)
+export const perSecond = 1000;
+export const perMinute = perSecond * 60;
+export const perHour = perMinute * 60;
 export const perDay = perHour * 24;
 export const perYear = perDay * 365;
 export const perMonth = perYear / 12;
+
+// this is the fundamental time constant
+// which essentially controls game tick > date speed
+let speedMultiplier = 1/perSecond;
+
+// "frame rate" of the game
+let tickIntervalMs = 20;
+
+let msPerTick = perHour * speedMultiplier * tickIntervalMs;
+let ticksPerHour = perHour / msPerTick;
 
 export const environment = {
    production: false,
@@ -114,11 +113,11 @@ export const environment = {
          customersToProfitGrowthRate: 15 / perMonth,
       },
       ticker: {
-         defaultIntervalMs: tickInterval,
+         defaultIntervalMs: tickIntervalMs,
          speedDelta: .001,
          ticksPerHour: ticksPerHour,
          tickToMsMap: msPerTick,
-         msInAnHour: msInAnHour,
+         msInAnHour: perHour,
          speedMultiplier: speedMultiplier,
          intervalIncrementDelta: 50,
          minimumInterval: 20 // this is a performance consideration, since we have at least 2ms overhead

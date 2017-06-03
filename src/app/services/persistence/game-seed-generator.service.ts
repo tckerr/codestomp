@@ -192,6 +192,13 @@ export class GameSeedGeneratorService {
                }
             },
             businessUnits: {
+               corporate: {
+                  id: 'corporate',
+                  name: 'Corporate',
+                  icon: 'fa-users',
+                  active: false,
+                  staff: []
+               },
                hr: {
                   id: 'hr',
                   name: 'Human Resources',

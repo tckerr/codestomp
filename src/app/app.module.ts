@@ -45,7 +45,7 @@ import {StaffCategoryIconResolverService} from './services/staffing/staff-catego
 import {StaffQuitDecisionService} from './services/staffing/staff-quit-decision.service';
 import {DeploymentExecutor} from './services/tick/subscribers/manual/deployment-executor.service';
 import {CustomerAccumulatorService} from './services/tick/subscribers/automatic/accumulators/customer-accumulator.service';
-import {TickSubscriptionAggregationService} from './services/tick/subscribers/automatic/tick-subscription-aggregation.service';
+import {SubscriptionAggregationService} from './services/subscription-aggregation.service';
 import {CodeProfitAccumulatorService} from './services/tick/subscribers/automatic/accumulators/code-profit-accumulator.service';
 import {TalentGeneratorService} from './services/tick/subscribers/automatic/generators/talent-generator-service';
 import {StaffActionAccumulatorService} from './services/tick/subscribers/automatic/accumulators/staff-actions/staff-action-accumulator.service';
@@ -63,6 +63,8 @@ import {AchievementUnlockerService} from './services/achievements/achievement-un
 import {AchievementCriteriaValueResolverService} from './services/achievements/achievement-criteria-value-resolver.service';
 import { AchievementProgressBarComponent } from './website/game/achievement-progress-bar/achievement-progress-bar.component';
 import {AchievementEvaluatorService} from './services/achievements/achievement-evaluator.service';
+import {BusinessUnitUnlockListenerService} from './services/listeners/business-unit-unlock-listener.service';
+import { CorporateComponent } from './website/game/management/business-units/corporate/corporate.component';
 
 const appRoutes: Routes = [
    {
@@ -98,6 +100,10 @@ const appRoutes: Routes = [
                {
                   path: 'hr',
                   component: HRComponent
+               },
+               {
+                  path: 'corporate',
+                  component: CorporateComponent
                }
             ]
          }
@@ -128,6 +134,7 @@ const appRoutes: Routes = [
       AlertsDigestComponent,
       TalentCapacityBreakdownComponent,
       AchievementProgressBarComponent,
+      CorporateComponent,
    ],
    imports: [
       BrowserModule,
@@ -146,7 +153,7 @@ const appRoutes: Routes = [
       CodeService,
       DeploymentExecutor,
       CustomerAccumulatorService,
-      TickSubscriptionAggregationService,
+      SubscriptionAggregationService,
       CodeProfitAccumulatorService,
       CustomerService,
       FundService,
@@ -175,6 +182,7 @@ const appRoutes: Routes = [
       AchievementCriteriaValueResolverService,
       AchievementUnlockerService,
       AchievementEvaluatorService,
+      BusinessUnitUnlockListenerService,
    ],
    bootstrap: [AppComponent]
 })

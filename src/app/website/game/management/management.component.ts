@@ -59,12 +59,10 @@ export class ManagementComponent implements OnInit, OnDestroy {
    }
 
    private get activeBusinessUnits() {
-      let results = [];
-      this.company.businessUnits.$asList().forEach(u => {
-         if (u.active)
-            results.push(u);
-      });
-      return results;
+      return Enumerable
+         .from(this.company.businessUnits.$asList())
+         .where(u => u.active)
+         .toArray();
    }
 
    private get achievementTracks(){

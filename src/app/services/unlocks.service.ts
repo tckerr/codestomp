@@ -2,9 +2,13 @@ import {Injectable} from '@angular/core';
 import {GameStorageService} from './persistence/game-storage.service';
 import {ExperienceLevel} from '../models/definitions/staff-definitions';
 import {UnlockableFeature} from '../models/achievements/unlockable-feature.enum';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UnlocksService {
+
+   private source = new Subject<UnlockableFeature>();
+   public pipeline = this.source.asObservable();
 
    constructor(private gameStorageService: GameStorageService) {
    }
@@ -15,8 +19,9 @@ export class UnlocksService {
 
    unlock(feature: UnlockableFeature) {
       if (feature == UnlockableFeature.None)
-         return
+         return;
       this.gameStorageService.game.unlockedFeatures[feature] = true;
+      this.source.next(feature);
    }
 
    public isUnlocked(feature: UnlockableFeature) {

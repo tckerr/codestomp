@@ -17,7 +17,7 @@ export class GameStorageService {
 
    load(gameId: string) {
       let gameData = localStorage.getItem(gameId);
-      this.traceLoad(gameData, gameId);
+      // this.traceLoad(gameData, gameId);
       if (!gameData)
          throw Error(`Game does not exist: ${gameId}`);
       this.game = new Game(JSON.parse(gameData));
