@@ -3,6 +3,7 @@ import {GameStorageService} from '../persistence/game-storage.service';
 import * as Enumerable from 'linq';
 import {IEnumerable} from 'linq';
 import {AchievementBlock} from '../../models/achievements/achievement-block';
+import {AchievementTrack} from '../../models/achievements/achievement-track';
 
 @Injectable()
 export class AchievementsService {
@@ -23,15 +24,31 @@ export class AchievementsService {
       return track;
    }
 
+   public pendingForId(id: string): AchievementBlock {
+      let tracks = this.unlockedTracks
+         .where(track => track.id === id)
+         .selectMany(track => this.firstUnlockedBlockForEach(track))
+         .take(1);
+      return tracks.any() ? tracks.first() : null;
+   }
+
    public get pending(): IEnumerable<AchievementBlock> {
+      return this
+         .unlockedTracks
+         .selectMany(track => this.firstUnlockedBlockForEach(track));
+   }
+
+   private firstUnlockedBlockForEach(track: AchievementTrack) {
+      return Enumerable
+         .from(track.blocks)
+         .where(block => !block.unlocked)
+         .take(1);
+   };
+
+   private get unlockedTracks(): IEnumerable<AchievementTrack> {
       return Enumerable
          .from(this.tracks)
-         .where(t => t.unlocked)
-         .selectMany(t =>
-            Enumerable
-               .from(t.blocks)
-               .where(t => !t.unlocked)
-               .take(1));
+         .where(t => t.unlocked);
    }
 
 }

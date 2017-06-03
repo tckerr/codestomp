@@ -97,9 +97,8 @@ export class JobMarketComponent implements OnChanges, OnInit {
    }
 
    private getPreviewName(staff) {
-      let hiring = this.unlocksService.unlocks.hiring[this.businessUnitId];
-      const preview = hiring === this.unlocksService.experienceTypeToUnlockTier(staff.experience) - 1;
-      return preview ? staff.displayName : '???';
+      let previewable = this.unlocksService.staffAtExperienceIsUnlocked(staff.experience - 1, this.businessUnitId);
+      return previewable ? staff.displayName : '???';
    }
 
    public resetCost() {

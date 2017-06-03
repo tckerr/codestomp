@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {UnlocksService} from '../../../../../services/unlocks.service';
+import {UnlockableFeature} from '../../../../../models/achievements/unlockable-feature.enum';
 
 @Component({
    selector: 'app-development',
@@ -22,7 +23,7 @@ export class DevelopmentComponent implements OnInit, OnDestroy {
    }
 
    public devHiringUnlocked(){
-      return this.unlocksService.unlocks.hiring.development;
+      return this.unlocksService.isUnlocked(UnlockableFeature.DevelopmentHiringTier1);
    }
 
 }

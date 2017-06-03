@@ -26,7 +26,31 @@
          </div>
       </div>
    </div>
+   <div class="card mt-1">
+      <div class="card-header pt-2 pb-2 pr-2">
+         Achievements Progress
+         <span class="pull-right text-muted"
+               [ngbPopover]="achievementsExplanation"
+               triggers="mouseenter:mouseleave"
+               placement="left">
+      <i class="fa fa-question-circle"></i></span>
+      </div>
+      <div class="card-block p-2">
+         <div class="row" *ngFor="let track of achievementTracks">
+            <div class="col-12">
+               <app-achievement-progress-bar [achievementTrackId]="track.id"></app-achievement-progress-bar>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
+
+<ng-template #achievementsExplanation>
+   <p class="mb-0">
+      Earn <strong>achievements</strong> over time by completing the necessary requirements. Achievements
+      will typically unlock new features free of charge!
+   </p>
+</ng-template>
 
 <ng-template #specialEventModal let-c="close" let-d="dismiss">
    <div class="modal-header">
@@ -39,6 +63,8 @@
       <p>{{specialEventModalViewData.description}}</p>
    </div>
    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{specialEventModalViewData.buttonText}}</button>
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">
+         {{specialEventModalViewData.buttonText}}
+      </button>
    </div>
 </ng-template>

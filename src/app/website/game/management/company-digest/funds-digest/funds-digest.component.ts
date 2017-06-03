@@ -24,7 +24,8 @@ export class FundsDigestComponent implements OnInit {
    }
    public get bgColor() {
       let pph = this.profitPerHour;
-      if (pph < 0 && this.fundsService.funds.balance < Math.abs(pph))
+      let fundsNegative = this.fundsService.funds.balance < 0;
+      if (fundsNegative || (pph < 0 && this.fundsService.funds.balance < Math.abs(pph)))
          return 'card-danger';
       return pph >= 0 ? 'card-success' : "card-warning"
    }

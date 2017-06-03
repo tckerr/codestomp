@@ -1,12 +1,24 @@
-<div class="card-group">
+<ng-template #customersExplanation>
+   <p class="mb-0">
+      Customers are your main source of revenue. The more code you push to production, the more customers will come!
+   </p>
+</ng-template>
+
+<div class="card-group" *ngIf="unlocked">
    <div class="card card-digest">
-      <div class="card-header p-1 pl-2">
+      <div class="card-header p-1 pl-2 pr-2">
          Customers
+         <span class="pull-right text-muted"
+               [ngbPopover]="customersExplanation"
+               triggers="mouseenter:mouseleave"
+               container="body"
+               placement="bottom">
+            <i class="fa fa-question-circle"></i>
+         </span>
       </div>
       <div class="card-block p-2">
          <h2 class="d-inline">{{customerService.customers.$balanceFloored | number:'1.0-0'}}</h2>
          <small class="text-muted">
-
             <span>({{customerAccumulatorService.customersPerHr | number: '1.2-2'}}/hr)</span>
          </small>
       </div>

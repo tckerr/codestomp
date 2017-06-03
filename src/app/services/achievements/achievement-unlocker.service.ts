@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import {AchievementBlock} from '../../models/achievements/achievement-block';
 import {UnlockableFeature} from '../../models/achievements/unlockable-feature.enum';
 import {UnlocksService} from '../unlocks.service';
-import {GameStorageService} from '../persistence/game-storage.service';
 import {NotificationService} from '../notifications/notification.service';
 
 @Injectable()
 export class AchievementUnlockerService {
 
   constructor(
-     private gameStorageService: GameStorageService,
      private notificationService: NotificationService,
      private unlocksService: UnlocksService
   ) { }

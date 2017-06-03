@@ -4,6 +4,7 @@ import {ResourceUpdate} from '../../messaging/resource-update';
 export class ResourceBase {
 
    public balance: number;
+   protected canBeNegative: boolean = false;
    public totalAccumulated: number;
    private $source = new Subject<ResourceUpdate>();
 
@@ -23,10 +24,11 @@ export class ResourceBase {
 
    remove(count: number, strict: boolean = false) {
       let previousBalance = this.balance;
-      let newBalance = this.balance - count;
-      if ( strict && newBalance < 0 )
+      this.balance = this.balance - count;
+      if (!this.canBeNegative && strict && this.balance < 0 )
          throw Error("Not enough resources!");
-      this.balance = Math.max(0, newBalance);
+      if (!this.canBeNegative)
+         this.balance = Math.max(0, this.balance);
       let delta = this.balance - previousBalance;
       this.$source.next(new ResourceUpdate(previousBalance, this.balance, this.totalAccumulated, delta, this));
       return delta;

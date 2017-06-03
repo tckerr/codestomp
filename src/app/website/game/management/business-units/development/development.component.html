@@ -21,7 +21,7 @@
          </div>
       </div>
       <hr class="mt-2 mb-2">
-      <div class="row" *ngIf="devHiringUnlocked() > 0">
+      <div class="row" *ngIf="devHiringUnlocked()">
          <div class="col-12">
             <app-staff-summary [businessUnitId]="'development'"></app-staff-summary>
          </div>
@@ -32,5 +32,3 @@
       <app-job-market [businessUnitId]="'development'"></app-job-market>
    </div>
 </div>
-
-

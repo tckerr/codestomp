@@ -9,6 +9,7 @@ export class StaffCategory {
 }
 
 export enum ExperienceLevel {
+   None,
    Intern,
    Associate,
    Junior,

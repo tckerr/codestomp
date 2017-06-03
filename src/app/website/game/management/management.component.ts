@@ -8,6 +8,8 @@ import {SpecialEvent} from '../../../models/messaging/special-event';
 import {isNullOrUndefined} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SpecialEventGeneratorService} from '../../../services/tick/subscribers/automatic/generators/special-event-generator.service';
+import {AchievementsService} from '../../../services/achievements/achievements.service';
+import * as Enumerable from 'linq';
 
 @Component({
    selector: 'app-management',
@@ -25,6 +27,7 @@ export class ManagementComponent implements OnInit, OnDestroy {
    constructor(private gameStorageService: GameStorageService,
                private specialEventGeneratorService: SpecialEventGeneratorService,
                private modalService: NgbModal,
+               private achievementsService: AchievementsService,
                private router: Router,
                private tickService: TickService,
                private unlocksService: UnlocksService) {
@@ -62,5 +65,12 @@ export class ManagementComponent implements OnInit, OnDestroy {
             results.push(u);
       });
       return results;
+   }
+
+   private get achievementTracks(){
+      return Enumerable
+         .from(this.achievementsService.tracks)
+         .where(t => t.unlocked)
+         .toArray();
    }
 }

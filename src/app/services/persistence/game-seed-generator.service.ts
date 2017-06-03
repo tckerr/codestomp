@@ -6,17 +6,8 @@ import {ExperienceLevel, StaffCategory, StaffType} from '../../models/definition
 import {AchievementCriteriaType} from '../../models/achievements/achievement-criteria-type.enum';
 import {UnlockableFeature} from '../../models/achievements/unlockable-feature.enum';
 import {LogType} from '../../models/definitions/log-type';
+import {EnumParser} from '../../util/enum-parser';
 
-function getEnumMembers(myEnum): string[]
-{
-    let members = []
-    for(let i:number = 0; true; i++) {
-        if(myEnum[i] === undefined) break
-        members.push(myEnum[i])
-    }
-
-    return members
-}
 
 @Injectable()
 export class GameSeedGeneratorService {
@@ -26,7 +17,7 @@ export class GameSeedGeneratorService {
 
    public defaultSeed(): any {
       let unlockedFeatures = {};
-      getEnumMembers(UnlockableFeature).forEach(a => unlockedFeatures[a] = false);
+      EnumParser.getMembers(UnlockableFeature).forEach(a => unlockedFeatures[a] = false);
 
       return {
          id: 'csgm_' + this.idGeneratorService.generate(),
@@ -52,6 +43,7 @@ export class GameSeedGeneratorService {
                displayName: 'Development Achievements',
                blocks: [
                   {
+                     displayName: 'Manual Testing',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalPushedCodeAccumulated,
                      unlockWhenValueGte: 70,
@@ -63,6 +55,7 @@ export class GameSeedGeneratorService {
                      }
                   },
                   {
+                     displayName: 'Manual Deployments',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalTestedCodeAccumulated,
                      unlockWhenValueGte: 70,
@@ -74,14 +67,63 @@ export class GameSeedGeneratorService {
                      }
                   },
                   {
+                     displayName: 'Bug Fixes',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalProdCodeAccumulated,
-                     unlockWhenValueGte: 300,
+                     unlockWhenValueGte: 200,
                      unlocksFeature: UnlockableFeature.ManualBugFixes,
                      notification: {
                         title: 'Bugs! Oh my!',
                         message: 'Bugs are starting to pile up in production. Fix them!',
                         logType: LogType.Error
+                     }
+                  },
+                  {
+                     displayName: 'Staff',
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.TotalProdCodeAccumulated,
+                     unlockWhenValueGte: 400,
+                     unlocksFeature: UnlockableFeature.DevelopmentHiringTier1,
+                     notification: {
+                        title: 'Time to grow your business!',
+                        message: 'Check out the development job market for details on how to hire your first employee.',
+                        logType: LogType.Success
+                     }
+                  },
+                  {
+                     displayName: 'Incorporation',
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.ConcurrentCustomers,
+                     unlockWhenValueGte: 1000,
+                     unlocksFeature: UnlockableFeature.Incorporation,
+                     notification: {
+                        title: 'Development hiring options unlocked!',
+                        message: 'Check out the development job market for more options.',
+                        logType: LogType.Success
+                     }
+                  },
+                  {
+                     displayName: 'Staff Tier 2',
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.TotalFundsAccumulated,
+                     unlockWhenValueGte: 1000,
+                     unlocksFeature: UnlockableFeature.DevelopmentHiringTier2,
+                     notification: {
+                        title: 'Development hiring options unlocked!',
+                        message: 'Check out the development job market for more options.',
+                        logType: LogType.Success
+                     }
+                  },
+                  {
+                     displayName: 'Staff Tier 3',
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.TotalFundsAccumulated,
+                     unlockWhenValueGte: 2000,
+                     unlocksFeature: UnlockableFeature.DevelopmentHiringTier3,
+                     notification: {
+                        title: 'Development hiring options unlocked!',
+                        message: 'Check out the development job market for more options.',
+                        logType: LogType.Success
                      }
                   }
                ]
@@ -136,7 +178,7 @@ export class GameSeedGeneratorService {
                   id: 'hr',
                   name: 'Human Resources',
                   icon: 'fa-users',
-                  active: true,
+                  active: false,
                   staff: [
                      {
                         id: StaffType.TalentScout,
@@ -189,7 +231,7 @@ export class GameSeedGeneratorService {
                   id: 'debug',
                   name: 'Debug',
                   icon: 'fa-code',
-                  active: true,
+                  active: false,
                   staff: []
                },
                development: {

@@ -7,31 +7,26 @@ import {AchievementsService} from '../../../../achievements/achievements.service
 import {AchievementBlock} from '../../../../../models/achievements/achievement-block';
 import {AchievementCriteriaValueResolverService} from '../../../../achievements/achievement-criteria-value-resolver.service';
 import {AchievementUnlockerService} from '../../../../achievements/achievement-unlocker.service';
+import {AchievementEvaluatorService} from '../../../../achievements/achievement-evaluator.service';
 
 @Injectable()
 export class AchievementUnlockListenerService extends TickSubscriberBase implements ITickSubscriber {
 
    constructor(private achievementsService: AchievementsService,
-               private valueResolver: AchievementCriteriaValueResolverService,
+               private evaluator: AchievementEvaluatorService,
                private unlocker: AchievementUnlockerService,) {
       super();
    }
 
    subscribe(tickService: TickService) {
-      this.tickerSubscription = tickService.pipeline.subscribe(t => this.checkAchievementCriteria(t));
+      this.tickerSubscription = tickService.pipeline.subscribe(t => this.checkAchievementCriteria());
    }
 
-   private checkAchievementCriteria(tick: Tick) {
+   private checkAchievementCriteria() {
       this.achievementsService
          .pending
-         .forEach(block => this.resolvePendingAchievement(block));
-   }
-
-   private resolvePendingAchievement(block: AchievementBlock) {
-      let value = this.valueResolver.typeToValue(block.criteriaType);
-      let unlocked = value >= block.unlockWhenValueGte;
-      if (unlocked)
-         this.unlocker.unlock(block);
+         .where(block => this.evaluator.achievementComplete(block))
+         .forEach(block => this.unlocker.unlock(block));
    }
 
 }

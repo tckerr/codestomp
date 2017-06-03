@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UnlocksService} from '../../../../../services/unlocks.service';
+import {UnlockableFeature} from '../../../../../models/achievements/unlockable-feature.enum';
 
 @Component({
    selector: 'app-hr',
@@ -15,7 +16,7 @@ export class HRComponent implements OnInit {
    }
 
    public hiringUnlocked(){
-      return this.unlocksService.unlocks.hiring.hr;
+      return this.unlocksService.isUnlocked(UnlockableFeature.HrHiringTier1);
    }
 
 }

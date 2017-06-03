@@ -1,0 +1,26 @@
+<ng-template #progressTooltip>
+   <p class="mb-0 text-center">
+      <strong>{{currentValue}}/{{max}}</strong> {{unitString}} ({{progressPercent}}%)
+   </p>
+</ng-template>
+<div class="row" *ngIf="eligible" style="height: 20px;">
+   <div class="col-12 d-flex float-right"
+        [ngbPopover]="progressTooltip"
+        [popoverTitle]="blockName"
+        container="body"
+        placement="top"
+        triggers="mouseenter:mouseleave">
+      <div class="badge badge-info d-inline-block text-uppercase">
+         <i class="fa" [ngClass]="iconClass"></i>
+         <small>{{blockName}}</small>
+      </div>
+      <div class="d-inline-block ml-1 progress" style="flex-grow: 100; height: 100%">
+         <div
+            style="padding-top: 2px!important"
+            class="h-100 progress-bar bg-success"
+            [style.width]="progressPercent+'%'">
+            <span>{{progressPercent}}%</span>
+         </div>
+      </div>
+   </div>
+</div>

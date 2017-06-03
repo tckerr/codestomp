@@ -1,6 +1,8 @@
 import {IStaff} from './istaff';
+import {ExperienceLevel} from '../../../definitions/staff-definitions';
 
 export class Staff implements IStaff {
+
    public id: number;
    public displayName: string;
    public category: string;

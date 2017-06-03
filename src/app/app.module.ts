@@ -61,6 +61,8 @@ import {AchievementsService} from './services/achievements/achievements.service'
 import {AchievementUnlockListenerService} from 'app/services/tick/subscribers/automatic/listeners/achievement-unlock-listener.service';
 import {AchievementUnlockerService} from './services/achievements/achievement-unlocker.service';
 import {AchievementCriteriaValueResolverService} from './services/achievements/achievement-criteria-value-resolver.service';
+import { AchievementProgressBarComponent } from './website/game/achievement-progress-bar/achievement-progress-bar.component';
+import {AchievementEvaluatorService} from './services/achievements/achievement-evaluator.service';
 
 const appRoutes: Routes = [
    {
@@ -125,6 +127,7 @@ const appRoutes: Routes = [
       JobMarketComponent,
       AlertsDigestComponent,
       TalentCapacityBreakdownComponent,
+      AchievementProgressBarComponent,
    ],
    imports: [
       BrowserModule,
@@ -170,7 +173,8 @@ const appRoutes: Routes = [
       AchievementsService,
       AchievementUnlockListenerService,
       AchievementCriteriaValueResolverService,
-      AchievementUnlockerService
+      AchievementUnlockerService,
+      AchievementEvaluatorService,
    ],
    bootstrap: [AppComponent]
 })
