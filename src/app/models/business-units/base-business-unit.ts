@@ -2,7 +2,7 @@ import {IBusinessUnit} from './ibusiness-unit';
 import {Staff} from './staff';
 
 export class BaseBusinessUnit implements IBusinessUnit {
-   public staff: Staff[];
+   public staff: Staff[] = [];
    public name: string;
    public id: string;
    public active: boolean;
@@ -11,5 +11,8 @@ export class BaseBusinessUnit implements IBusinessUnit {
       this.name = json.name;
       this.id = json.id;
       this.active = json.active;
+      for (let staff of json.staff) {
+         this.staff.push(new Staff(staff));
+      }
    }
 }

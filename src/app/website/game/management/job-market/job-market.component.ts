@@ -33,6 +33,7 @@ export class JobMarketComponent implements OnChanges, OnInit {
    ngOnInit(): void {
       this.buildHireTypes();
    }
+
    ngOnChanges(changes: SimpleChanges): void {
       this.businessUnitId = changes['businessUnitId'].currentValue || this.businessUnitId;
       this.buildHireTypes();
@@ -40,6 +41,7 @@ export class JobMarketComponent implements OnChanges, OnInit {
 
    private buildHireTypes() {
       let self = this;
+      debugger;
       this.hireTypes = Enumerable
          .from(this.gameStorageService.game.company.businessUnits.$asList())
          .where(bu => bu.id === this.businessUnitId)
@@ -72,15 +74,15 @@ export class JobMarketComponent implements OnChanges, OnInit {
             return [
                {
                   displayName: 'Coding',
-                  value: Math.floor(100 * staff.typeDetails.codePerMs * perHour)/100 + '/hr'
+                  value: Math.floor(100 * staff.typeDetails.codePerMs * perHour) / 100 + '/hr'
                },
                {
                   displayName: 'Testing',
-                  value: Math.floor(100 * staff.typeDetails.testingPerMs * perHour)/100 + '/hr'
+                  value: Math.floor(100 * staff.typeDetails.testingPerMs * perHour) / 100 + '/hr'
                },
                {
                   displayName: 'Bug Fixes',
-                  value: Math.floor(100 * staff.typeDetails.bugFixesPerMs * perHour)/100 + '/hr'
+                  value: Math.floor(100 * staff.typeDetails.bugFixesPerMs * perHour) / 100 + '/hr'
                }
             ]
       }
@@ -91,12 +93,13 @@ export class JobMarketComponent implements OnChanges, OnInit {
       return this.iconResolver.resolve(category);
    }
 
-   private get activeBusinessUnit(){
+   private get activeBusinessUnit() {
       return this.gameStorageService.game.company.businessUnits[this.businessUnitId];
    }
 
    private getPreviewName(staff) {
-      const preview = this.unlocksService.unlocks.hiring[this.businessUnitId] === this.unlocksService.experienceTypeToUnlockTier(staff.experience) - 1;
+      let hiring = this.unlocksService.unlocks.hiring[this.businessUnitId];
+      const preview = hiring === this.unlocksService.experienceTypeToUnlockTier(staff.experience) - 1;
       return preview ? staff.displayName : '???';
    }
 

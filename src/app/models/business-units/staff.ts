@@ -1,6 +1,6 @@
 import {IStaff} from './istaff';
 
-export abstract class Staff implements IStaff {
+export class Staff implements IStaff {
    public id: number;
    public displayName: string;
    public category: string;

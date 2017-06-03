@@ -10,7 +10,6 @@
       </div>
       <div class="row">
          <div class="col-12">
-
             <div class="row h-100">
                <div class="col-5 pr-0">
                   <div class="list-group small">
@@ -22,8 +21,8 @@
                            <span>
                               <span class="badge badge-info">
                                  <i
-                                 [ngClass]="getStaffCategoryIcon(hireType.category)"
-                                 class="fa"></i>
+                                    [ngClass]="getStaffCategoryIcon(hireType.category)"
+                                    class="fa"></i>
                               </span> {{hireType.displayName}}
                            </span>
                         </button>
@@ -89,37 +88,43 @@
                         </div>
                         <div class="row small m-2 mb-1">
                            <div class="col-4 p-1 text-center">
-                              <button class="btn btn-info btn-block btn-sm btn-interactive"
-                                      (mouseenter)="activeTalentCost = activeHireType.talentCost"
-                                      (mouseleave)="resetCost()"
-                                      (click)="activeHireType.hire(1)"
-                                      [disabled]="activeHireType.count() <= 0 && resetCost()">
-                                 <span>
-                                    <i class="fa fa-user-plus"></i> Hire
-                                 </span>
-                              </button>
+                              <span class="btn-block"
+                                 (mouseover)="activeTalentCost = activeHireType.talentCost"
+                                 (mouseleave)="resetCost()">
+                                 <button class="btn btn-info btn-block btn-sm btn-interactive"
+                                         (click)="activeHireType.hire(1)"
+                                         [disabled]="activeHireType.count() <= 0">
+                                    <span>
+                                       <i class="fa fa-user-plus"></i> Hire
+                                    </span>
+                                 </button>
+                              </span>
                            </div>
                            <div class="col-4 p-1 text-center">
-                              <button class="btn btn-info btn-block btn-sm btn-interactive"
-                                      (mouseenter)="activeTalentCost = activeHireType.talentCost * 10"
-                                      (mouseleave)="resetCost()"
-                                      (click)="activeHireType.hire(10)"
-                                      [disabled]="activeHireType.count() < 10 && resetCost()">
-                                 <span>
-                                    <i class="fa fa-user-plus"></i> Hire 10
-                                 </span>
-                              </button>
+                              <span class="btn-block"
+                                    (mouseover)="activeTalentCost = activeHireType.talentCost * 10"
+                                    (mouseleave)="resetCost()">
+                                 <button class="btn btn-info btn-block btn-sm btn-interactive"
+                                         (click)="activeHireType.hire(10)"
+                                         [disabled]="activeHireType.count() < 10">
+                                    <span>
+                                       <i class="fa fa-user-plus"></i> Hire 10
+                                    </span>
+                                 </button>
+                              </span>
                            </div>
                            <div class="col-4 p-1 text-center">
-                              <button class="btn btn-info btn-block btn-sm btn-interactive"
-                                      (mouseenter)="activeTalentCost = activeHireType.talentCost * activeHireType.count()"
-                                      (mouseleave)="resetCost()"
-                                      (click)="activeHireType.hireAll()"
-                                      [disabled]="activeHireType.count() < 1">
-                                 <span>
-                                    <i class="fa fa-user-plus"></i> Hire All
-                                 </span>
-                              </button>
+                              <span class="btn-block"
+                                    (mouseover)="activeTalentCost = activeHireType.talentCost * activeHireType.count()"
+                                    (mouseleave)="resetCost()">
+                                 <button class="btn btn-info btn-block btn-sm btn-interactive"
+                                         (click)="activeHireType.hireAll()"
+                                         [disabled]="activeHireType.count() < 1">
+                                    <span>
+                                       <i class="fa fa-user-plus"></i> Hire All
+                                    </span>
+                                 </button>
+                              </span>
                            </div>
                         </div>
                      </div>

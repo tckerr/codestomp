@@ -70,7 +70,7 @@ export class GameSeedGeneratorService {
                hr: {
                   id: 'hr',
                   name: 'Human Resources',
-                  active: false,
+                  active: true,
                   staff: [
                      {
                         id: StaffType.TalentScout,
@@ -122,7 +122,8 @@ export class GameSeedGeneratorService {
                debug: {
                   id: 'debug',
                   name: 'Debug',
-                  active: true
+                  active: true,
+                  staff:[]
                },
                development: {
                   id: 'development',
