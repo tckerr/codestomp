@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CodeService} from '../../../../../../services/resource-services/code.service';
 import {ConfigurationService} from 'app/services/config/configuration.service';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
-import {CommitGeneratorService} from '../../../../../../commit-generator.service';
+import {CommitGeneratorService} from '../../../../../../services/util/commit-generator.service';
 import {LoggerService} from '../../../../../../services/logging/logger-service';
 import {TickService} from '../../../../../../services/tick/tick.service';
 import {Subscription} from "rxjs/Subscription";

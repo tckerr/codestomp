@@ -28,7 +28,6 @@ import {ConfigurationService} from './services/config/configuration.service';
 import {DebugService} from './services/config/debug.service';
 import {DevelopmentActionsComponent} from './website/game/management/business-units/development/development-actions/development-actions.component';
 import {CompanyDigestComponent} from './website/game/management/company-digest/company-digest.component';
-import {CommitGeneratorService} from './commit-generator.service';
 import {UnlocksService} from './services/unlocks.service';
 import {FundsDigestComponent} from './website/game/management/company-digest/funds-digest/funds-digest.component';
 import {DateDigestComponent} from './website/game/management/company-digest/date-digest/date-digest.component';
@@ -56,6 +55,7 @@ import {CodeTestingService} from './services/tick/subscribers/automatic/accumula
 import {CodeDeploymentService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/code-deployment.service';
 import {BugFixingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/bug-fixing.service';
 import {SpecialEventGeneratorService} from './services/tick/subscribers/automatic/generators/special-event-generator.service';
+import {CommitGeneratorService} from './services/util/commit-generator.service';
 
 const appRoutes: Routes = [
    {
