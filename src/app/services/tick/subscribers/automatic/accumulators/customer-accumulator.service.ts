@@ -1,27 +1,23 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {TickService} from '../../../tick.service';
 import {CodeService} from '../../../../resource-services/code.service';
-import {Subscription} from 'rxjs/Subscription';
 import {CustomerService} from '../../../../resource-services/customer.service';
 import {ConfigurationService} from '../../../../config/configuration.service';
 import {Tick} from '../../../../../models/tick/tick';
 import {ITickSubscriber} from '../i-tick-subscriber';
+import {TickSubscriberBase} from '../tick-subscriber-base';
 
 @Injectable()
-export class CustomerAccumulatorService implements OnDestroy, ITickSubscriber {
-   private sub: Subscription;
+export class CustomerAccumulatorService extends TickSubscriberBase implements ITickSubscriber {
 
    constructor(private codeService: CodeService,
                private customerService: CustomerService,
                private config: ConfigurationService) {
-   }
-
-   ngOnDestroy(): void {
-      this.sub && this.sub.unsubscribe();
+      super();
    }
 
    public subscribe(tickService: TickService) {
-      this.sub = tickService.pipeline.subscribe((tick: Tick) => {
+      this.tickerSubscription = tickService.pipeline.subscribe((tick: Tick) => {
          let growth = this.customerGrowthForMs(tick.msElapsed);
          if (growth > 0)
             this.customerService.add(growth);
@@ -59,6 +55,4 @@ export class CustomerAccumulatorService implements OnDestroy, ITickSubscriber {
       let eligible = cap - this.customerService.customers.balance;
       return eligible;
    }
-
-
 }

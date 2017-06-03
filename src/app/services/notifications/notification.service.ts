@@ -1,18 +1,32 @@
-import { Injectable } from '@angular/core';
-import * as alertifyjs from 'alertifyjs'
+import {Injectable, OnDestroy, OnInit} from '@angular/core';
+import * as alertifyjs from 'alertifyjs';
 import {LoggerService} from '../logging/logger-service';
 import {LogType} from '../../models/definitions/log-type';
+import {GameStorageService} from '../persistence/game-storage.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Injectable()
-export class NotificationService {
+export class NotificationService implements OnDestroy {
+   private sub: Subscription;
 
-  constructor(private logger: LoggerService) {
-     alertifyjs.set('notifier', 'position', 'bottom-left');
-  }
+   constructor(private logger: LoggerService, private gameStorageService: GameStorageService) {
+      alertifyjs.set('notifier', 'position', 'bottom-left');
+      this.sub = this.gameStorageService.loadedPipeline.subscribe(() => this.clearAll());
+   }
 
-  public notify(title: string, description: string, logType: LogType = LogType.Error) {
+   ngOnDestroy(): void {
+      if (this.sub) {
+         this.sub.unsubscribe();
+      }
+   }
+
+   public notify(title: string, description: string, logType: LogType = LogType.Error) {
       this.logger.gameLog(`${title}: ${description}`, logType);
       this.fireNotification(title, description, logType)
+   }
+
+   public clearAll() {
+      alertifyjs.dismissAll();
    }
 
    private fireNotification(title: string, description: string, logType: LogType) {
@@ -25,19 +39,19 @@ export class NotificationService {
       `);
    }
 
-   private getNotificationMethod(logType: LogType){
-     switch (logType){
-        case LogType.Error:
-           return alertifyjs.error;
-        case LogType.Warning:
-           return alertifyjs.warning;
-        case LogType.Info:
-           return alertifyjs.message;
-        case LogType.Success:
-           return alertifyjs.success;
-        default:
-           return alertifyjs.message;
-     }
+   private getNotificationMethod(logType: LogType) {
+      switch (logType) {
+         case LogType.Error:
+            return alertifyjs.error;
+         case LogType.Warning:
+            return alertifyjs.warning;
+         case LogType.Info:
+            return alertifyjs.message;
+         case LogType.Success:
+            return alertifyjs.success;
+         default:
+            return alertifyjs.message;
+      }
    }
 
 }

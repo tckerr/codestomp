@@ -29,6 +29,10 @@ export class TickService implements Pipeline {
    private tickToMsMapCached: number;
 
    constructor(private gameStorageService: GameStorageService) {
+      this.initialize();
+   }
+
+   public initialize() {
       this.tickerIntervalMs = environment.gameSettings.ticker.defaultIntervalMs;
       this.intervalIncrementDelta = environment.gameSettings.ticker.intervalIncrementDelta;
       this.minimumInterval = environment.gameSettings.ticker.minimumInterval;
@@ -60,6 +64,11 @@ export class TickService implements Pipeline {
    stop() {
       if (this.subscription)
          this.subscription.unsubscribe();
+   }
+
+   flush() {
+      this.stop();
+      this.initialize();
    }
 
    increaseTps() {

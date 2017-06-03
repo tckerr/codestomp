@@ -44,6 +44,7 @@ export class CodeService {
       return amount;
    }
 
+   // TODO: why is this necessary?
    public resetDeployment() {
       let lines = this.code.deploying.balance;
       this.code.deploying.remove(lines);

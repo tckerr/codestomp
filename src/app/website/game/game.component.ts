@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {CodeService} from '../../services/resource-services/code.service';
 import {TickSubscriptionAggregationService} from '../../services/tick/subscribers/automatic/tick-subscription-aggregation.service';
+import {NotificationService} from '../../services/notifications/notification.service';
 
 @Component({
    selector: 'app-game',
@@ -23,21 +24,24 @@ export class GameComponent implements OnInit, OnDestroy {
    }
 
    ngOnInit() {
+      this.gameStorageService.loadedPipeline.subscribe(() => this.onGameLoad());
       this.routeParamsSubscription = this.route.params.subscribe(params => {
          this.gameId = params['gameId'];
-         this.onGameLoad();
+         this.gameStorageService.load(this.gameId);
       });
    }
 
    private onGameLoad() {
-      this.gameStorageService.load(this.gameId);
+      this.tickService.flush();
+      this.codeService.resetDeployment(); // TODO: fix this by making all deployment info stored and resumable
+      this.tickSubscriptionAggregationService.restart();
       this.tickService.start();
-      this.tickSubscriptionAggregationService.start();
-      this.codeService.resetDeployment();
    }
 
    ngOnDestroy() {
       this.routeParamsSubscription.unsubscribe();
+      this.tickSubscriptionAggregationService.stop();
+      this.tickService.stop();
    }
 
 }

@@ -10,6 +10,7 @@ import * as Enumerable from 'linq';
 import {IEnumerable} from 'linq';
 import {StaffQuitDecisionService} from '../../../../staffing/staff-quit-decision.service';
 import {ITickSubscriber} from '../i-tick-subscriber';
+import {TickSubscriberBase} from '../tick-subscriber-base';
 
 export class PaymentObligationResult {
    constructor(public obligation: PaymentObligation,
@@ -28,21 +29,17 @@ export class PaymentObligation {
 }
 
 @Injectable()
-export class StaffSalaryAccumulatorService implements OnDestroy, ITickSubscriber {
-
-   private sub: Subscription;
+export class StaffSalaryAccumulatorService extends TickSubscriberBase implements ITickSubscriber  {
 
    constructor(private fundService: FundService,
                private gameStorage: GameStorageService,
                private staffQuitDecisionService: StaffQuitDecisionService,
-   ) { }
-
-   ngOnDestroy(): void {
-      this.sub && this.sub.unsubscribe();
+   ) {
+      super();
    }
 
    public subscribe(tickService: TickService) {
-      this.sub = tickService.pipeline.subscribe((tick: Tick) => {
+      this.tickerSubscription = tickService.pipeline.subscribe((tick: Tick) => {
          let ms = tick.msElapsed;
          this.paySalariesAndGetFailedObligations(ms)
             .shuffle()

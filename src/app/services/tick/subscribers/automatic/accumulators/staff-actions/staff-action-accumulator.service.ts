@@ -8,16 +8,17 @@ import {CodeDeploymentService} from './development/code-deployment.service';
 import {BugFixingService} from './development/bug-fixing.service';
 import {ITickSubscriber} from '../../i-tick-subscriber';
 import {CodeTestingService} from './development/code-testing.service';
+import {TickSubscriberBase} from '../../tick-subscriber-base';
 
 @Injectable()
-export class StaffActionAccumulatorService implements OnDestroy, ITickSubscriber {
-   private sub: Subscription;
+export class StaffActionAccumulatorService extends TickSubscriberBase implements ITickSubscriber  {
    private executors: TickExecutor[] = [];
 
    constructor(private codeWritingService: CodeWritingService,
                private codeTestingService: CodeTestingService,
                private codeDeploymentService: CodeDeploymentService,
                private bugFixingService: BugFixingService) {
+      super();
       this.executors = [
          bugFixingService,
          codeTestingService,
@@ -26,17 +27,9 @@ export class StaffActionAccumulatorService implements OnDestroy, ITickSubscriber
       ];
    }
 
-   ngOnDestroy(): void {
-      this.stop()
-   }
-
    public subscribe(tickService: TickService) {
-      this.sub = tickService
+      this.tickerSubscription = tickService
          .pipeline
          .subscribe((tick: Tick) => this.executors.forEach(e => e.execute(tick)));
-   }
-
-   public stop(){
-      this.sub && this.sub.unsubscribe();
    }
 }

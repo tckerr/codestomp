@@ -34,5 +34,14 @@ export class TickSubscriptionAggregationService {
       this.subscribers.forEach(a => a.subscribe(this.tickService));
    }
 
+   public stop() {
+      this.subscribers.forEach(a => a.unsubscribe());
+   }
+
+   public restart() {
+      this.stop();
+      this.start();
+   }
+
 
 }

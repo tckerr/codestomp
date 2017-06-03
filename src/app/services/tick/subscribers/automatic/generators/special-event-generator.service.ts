@@ -8,31 +8,44 @@ import {GameStorageService} from '../../../../persistence/game-storage.service';
 import {LogType} from '../../../../../models/definitions/log-type';
 import {ITickSubscriber} from '../i-tick-subscriber';
 import {TickService} from 'app/services/tick/tick.service';
+import {TickSubscriberBase} from '../tick-subscriber-base';
+import {Subscription} from 'rxjs/Subscription';
 
 @Injectable()
-export class SpecialEventGeneratorService implements ITickSubscriber {
+export class SpecialEventGeneratorService extends TickSubscriberBase implements ITickSubscriber {
 
    private source = new Subject<SpecialEvent>();
-   public pipeline = this.source.asObservable(); // TODO: simply relationship with management component
+   public pipeline = this.source.asObservable();
+   private notificationSub: Subscription;
+
+   // TODO: simply relationship with management component
 
    // TODO: potentially separate the listener with the broadcaster to avoid circular dependencies
    constructor(private deploymentExecutor: DeploymentExecutor,
                private customerService: CustomerService,
                private gameStorageService: GameStorageService,
                private notificationService: NotificationService) {
-      this.pipeline.subscribe(e => {
-         if (e.isNotification)
-            this.notificationService.notify(e.eventName, e.description, e.logType);
-      })
+      super();
    }
 
    public subscribe(tickService: TickService) {
-      this.deploymentExecutor.pipeline
+      this.notificationSub = this.pipeline.subscribe(e => {
+         if (e.isNotification)
+            this.notificationService.notify(e.eventName, e.description, e.logType);
+      })
+      this.tickerSubscription = this.deploymentExecutor.pipeline
          .takeWhile(() => {
             let deploys = this.gameStorageService.game.company.businessUnits.development.deploymentInfo.deployCount;
             return deploys == 1;
          })
          .subscribe(() => this.grandOpening());
+   }
+
+   public unsubscribe(): any {
+      if (this.notificationSub) {
+         this.notificationSub.unsubscribe();
+      }
+      return super.unsubscribe();
    }
 
    public fireSpecialEvent(eventName: string, description: string, buttonText: string, logType: LogType, displayType: SpecialEventDisplayType) {
