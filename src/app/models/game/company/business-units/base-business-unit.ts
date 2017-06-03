@@ -4,6 +4,7 @@ import {Staff} from './staff';
 export class BaseBusinessUnit implements IBusinessUnit {
    public staff: Staff[] = [];
    public name: string;
+   public icon: string;
    public id: string;
    public active: boolean;
 
@@ -14,5 +15,6 @@ export class BaseBusinessUnit implements IBusinessUnit {
       for (let staff of json.staff) {
          this.staff.push(new Staff(staff));
       }
+      this.icon = json.icon || "fa-building";
    }
 }

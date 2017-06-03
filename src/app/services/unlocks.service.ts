@@ -46,7 +46,7 @@ export class UnlocksService {
       if (this.unlocks.bugFixes == 0 && this.config.unlockBugFixesWhenBugsGte <= this.codeService.bugs.totalAccumulated) {
          this.gameStorageService.game.company.unlocks.bugFixes++;
          this.notificationService.notify(
-            'Bugs! Oh my!', 'There\'s some bugs in production. Fix them!', LogType.Error);
+            'Bugs! Oh my!', 'Bugs are starting to pile up in production. Fix them!', LogType.Error);
       }
    }
 

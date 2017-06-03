@@ -67,7 +67,7 @@ export class DeploymentExecutor implements OnDestroy {
       this.deploymentInfo.currentDeployRate = rate;
       this.deploymentInfo.lastDeployInitiatedUtc = time;
       let linesOfCodeToDeploy = this.codeService.moveTestedToDeploying(count);
-      this.logger.gameLog(`Beginning deployment of ${Math.floor(linesOfCodeToDeploy)} lines of code...`);
+      //this.logger.gameLog(`Beginning deployment of ${Math.floor(linesOfCodeToDeploy)} lines of code...`);
 
       this.executeDeploy(rate);
    }

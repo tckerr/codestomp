@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UnlocksService} from '../../../../../services/unlocks.service';
 
 @Component({
    selector: 'app-hr',
@@ -7,10 +8,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HRComponent implements OnInit {
 
-   constructor() {
+   constructor(private unlocksService: UnlocksService) {
    }
 
    ngOnInit() {
+   }
+
+   public hiringUnlocked(){
+      return this.unlocksService.unlocks.hiring.hr;
    }
 
 }

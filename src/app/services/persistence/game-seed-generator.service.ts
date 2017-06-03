@@ -70,6 +70,7 @@ export class GameSeedGeneratorService {
                hr: {
                   id: 'hr',
                   name: 'Human Resources',
+                  icon: 'fa-users',
                   active: true,
                   staff: [
                      {
@@ -122,12 +123,14 @@ export class GameSeedGeneratorService {
                debug: {
                   id: 'debug',
                   name: 'Debug',
+                  icon: 'fa-code',
                   active: true,
                   staff:[]
                },
                development: {
                   id: 'development',
                   name: 'Development',
+                  icon: 'fa-rocket',
                   active: true,
                   deploymentInfo: {
                      lastDeployUtc: moment.min().format(),

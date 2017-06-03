@@ -5,10 +5,7 @@
       </div>
    </div>
    <div class="row">
-      <div
-         [class.col-8]="hiringActive"
-         [class.pr-1]="hiringActive"
-         [class.col-12]="!hiringActive">
+      <div class="col-12">
          <div class="card mt-1">
             <div class="card-header small pt-2" *ngIf="activeBusinessUnits.length > 1">
                <ul class="nav nav-tabs card-header-tabs">
@@ -16,7 +13,10 @@
                      <a
                         class="nav-link"
                         [routerLink]="unit.id"
-                        routerLinkActive="active">{{unit.name}}</a>
+                        routerLinkActive="active">
+                        <i class="fa" style="margin-right: .15rem" [ngClass]="unit.icon"></i>
+                        {{unit.name}}
+                     </a>
                   </li>
                </ul>
             </div>
@@ -25,13 +25,8 @@
             </div>
          </div>
       </div>
-
-      <div class="col-4 pl-0" *ngIf="hiringActive">
-         <app-job-market [businessUnitId]="activeBusinessUnit"></app-job-market>
-      </div>
    </div>
 </div>
-
 
 <ng-template #specialEventModal let-c="close" let-d="dismiss">
    <div class="modal-header">

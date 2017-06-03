@@ -36,8 +36,6 @@ export class ManagementComponent implements OnInit, OnDestroy {
             if (eventData.isModal)
                this.openSpecialEventModal(eventData);
          });
-      // TODO: a better way
-      this.router.events.subscribe((s: any) => this.lastNavigatedBusinessUnit = s.url.toString().split("/").reverse()[0]);
    }
 
    private openSpecialEventModal(eventData: SpecialEvent) {
@@ -51,23 +49,6 @@ export class ManagementComponent implements OnInit, OnDestroy {
 
    ngOnDestroy(): void {
       this.sub && this.sub.unsubscribe();
-   }
-
-   public get hiringActive() {
-      if(isNullOrUndefined(this.activeBusinessUnit))
-         return false;
-      let hiring = this.unlocksService.unlocks.hiring;
-      for (var key in hiring) {
-         if (hiring[key] > 0)
-            {
-               return true;
-            }
-      }
-      return false;
-   }
-
-   public get activeBusinessUnit() {
-      return this.lastNavigatedBusinessUnit;
    }
 
    private get company() {
