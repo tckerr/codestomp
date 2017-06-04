@@ -37,7 +37,7 @@ export class CustomerAccumulatorService extends TickSubscriberBase implements IT
       return this.customerGrowthForMs(1000 * 60 * 60);
    }
 
-   private growthFromWordOfMouth(growthTarget: number,ms: number) {
+   private growthFromWordOfMouth(growthTarget: number, ms: number) {
       let share = this.config.WORD_OF_MOUTH_GROWTH_SHARE_PCT;
       let growthRate = this.config.WORD_OF_MOUTH_GROWTH_RATE;
       return ms * share * growthTarget * growthRate;

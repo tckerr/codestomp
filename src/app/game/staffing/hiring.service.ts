@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ExperienceLevel, StaffType} from '../../models/definitions/staff-definitions';
 import {LoggerService} from '../../logging/logger-service';
 import {TalentService} from '../resource-services/talent.service';
@@ -9,9 +9,10 @@ import {LogType} from '../../models/definitions/log-type';
 @Injectable()
 export class HiringService {
 
-  constructor(private gameStorageService: GameStorageService,
-              private talentService: TalentService,
-               private logger: LoggerService) { }
+   constructor(private gameStorageService: GameStorageService,
+               private talentService: TalentService,
+               private logger: LoggerService) {
+   }
 
    public hire(id: StaffType, exp: ExperienceLevel, count: number = 1) {
       this.talentService.hire(exp, count);

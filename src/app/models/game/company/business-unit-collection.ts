@@ -16,7 +16,7 @@ export class BusinessUnitCollection {
       this.hr = new HrBusinessUnit(json.hr);
    }
 
-   public $asList(): IBusinessUnit[]{
+   public $asList(): IBusinessUnit[] {
       return [this.development, this.debug, this.hr, this.corporate];
    }
 }

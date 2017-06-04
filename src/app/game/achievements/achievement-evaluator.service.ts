@@ -5,9 +5,7 @@ import {AchievementCriteriaValueResolverService} from './achievement-criteria-va
 @Injectable()
 export class AchievementEvaluatorService {
 
-   constructor(
-      private valueResolver: AchievementCriteriaValueResolverService,
-   ) {
+   constructor(private valueResolver: AchievementCriteriaValueResolverService,) {
    }
 
    public achievementComplete(block: AchievementBlock) {
@@ -19,7 +17,7 @@ export class AchievementEvaluatorService {
    }
 
    public current(block: AchievementBlock) {
-      if(!block.cumulative)
+      if (!block.cumulative)
          return Math.max(0, this.valueResolver.typeToValue(block.criteriaType) - block.baseline);
       return this.valueResolver.typeToValue(block.criteriaType);
    }

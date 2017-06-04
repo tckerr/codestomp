@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TalentService} from "../../../../../game/resource-services/talent.service";
+import {TalentService} from '../../../../../game/resource-services/talent.service';
 
 @Component({
    selector: 'app-talent-capacity-breakdown',
@@ -13,7 +13,8 @@ export class TalentCapacityBreakdownComponent implements OnInit {
    constructor(private talentService: TalentService) {
    }
 
-   ngOnInit() {}
+   ngOnInit() {
+   }
 
    public get effectiveAvailablePct() {
       return this.effectiveAvailable / this.max;
@@ -25,7 +26,7 @@ export class TalentCapacityBreakdownComponent implements OnInit {
    }
 
    private get available() {
-      return  Math.floor(this.talentService.talent.balance);
+      return Math.floor(this.talentService.talent.balance);
    }
 
    private get max() {
@@ -37,7 +38,7 @@ export class TalentCapacityBreakdownComponent implements OnInit {
    }
 
    public get costPct() {
-      let pct = this.hoveredCost/this.max;
+      let pct = this.hoveredCost / this.max;
       return `${pct * 100}%`;
    }
 

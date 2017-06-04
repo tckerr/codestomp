@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {StaffCategory} from '../../models/definitions/staff-definitions';
 
 @Injectable()
 export class StaffCategoryIconResolverService {
 
-  constructor() { }
+   constructor() {
+   }
 
-  public resolve(category: StaffCategory) {
+   public resolve(category: StaffCategory) {
       switch (category) {
          case StaffCategory.Developer:
             return 'fa-keyboard-o';

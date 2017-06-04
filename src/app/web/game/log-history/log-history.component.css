@@ -12,12 +12,12 @@
 }
 
 .log-history-item:not(.odd) {
-    /*opacity: 1;*/
+   /*opacity: 1;*/
    /*border-bottom: 1px solid #e5e5e5;*/
 }
 
 .log-history-container {
-   background-color: rgba(247,247,249, 0);
+   background-color: rgba(247, 247, 249, 0);
    width: 100%;
    overflow-y: auto;
    /*border-left: 1px solid rgba(0, 0, 0, 0.125);*/
@@ -25,6 +25,7 @@
 
 .log-history-content {
    overflow-y: auto;
-   position: absolute;   bottom: 0;
+   position: absolute;
+   bottom: 0;
    width: 100%;
 }

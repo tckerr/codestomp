@@ -23,10 +23,8 @@ export class TickService implements Pipeline {
    public pipeline = this.source.asObservable();
    public tps: number;
 
-   constructor(
-      private gameStorageService: GameStorageService,
-      private config: ConfigurationService
-   ) {
+   constructor(private gameStorageService: GameStorageService,
+               private config: ConfigurationService) {
       this.initialize();
    }
 
@@ -36,7 +34,7 @@ export class TickService implements Pipeline {
       this.setNewSpeed();
    }
 
-   private get interval(){
+   private get interval() {
       return 1000 / this.tps;
    }
 

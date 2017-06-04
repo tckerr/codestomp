@@ -11,9 +11,10 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class TickerSpeedComponent implements OnInit, OnDestroy {
    ngOnDestroy(): void {
-      if(this.sub)
+      if (this.sub)
          this.sub.unsubscribe()
    }
+
    private averageOverlap: number = 0;
    private sub: Subscription;
 

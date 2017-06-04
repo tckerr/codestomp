@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {GameStorageService} from '../../persistence/game-storage.service';
-import {LoggerService} from '../../logging/logger-service';
-import {CommitGeneratorService} from '../../utilities/commit-generator.service';
 import {ConfigurationService} from '../../configuration/configuration.service';
 
 @Injectable()

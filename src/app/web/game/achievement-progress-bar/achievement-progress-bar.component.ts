@@ -18,8 +18,7 @@ export class AchievementProgressBarComponent implements OnInit, OnChanges {
 
    constructor(private achievementsService: AchievementsService,
                private achievementEvaluatorService: AchievementEvaluatorService,
-               private criteriaResolver: AchievementCriteriaValueResolverService,
-   ) {
+               private criteriaResolver: AchievementCriteriaValueResolverService,) {
    }
 
    ngOnInit() {

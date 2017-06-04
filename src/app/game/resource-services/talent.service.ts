@@ -1,16 +1,14 @@
 import {Injectable} from '@angular/core';
 import {GameStorageService} from '../../persistence/game-storage.service';
-import {ExperienceLevel} from "../../models/definitions/staff-definitions";
-import {environment} from "../../../environments/environment";
-import {ConfigurationService} from "../../configuration/configuration.service";
+import {ExperienceLevel} from '../../models/definitions/staff-definitions';
+import {ConfigurationService} from '../../configuration/configuration.service';
 
 @Injectable()
 export class TalentService {
 
-   constructor(
-      private gameStorageService: GameStorageService,
-      private config: ConfigurationService,
-   ){}
+   constructor(private gameStorageService: GameStorageService,
+               private config: ConfigurationService,) {
+   }
 
    public get talent() {
       return this.gameStorageService.game.marketResources.talent;
@@ -21,8 +19,8 @@ export class TalentService {
    }
 
    public remove(count: number = 1): void {
-      if(count > this.talent.balance)
-         throw Error("Not enough talent to remove!")
+      if (count > this.talent.balance)
+         throw Error('Not enough talent to remove!')
       this.talent.remove(count);
    }
 
@@ -37,7 +35,7 @@ export class TalentService {
    }
 
 
-   public get talentCap(){
+   public get talentCap() {
       return this.config.TALENT_CAP;
    }
 

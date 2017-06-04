@@ -10,9 +10,11 @@ import {Subscription} from 'rxjs/Subscription';
 export class AlertsDigestComponent implements OnInit {
    ngOnInit(): void {
    }
+
    private quitterSub: Subscription;
 
    private alerts: any[] = [];
 
-   constructor(private quitters: QuitterNotificationService) {}
+   constructor(private quitters: QuitterNotificationService) {
+   }
 }

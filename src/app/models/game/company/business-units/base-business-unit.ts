@@ -15,6 +15,6 @@ export class BaseBusinessUnit implements IBusinessUnit {
       for (let staff of json.staff) {
          this.staff.push(new Staff(staff));
       }
-      this.icon = json.icon || "fa-building";
+      this.icon = json.icon || 'fa-building';
    }
 }

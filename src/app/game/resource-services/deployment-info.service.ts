@@ -20,11 +20,11 @@ export class DeploymentInfoService {
       return this.devBusinessUnit.deploymentInfo.deploying;
    }
 
-   public get currentDeployRate(){
+   public get currentDeployRate() {
       return this.devBusinessUnit.deploymentInfo.currentDeployRate;
    }
 
-   public set currentDeployRate(value: number){
+   public set currentDeployRate(value: number) {
       this.devBusinessUnit.deploymentInfo.currentDeployRate = value;
    }
 
@@ -44,7 +44,7 @@ export class DeploymentInfoService {
       return moment(this.devBusinessUnit.deploymentInfo.lastDeployInitiatedUtc);
    }
 
-   public incrementDeployCount(count: number = 1){
+   public incrementDeployCount(count: number = 1) {
       this.devBusinessUnit.deploymentInfo.deployCount += count;
    }
 

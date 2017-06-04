@@ -3,7 +3,6 @@ import {AchievementCriteriaType} from '../../models/achievements/achievement-cri
 import {CodeService} from '../resource-services/code.service';
 import {FundService} from '../resource-services/fund.service';
 import {CustomerService} from '../resource-services/customer.service';
-import {UnlockableFeature} from '../../models/achievements/unlockable-feature.enum';
 
 @Injectable()
 export class AchievementCriteriaValueResolverService {

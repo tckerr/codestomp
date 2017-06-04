@@ -11,18 +11,18 @@ import {UnlockableFeature} from '../../../../../models/achievements/unlockable-f
 export class DevelopmentComponent implements OnInit, OnDestroy {
    private routeParamsSubscription: Subscription;
 
-   constructor(
-      private unlocksService: UnlocksService,
-   ) {}
+   constructor(private unlocksService: UnlocksService,) {
+   }
 
-   ngOnInit() { }
+   ngOnInit() {
+   }
 
    ngOnDestroy(): void {
       if (this.routeParamsSubscription)
          this.routeParamsSubscription.unsubscribe();
    }
 
-   public devHiringUnlocked(){
+   public devHiringUnlocked() {
       return this.unlocksService.isUnlocked(UnlockableFeature.DevelopmentHiringTier1);
    }
 

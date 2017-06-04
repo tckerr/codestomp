@@ -4,7 +4,6 @@ export class Tick {
                public date: Moment,
                public msElapsed: number,
                public msSinceLastTick: number,
-               public msOverlap: number,
-   ) {
+               public msOverlap: number,) {
    }
 }

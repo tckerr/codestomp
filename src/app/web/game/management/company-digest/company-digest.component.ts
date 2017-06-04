@@ -13,6 +13,7 @@ export class CompanyDigestComponent implements OnInit {
                private customerAccumulatorService: CustomerAccumulatorService) {
    }
 
-   ngOnInit() { }
+   ngOnInit() {
+   }
 
 }

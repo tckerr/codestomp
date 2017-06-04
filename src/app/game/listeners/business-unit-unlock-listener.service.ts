@@ -9,10 +9,8 @@ import {GameStorageService} from '../../persistence/game-storage.service';
 @Injectable()
 export class BusinessUnitUnlockListenerService extends ListenerBase implements IListener {
 
-   constructor(
-      private unlocksService: UnlocksService,
-      private gameStorageService: GameStorageService,
-   ) {
+   constructor(private unlocksService: UnlocksService,
+               private gameStorageService: GameStorageService,) {
       super();
    }
 
@@ -23,7 +21,7 @@ export class BusinessUnitUnlockListenerService extends ListenerBase implements I
    }
 
    private handleUnlock(feature: UnlockableFeature) {
-      switch (feature){
+      switch (feature) {
          case UnlockableFeature.Incorporation:
             return this.unlockCorporate();
          default:

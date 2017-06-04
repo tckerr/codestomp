@@ -4,23 +4,21 @@ import {SkillResource} from '../../models/game/resources/skills/skill-resource';
 import {FundService} from './fund.service';
 
 
-let fib = function(n) {
-    let a = 0, b = 1, f = 1;
-    for(let i = 2; i <= n; i++) {
-        f = a + b;
-        a = b;
-        b = f;
-    }
-    return f;
+let fib = function (n) {
+   let a = 0, b = 1, f = 1;
+   for (let i = 2; i <= n; i++) {
+      f = a + b;
+      a = b;
+      b = f;
+   }
+   return f;
 };
 
 @Injectable()
 export class SkillsService {
 
-   constructor(
-      private gameStorageService: GameStorageService,
-      private fundService: FundService,
-   ) {
+   constructor(private gameStorageService: GameStorageService,
+               private fundService: FundService,) {
    }
 
    public get skills() {
@@ -37,11 +35,11 @@ export class SkillsService {
       skill.level++;
    }
 
-   public getCost(skill: SkillResource){
+   public getCost(skill: SkillResource) {
       return fib(skill.level + 1);
    }
 
-   public getImprovement(skill: SkillResource){
+   public getImprovement(skill: SkillResource) {
       return skill.level * skill.improvementConstant;
    }
 

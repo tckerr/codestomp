@@ -15,7 +15,7 @@ export class HRComponent implements OnInit {
    ngOnInit() {
    }
 
-   public hiringUnlocked(){
+   public hiringUnlocked() {
       return this.unlocksService.isUnlocked(UnlockableFeature.HrHiringTier1);
    }
 

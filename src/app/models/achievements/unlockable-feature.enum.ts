@@ -1,5 +1,5 @@
 export enum UnlockableFeature {
-      // default
+   // default
    None,
 
       // development

@@ -106,7 +106,7 @@ export class JobMarketComponent implements OnChanges, OnInit {
       return true;
    }
 
-   public get anyHiresUnlocked(){
+   public get anyHiresUnlocked() {
       return Enumerable
          .from(this.hireTypes)
          .any(s => s.unlocked());

@@ -25,10 +25,8 @@ export class SubscriptionAggregationService {
                staffSalaryAccumulatorService: StaffSalaryAccumulatorService,
                achievementUnlockListenerService: AchievementUnlockListenerService,
                codeProfitAccumulator: CodeProfitAccumulatorService,
-
                // listeners
-               businessUnitUnlockListenerService: BusinessUnitUnlockListenerService,
-   ) {
+               businessUnitUnlockListenerService: BusinessUnitUnlockListenerService,) {
       this.subscribers = [
          talentGeneratorService,
          specialEventGeneratorService,

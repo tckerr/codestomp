@@ -4,8 +4,7 @@ import * as Enumerable from 'linq';
 import {UnlocksService} from '../../../../../services/unlocks.service';
 import {StaffType} from '../../../../../models/definitions/staff-definitions';
 import {HiringService} from '../../../../../game/staffing/hiring.service';
-import {GameStorageService} from "../../../../../persistence/game-storage.service";
-import {IBusinessUnit} from "../../../../../models/game/company/business-units/ibusiness-unit";
+import {GameStorageService} from '../../../../../persistence/game-storage.service';
 
 @Component({
    selector: 'app-staff-summary',

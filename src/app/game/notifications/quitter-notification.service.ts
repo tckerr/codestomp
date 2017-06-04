@@ -12,7 +12,7 @@ export class QuitterNotificationService {
    constructor(private logger: LoggerService) {
    }
 
-   public newQuitter(quitter: string = "An employee", reason: string = "poor work conditions"){
+   public newQuitter(quitter: string = 'An employee', reason: string = 'poor work conditions') {
       let message = `${quitter} has quit due to ${reason}!`;
       this.source.next([quitter, reason]);
       this.logger.gameLog(message, LogType.Error);

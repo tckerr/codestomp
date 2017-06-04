@@ -6,7 +6,7 @@ export class AchievementTrack {
    public unlocked: boolean;
    public blocks: AchievementBlock[] = [];
 
-   constructor(json: any){
+   constructor(json: any) {
       this.id = json.id;
       this.unlocked = json.unlocked;
       this.displayName = json.displayName;

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IdGeneratorService} from '../utilities/id-generator.service';
-import {environment, hour, year} from '../../environments/environment';
+import {hour, year} from '../../environments/environment';
 import * as moment from 'moment';
 import {ExperienceLevel, StaffCategory, StaffType} from '../models/definitions/staff-definitions';
 import {AchievementCriteriaType} from '../models/achievements/achievement-criteria-type.enum';
@@ -13,10 +13,9 @@ import {ConfigurationService} from '../configuration/configuration.service';
 @Injectable()
 export class GameSeedGeneratorService {
 
-   constructor(
-      private idGeneratorService: IdGeneratorService,
-      private config: ConfigurationService,
-      private enumParser: EnumParserService) {
+   constructor(private idGeneratorService: IdGeneratorService,
+               private config: ConfigurationService,
+               private enumParser: EnumParserService) {
    }
 
    public defaultSeed(): any {
@@ -45,7 +44,7 @@ export class GameSeedGeneratorService {
             {
                id: 'incoporation',
                unlocked: false,
-               displayName: "Incorporation",
+               displayName: 'Incorporation',
                blocks: [
                   {
                      displayName: 'Incorporation',
@@ -157,7 +156,7 @@ export class GameSeedGeneratorService {
             }
          ],
          company: {
-            name: "T-Corp",
+            name: 'T-Corp',
             resources: {
                funds: {
                   balance: 0,
@@ -220,7 +219,7 @@ export class GameSeedGeneratorService {
                customers: {
                   balance: 0,
                   totalAccumulated: 0,
-                     canBeNegative: false
+                  canBeNegative: false
                }
             },
             businessUnits: {

@@ -1,5 +1,4 @@
 import {IStaff} from './istaff';
-import {ExperienceLevel} from '../../../definitions/staff-definitions';
 
 export class Staff implements IStaff {
 

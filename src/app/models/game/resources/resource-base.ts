@@ -26,8 +26,8 @@ export class ResourceBase {
    remove(count: number, strict: boolean = false) {
       let previousBalance = this.balance;
       this.balance = this.balance - count;
-      if (!this.canBeNegative && strict && this.balance < 0 )
-         throw Error("Not enough resources!");
+      if (!this.canBeNegative && strict && this.balance < 0)
+         throw Error('Not enough resources!');
       if (!this.canBeNegative)
          this.balance = Math.max(0, this.balance);
       let delta = this.balance - previousBalance;
@@ -35,7 +35,7 @@ export class ResourceBase {
       return delta;
    }
 
-   public get $balanceFloored(){
+   public get $balanceFloored() {
       return Math.floor(this.balance);
    }
 }
