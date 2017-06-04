@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UnlocksService} from '../../../../../services/unlocks.service';
+import {UnlocksService} from '../../../../../game/achievements/unlocks.service';
 import {UnlockableFeature} from '../../../../../models/achievements/unlockable-feature.enum';
 
 @Component({

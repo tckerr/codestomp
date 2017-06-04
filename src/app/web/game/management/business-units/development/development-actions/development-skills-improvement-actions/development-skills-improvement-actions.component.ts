@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UnlockableFeature} from '../../../../../../../models/achievements/unlockable-feature.enum';
 import {SkillsService} from '../../../../../../../game/resource-services/skills.service';
 import {FundService} from '../../../../../../../game/resource-services/fund.service';
-import {UnlocksService} from '../../../../../../../services/unlocks.service';
+import {UnlocksService} from '../../../../../../../game/achievements/unlocks.service';
 
 @Component({
    selector: 'app-development-skills-improvement-actions',

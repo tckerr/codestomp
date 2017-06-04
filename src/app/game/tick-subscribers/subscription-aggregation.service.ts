@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {TickService} from '../time/tick.service';
-import {IListener} from '../game/listeners/i-listener';
-import {BusinessUnitUnlockListenerService} from '../game/listeners/business-unit-unlock-listener.service';
-import {TalentGeneratorService} from '../game/tick-subscribers/automatic/generators/talent-generator-service';
-import {ITickSubscriber} from '../game/tick-subscribers/automatic/i-tick-subscriber';
-import {SpecialEventGeneratorService} from '../game/tick-subscribers/automatic/generators/special-event-generator.service';
-import {CustomerAccumulatorService} from '../game/tick-subscribers/automatic/accumulators/customer-accumulator.service';
-import {StaffActionAccumulatorService} from '../game/tick-subscribers/automatic/accumulators/staff-actions/staff-action-accumulator.service';
-import {StaffSalaryAccumulatorService} from '../game/tick-subscribers/automatic/accumulators/staff-salary-accumulator.service';
-import {AchievementUnlockListenerService} from '../game/tick-subscribers/automatic/listeners/achievement-unlock-listener.service';
-import {CodeProfitAccumulatorService} from '../game/tick-subscribers/automatic/accumulators/code-profit-accumulator.service';
+import {TickService} from '../../time/tick.service';
+import {IListener} from '../listeners/i-listener';
+import {BusinessUnitUnlockListenerService} from '../listeners/business-unit-unlock-listener.service';
+import {TalentGeneratorService} from './automatic/generators/talent-generator-service';
+import {ITickSubscriber} from './automatic/i-tick-subscriber';
+import {SpecialEventGeneratorService} from './automatic/generators/special-event-generator.service';
+import {CustomerAccumulatorService} from './automatic/accumulators/customer-accumulator.service';
+import {StaffActionAccumulatorService} from './automatic/accumulators/staff-actions/staff-action-accumulator.service';
+import {StaffSalaryAccumulatorService} from './automatic/accumulators/staff-salary-accumulator.service';
+import {AchievementUnlockListenerService} from './automatic/listeners/achievement-unlock-listener.service';
+import {CodeProfitAccumulatorService} from './automatic/accumulators/code-profit-accumulator.service';
 
 @Injectable()
 export class SubscriptionAggregationService {

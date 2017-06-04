@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {UnlocksService} from '../../../../../services/unlocks.service';
+import {UnlocksService} from '../../../../../game/achievements/unlocks.service';
 import {UnlockableFeature} from '../../../../../models/achievements/unlockable-feature.enum';
 
 @Component({

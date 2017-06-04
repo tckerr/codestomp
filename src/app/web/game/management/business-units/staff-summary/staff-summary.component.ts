@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Staff} from '../../../../../models/game/company/business-units/staff';
 import * as Enumerable from 'linq';
-import {UnlocksService} from '../../../../../services/unlocks.service';
+import {UnlocksService} from '../../../../../game/achievements/unlocks.service';
 import {StaffType} from '../../../../../models/definitions/staff-definitions';
 import {HiringService} from '../../../../../game/staffing/hiring.service';
 import {GameStorageService} from '../../../../../persistence/game-storage.service';

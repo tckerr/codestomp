@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CodeService} from '../../../../../../game/resource-services/code.service';
 import {ConfigurationService} from 'app/configuration/configuration.service';
-import {UnlocksService} from '../../../../../../services/unlocks.service';
+import {UnlocksService} from '../../../../../../game/achievements/unlocks.service';
 import {CommitGeneratorService} from '../../../../../../utilities/commit-generator.service';
 import {LoggerService} from '../../../../../../logging/logger-service';
 import {TickService} from '../../../../../../time/tick.service';

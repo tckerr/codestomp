@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {hour, year} from '../../../../../environments/environment';
 import {StaffCategory} from '../../../../models/definitions/staff-definitions';
-import {UnlocksService} from '../../../../services/unlocks.service';
+import {UnlocksService} from '../../../../game/achievements/unlocks.service';
 import * as Enumerable from 'linq';
 import {TalentService} from '../../../../game/resource-services/talent.service';
 import {Staff} from 'app/models/game/company/business-units/staff';

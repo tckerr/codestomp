@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Pipeline} from '../services/pipeline';
 import {Subject} from 'rxjs/Subject';
 import {Tick} from '../models/tick/tick';
 import {Observable} from 'rxjs/Observable';
@@ -10,7 +9,7 @@ import {GameStorageService} from '../persistence/game-storage.service';
 import {ConfigurationService} from '../configuration/configuration.service';
 
 @Injectable()
-export class TickService implements Pipeline {
+export class TickService {
    private subscription: Subscription;
    private timer: Observable<number>;
    private source = new Subject<Tick>();

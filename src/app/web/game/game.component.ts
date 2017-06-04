@@ -3,7 +3,7 @@ import {TickService} from '../../time/tick.service';
 import {GameStorageService} from '../../persistence/game-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {SubscriptionAggregationService} from '../../services/subscription-aggregation.service';
+import {SubscriptionAggregationService} from '../../game/tick-subscribers/subscription-aggregation.service';
 
 @Component({
    selector: 'app-game',

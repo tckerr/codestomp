@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {GameStorageService} from '../../../persistence/game-storage.service';
-import {UnlocksService} from '../../../services/unlocks.service';
+import {UnlocksService} from '../../../game/achievements/unlocks.service';
 import {Subscription} from 'rxjs/Subscription';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TickService} from '../../../time/tick.service';
