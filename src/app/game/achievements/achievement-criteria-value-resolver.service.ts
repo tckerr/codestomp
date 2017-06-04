@@ -3,13 +3,16 @@ import {AchievementCriteriaType} from '../../models/achievements/achievement-cri
 import {CodeService} from '../resource-services/code.service';
 import {FundService} from '../resource-services/fund.service';
 import {CustomerService} from '../resource-services/customer.service';
+import {BusinessUnitService} from '../business-units/business-unit.service';
 
 @Injectable()
 export class AchievementCriteriaValueResolverService {
 
    constructor(private codeService: CodeService,
                private fundService: FundService,
-               private customerService: CustomerService,) {
+               private customerService: CustomerService,
+               private businessUnitService: BusinessUnitService,
+   ) {
       this.assertTypesResolve();
    }
 
@@ -30,6 +33,8 @@ export class AchievementCriteriaValueResolverService {
             return this.fundService.funds.totalAccumulated;
          case AchievementCriteriaType.ConcurrentCustomers:
             return this.customerService.customers.balance;
+         case AchievementCriteriaType.UnlockedBusinessUnits:
+            return this.businessUnitService.totalUnlocked;
       }
       let type = AchievementCriteriaType[<any>criteriaType];
       throw Error(`You have not implemented a return value for the AchievementCriteriaType '${type}'`);
@@ -49,6 +54,8 @@ export class AchievementCriteriaValueResolverService {
             return 'funds earned';
          case AchievementCriteriaType.ConcurrentCustomers:
             return 'customers sustained';
+         case AchievementCriteriaType.UnlockedBusinessUnits:
+            return 'business units purchased';
       }
       let type = AchievementCriteriaType[<any>criteriaType];
       throw Error(`You have not implemented a unit string for the AchievementCriteriaType '${type}'`);

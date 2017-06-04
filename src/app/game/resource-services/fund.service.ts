@@ -9,8 +9,19 @@ export class FundService {
                private logger: LoggerService) {
    }
 
+   public canAfford(cost: number){
+      return this.funds.balance >= cost;
+   }
+
+
    public get funds() {
       return this.gameStorageService.game.company.resources.funds;
+   }
+
+   public purchase(cost){
+      if (!this.canAfford(cost))
+         throw Error("Cannot afford")
+      this.funds.remove(cost);
    }
 
    public add(count: number = 1): void {

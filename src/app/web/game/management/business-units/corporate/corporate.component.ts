@@ -3,6 +3,9 @@ import {GameStorageService} from '../../../../../persistence/game-storage.servic
 import * as Enumerable from 'linq';
 import {IBusinessUnit} from '../../../../../models/game/company/business-units/ibusiness-unit';
 import {FundService} from '../../../../../game/resource-services/fund.service';
+import {BusinessUnitUnlockListenerService} from '../../../../../game/listeners/business-unit-unlock-listener.service';
+import {BusinessUnitService} from '../../../../../game/business-units/business-unit.service';
+import {BusinessUnitUnlockerService} from '../../../../../game/business-units/business-unit-unlocker.service';
 
 class UnitGroup {
    constructor(public index, public items) {
@@ -18,12 +21,11 @@ export class CorporateComponent implements OnInit {
 
    constructor(
       private gameStorageService: GameStorageService,
-      private fundService: FundService,
+      private businessUnitUnlockerService: BusinessUnitUnlockerService
    ) {
    }
 
-   ngOnInit() {
-   }
+   ngOnInit() {}
 
    private get unitGroups(): UnitGroup[] {
       let index = 0;
@@ -35,21 +37,23 @@ export class CorporateComponent implements OnInit {
          .toArray();
    }
 
-   private unitFor(id: string) {
-      return this.gameStorageService.game.company.businessUnits[id];
-   }
-
    private getIndex(g: UnitGroup) {
       return g.index;
    }
 
+   private unitFor(id: string) {
+      return this.gameStorageService.game.company.businessUnits[id];
+   }
+
    private costFor(unit: IBusinessUnit) {
-      return 1000;
+      return this.businessUnitUnlockerService.costFor(unit.id);
    }
 
    private canAfford(unit: IBusinessUnit) {
-      let cost = this.costFor(unit);
-      return this.fundService.funds.balance >= cost;
+      return this.businessUnitUnlockerService.canAfford(unit.id);
    }
 
+   private purchase(unit: IBusinessUnit) {
+      this.businessUnitUnlockerService.purchase(unit.id);
+   }
 }

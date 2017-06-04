@@ -25,6 +25,7 @@
                         <span class="pull-right" *ngIf="!unit.active" style="vertical-align: middle">
                            <button
                               [disabled]="!canAfford(unit)"
+                              (click)="purchase(unit)"
                               class="btn btn-sm btn-info">
                               <small><i class="fa fa-unlock"></i> {{costFor(unit) |currency:"usd":true:'1.0-0' }}</small>
                            </button>

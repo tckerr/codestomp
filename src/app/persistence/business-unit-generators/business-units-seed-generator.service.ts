@@ -21,6 +21,7 @@ export class BusinessUnitsSeedGeneratorService {
 
    public build() {
       return {
+
          corporate: this.corporateSeedGeneratorService.build(),
          hr: this.hrSeedGeneratorService.build(),
          debug: this.debugSeedGeneratorService.build(),

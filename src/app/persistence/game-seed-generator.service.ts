@@ -42,6 +42,24 @@ export class GameSeedGeneratorService {
                blocks: []
             },
             {
+               id: 'marketing',
+               unlocked: true,
+               displayName: 'Marketing Achievements',
+               blocks: []
+            },
+            {
+               id: 'finance',
+               unlocked: true,
+               displayName: 'Finance Achievements',
+               blocks: []
+            },
+            {
+               id: 'debug',
+               unlocked: true,
+               displayName: 'Debug Achievements',
+               blocks: []
+            },
+            {
                id: 'incoporation',
                unlocked: false,
                displayName: 'Incorporation',
@@ -56,6 +74,19 @@ export class GameSeedGeneratorService {
                      notification: {
                         title: 'Your business is now a corporation!',
                         message: 'You\'re on the road to success.',
+                        logType: LogType.Success
+                     }
+                  },
+                  {
+                     displayName: 'Divide and Conquer',
+                     unlocked: false,
+                     cumulative: false,
+                     criteriaType: AchievementCriteriaType.UnlockedBusinessUnits,
+                     unlockWhenValueGte: 1,
+                     unlocksFeature: UnlockableFeature.None,
+                     notification: {
+                        title: 'You\'ve expanded to another business unit!',
+                        message: '...',
                         logType: LogType.Success
                      }
                   },

@@ -18,10 +18,11 @@ export class AchievementsService {
    public track(id: string) {
       let track = Enumerable
          .from(this.gameStorageService.game.achievementTracks)
-         .first(t => t.id === id);
-      if (!track)
+         .where(t => t.id === id)
+         .toArray();
+      if (track.length < 1)
          throw Error(`Track not found: ${id}`);
-      return track;
+      return track[0];
    }
 
    public pendingForId(id: string): AchievementBlock {

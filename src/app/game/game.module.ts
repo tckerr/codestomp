@@ -35,6 +35,9 @@ import {ConfigurationModule} from '../configuration/configuration.module';
 import {LoggingModule} from '../logging/logging.module';
 import {PersistenceModule} from '../persistence/persistence.module';
 import {TimeModule} from '../time/time.module';
+import {BusinessUnitService} from './business-units/business-unit.service';
+import {AchievementTrackUnlockerService} from './achievements/achievement-track-unlocker.service';
+import {BusinessUnitUnlockerService} from './business-units/business-unit-unlocker.service';
 
 @NgModule({
    imports: [
@@ -78,6 +81,9 @@ import {TimeModule} from '../time/time.module';
       AchievementEvaluatorService,
       BusinessUnitUnlockListenerService,
       SkillsService,
+      BusinessUnitService,
+      AchievementTrackUnlockerService,
+      BusinessUnitUnlockerService,
    ]
 })
 export class GameModule {

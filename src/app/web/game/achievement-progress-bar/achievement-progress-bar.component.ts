@@ -103,6 +103,8 @@ export class AchievementProgressBarComponent implements OnInit, OnChanges {
             return 'fa-users';
          case UnlockableFeature.Incorporation:
             return 'fa-building-o';
+         case UnlockableFeature.None:
+            return '';
       }
       let type = UnlockableFeature[<any>unlocksFeature];
       throw Error(`You have not implemented an icon class for the UnlockableFeature '${type}'`);
