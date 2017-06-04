@@ -1,3 +1,52 @@
-<p>
-   corporate works!
-</p>
+<div class="row">
+   <div class="col-12">
+
+   </div>
+</div>
+<div class="row">
+   <div class="col-5 pr-0">
+      <div class="card-group">
+         <div class="card" *ngFor="let group of unitGroups; trackBy:getIndex">
+            <ul class="list-group list-group-flush">
+               <ng-container *ngFor="let unit of group.items;">
+                  <button class="list-group-item list-group-item-action p-0"
+                          style="min-height: 80px"
+                          [ngClass]="{
+                              'active text-white': selectedUnit == unit
+                          }"
+                          (click)="selectedUnit = unit">
+                     <div class="col-3 pl-3 text-center" [class.text-primary]="unit.active && selectedUnit !== unit">
+                        <i class="fa fa-3x" [ngClass]="unit.active ? unit.icon : 'fa-lock'"></i>
+                     </div>
+                     <div class="col-6 pl-2">
+                        <p class="pt-3"><strong>{{unit.name}}</strong></p>
+                     </div>
+                     <div class="col-3 pl-0 pr-3">
+                        <span class="pull-right" *ngIf="!unit.active" style="vertical-align: middle">
+                           <button
+                              [disabled]="!canAfford(unit)"
+                              class="btn btn-sm btn-info">
+                              <small><i class="fa fa-unlock"></i> {{costFor(unit) |currency:"usd":true:'1.0-0' }}</small>
+                           </button>
+                        </span>
+                     </div>
+                  </button>
+               </ng-container>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div class="col-7 pl-2">
+      <div class="card" *ngIf="selectedUnit">
+         <div class="card-block" *ngIf="selectedUnit.active">
+            {{selectedUnit.id}}
+         </div>
+         <div class="card-block" *ngIf="!selectedUnit.active">
+            buy me
+         </div>
+      </div>
+   </div>
+</div>
+
+
+

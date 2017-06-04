@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {IdGeneratorService} from '../utilities/id-generator.service';
-import {hour, year} from '../../environments/environment';
 import * as moment from 'moment';
-import {ExperienceLevel, StaffCategory, StaffType} from '../models/definitions/staff-definitions';
 import {AchievementCriteriaType} from '../models/achievements/achievement-criteria-type.enum';
 import {UnlockableFeature} from '../models/achievements/unlockable-feature.enum';
 import {LogType} from '../models/definitions/log-type';
 import {EnumParserService} from '../utilities/enum-parser.service';
 import {ConfigurationService} from '../configuration/configuration.service';
+import {BusinessUnitsSeedGeneratorService} from './business-unit-generators/business-units-seed-generator.service';
 
 
 @Injectable()
@@ -15,6 +14,7 @@ export class GameSeedGeneratorService {
 
    constructor(private idGeneratorService: IdGeneratorService,
                private config: ConfigurationService,
+               private businessUnitsSeedGeneratorService: BusinessUnitsSeedGeneratorService,
                private enumParser: EnumParserService) {
    }
 
@@ -22,7 +22,7 @@ export class GameSeedGeneratorService {
       let unlockedFeatures = {};
       this.enumParser.getMembers(UnlockableFeature).forEach(a => unlockedFeatures[a] = false);
 
-      return {
+      let seed = {
          id: this.idGeneratorService.generate(),
          tick: 0,
          time: moment(this.config.INITIAL_GAME_DATE).format(),
@@ -222,214 +222,12 @@ export class GameSeedGeneratorService {
                   canBeNegative: false
                }
             },
-            businessUnits: {
-               corporate: {
-                  id: 'corporate',
-                  name: 'Corporate',
-                  icon: 'fa-users',
-                  active: false,
-                  staff: []
-               },
-               hr: {
-                  id: 'hr',
-                  name: 'Human Resources',
-                  icon: 'fa-users',
-                  active: false,
-                  staff: [
-                     {
-                        id: StaffType.TalentScout,
-                        displayName: 'Talent Scout', // generates talent
-                        category: StaffCategory.TalentScout,
-                        experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 0,
-                        hired: 0,
-                        typeDetails: {}
-                     },
-                     {
-                        id: StaffType.Recruiter,
-                        displayName: 'Recruiter', // auto-hire tier 1
-                        category: StaffCategory.Recruiter,
-                        experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 0,
-                        hired: 0,
-                        typeDetails: {}
-                     },
-                     {
-                        id: StaffType.TalentAcquisitionManager,
-                        displayName: 'Talent Acquisition Manager', // auto-hire tier 2
-                        category: StaffCategory.Recruiter,
-                        experience: ExperienceLevel.Junior,
-                        baseSalaryPerMs: 0,
-                        hired: 0,
-                        typeDetails: {}
-                     },
-                     {
-                        id: StaffType.CorporateTrainer,
-                        displayName: 'Corporate Trainer', // hires inside the company (optional upgrades)
-                        category: StaffCategory.Trainer,
-                        experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 0,
-                        hired: 0,
-                        typeDetails: {}
-                     },
-                     {
-                        id: StaffType.BenefitsSpecialist,
-                        displayName: 'Benefits Specialist', // internal satisfaction
-                        category: StaffCategory.EmployeeRetainer,
-                        experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 0,
-                        hired: 0,
-                        typeDetails: {}
-                     }
-                  ]
-               },
-               debug: {
-                  id: 'debug',
-                  name: 'Debug',
-                  icon: 'fa-code',
-                  active: true,
-                  staff: []
-               },
-               development: {
-                  id: 'development',
-                  name: 'Development',
-                  icon: 'fa-rocket',
-                  active: true,
-                  deploymentInfo: {
-                     lastDeployUtc: moment.min().format(),
-                     lastDeployInitiatedUtc: moment.min().format(),
-                     deployCount: 0,
-                     currentDeployRate: 0,
-                     deploying: false,
-                  },
-                  staff: [
-                     {
-                        id: StaffType.DevelopmentIntern,
-                        displayName: 'Development Intern',
-                        category: StaffCategory.Developer,
-                        experience: ExperienceLevel.Intern,
-                        special: 'Fixes bugs... basically for free',
-                        baseSalaryPerMs: 10000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 1 / hour,
-                           testingPerMs: 0,
-                           bugFixesPerMs: 3 / hour
-                        }
-                     },
-                     {
-                        id: StaffType.AssociateDeveloper,
-                        displayName: 'Associate Developer',
-                        category: StaffCategory.Developer,
-                        experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 50000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 15 / hour,
-                           testingPerMs: 0,
-                           bugFixesPerMs: 0
-                        }
-                     },
-                     {
-                        id: StaffType.JuniorDeveloper,
-                        displayName: 'Junior Developer',
-                        category: StaffCategory.Developer,
-                        experience: ExperienceLevel.Junior,
-                        baseSalaryPerMs: 85000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 45 / hour,
-                           testingPerMs: 0,
-                           bugFixesPerMs: 0,
-                        }
-                     },
-                     {
-                        id: StaffType.SeniorDeveloper,
-                        displayName: 'Senior Developer',
-                        category: StaffCategory.Developer,
-                        experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 125000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 90 / hour,
-                           testingPerMs: 0,
-                           bugFixesPerMs: 0,
-                        }
-                     },
-                     {
-                        id: StaffType.AssociateQaAnalyst,
-                        displayName: 'Associate QA Analyst',
-                        category: StaffCategory.QA,
-                        experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 40000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 0,
-                           testingPerMs: 10 / hour,
-                           bugFixesPerMs: 0,
-                        }
-                     },
-                     {
-                        id: StaffType.JuniorQaAnalyst,
-                        displayName: 'Junior QA Analyst',
-                        category: StaffCategory.QA,
-                        experience: ExperienceLevel.Junior,
-                        baseSalaryPerMs: 55000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 0,
-                           testingPerMs: 25 / hour,
-                           bugFixesPerMs: 0,
-
-                        }
-                     },
-                     {
-                        id: StaffType.SeniorQaAnalyst,
-                        displayName: 'Senior QA Analyst',
-                        category: StaffCategory.QA,
-                        experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 70000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 0,
-                           testingPerMs: 45 / hour,
-                           bugFixesPerMs: 0,
-
-                        }
-                     },
-                     {
-                        id: StaffType.QaAutomationEngineer,
-                        displayName: 'QA Automation Engineer',
-                        category: StaffCategory.QA,
-                        experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 100000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 0,
-                           testingPerMs: 70 / hour,
-                           bugFixesPerMs: 0,
-                        }
-                     },
-                     {
-                        id: StaffType.DevOpsEngineer,
-                        displayName: 'Dev Ops Engineer',
-                        category: StaffCategory.DevOps,
-                        special: 'Automates deployments on a regular schedule',
-                        experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 100000 / year,
-                        hired: 0,
-                        typeDetails: {
-                           codePerMs: 0,
-                           testingPerMs: 0,
-                           bugFixesPerMs: 0,
-                        }
-                     }
-                  ]
-               }
-            }
+            businessUnits: this.businessUnitsSeedGeneratorService.build()
          }
       };
-   }
-
+      return seed;
+   };
 }
+
+
 

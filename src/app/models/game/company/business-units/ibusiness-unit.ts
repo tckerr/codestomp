@@ -5,4 +5,5 @@ export interface IBusinessUnit {
    name: string;
    active: boolean;
    staff: Staff[];
+   icon: string;
 }

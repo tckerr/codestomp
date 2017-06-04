@@ -9,11 +9,25 @@ export class ConfigurationService {
 
    public INITIAL_GAME_DATE = '2050-01-01 00:00';
 
+   // business units
+   public FINANCE_UNLOCKED_AT_START = false;
+   public DEVELOPMENT_UNLOCKED_AT_START = true;
+   public CORPORATE_UNLOCKED_AT_START = true;
+   public HR_UNLOCKED_AT_START = false;
+   public MARKETING_UNLOCKED_AT_START = false;
+   public DEBUG_UNLOCKED_AT_START = true;
+
    public GAME_TIME_ELAPSED_PER_SECOND = hour;
    public TPS_INCREMENT_MULTIPLIER = 1.1;
    public INITIAL_TPS = 60;
    public INITIAL_SPEED_MULTIPLIER = 1;
    public MAX_TPS = 150;
+
+   // debug helpers, set to 0 in prod
+   public CODE_GENERATED_CONSTANT = 1000;
+   public CODE_TESTED_CONSTANT = 1000;
+   public CODE_DEPLOY_CONSTANT = 1000;
+   public BUG_FIX_CONSTANT = 1000;
 
    // devops rates
    public MINIMUM_TESTED_CODE_FOR_DEPLOY = 100;

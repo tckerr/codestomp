@@ -7,8 +7,11 @@ import {DevelopmentComponent} from '../web/game/management/business-units/develo
 import {ManagementComponent} from '../web/game/management/management.component';
 import {GameComponent} from '../web/game/game.component';
 import {NewGameComponent} from '../web/game/new-game/new-game.component';
-import {RouterModule, Routes} from '@angular/router';
+import {CanActivate, RouterModule, Routes} from '@angular/router';
 import {WebModule} from '../web/web.module';
+import {FinanceComponent} from '../web/game/management/business-units/finance/finance.component';
+import {MarketingComponent} from '../web/game/management/business-units/marketing/marketing.component';
+
 
 const appRoutes: Routes = [
    {
@@ -48,6 +51,14 @@ const appRoutes: Routes = [
                {
                   path: 'corporate',
                   component: CorporateComponent
+               },
+               {
+                  path: 'finance',
+                  component: FinanceComponent
+               },
+               {
+                  path: 'marketing',
+                  component: MarketingComponent
                }
             ]
          }
@@ -64,6 +75,7 @@ const appRoutes: Routes = [
    exports: [
       RouterModule
    ],
+   providers: [],
    declarations: []
 })
 export class AppRoutingModule {

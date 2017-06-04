@@ -34,7 +34,8 @@ export class DevelopmentActionsComponent implements OnInit {
    private writeCode(val: number = 1) {
       let commit = this.commitGeneratorService.generate();
       this.logger.gameLog(commit);
-      this.codeService.write(val);
+      let effectiveValue = val + this.config.CODE_GENERATED_CONSTANT;
+      this.codeService.write(effectiveValue);
    }
 
    private get skills() {
@@ -42,11 +43,13 @@ export class DevelopmentActionsComponent implements OnInit {
    }
 
    private testCode(val: number = 1) {
-      this.codeService.test(val, this.config.BASE_TESTING_FAILURE_PCT);
+      let effectiveValue = val + this.config.CODE_TESTED_CONSTANT;
+      this.codeService.test(effectiveValue, this.config.BASE_TESTING_FAILURE_PCT);
    }
 
    private fixBugs(val: number = 1) {
-      this.codeService.bugFix(val);
+      let effectiveValue = val + this.config.BUG_FIX_CONSTANT;
+      this.codeService.bugFix(effectiveValue);
    }
 
 
@@ -62,12 +65,13 @@ export class DevelopmentActionsComponent implements OnInit {
       return this.unlocksService.isUnlocked(UnlockableFeature.ManualBugFixes);
    }
 
-   private deploy(count: number) {
+   private deploy(val: number) {
       if (!this.canDeploy) {
          return 0;
       }
       this.queuedDeploy && this.queuedDeploy.unsubscribe();
-      this.queuedDeploy = this.ticker.pipeline.take(1).subscribe(t => this.deploymentService.deploy(count, t.date));
+      let effectiveValue = val + this.config.CODE_DEPLOY_CONSTANT;
+      this.queuedDeploy = this.ticker.pipeline.take(1).subscribe(t => this.deploymentService.deploy(effectiveValue, t.date));
    }
 
    private get canDeploy() {

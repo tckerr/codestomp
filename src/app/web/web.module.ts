@@ -28,6 +28,8 @@ import {HttpModule} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {GameModule} from '../game/game.module';
+import { FinanceComponent } from './game/management/business-units/finance/finance.component';
+import { MarketingComponent } from './game/management/business-units/marketing/marketing.component';
 
 @NgModule({
    imports: [
@@ -62,6 +64,8 @@ import {GameModule} from '../game/game.module';
       AchievementProgressBarComponent,
       CorporateComponent,
       DevelopmentSkillsImprovementActionsComponent,
+      FinanceComponent,
+      MarketingComponent,
    ]
 })
 export class WebModule {

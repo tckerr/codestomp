@@ -36,7 +36,7 @@ export class GameStorageService {
       this.logger.gameLog('Saving...' + this.game.id);
       console.group('Saving');
       console.log(game);
-      console.log(this.toJson(game));
+      //console.log(this.toJson(game));
       console.groupEnd();
    }
 

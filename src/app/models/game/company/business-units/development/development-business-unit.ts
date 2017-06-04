@@ -3,7 +3,6 @@ import {DeploymentInfo} from './deployment-info';
 import {DevelopmentStaff} from './development-staff';
 
 export class DevelopmentBusinessUnit implements IBusinessUnit {
-   public spacesVsTabs: string;
    public name: string;
    public id: string;
    public active: boolean;
@@ -15,7 +14,6 @@ export class DevelopmentBusinessUnit implements IBusinessUnit {
       this.name = json.name;
       this.id = json.id;
       this.active = json.active;
-      this.spacesVsTabs = json.spacesVsTabs;
       for (let staff of json.staff) {
          this.staff.push(new DevelopmentStaff(staff));
       }

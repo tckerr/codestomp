@@ -1,24 +1,34 @@
-debug
-
-executive management - just perks for other stuff, nothing big, potentially investment early on?
-human relations - employee dissatisfaction, productivity
-recruiting - automates hiring, building talent
+tier 1
+---
 development - build product
-procurement - spend $$ to get stuff
-marketing/sales - increase the value of customers
-customer support - need more issues for this to be relevant
+corporate - unlocks other business units
+
+tier 2
+---
+finance - budgets and debt
+hr/recruiting - automates hiring, building talent
+marketing - increase the value of customers
+
+tier 3
+---
 accounting - detailed view into finances (no actual purpose?) - tax events
+human relations - employee dissatisfaction, productivity
+leadership - just perks for other stuff, nothing big, potentially investment early on?
+
+tier 4
+---
 IT/network/security - prevents security breaches
+customer support - need more issues for this to be relevant
 
 
 chopping block
-   - finance, all just in accounting
    - operations - redundant (devops)
    - compliance/legal
    - facilities - may be too complicated
    - product (product is abstract so not sure about this)
    - account management - enterprise clients (what does this mean?)
    - public relations - any use?
+   - procurement - spend $$ to get stuff, handled by corporate and other BUs
 
 --
 
