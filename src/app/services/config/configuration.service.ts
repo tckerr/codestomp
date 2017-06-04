@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {perDay, perHour, perMonth} from '../../../environments/environment';
+import {day, hour, month} from '../../../environments/environment';
 import {ExperienceLevel} from '../../models/definitions/staff-definitions';
 
 @Injectable()
@@ -10,25 +10,25 @@ export class ConfigurationService {
 
    // devops rates
    public MINIMUM_TESTED_CODE_FOR_DEPLOY = 100;
-   public BASE_DEPLOY_RATE = 67 / perHour;
-   public BASE_DEPLOY_CHUNK_SIZE = 30 / perHour;
+   public BASE_DEPLOY_RATE = 67 / hour;
+   public BASE_DEPLOY_CHUNK_SIZE = 30 / hour;
    public BASE_BUGS_TO_PRODUCTION_PCT = .05;
    public BASE_TESTING_FAILURE_PCT = .15;
 
-   public QUIT_CHANCE_ON_LACK_OF_PAYMENT_RATE = .6 / perHour;
+   public QUIT_CHANCE_ON_LACK_OF_PAYMENT_RATE = .6 / hour;
 
    // customer growth
    public CUSTOMERS_CAP_AS_PCT_OF_PROD_CODE = .5;
-   public CUSTOMERS_TO_PROD_CODE_GROWTH_RATE = .005 / perHour;
-   public WORD_OF_MOUTH_GROWTH_RATE = .000005 / perHour;
+   public CUSTOMERS_TO_PROD_CODE_GROWTH_RATE = .005 / hour;
+   public WORD_OF_MOUTH_GROWTH_RATE = .000005 / hour;
    public CUSTOMERS_TO_PROD_CODE_GROWTH_SHARE_PCT = .8;
    public WORD_OF_MOUTH_GROWTH_SHARE_PCT = .2;
 
    // funds growth
-   public CUSTOMERS_TO_PROFIT_RATE = 15 / perMonth;
+   public CUSTOMERS_TO_PROFIT_RATE = 15 / month;
 
    // job markets
-   public TALENT_GENERATION_RATE = 2 / perDay;
+   public TALENT_GENERATION_RATE = 2 / day;
    public TALENT_CAP = 50; // TODO: make a growth
 
    // settings

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IdGeneratorService} from '../util/id-generator.service';
-import {environment, perHour, perYear} from '../../../environments/environment';
+import {environment, hour, year} from '../../../environments/environment';
 import * as moment from 'moment';
 import {ExperienceLevel, StaffCategory, StaffType} from '../../models/definitions/staff-definitions';
 import {AchievementCriteriaType} from '../../models/achievements/achievement-criteria-type.enum';
@@ -307,12 +307,12 @@ export class GameSeedGeneratorService {
                         category: StaffCategory.Developer,
                         experience: ExperienceLevel.Intern,
                         special: 'Fixes bugs... basically for free',
-                        baseSalaryPerMs: 10000 / perYear,
+                        baseSalaryPerMs: 10000 / year,
                         hired: 0,
                         typeDetails: {
-                           codePerMs: 1 / perHour,
+                           codePerMs: 1 / hour,
                            testingPerMs: 0,
-                           bugFixesPerMs: 3 / perHour
+                           bugFixesPerMs: 3 / hour
                         }
                      },
                      {
@@ -320,10 +320,10 @@ export class GameSeedGeneratorService {
                         displayName: 'Associate Developer',
                         category: StaffCategory.Developer,
                         experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 50000 / perYear,
+                        baseSalaryPerMs: 50000 / year,
                         hired: 0,
                         typeDetails: {
-                           codePerMs: 15 / perHour,
+                           codePerMs: 15 / hour,
                            testingPerMs: 0,
                            bugFixesPerMs: 0
                         }
@@ -333,10 +333,10 @@ export class GameSeedGeneratorService {
                         displayName: 'Junior Developer',
                         category: StaffCategory.Developer,
                         experience: ExperienceLevel.Junior,
-                        baseSalaryPerMs: 85000 / perYear,
+                        baseSalaryPerMs: 85000 / year,
                         hired: 0,
                         typeDetails: {
-                           codePerMs: 45 / perHour,
+                           codePerMs: 45 / hour,
                            testingPerMs: 0,
                            bugFixesPerMs: 0,
                         }
@@ -346,10 +346,10 @@ export class GameSeedGeneratorService {
                         displayName: 'Senior Developer',
                         category: StaffCategory.Developer,
                         experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 125000 / perYear,
+                        baseSalaryPerMs: 125000 / year,
                         hired: 0,
                         typeDetails: {
-                           codePerMs: 90 / perHour,
+                           codePerMs: 90 / hour,
                            testingPerMs: 0,
                            bugFixesPerMs: 0,
                         }
@@ -359,11 +359,11 @@ export class GameSeedGeneratorService {
                         displayName: 'Associate QA Analyst',
                         category: StaffCategory.QA,
                         experience: ExperienceLevel.Associate,
-                        baseSalaryPerMs: 40000 / perYear,
+                        baseSalaryPerMs: 40000 / year,
                         hired: 0,
                         typeDetails: {
                            codePerMs: 0,
-                           testingPerMs: 10 / perHour,
+                           testingPerMs: 10 / hour,
                            bugFixesPerMs: 0,
                         }
                      },
@@ -372,11 +372,11 @@ export class GameSeedGeneratorService {
                         displayName: 'Junior QA Analyst',
                         category: StaffCategory.QA,
                         experience: ExperienceLevel.Junior,
-                        baseSalaryPerMs: 55000 / perYear,
+                        baseSalaryPerMs: 55000 / year,
                         hired: 0,
                         typeDetails: {
                            codePerMs: 0,
-                           testingPerMs: 25 / perHour,
+                           testingPerMs: 25 / hour,
                            bugFixesPerMs: 0,
 
                         }
@@ -386,11 +386,11 @@ export class GameSeedGeneratorService {
                         displayName: 'Senior QA Analyst',
                         category: StaffCategory.QA,
                         experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 70000 / perYear,
+                        baseSalaryPerMs: 70000 / year,
                         hired: 0,
                         typeDetails: {
                            codePerMs: 0,
-                           testingPerMs: 45 / perHour,
+                           testingPerMs: 45 / hour,
                            bugFixesPerMs: 0,
 
                         }
@@ -400,11 +400,11 @@ export class GameSeedGeneratorService {
                         displayName: 'QA Automation Engineer',
                         category: StaffCategory.QA,
                         experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 100000 / perYear,
+                        baseSalaryPerMs: 100000 / year,
                         hired: 0,
                         typeDetails: {
                            codePerMs: 0,
-                           testingPerMs: 70 / perHour,
+                           testingPerMs: 70 / hour,
                            bugFixesPerMs: 0,
                         }
                      },
@@ -414,7 +414,7 @@ export class GameSeedGeneratorService {
                         category: StaffCategory.DevOps,
                         special: 'Automates deployments on a regular schedule',
                         experience: ExperienceLevel.Senior,
-                        baseSalaryPerMs: 100000 / perYear,
+                        baseSalaryPerMs: 100000 / year,
                         hired: 0,
                         typeDetails: {
                            codePerMs: 0,

@@ -4,35 +4,33 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 // convenience (ms)
-export const perSecond = 1000;
-export const perMinute = perSecond * 60;
-export const perHour = perMinute * 60;
-export const perDay = perHour * 24;
-export const perYear = perDay * 365;
-export const perMonth = perYear / 12;
+export const ms = 1;
+export const second = ms * 1000;
+export const minute = second * 60;
+export const hour = minute * 60;
+export const day = hour * 24;
+export const year = day * 365;
+export const month = year / 12;
 
 // this is the fundamental time constant
 // which essentially controls game tick > date speed
-let speedMultiplier = 1/perSecond;
+let speedMultiplier = 1/second;
 
 // "frame rate" of the game
-let tickIntervalMs = 20;
+let msBetweenTicks = second/50; // 50 per second
 
-let msPerTick = perHour * speedMultiplier * tickIntervalMs;
-let ticksPerHour = perHour / msPerTick;
+let msPerTick = hour * speedMultiplier * msBetweenTicks;
+let ticksPerHour = hour / msPerTick;
 
 export const environment = {
    production: false,
    gameSettings: {
       ticker: {
-         defaultIntervalMs: tickIntervalMs,
-         speedDelta: .001,
+         msBetweenTicks: msBetweenTicks,
          ticksPerHour: ticksPerHour,
-         tickToMsMap: msPerTick,
-         msInAnHour: perHour,
+         msPerTick: msPerTick,
+         msInAnHour: hour,
          speedMultiplier: speedMultiplier,
-         intervalIncrementDelta: 50,
-         minimumInterval: 20 // this is a performance consideration, since we have at least 2ms overhead
       }
    }
 };

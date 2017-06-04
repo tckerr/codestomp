@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {perHour, perYear} from '../../../../../environments/environment';
+import {hour, year} from '../../../../../environments/environment';
 import {StaffCategory} from '../../../../models/definitions/staff-definitions';
 import {UnlocksService} from '../../../../services/unlocks.service';
 import * as Enumerable from 'linq';
@@ -53,8 +53,8 @@ export class JobMarketComponent implements OnChanges, OnInit {
                displayName: staff.displayName,
                special: staff.special,
                typeDetails: this.buildTypeDetails(staff),
-               salary: staff.baseSalaryPerMs * perYear,
-               salaryPerHour: staff.baseSalaryPerMs * perHour,
+               salary: staff.baseSalaryPerMs * year,
+               salaryPerHour: staff.baseSalaryPerMs * hour,
                talentCost: this.talentService.getCostForExperience(staff.experience),
                hire: (count) => this.hiringService.hire(staff.id, staff.experience, count),
                hireAll: () => this.hiringService.hire(staff.id, staff.experience, this.talentService.maxHires(staff.experience)),
@@ -73,15 +73,15 @@ export class JobMarketComponent implements OnChanges, OnInit {
             return [
                {
                   displayName: 'Coding',
-                  value: Math.floor(100 * staff.typeDetails.codePerMs * perHour) / 100 + '/hr'
+                  value: Math.floor(100 * staff.typeDetails.codePerMs * hour) / 100 + '/hr'
                },
                {
                   displayName: 'Testing',
-                  value: Math.floor(100 * staff.typeDetails.testingPerMs * perHour) / 100 + '/hr'
+                  value: Math.floor(100 * staff.typeDetails.testingPerMs * hour) / 100 + '/hr'
                },
                {
                   displayName: 'Bug Fixes',
-                  value: Math.floor(100 * staff.typeDetails.bugFixesPerMs * perHour) / 100 + '/hr'
+                  value: Math.floor(100 * staff.typeDetails.bugFixesPerMs * hour) / 100 + '/hr'
                }
             ]
       }

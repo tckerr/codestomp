@@ -5,7 +5,7 @@ import {Tick} from '../../../../../models/tick/tick';
 import {FundService} from '../../../../resource-services/fund.service';
 import {Staff} from '../../../../../models/game/company/business-units/staff';
 import {GameStorageService} from '../../../../persistence/game-storage.service';
-import {perHour} from '../../../../../../environments/environment';
+import {hour} from '../../../../../../environments/environment';
 import * as Enumerable from 'linq';
 import {IEnumerable} from 'linq';
 import {StaffQuitDecisionService} from '../../../../staffing/staff-quit-decision.service';
@@ -67,7 +67,7 @@ export class StaffSalaryAccumulatorService extends TickSubscriberBase implements
    }
 
    public get costsPerHour() {
-      let obligations = this.salaryObligationsForElapsedMs(perHour);
+      let obligations = this.salaryObligationsForElapsedMs(hour);
       return Enumerable.from(obligations).sum(o => o.amount);
    }
 

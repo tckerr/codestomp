@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {FundService} from '../../../../resource-services/fund.service';
 import {ConfigurationService} from '../../../../config/configuration.service';
 import {ITickSubscriber} from '../i-tick-subscriber';
-import {perHour} from '../../../../../../environments/environment';
+import {hour} from '../../../../../../environments/environment';
 import {TickSubscriberBase} from '../tick-subscriber-base';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class CodeProfitAccumulatorService extends TickSubscriberBase implements 
    }
 
    public get profitPerHr() {
-      return this.profitPerMs(perHour);
+      return this.profitPerMs(hour);
    }
    x
 }

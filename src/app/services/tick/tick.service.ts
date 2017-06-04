@@ -8,52 +8,53 @@ import {environment} from '../../../environments/environment';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
 import {GameStorageService} from '../persistence/game-storage.service';
-import {LoggerService} from '../logging/logger-service';
-import * as Enumerable from 'linq';
 
 @Injectable()
 export class TickService implements Pipeline {
-   public tickerIntervalMs: number;
+   public msBetweenTicks: number;
    public ticksPerHour: number;
-   public tickToMsMap: number;
+   public msPerTick: number;
    private subscription: Subscription;
    private timer: Observable<number>;
    private source = new Subject<Tick>();
    public pipeline = this.source.asObservable();
-   private intervalIncrementDelta: number;
    private minimumInterval: number;
    private speedMultiplier: number;
    private msInAnHour: number;
    private incrementingSub: Subscription;
    private latest: moment.Moment;
-   private tickToMsMapCached: number;
+   private msPerTickCached: number;
+   private originalSpeedMultiplier: number;
+   private speedChangeDelta: number;
 
    constructor(private gameStorageService: GameStorageService) {
       this.initialize();
    }
 
    public initialize() {
-      this.tickerIntervalMs = environment.gameSettings.ticker.defaultIntervalMs;
-      this.minimumInterval = environment.gameSettings.ticker.minimumInterval;
+      this.msBetweenTicks = environment.gameSettings.ticker.msBetweenTicks;
+      this.minimumInterval = 20; // this is a performance consideration, since we have at least 2ms overhead
       this.speedMultiplier = environment.gameSettings.ticker.speedMultiplier;
+      this.originalSpeedMultiplier = this.speedMultiplier;
       this.msInAnHour = environment.gameSettings.ticker.msInAnHour;
-      this.tickToMsMap = environment.gameSettings.ticker.tickToMsMap;
+      this.msPerTick = environment.gameSettings.ticker.msPerTick;
+      this.speedChangeDelta = .001;
    }
 
    start(offset: number = 0) {
       this.stop();
-      this.timer = Observable.timer(offset - moment().diff(this.latest, 'ms'), this.tickerIntervalMs);
-      this.tickToMsMapCached = this.tickToMsMap;
-      this.subscription = this.timer.subscribe(() => this.generateTick(this.tickToMsMapCached, this.tickerIntervalMs));
+      this.timer = Observable.timer(offset - moment().diff(this.latest, 'ms'), this.msBetweenTicks);
+      this.msPerTickCached = this.msPerTick;
+      this.subscription = this.timer.subscribe(() => this.generateTick(this.msPerTickCached, this.msBetweenTicks));
    }
 
    step(){
-      this.generateTick(this.tickToMsMapCached, this.tickerIntervalMs);
+      this.generateTick(this.msPerTickCached, this.msBetweenTicks);
    }
 
    continueWithUpdates(){
       this.incrementingSub && this.incrementingSub.unsubscribe();
-      let cachedInterval = this.tickerIntervalMs;
+      let cachedInterval = this.msBetweenTicks;
       this.incrementingSub = this.timer.take(1).subscribe(() => {
          if (!this.paused)
             this.start(cachedInterval);
@@ -71,25 +72,25 @@ export class TickService implements Pipeline {
    }
 
    increaseTps() {
-      let newValue = Math.max(this.minimumInterval, this.tickerIntervalMs / 1.1);
+      let newValue = Math.max(this.minimumInterval, this.msBetweenTicks / 1.1);
       this.setNewTps(newValue);
       this.continueWithUpdates();
    }
 
    decreaseTps() {
-      let newValue = this.tickerIntervalMs * 1.1;
+      let newValue = this.msBetweenTicks * 1.1;
       this.setNewTps(newValue);
       this.continueWithUpdates();
    }
 
    private setNewTps(newValue: number) {
-      this.tickerIntervalMs = newValue;
+      this.msBetweenTicks = newValue;
       this.setNewSpeed();
    }
 
    private setNewSpeed() {
-      this.tickToMsMap = this.msInAnHour * this.speedMultiplier * this.tickerIntervalMs;
-      this.ticksPerHour = this.msInAnHour / this.tickToMsMap;
+      this.msPerTick = this.msInAnHour * this.speedMultiplier * this.msBetweenTicks;
+      this.ticksPerHour = this.msInAnHour / this.msPerTick;
    }
 
    faster() {
@@ -105,7 +106,7 @@ export class TickService implements Pipeline {
    }
 
    resetSpeed() {
-      this.speedMultiplier = environment.gameSettings.ticker.speedMultiplier;
+      this.speedMultiplier = this.originalSpeedMultiplier;
       this.setNewSpeed();
       this.continueWithUpdates();
    }
@@ -115,11 +116,11 @@ export class TickService implements Pipeline {
    }
 
    public get speed() {
-      return this.speedMultiplier / environment.gameSettings.ticker.speedDelta;
+      return this.speedMultiplier / this.speedChangeDelta;
    }
 
    public get tps() {
-      return Math.round(100000 / this.tickerIntervalMs) / 100;
+      return Math.round(100000 / this.msBetweenTicks) / 100;
    }
 
    private generateTick(tickToMsMapCached, interval) {
