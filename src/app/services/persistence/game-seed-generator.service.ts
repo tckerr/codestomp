@@ -48,7 +48,7 @@ export class GameSeedGeneratorService {
                      unlocked: false,
                      cumulative: true,
                      criteriaType: AchievementCriteriaType.ConcurrentCustomers,
-                     unlockWhenValueGte: 1000,
+                     unlockWhenValueGte: 1500,
                      unlocksFeature: UnlockableFeature.Incorporation,
                      notification: {
                         title: 'Your business is now a corporation!',
@@ -72,7 +72,7 @@ export class GameSeedGeneratorService {
                      unlocksFeature: UnlockableFeature.ManualTesting,
                      notification: {
                         title: 'Time to test',
-                        message: 'Boring, we know. But testing is important!',
+                        message: 'Boring, of course. But testing is important!',
                         logType: LogType.Info
                      }
                   },
@@ -89,10 +89,22 @@ export class GameSeedGeneratorService {
                      }
                   },
                   {
-                     displayName: 'Bug Fixes',
+                     displayName: 'Self Improvement',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalProdCodeAccumulated,
-                     unlockWhenValueGte: 200,
+                     unlockWhenValueGte: 140,
+                     unlocksFeature: UnlockableFeature.SelfImprovement,
+                     notification: {
+                        title: 'Stay informed',
+                        message: 'If you don\'t stay on top of the latest tech, you\'ll fall behind.',
+                        logType: LogType.Info
+                     }
+                  },
+                  {
+                     displayName: 'Bug Fixes',
+                     unlocked: false,
+                     criteriaType: AchievementCriteriaType.TotalProdCodeAccumulated, // TODO: total bugs fixed
+                     unlockWhenValueGte: 100,
                      unlocksFeature: UnlockableFeature.ManualBugFixes,
                      notification: {
                         title: 'Bugs! Oh my!',
@@ -105,7 +117,7 @@ export class GameSeedGeneratorService {
                      unlocked: false,
                      triggersTrack: 'incoporation',
                      criteriaType: AchievementCriteriaType.TotalProdCodeAccumulated,
-                     unlockWhenValueGte: 400,
+                     unlockWhenValueGte: 300,
                      unlocksFeature: UnlockableFeature.DevelopmentHiringTier1,
                      notification: {
                         title: 'Time to grow your business!',
@@ -117,7 +129,7 @@ export class GameSeedGeneratorService {
                      displayName: 'Dev Staff Tier 2',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalFundsAccumulated,
-                     unlockWhenValueGte: 3000,
+                     unlockWhenValueGte: 5000,
                      unlocksFeature: UnlockableFeature.DevelopmentHiringTier2,
                      notification: {
                         title: 'Development hiring options unlocked!',
@@ -129,7 +141,7 @@ export class GameSeedGeneratorService {
                      displayName: 'Dev Staff Tier 3',
                      unlocked: false,
                      criteriaType: AchievementCriteriaType.TotalFundsAccumulated,
-                     unlockWhenValueGte: 10000,
+                     unlockWhenValueGte: 15000,
                      unlocksFeature: UnlockableFeature.DevelopmentHiringTier3,
                      notification: {
                         title: 'Development hiring options unlocked!',
@@ -142,21 +154,37 @@ export class GameSeedGeneratorService {
          ],
          company: {
             name: environment.gameSettings.defaults.companyName,
-            unlocks: {
-               manualTesting: 0,
-               deployments: 0,
-               hiring: {
-                  development: 0,
-                  hr: 0,
-                  debug: 0
-               },
-               bugFixes: 0,
-            },
             resources: {
                funds: {
                   balance: environment.gameSettings.defaults.startingFunds,
                   totalAccumulated: environment.gameSettings.defaults.startingFunds,
                   canBeNegative: false
+               },
+               skills: {
+                  coding: {
+                     balance: 3,
+                     totalAccumulated: 3,
+                     level: 1,
+                     improvementConstant: 2,
+                  },
+                  testing: {
+                     balance: 5,
+                     totalAccumulated: 5,
+                     level: 1,
+                     improvementConstant: 3,
+                  },
+                  deploying: {
+                     balance: 100,
+                     totalAccumulated: 100,
+                     level: 1,
+                     improvementConstant: 20,
+                  },
+                  bugFixing: {
+                     balance: 1,
+                     totalAccumulated: 1,
+                     level: 1,
+                     improvementConstant: 1,
+                  }
                },
                code: {
                   pushed: {

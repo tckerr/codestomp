@@ -3,7 +3,7 @@
       class="progress-bar bg-info"
       role="progressbar"
       [style.width]="availablePct">
-      <span *ngIf="effectiveAvailable > .2">Available </span><span>({{available | number: '1.0-0'}})</span>
+      <span *ngIf="effectiveAvailablePct > .2">Available </span><span>({{effectiveAvailable | number: '1.0-0'}})</span>
    </div>
    <div
       *ngIf="hoveredCost > 0"

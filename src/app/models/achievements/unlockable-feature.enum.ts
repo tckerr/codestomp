@@ -1,5 +1,4 @@
 export enum UnlockableFeature {
-
       // default
    None,
 
@@ -10,6 +9,7 @@ export enum UnlockableFeature {
    DevelopmentHiringTier1,
    DevelopmentHiringTier2,
    DevelopmentHiringTier3,
+   SelfImprovement,
 
       //biz
    Incorporation,

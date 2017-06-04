@@ -1,6 +1,6 @@
-<div class="progress " *ngIf="codeService.total > 0" style="height: 50px; white-space: nowrap; cursor: pointer">
+<div class="progress " *ngIf="codeService.total > 0" style="height: 24px; white-space: nowrap; cursor: pointer">
    <div
-      class="progress-bar bg-disabled h-100 pt-3 in"
+      class="progress-bar bg-disabled h-100 pt-1"
       role="progressbar"
       [style.width]="pushedPercent+'%'"
       ngbTooltip="New: {{pushed | number: '1.0-0'}}">
@@ -10,7 +10,7 @@
       </strong>
    </div>
    <div
-      class="progress-bar bg-nighttime h-100 pt-3"
+      class="progress-bar bg-nighttime h-100 pt-1"
       role="progressbar"
       ngbTooltip="Tested: {{tested | number: '1.0-0'}}"
       [style.width]="testedPercent+'%'">
@@ -20,7 +20,7 @@
       </strong>
    </div>
    <div
-      class="progress-bar bg-warning progress-bar-striped progress-bar-animated h-100 pt-3"
+      class="progress-bar bg-warning progress-bar-striped progress-bar-animated h-100 pt-1"
       role="progressbar"
       ngbTooltip="Deploying: {{deploying | number: '1.0-0'}}"
       [style.width]="deployingPercent+'%'">
@@ -30,7 +30,7 @@
       </strong>
    </div>
    <div
-      class="progress-bar bg-info h-100 pt-3"
+      class="progress-bar bg-info h-100 pt-1"
       role="progressbar"
       ngbTooltip="Production: {{prod | number: '1.0-0'}}"
       [style.width]="prodPercent+'%'"
@@ -41,7 +41,7 @@
       </strong>
    </div>
    <div
-      class="progress-bar bg-danger h-100 pt-3"
+      class="progress-bar bg-danger h-100 pt-1"
       role="progressbar"
       ngbTooltip="Bugs: {{bugs | number: '1.0-0'}}"
       [style.width]="bugsPercent+'%'"
@@ -52,9 +52,9 @@
       </strong>
    </div>
 </div>
-<div class="progress " style="height: 50px;" *ngIf="codeService.total == 0">
+<div class="progress " style="height: 24px;" *ngIf="codeService.total == 0">
    <div
-      class="progress-bar bg-faded h-100 pt-3"
+      class="progress-bar bg-faded h-100 pt-1"
       role="progressbar"
       style="width: 100%"></div>
 </div>

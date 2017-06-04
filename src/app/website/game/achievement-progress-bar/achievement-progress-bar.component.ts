@@ -95,6 +95,8 @@ export class AchievementProgressBarComponent implements OnInit, OnChanges {
             return 'fa-bug';
          case UnlockableFeature.ManualDeployments:
             return 'fa-ship';
+         case UnlockableFeature.SelfImprovement:
+            return 'fa-code-fork';
          case UnlockableFeature.DevelopmentHiringTier1:
          case UnlockableFeature.DevelopmentHiringTier2:
          case UnlockableFeature.DevelopmentHiringTier3:

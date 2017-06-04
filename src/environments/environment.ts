@@ -88,9 +88,9 @@ export const environment = {
       defaults: {
          companyName: 'T-Corp',
          startingFunds: 0,
-         codePerClick: 500, // balanced for ~3
-         manualTestsPerClick: 500,
-         deployThreshold: 200,
+         codePerClick: 100, // balanced for ~3
+         manualTestsPerClick: 100,
+         deployThreshold: 100,
          bugsPercentage: .05,
          testsFailurePercentage: .15,
          quitChanceOnLackOfPayment: .6 / perHour,
@@ -100,7 +100,7 @@ export const environment = {
          deployAmountPerMs: 30 / perHour,
 
          // job markets
-         talentGenerationPerMs: 3 / perDay,
+         talentGenerationPerMs: 2 / perDay,
          talentGenerationCap: 50, // TODO: make a growth
 
          // customer growth in ms

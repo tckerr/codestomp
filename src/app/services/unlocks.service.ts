@@ -13,10 +13,6 @@ export class UnlocksService {
    constructor(private gameStorageService: GameStorageService) {
    }
 
-   public get unlocks() {
-      return this.gameStorageService.game.company.unlocks;
-   }
-
    unlock(feature: UnlockableFeature) {
       if (feature == UnlockableFeature.None)
          return;

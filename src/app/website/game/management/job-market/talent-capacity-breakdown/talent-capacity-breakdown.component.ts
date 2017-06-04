@@ -15,10 +15,13 @@ export class TalentCapacityBreakdownComponent implements OnInit {
 
    ngOnInit() {}
 
-   public get effectiveAvailable() {
-      let effectiveAvailable = this.hoveredCost ? this.available - this.hoveredCost : this.available;
-      let availablePct = effectiveAvailable / this.max;
-      return availablePct;
+   public get effectiveAvailablePct() {
+      return this.effectiveAvailable / this.max;
+   }
+
+   private get effectiveAvailable() {
+      let effectiveAvailable = !isNaN(this.hoveredCost) ? this.available - this.hoveredCost : this.available;
+      return Math.max(0, effectiveAvailable);
    }
 
    private get available() {
@@ -30,7 +33,7 @@ export class TalentCapacityBreakdownComponent implements OnInit {
    }
 
    public get availablePct() {
-      return `${this.effectiveAvailable * 100}%`;
+      return `${this.effectiveAvailablePct * 100}%`;
    }
 
    public get costPct() {

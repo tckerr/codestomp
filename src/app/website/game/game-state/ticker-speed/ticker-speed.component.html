@@ -2,14 +2,14 @@
    <div class="input-group input-group-sm mr-1">
       <button
          (click)="decreaseTps()"
-         class="btn btn-sm btn-info">
+         class="btn btn-sm btn-secondary">
          <i class="fa fa-minus-circle"></i>
       </button>
    </div>
    <div class="input-group input-group-sm mr-1">
       <button
          (click)="increaseTps()"
-         class=" btn btn-sm btn-info">
+         class=" btn btn-sm btn-secondary">
          <i class="fa fa-plus-circle"></i>
       </button>
    </div>
@@ -21,16 +21,14 @@
    <div class="input-group input-group-sm mr-1">
       <button
          (click)="resetSpeed()"
-         class="btn btn-sm btn-warning">
+         class="btn btn-sm btn-secondary">
          <i class="fa fa-undo"></i>
       </button>
    </div>
     <div class="input-group input-group-sm mr-1">
       <button
          (click)="decreaseSpeed()"
-         class="btn btn-sm"
-         [class.btn-warning]="tickService.paused"
-         [class.btn-info]="!tickService.paused">
+         class="btn btn-sm btn-secondary">
          <i class="fa fa-backward"></i>
       </button>
    </div>
@@ -38,14 +36,14 @@
       <button
          *ngIf="!tickService.paused"
          (click)="pause()"
-         class="btn btn-info btn-sm"
+         class="btn btn-secondary btn-sm"
          style="min-width: 30px">
          <i class="fa fa-pause"></i>
       </button>
       <button
          *ngIf="tickService.paused"
          (click)="resume()"
-         class="btn btn-sm btn-warning"
+         class="btn btn-sm btn-secondary"
          style="min-width: 30px">
          <i class="fa fa-play"></i>
       </button>
@@ -53,18 +51,14 @@
    <div class="input-group input-group-sm mr-1">
       <button
          (click)="step()"
-         class="btn btn-sm btn-interactive"
-         [class.btn-warning]="tickService.paused"
-         [class.btn-info]="!tickService.paused">
+         class="btn btn-sm btn-interactive btn-secondary">
          <i class="fa fa-step-forward"></i>
       </button>
    </div>
    <div class="input-group input-group-sm mr-1">
       <button
          (click)="increaseSpeed()"
-         class="btn btn-sm"
-         [class.btn-warning]="tickService.paused"
-         [class.btn-info]="!tickService.paused">
+         class="btn btn-sm btn-secondary">
          <i class="fa fa-forward"></i>
       </button>
    </div>

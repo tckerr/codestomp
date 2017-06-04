@@ -49,8 +49,11 @@ html, body {
 }
 
 .card-digest{
+   max-width: 300px;
    min-width: 200px;
-   height: 85px;
+   display: inline-block;
+   vertical-align: top;
+   height: 90px;
 }
 
 .flex-center {
@@ -84,4 +87,3 @@ a , button{
 .ajs-success {
    background-color:#5cb85c !important;
 }
-

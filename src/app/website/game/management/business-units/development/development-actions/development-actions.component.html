@@ -1,13 +1,16 @@
 <button
-   class="btn btn-info btn-sm btn-interactive p-3"
-   (click)="writeCode(config.codePerClick)">
+   class="btn btn-info btn-sm btn-interactive h-100 p-2 pt-3"
+   (click)="writeCode(skills.coding.balance)">
    <p class="m-0 p-0" style="font-size: 30px"><i class="fa fa-keyboard-o"></i></p>
    <p class="m-0 p-0">Write some code</p>
+   <p class="m-0 mt-1 p-0">
+      <small><span class="small text-uppercase">{{skills.coding.balance}}</span></small>
+   </p>
 </button>
 <button
    *ngIf="manualTestingUnlocked"
-   class="btn btn-info btn-popover btn-sm btn-interactive h-100 p-3"
-   (click)="testCode(config.manualTestsPerClick)"
+   class="btn btn-info btn-popover btn-sm btn-interactive h-100 p-2 pt-3"
+   (click)="testCode(skills.testing.balance)"
    [disabled]="codeService.pushed.balance <= 0">
    <span
       class="top-corner-icon-adjusted">
@@ -17,13 +20,18 @@
          placement="top"
          triggers="mouseenter:mouseleave"></i>
    </span>
-   <p class="m-0 p-0" style="font-size: 30px"><i class="fa fa-check-square-o"></i></p>
+   <p class="m-0 p-0" style="font-size: 30px">
+      <i class="fa fa-check-square-o"></i>
+   </p>
    <p class="m-0 p-0">Test your code</p>
+   <p class="m-0 mt-1 p-0">
+      <small><span class="small text-uppercase">{{skills.testing.balance}}</span></small>
+   </p>
 </button>
 <button
    *ngIf="manualDeploymentsUnlocked"
-   class="btn btn-info btn-sm btn-interactive btn-popover h-100 p-3"
-   (click)="deploy()"
+   class="btn btn-warning btn-sm btn-interactive btn-popover h-100 p-2 pt-3"
+   (click)="deploy(skills.deploying.balance)"
    [disabled]="!canDeploy">
    <span
       class="top-corner-icon-adjusted">
@@ -36,10 +44,13 @@
    <p class="m-0 p-0" style="font-size: 30px; min-width:90px;"><i class="fa fa-ship"></i></p>
    <p *ngIf="canDeploy" class="m-0 p-0">Ship it to prod</p>
    <p *ngIf="!canDeploy" class="m-0 p-0">{{deployBlockReason}}</p>
+   <p class="m-0 mt-1 p-0">
+      <small><span class="small text-uppercase">{{skills.deploying.balance}}</span></small>
+   </p>
 </button>
 <button
    *ngIf="manualBugFixesUnlocked"
-   class="btn btn-danger btn-sm btn-popover btn-interactive h-100 p-3"
+   class="btn btn-danger btn-sm btn-popover btn-interactive h-100 p-2 pt-3"
    (click)="fixBugs()"
    [disabled]="codeService.bugs.balance <= 0">
    <span
@@ -52,8 +63,11 @@
    </span>
    <p class="m-0 p-0" style="font-size: 30px"><i class="fa fa-bug"></i></p>
    <p class="m-0 p-0">Fix some bugs</p>
+   <p class="m-0 mt-1 p-0">
+      <small><span class="small text-uppercase">{{skills.bugFixing.balance}}</span></small>
+   </p>
 </button>
-
+<app-development-skills-improvement-actions></app-development-skills-improvement-actions>
 <ng-template #testingQuestion>
    <p class="pb-0 mb-0">
       All code must be <strong>tested</strong> before it is deployed. Remember, not all tested code works!

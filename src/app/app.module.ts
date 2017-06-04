@@ -65,6 +65,8 @@ import { AchievementProgressBarComponent } from './website/game/achievement-prog
 import {AchievementEvaluatorService} from './services/achievements/achievement-evaluator.service';
 import {BusinessUnitUnlockListenerService} from './services/listeners/business-unit-unlock-listener.service';
 import { CorporateComponent } from './website/game/management/business-units/corporate/corporate.component';
+import {SkillsService} from './services/resource-services/skills.service';
+import { DevelopmentSkillsImprovementActionsComponent } from './website/game/management/business-units/development/development-actions/development-skills-improvement-actions/development-skills-improvement-actions.component';
 
 const appRoutes: Routes = [
    {
@@ -135,6 +137,7 @@ const appRoutes: Routes = [
       TalentCapacityBreakdownComponent,
       AchievementProgressBarComponent,
       CorporateComponent,
+      DevelopmentSkillsImprovementActionsComponent,
    ],
    imports: [
       BrowserModule,
@@ -183,6 +186,7 @@ const appRoutes: Routes = [
       AchievementUnlockerService,
       AchievementEvaluatorService,
       BusinessUnitUnlockListenerService,
+      SkillsService,
    ],
    bootstrap: [AppComponent]
 })

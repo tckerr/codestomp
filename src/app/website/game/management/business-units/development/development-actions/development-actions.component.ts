@@ -8,6 +8,8 @@ import {TickService} from '../../../../../../services/tick/tick.service';
 import {Subscription} from "rxjs/Subscription";
 import {DeploymentExecutor} from '../../../../../../services/tick/subscribers/manual/deployment-executor.service';
 import {UnlockableFeature} from '../../../../../../models/achievements/unlockable-feature.enum';
+import {SkillsService} from '../../../../../../services/resource-services/skills.service';
+import {FundService} from '../../../../../../services/resource-services/fund.service';
 
 @Component({
    selector: 'app-development-actions',
@@ -22,6 +24,7 @@ export class DevelopmentActionsComponent implements OnInit {
                private unlocksService: UnlocksService,
                private logger: LoggerService,
                private ticker: TickService,
+               private skillsService: SkillsService,
                private commitGeneratorService: CommitGeneratorService,
                private config: ConfigurationService) {
    }
@@ -35,6 +38,10 @@ export class DevelopmentActionsComponent implements OnInit {
       this.codeService.write(val);
    }
 
+   private get skills(){
+      return this.skillsService.skills;
+   }
+
    private testCode(val: number = 1) {
       this.codeService.test(val, this.config.testsFailurePercentage);
    }
@@ -42,6 +49,7 @@ export class DevelopmentActionsComponent implements OnInit {
    private fixBugs(val: number = 1) {
       this.codeService.bugFix(val);
    }
+
 
    private get manualTestingUnlocked(){
       return this.unlocksService.isUnlocked(UnlockableFeature.ManualTesting);
@@ -53,11 +61,10 @@ export class DevelopmentActionsComponent implements OnInit {
       return this.unlocksService.isUnlocked(UnlockableFeature.ManualBugFixes);
    }
 
-   private deploy() {
+   private deploy(count: number) {
       if (!this.canDeploy){
          return 0;
       }
-      let count = this.config.deployThreshold;
       this.queuedDeploy && this.queuedDeploy.unsubscribe();
       this.queuedDeploy = this.ticker.pipeline.take(1).subscribe(t => this.deploymentService.deploy(count, t.date));
    }
