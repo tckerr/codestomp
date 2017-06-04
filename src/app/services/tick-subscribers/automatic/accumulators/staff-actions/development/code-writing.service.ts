@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Staff} from '../../../../../../../models/game/company/business-units/staff';
-import {Tick} from '../../../../../../../models/tick/tick';
-import {DeveloperStaffService} from '../../../../../../staffing/developer-staff.service';
-import {CodeService} from '../../../../../../resource-services/code.service';
-import {TickExecutor} from '../../../../../tick-executor';
+import {Staff} from '../../../../../../models/game/company/business-units/staff';
+import {Tick} from '../../../../../../models/tick/tick';
+import {DeveloperStaffService} from '../../../../../staffing/developer-staff.service';
+import {CodeService} from '../../../../../resource-services/code.service';
+import {TickExecutor} from '../../../tick-executor';
 
 @Injectable()
 export class CodeWritingService implements TickExecutor {

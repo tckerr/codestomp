@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
-import {CustomerAccumulatorService} from './tick/subscribers/automatic/accumulators/customer-accumulator.service';
-import {CodeProfitAccumulatorService} from './tick/subscribers/automatic/accumulators/code-profit-accumulator.service';
-import {StaffActionAccumulatorService} from './tick/subscribers/automatic/accumulators/staff-actions/staff-action-accumulator.service';
-import {StaffSalaryAccumulatorService} from './tick/subscribers/automatic/accumulators/staff-salary-accumulator.service';
-import {ITickSubscriber} from './tick/subscribers/automatic/i-tick-subscriber';
-import {TalentGeneratorService} from './tick/subscribers/automatic/generators/talent-generator-service';
-import {SpecialEventGeneratorService} from './tick/subscribers/automatic/generators/special-event-generator.service';
 import {TickService} from '../time/tick.service';
-import {AchievementUnlockListenerService} from './tick/subscribers/automatic/listeners/achievement-unlock-listener.service';
 import {IListener} from './listeners/i-listener';
 import {BusinessUnitUnlockListenerService} from './listeners/business-unit-unlock-listener.service';
- 
+import {TalentGeneratorService} from './tick-subscribers/automatic/generators/talent-generator-service';
+import {ITickSubscriber} from './tick-subscribers/automatic/i-tick-subscriber';
+import {SpecialEventGeneratorService} from './tick-subscribers/automatic/generators/special-event-generator.service';
+import {CustomerAccumulatorService} from './tick-subscribers/automatic/accumulators/customer-accumulator.service';
+import {StaffActionAccumulatorService} from './tick-subscribers/automatic/accumulators/staff-actions/staff-action-accumulator.service';
+import {StaffSalaryAccumulatorService} from './tick-subscribers/automatic/accumulators/staff-salary-accumulator.service';
+import {AchievementUnlockListenerService} from './tick-subscribers/automatic/listeners/achievement-unlock-listener.service';
+import {CodeProfitAccumulatorService} from './tick-subscribers/automatic/accumulators/code-profit-accumulator.service';
+
 @Injectable()
 export class SubscriptionAggregationService {
 

@@ -1,21 +1,11 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {GameComponent} from './web/game/game.component';
-import {RouterModule, Routes} from '@angular/router';
-import {NewGameComponent} from './web/game/new-game/new-game.component';
-import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
 import {IdGeneratorService} from './utilities/id-generator.service';
-import {ManagementComponent} from './web/game/management/management.component';
-import {DevelopmentComponent} from './web/game/management/business-units/development/development.component';
-import {HRComponent} from './web/game/management/business-units/hr/hr.component';
 import {CodeService} from './services/resource-services/code.service';
 import {CustomerService} from './services/resource-services/customer.service';
 import {FundService} from './services/resource-services/fund.service';
-import {DebugComponent} from './web/game/management/business-units/debug/debug.component';
 import {UnlocksService} from './services/unlocks.service';
 import {DeveloperStaffService} from './services/staffing/developer-staff.service';
 import {QuitterNotificationService} from './services/notifications/quitter-notification.service';
@@ -24,21 +14,9 @@ import {TalentService} from './services/resource-services/talent.service';
 import {HiringService} from './services/staffing/hiring.service';
 import {StaffCategoryIconResolverService} from './services/staffing/staff-category-icon-resolver.service';
 import {StaffQuitDecisionService} from './services/staffing/staff-quit-decision.service';
-import {DeploymentExecutor} from './services/tick/subscribers/manual/deployment-executor.service';
-import {CustomerAccumulatorService} from './services/tick/subscribers/automatic/accumulators/customer-accumulator.service';
 import {SubscriptionAggregationService} from './services/subscription-aggregation.service';
-import {CodeProfitAccumulatorService} from './services/tick/subscribers/automatic/accumulators/code-profit-accumulator.service';
-import {TalentGeneratorService} from './services/tick/subscribers/automatic/generators/talent-generator-service';
-import {StaffActionAccumulatorService} from './services/tick/subscribers/automatic/accumulators/staff-actions/staff-action-accumulator.service';
-import {StaffSalaryAccumulatorService} from 'app/services/tick/subscribers/automatic/accumulators/staff-salary-accumulator.service';
-import {CodeWritingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/code-writing.service';
-import {CodeTestingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/code-testing.service';
-import {CodeDeploymentService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/code-deployment.service';
-import {BugFixingService} from './services/tick/subscribers/automatic/accumulators/staff-actions/development/bug-fixing.service';
-import {SpecialEventGeneratorService} from './services/tick/subscribers/automatic/generators/special-event-generator.service';
 import {DeploymentInfoService} from './services/resource-services/deployment-info.service';
 import {AchievementsService} from './services/achievements/achievements.service';
-import {AchievementUnlockListenerService} from 'app/services/tick/subscribers/automatic/listeners/achievement-unlock-listener.service';
 import {AchievementUnlockerService} from './services/achievements/achievement-unlocker.service';
 import {AchievementCriteriaValueResolverService} from './services/achievements/achievement-criteria-value-resolver.service';
 import {AchievementEvaluatorService} from './services/achievements/achievement-evaluator.service';
@@ -50,7 +28,19 @@ import {PersistenceModule} from './persistence/persistence.module';
 import {UtilitiesModule} from './utilities/utilities.module';
 import {TimeModule} from './time/time.module';
 import {WebModule} from './web/web.module';
-
+import {AppRoutingModule} from './app-routing/app-routing.module';
+import {DeploymentExecutor} from './services/tick-subscribers/manual/deployment-executor.service';
+import {CustomerAccumulatorService} from './services/tick-subscribers/automatic/accumulators/customer-accumulator.service';
+import {CodeProfitAccumulatorService} from './services/tick-subscribers/automatic/accumulators/code-profit-accumulator.service';
+import {TalentGeneratorService} from './services/tick-subscribers/automatic/generators/talent-generator-service';
+import {StaffActionAccumulatorService} from './services/tick-subscribers/automatic/accumulators/staff-actions/staff-action-accumulator.service';
+import {StaffSalaryAccumulatorService} from './services/tick-subscribers/automatic/accumulators/staff-salary-accumulator.service';
+import {CodeWritingService} from './services/tick-subscribers/automatic/accumulators/staff-actions/development/code-writing.service';
+import {CodeTestingService} from './services/tick-subscribers/automatic/accumulators/staff-actions/development/code-testing.service';
+import {CodeDeploymentService} from './services/tick-subscribers/automatic/accumulators/staff-actions/development/code-deployment.service';
+import {BugFixingService} from './services/tick-subscribers/automatic/accumulators/staff-actions/development/bug-fixing.service';
+import {SpecialEventGeneratorService} from './services/tick-subscribers/automatic/generators/special-event-generator.service';
+import {AchievementUnlockListenerService} from './services/tick-subscribers/automatic/listeners/achievement-unlock-listener.service';
 
 @NgModule({
    declarations: [
@@ -62,7 +52,8 @@ import {WebModule} from './web/web.module';
       LoggingModule,
       PersistenceModule,
       TimeModule,
-      WebModule
+      WebModule,
+      AppRoutingModule
    ],
    providers: [
       NgbAlertConfig,

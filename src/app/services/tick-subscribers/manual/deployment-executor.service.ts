@@ -1,15 +1,15 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {LoggerService} from '../../../../logging/logger-service';
+import {LoggerService} from '../../../logging/logger-service';
 import {Subject} from 'rxjs/Subject';
-import {CodeService} from '../../../resource-services/code.service';
+import {CodeService} from '../../resource-services/code.service';
 import 'rxjs/Rx';
 import {TickService} from 'app/time/tick.service';
-import {ConfigurationService} from '../../../../configuration/configuration.service';
+import {ConfigurationService} from '../../../configuration/configuration.service';
 import * as moment from 'moment';
-import {GameStorageService} from '../../../../persistence/game-storage.service';
-import {LogType} from '../../../../models/definitions/log-type';
+import {GameStorageService} from '../../../persistence/game-storage.service';
+import {LogType} from '../../../models/definitions/log-type';
 import {Subscription} from 'rxjs/Subscription';
-import {DeploymentInfoService} from '../../../resource-services/deployment-info.service';
+import {DeploymentInfoService} from '../../resource-services/deployment-info.service';
 
 @Injectable()
 export class DeploymentExecutor implements OnDestroy {
@@ -32,27 +32,29 @@ export class DeploymentExecutor implements OnDestroy {
       });
    }
 
-   ngOnDestroy(): void { this.stop(); }
+   ngOnDestroy(): void {
+      this.stop();
+   }
 
-   public stop(){
-      if (this.tickerSub){
+   public stop() {
+      if (this.tickerSub) {
          this.tickerSub.unsubscribe();
       }
    }
 
-   public get deploying(){
+   public get deploying() {
       return this.deploymentInfo.deploying;
    }
 
-   public get lastDeployedDate(){
+   public get lastDeployedDate() {
       return this.deploymentInfo.lastDeployedDate;
    }
 
-   public get canDeploy(){
+   public get canDeploy() {
       return !this.deploying && this.codeService.tested.balance >= this.config.MINIMUM_TESTED_CODE_FOR_DEPLOY;
    }
 
-   public resumeDeploy(){
+   public resumeDeploy() {
       if (!this.deploying)
          throw Error('You are not deploying, so you may not resume');
       let rate = this.deploymentInfo.currentDeployRate;

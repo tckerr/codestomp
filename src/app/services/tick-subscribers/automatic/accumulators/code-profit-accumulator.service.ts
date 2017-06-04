@@ -1,11 +1,10 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {TickService} from '../../../../../time/tick.service';
-import {CustomerService} from '../../../../resource-services/customer.service';
-import {Subscription} from 'rxjs/Subscription';
-import {FundService} from '../../../../resource-services/fund.service';
-import {ConfigurationService} from '../../../../../configuration/configuration.service';
+import {Injectable} from '@angular/core';
+import {TickService} from '../../../../time/tick.service';
+import {CustomerService} from '../../../resource-services/customer.service';
+import {FundService} from '../../../resource-services/fund.service';
+import {ConfigurationService} from '../../../../configuration/configuration.service';
 import {ITickSubscriber} from '../i-tick-subscriber';
-import {hour} from '../../../../../../environments/environment';
+import {hour} from '../../../../../environments/environment';
 import {TickSubscriberBase} from '../tick-subscriber-base';
 
 @Injectable()
@@ -32,5 +31,6 @@ export class CodeProfitAccumulatorService extends TickSubscriberBase implements 
    public get profitPerHr() {
       return this.profitPerMs(hour);
    }
+
    x
 }

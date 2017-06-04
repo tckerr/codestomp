@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from '../../../../../services/resource-services/customer.service';
-import {CustomerAccumulatorService} from '../../../../../services/tick/subscribers/automatic/accumulators/customer-accumulator.service';
-import {UnlocksService} from '../../../../../services/unlocks.service';
 import {FundService} from '../../../../../services/resource-services/fund.service';
+import {CustomerAccumulatorService} from '../../../../../services/tick-subscribers/automatic/accumulators/customer-accumulator.service';
 
 @Component({
    selector: 'app-customers-digest',
@@ -12,15 +11,15 @@ import {FundService} from '../../../../../services/resource-services/fund.servic
 export class CustomersDigestComponent implements OnInit {
 
    constructor(private customerService: CustomerService,
+               // TODO: extract shared dependency
                private customerAccumulatorService: CustomerAccumulatorService,
-               private fundService: FundService,
-   ) {
+               private fundService: FundService,) {
    }
 
    ngOnInit() {
    }
 
-   private get unlocked(){
+   private get unlocked() {
       return this.fundService.funds.totalAccumulated > 0;
    }
 

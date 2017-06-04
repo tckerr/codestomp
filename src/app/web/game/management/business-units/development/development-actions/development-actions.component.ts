@@ -5,11 +5,10 @@ import {UnlocksService} from '../../../../../../services/unlocks.service';
 import {CommitGeneratorService} from '../../../../../../utilities/commit-generator.service';
 import {LoggerService} from '../../../../../../logging/logger-service';
 import {TickService} from '../../../../../../time/tick.service';
-import {Subscription} from "rxjs/Subscription";
-import {DeploymentExecutor} from '../../../../../../services/tick/subscribers/manual/deployment-executor.service';
+import {Subscription} from 'rxjs/Subscription';
 import {UnlockableFeature} from '../../../../../../models/achievements/unlockable-feature.enum';
 import {SkillsService} from '../../../../../../services/resource-services/skills.service';
-import {FundService} from '../../../../../../services/resource-services/fund.service';
+import {DeploymentExecutor} from '../../../../../../services/tick-subscribers/manual/deployment-executor.service';
 
 @Component({
    selector: 'app-development-actions',
@@ -38,7 +37,7 @@ export class DevelopmentActionsComponent implements OnInit {
       this.codeService.write(val);
    }
 
-   private get skills(){
+   private get skills() {
       return this.skillsService.skills;
    }
 
@@ -51,18 +50,20 @@ export class DevelopmentActionsComponent implements OnInit {
    }
 
 
-   private get manualTestingUnlocked(){
+   private get manualTestingUnlocked() {
       return this.unlocksService.isUnlocked(UnlockableFeature.ManualTesting);
    }
-   private get manualDeploymentsUnlocked(){
+
+   private get manualDeploymentsUnlocked() {
       return this.unlocksService.isUnlocked(UnlockableFeature.ManualDeployments);
    }
-   private get manualBugFixesUnlocked(){
+
+   private get manualBugFixesUnlocked() {
       return this.unlocksService.isUnlocked(UnlockableFeature.ManualBugFixes);
    }
 
    private deploy(count: number) {
-      if (!this.canDeploy){
+      if (!this.canDeploy) {
          return 0;
       }
       this.queuedDeploy && this.queuedDeploy.unsubscribe();

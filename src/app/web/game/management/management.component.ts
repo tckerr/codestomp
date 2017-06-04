@@ -5,11 +5,10 @@ import {Subscription} from 'rxjs/Subscription';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TickService} from '../../../time/tick.service';
 import {SpecialEvent} from '../../../models/messaging/special-event';
-import {isNullOrUndefined} from 'util';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SpecialEventGeneratorService} from '../../../services/tick/subscribers/automatic/generators/special-event-generator.service';
+import {Router} from '@angular/router';
 import {AchievementsService} from '../../../services/achievements/achievements.service';
 import * as Enumerable from 'linq';
+import {SpecialEventGeneratorService} from '../../../services/tick-subscribers/automatic/generators/special-event-generator.service';
 
 @Component({
    selector: 'app-management',
@@ -22,7 +21,6 @@ export class ManagementComponent implements OnInit, OnDestroy {
    @ViewChild('container') container: ElementRef;
    @ViewChild('specialEventModal') specialEventModal: ElementRef;
    private specialEventModalViewData: SpecialEvent;
-   private lastNavigatedBusinessUnit: string = "development"; //todo: :(
 
    constructor(private gameStorageService: GameStorageService,
                private specialEventGeneratorService: SpecialEventGeneratorService,
@@ -65,7 +63,7 @@ export class ManagementComponent implements OnInit, OnDestroy {
          .toArray();
    }
 
-   private get achievementTracks(){
+   private get achievementTracks() {
       return Enumerable
          .from(this.achievementsService.tracks)
          .where(t => t.unlocked)

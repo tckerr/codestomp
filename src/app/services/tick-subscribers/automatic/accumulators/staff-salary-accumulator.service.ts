@@ -1,14 +1,13 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
-import {TickService} from '../../../../../time/tick.service';
-import {Tick} from '../../../../../models/tick/tick';
-import {FundService} from '../../../../resource-services/fund.service';
-import {Staff} from '../../../../../models/game/company/business-units/staff';
-import {GameStorageService} from '../../../../../persistence/game-storage.service';
-import {hour} from '../../../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {TickService} from '../../../../time/tick.service';
+import {Tick} from '../../../../models/tick/tick';
+import {FundService} from '../../../resource-services/fund.service';
+import {Staff} from '../../../../models/game/company/business-units/staff';
+import {GameStorageService} from '../../../../persistence/game-storage.service';
+import {hour} from '../../../../../environments/environment';
 import * as Enumerable from 'linq';
 import {IEnumerable} from 'linq';
-import {StaffQuitDecisionService} from '../../../../staffing/staff-quit-decision.service';
+import {StaffQuitDecisionService} from '../../../staffing/staff-quit-decision.service';
 import {ITickSubscriber} from '../i-tick-subscriber';
 import {TickSubscriberBase} from '../tick-subscriber-base';
 
@@ -29,12 +28,11 @@ export class PaymentObligation {
 }
 
 @Injectable()
-export class StaffSalaryAccumulatorService extends TickSubscriberBase implements ITickSubscriber  {
+export class StaffSalaryAccumulatorService extends TickSubscriberBase implements ITickSubscriber {
 
    constructor(private fundService: FundService,
                private gameStorage: GameStorageService,
-               private staffQuitDecisionService: StaffQuitDecisionService,
-   ) {
+               private staffQuitDecisionService: StaffQuitDecisionService,) {
       super();
    }
 

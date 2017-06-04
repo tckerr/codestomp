@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {TickService} from '../../../../../time/tick.service';
-import {ConfigurationService} from '../../../../../configuration/configuration.service';
-import {TalentService} from '../../../../resource-services/talent.service';
+import {TickService} from '../../../../time/tick.service';
+import {ConfigurationService} from '../../../../configuration/configuration.service';
+import {TalentService} from '../../../resource-services/talent.service';
 import {ITickSubscriber} from '../i-tick-subscriber';
 import {TickSubscriberBase} from '../tick-subscriber-base';
 

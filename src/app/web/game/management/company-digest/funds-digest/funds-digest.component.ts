@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FundService} from '../../../../../services/resource-services/fund.service';
-import {CodeProfitAccumulatorService} from '../../../../../services/tick/subscribers/automatic/accumulators/code-profit-accumulator.service';
-import {StaffSalaryAccumulatorService} from '../../../../../services/tick/subscribers/automatic/accumulators/staff-salary-accumulator.service';
+import {CodeProfitAccumulatorService} from '../../../../../services/tick-subscribers/automatic/accumulators/code-profit-accumulator.service';
+import {StaffSalaryAccumulatorService} from '../../../../../services/tick-subscribers/automatic/accumulators/staff-salary-accumulator.service';
 
 @Component({
    selector: 'app-funds-digest',
@@ -11,6 +11,7 @@ import {StaffSalaryAccumulatorService} from '../../../../../services/tick/subscr
 export class FundsDigestComponent implements OnInit {
 
    constructor(private fundsService: FundService,
+               // TODO: extract data to shared dependency
                private codeProfitAccumulatorService: CodeProfitAccumulatorService,
                private staffSalaryAccumulatorService: StaffSalaryAccumulatorService) {
    }

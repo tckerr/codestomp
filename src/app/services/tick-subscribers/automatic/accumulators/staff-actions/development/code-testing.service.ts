@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Tick} from '../../../../../../../models/tick/tick';
-import {Staff} from '../../../../../../../models/game/company/business-units/staff';
-import {DeveloperStaffService} from '../../../../../../staffing/developer-staff.service';
-import {CodeService} from '../../../../../../resource-services/code.service';
-import {TickExecutor} from '../../../../../tick-executor';
-import {ConfigurationService} from '../../../../../../../configuration/configuration.service';
+import {Tick} from '../../../../../../models/tick/tick';
+import {Staff} from '../../../../../../models/game/company/business-units/staff';
+import {DeveloperStaffService} from '../../../../../staffing/developer-staff.service';
+import {CodeService} from '../../../../../resource-services/code.service';
+import {TickExecutor} from '../../../tick-executor';
+import {ConfigurationService} from '../../../../../../configuration/configuration.service';
 
 @Injectable()
 export class CodeTestingService implements TickExecutor {

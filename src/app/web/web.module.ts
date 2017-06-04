@@ -25,53 +25,8 @@ import {JobMarketComponent} from './game/management/job-market/job-market.compon
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {RouterModule, Routes} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-const appRoutes: Routes = [
-   {
-      path: '',
-      redirectTo: 'new',
-      pathMatch: 'full'
-   },
-   {
-      path: 'new',
-      component: NewGameComponent
-   },
-   {
-      path: 'game/:gameId',
-      component: GameComponent,
-      children: [
-         {
-            path: '',
-            component: ManagementComponent,
-            children: [
-               {
-                  path: '',
-                  pathMatch: 'full',
-                  redirectTo: 'development',
-               },
-               {
-                  path: 'development',
-                  component: DevelopmentComponent,
-               },
-               {
-                  path: 'debug',
-                  component: DebugComponent,
-               },
-               {
-                  path: 'hr',
-                  component: HRComponent
-               },
-               {
-                  path: 'corporate',
-                  component: CorporateComponent
-               }
-            ]
-         }
-      ]
-   }
-];
+import {RouterModule} from '@angular/router';
 
 @NgModule({
    imports: [
@@ -79,11 +34,8 @@ const appRoutes: Routes = [
       FormsModule,
       HttpModule,
       CommonModule,
+      RouterModule,
       NgbModule.forRoot(),
-      RouterModule.forRoot(appRoutes),
-   ],
-   exports : [
-     RouterModule 
    ],
    declarations: [
       GameComponent,
