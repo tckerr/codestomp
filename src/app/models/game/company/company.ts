@@ -1,5 +1,4 @@
 import {CompanyResourceBank} from './company-resource-bank';
-import {Unlocks} from './unlocks';
 import {BusinessUnitCollection} from './business-unit-collection';
 
 export class Company {

@@ -1,37 +1,46 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {perDay, perHour, perMonth} from '../../../environments/environment';
+import {ExperienceLevel} from '../../models/definitions/staff-definitions';
 
 @Injectable()
 export class ConfigurationService {
 
-   // manual input rates
-   public codePerClick = environment.gameSettings.defaults.codePerClick;
-   public manualTestsPerClick = environment.gameSettings.defaults.manualTestsPerClick;
+   public DEFAULT_GAME_START_DATE = '2050-01-01 00:00';
+   public ASK_BEFORE_CLEARING_LOCAL_STORAGE = false;
 
    // devops rates
-   public deployThreshold = environment.gameSettings.defaults.deployThreshold;
-   public deployChunkRate = environment.gameSettings.defaults.deployChunkRate;
-   public deployAmountPerMs = environment.gameSettings.defaults.deployAmountPerMs;
-   public bugsPercentage = environment.gameSettings.defaults.bugsPercentage;
-   public testsFailurePercentage = environment.gameSettings.defaults.testsFailurePercentage;
+   public MINIMUM_TESTED_CODE_FOR_DEPLOY = 100;
+   public BASE_DEPLOY_RATE = 67 / perHour;
+   public BASE_DEPLOY_CHUNK_SIZE = 30 / perHour;
+   public BASE_BUGS_TO_PRODUCTION_PCT = .05;
+   public BASE_TESTING_FAILURE_PCT = .15;
 
-   public quitChanceOnLackOfPayment = environment.gameSettings.defaults.quitChanceOnLackOfPayment;
+   public QUIT_CHANCE_ON_LACK_OF_PAYMENT_RATE = .6 / perHour;
 
    // customer growth
-   public customersCapAsPercentOfCode = environment.gameSettings.defaults.customersCapAsPercentOfCode;
-   public customersToDeployedCodeGrowthRate = environment.gameSettings.defaults.customersToDeployedCodeGrowthRate;
-   public customersToDeployedCodeGrowthShare = environment.gameSettings.defaults.customersToDeployedCodeGrowthShare;
-   public wordOfMouthGrowthRate = environment.gameSettings.defaults.wordOfMouthGrowthRate;
-   public wordOfMouthGrowthShare = environment.gameSettings.defaults.wordOfMouthGrowthShare;
+   public CUSTOMERS_CAP_AS_PCT_OF_PROD_CODE = .5;
+   public CUSTOMERS_TO_PROD_CODE_GROWTH_RATE = .005 / perHour;
+   public WORD_OF_MOUTH_GROWTH_RATE = .000005 / perHour;
+   public CUSTOMERS_TO_PROD_CODE_GROWTH_SHARE_PCT = .8;
+   public WORD_OF_MOUTH_GROWTH_SHARE_PCT = .2;
 
    // funds growth
-   public customersToProfitGrowthRate = environment.gameSettings.defaults.customersToProfitGrowthRate;
+   public CUSTOMERS_TO_PROFIT_RATE = 15 / perMonth;
 
    // job markets
-   public talentGenerationPerMs = environment.gameSettings.defaults.talentGenerationPerMs;
-   public talentGenerationCap = environment.gameSettings.defaults.talentGenerationCap;
+   public TALENT_GENERATION_RATE = 2 / perDay;
+   public TALENT_CAP = 50; // TODO: make a growth
 
    // settings
-   public showWelcomeModal = environment.gameSettings.showWelcomeModal;
+   public SHOW_WELCOME_MODAL = false;
+   public TALENT_COST_PER_EXPERIENCE: any;
+
+   constructor() {
+      this.TALENT_COST_PER_EXPERIENCE = {}
+      this.TALENT_COST_PER_EXPERIENCE[ExperienceLevel.Intern] = 1;
+      this.TALENT_COST_PER_EXPERIENCE[ExperienceLevel.Associate] = 1;
+      this.TALENT_COST_PER_EXPERIENCE[ExperienceLevel.Junior] = 2;
+      this.TALENT_COST_PER_EXPERIENCE[ExperienceLevel.Senior] = 3;
+   }
 
 }

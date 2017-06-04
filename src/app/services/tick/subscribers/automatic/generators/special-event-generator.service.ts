@@ -55,7 +55,7 @@ export class SpecialEventGeneratorService extends TickSubscriberBase implements 
 
    private initalizeGettingStartedEvent(tickService: TickService) {
       this.tickerSubscription = tickService.pipeline
-         .takeWhile(() => this.config.showWelcomeModal && this.gameStorageService.game.company.resources.code.pushed.totalAccumulated <= 0)
+         .takeWhile(() => this.config.SHOW_WELCOME_MODAL && this.gameStorageService.game.company.resources.code.pushed.totalAccumulated <= 0)
          .take(1)
          .subscribe(() => {
             this.fireSpecialEvent("Welcome to Codestomp!", "Grow a business. Hold no prisoners.", "Get Started", LogType.Info, SpecialEventDisplayType.Modal);

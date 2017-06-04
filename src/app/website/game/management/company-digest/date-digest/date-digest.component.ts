@@ -3,6 +3,7 @@ import {TickService} from '../../../../../services/tick/tick.service';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
 import {environment} from '../../../../../../environments/environment';
+import {ConfigurationService} from '../../../../../services/config/configuration.service';
 
 @Component({
   selector: 'app-date-digest',
@@ -13,8 +14,8 @@ export class DateDigestComponent implements OnInit {
    private tickerSub: Subscription;
    private latestTickDate: moment.Moment;
 
-  constructor(private tickService: TickService) {
-     this.latestTickDate = moment(environment.gameSettings.startTime)
+  constructor(private tickService: TickService, config: ConfigurationService) {
+     this.latestTickDate = moment(config.DEFAULT_GAME_START_DATE);
   }
 
   ngOnInit() {

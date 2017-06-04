@@ -13,7 +13,7 @@ export class StaffQuitDecisionService {
    public decide(ms: number, paymentObligationResult: PaymentObligationResult) {
       // we offset on ms so that longer intervals have more chance for quit
 
-      if (Math.random() > (ms * this.config.quitChanceOnLackOfPayment))
+      if (Math.random() > (ms * this.config.QUIT_CHANCE_ON_LACK_OF_PAYMENT_RATE))
          return;
       let deficitPct = paymentObligationResult.deficitPercent;
       if (Math.random() > deficitPct)

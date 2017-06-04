@@ -16,7 +16,7 @@ export class TalentGeneratorService extends TickSubscriberBase implements ITickS
    public subscribe(tickService: TickService) {
       this.tickerSubscription = tickService.pipeline.subscribe(
          tick => {
-            let newCount = tick.msElapsed * this.config.talentGenerationPerMs;
+            let newCount = tick.msElapsed * this.config.TALENT_GENERATION_RATE;
             let existingTalent = this.talentService.talent.balance;
             let newTotal = newCount + existingTalent;
             let effectiveTotal = Math.min(newTotal, this.talentService.talentCap);

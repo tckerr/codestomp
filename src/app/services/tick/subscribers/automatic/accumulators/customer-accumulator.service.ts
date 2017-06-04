@@ -38,19 +38,19 @@ export class CustomerAccumulatorService extends TickSubscriberBase implements IT
    }
 
    private growthFromWordOfMouth(growthTarget: number,ms: number) {
-      let share = this.config.wordOfMouthGrowthShare;
-      let growthRate = this.config.wordOfMouthGrowthRate;
+      let share = this.config.WORD_OF_MOUTH_GROWTH_SHARE_PCT;
+      let growthRate = this.config.WORD_OF_MOUTH_GROWTH_RATE;
       return ms * share * growthTarget * growthRate;
    }
 
    private growthFromCode(growthTarget: number, ms: number) {
-      let share = this.config.customersToDeployedCodeGrowthShare;
-      let growthRate = this.config.customersToDeployedCodeGrowthRate;
+      let share = this.config.CUSTOMERS_TO_PROD_CODE_GROWTH_SHARE_PCT;
+      let growthRate = this.config.CUSTOMERS_TO_PROD_CODE_GROWTH_RATE;
       return ms * share * growthTarget * growthRate;
    }
 
    private getEligibleGrowth(netCodeBalance): number {
-      let capPct = this.config.customersCapAsPercentOfCode;
+      let capPct = this.config.CUSTOMERS_CAP_AS_PCT_OF_PROD_CODE;
       let cap = capPct * netCodeBalance;
       let eligible = cap - this.customerService.customers.balance;
       return eligible;

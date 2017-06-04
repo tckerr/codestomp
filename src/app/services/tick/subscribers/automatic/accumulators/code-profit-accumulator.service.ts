@@ -26,7 +26,7 @@ export class CodeProfitAccumulatorService extends TickSubscriberBase implements 
    }
 
    private profitPerMs(ms: number) {
-      return ms * this.customerService.customers.$balanceFloored * this.config.customersToProfitGrowthRate;
+      return ms * this.customerService.customers.$balanceFloored * this.config.CUSTOMERS_TO_PROFIT_RATE;
    }
 
    public get profitPerHr() {

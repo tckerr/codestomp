@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GameStorageService} from '../../../services/persistence/game-storage.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
+import {ConfigurationService} from '../../../services/config/configuration.service';
 
 @Component({
    selector: 'app-game-state',
@@ -13,11 +14,10 @@ export class GameStateComponent implements OnInit {
    private gameId: string;
    @Output() private gameSaved = new EventEmitter<string>();
    private selectedGameId: string;
-   private askBeforeClear: boolean;
 
    constructor(private gameStorageService: GameStorageService,
+               private config: ConfigurationService,
                private router: Router) {
-      this.askBeforeClear = environment.gameSettings.askBeforeClear;
    }
 
    ngOnInit() {
@@ -42,7 +42,7 @@ export class GameStateComponent implements OnInit {
    }
 
    private clear(): void {
-      if (!this.askBeforeClear || confirm('Are you sure you want to clear all data?'))
+      if (!this.config.ASK_BEFORE_CLEARING_LOCAL_STORAGE || confirm('Are you sure you want to clear all data?'))
          this.gameStorageService.clear();
    }
 

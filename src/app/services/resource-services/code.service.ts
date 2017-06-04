@@ -53,7 +53,7 @@ export class CodeService {
    }
 
    public moveDeployingToDeployed(count: number) {
-      let bugs = this.config.bugsPercentage * count;
+      let bugs = this.config.BASE_BUGS_TO_PRODUCTION_PCT * count;
       this.code.prod.add(count - bugs);
       this.code.bugs.add(bugs);
       this.code.deploying.remove(count);

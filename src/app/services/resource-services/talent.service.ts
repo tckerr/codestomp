@@ -38,7 +38,7 @@ export class TalentService {
 
 
    public get talentCap(){
-      return this.config.talentGenerationCap;
+      return this.config.TALENT_CAP;
    }
 
    public maxHires(experience: ExperienceLevel) {
@@ -47,16 +47,7 @@ export class TalentService {
    }
 
    public getCostForExperience(experience: ExperienceLevel) {
-      switch (experience) {
-         case ExperienceLevel.Intern:
-            return environment.gameSettings.talentHiringCosts.intern;
-         case ExperienceLevel.Associate:
-            return environment.gameSettings.talentHiringCosts.associate;
-         case ExperienceLevel.Junior:
-            return environment.gameSettings.talentHiringCosts.junior;
-         case ExperienceLevel.Senior:
-            return environment.gameSettings.talentHiringCosts.senior;
-      }
+      return this.config.TALENT_COST_PER_EXPERIENCE[experience];
    }
 
 }

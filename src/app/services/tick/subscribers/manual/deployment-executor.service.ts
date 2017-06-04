@@ -49,7 +49,7 @@ export class DeploymentExecutor implements OnDestroy {
    }
 
    public get canDeploy(){
-      return !this.deploying && this.codeService.tested.balance >= this.config.deployThreshold;
+      return !this.deploying && this.codeService.tested.balance >= this.config.MINIMUM_TESTED_CODE_FOR_DEPLOY;
    }
 
    public resumeDeploy(){
@@ -59,7 +59,7 @@ export class DeploymentExecutor implements OnDestroy {
       this.executeDeploy(rate);
    }
 
-   public deploy(count: number, time: moment.Moment, rate: number = this.config.deployChunkRate): void {
+   public deploy(count: number, time: moment.Moment, rate: number = this.config.BASE_DEPLOY_RATE): void {
       if (this.deploying)
          throw Error('You are already deploying!');
 

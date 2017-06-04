@@ -22,7 +22,7 @@ export class CodeDeploymentService implements TickExecutor {
          let msIn12Hours = 1000 * 60 * 60 * 12;
          let deploymentCapability = this.getDeploymentCapabilityForMs(msIn12Hours, readyEngineers);
          if(deploymentCapability > 0)
-            this.executor.deploy(deploymentCapability, tick.date, this.config.deployChunkRate * readyEngineers);
+            this.executor.deploy(deploymentCapability, tick.date, this.config.BASE_DEPLOY_RATE * readyEngineers);
       }
    }
 
@@ -42,7 +42,7 @@ export class CodeDeploymentService implements TickExecutor {
    }
 
    private getDeploymentCapabilityForMs(ms: number, engineers: number) {
-      let rate = ms * this.config.deployAmountPerMs;
+      let rate = ms * this.config.BASE_DEPLOY_CHUNK_SIZE;
       return engineers * rate;
    }
 }
