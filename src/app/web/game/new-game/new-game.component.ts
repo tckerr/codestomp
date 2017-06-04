@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GameStorageService} from '../../persistence/game-storage.service';
+import {GameStorageService} from '../../../persistence/game-storage.service';
 import {Router} from '@angular/router';
 
 @Component({

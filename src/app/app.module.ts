@@ -4,39 +4,24 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {TickService} from './time/tick.service';
-import {GameComponent} from './website/game/game.component';
+import {GameComponent} from './web/game/game.component';
 import {RouterModule, Routes} from '@angular/router';
-import {NewGameComponent} from './website/new-game/new-game.component';
-import {GameStateComponent} from './website/game/game-state/game-state.component';
+import {NewGameComponent} from './web/game/new-game/new-game.component';
 import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {IdGeneratorService} from './utilities/id-generator.service';
-import {LogHistoryComponent} from './website/game/log-history/log-history.component';
-import {TickerSpeedComponent} from './website/game/game-state/ticker-speed/ticker-speed.component';
-import {ManagementComponent} from './website/game/management/management.component';
-import {DevelopmentComponent} from './website/game/management/business-units/development/development.component';
-import {HRComponent} from './website/game/management/business-units/hr/hr.component';
-import {GameSeedGeneratorService} from './persistence/game-seed-generator.service';
+import {ManagementComponent} from './web/game/management/management.component';
+import {DevelopmentComponent} from './web/game/management/business-units/development/development.component';
+import {HRComponent} from './web/game/management/business-units/hr/hr.component';
 import {CodeService} from './services/resource-services/code.service';
-import {CodeBreakdownComponent} from './website/game/management/business-units/development/code-breakdown/code-breakdown.component';
 import {CustomerService} from './services/resource-services/customer.service';
 import {FundService} from './services/resource-services/fund.service';
-import {DebugComponent} from './website/game/management/business-units/debug/debug.component';
-import {DevelopmentActionsComponent} from './website/game/management/business-units/development/development-actions/development-actions.component';
-import {CompanyDigestComponent} from './website/game/management/company-digest/company-digest.component';
+import {DebugComponent} from './web/game/management/business-units/debug/debug.component';
 import {UnlocksService} from './services/unlocks.service';
-import {FundsDigestComponent} from './website/game/management/company-digest/funds-digest/funds-digest.component';
-import {DateDigestComponent} from './website/game/management/company-digest/date-digest/date-digest.component';
-import {CustomersDigestComponent} from './website/game/management/company-digest/customers-digest/customers-digest.component';
-import {StaffSummaryComponent} from './website/game/management/business-units/staff-summary/staff-summary.component';
 import {DeveloperStaffService} from './services/staffing/developer-staff.service';
 import {QuitterNotificationService} from './services/notifications/quitter-notification.service';
-import {AlertsDigestComponent} from './website/game/management/company-digest/alerts-digest/alerts-digest.component';
 import {NotificationService} from './services/notifications/notification.service';
 import {TalentService} from './services/resource-services/talent.service';
 import {HiringService} from './services/staffing/hiring.service';
-import {JobMarketComponent} from './website/game/management/job-market/job-market.component';
-import {TalentCapacityBreakdownComponent} from './website/game/management/job-market/talent-capacity-breakdown/talent-capacity-breakdown.component';
 import {StaffCategoryIconResolverService} from './services/staffing/staff-category-icon-resolver.service';
 import {StaffQuitDecisionService} from './services/staffing/staff-quit-decision.service';
 import {DeploymentExecutor} from './services/tick/subscribers/manual/deployment-executor.service';
@@ -56,100 +41,28 @@ import {AchievementsService} from './services/achievements/achievements.service'
 import {AchievementUnlockListenerService} from 'app/services/tick/subscribers/automatic/listeners/achievement-unlock-listener.service';
 import {AchievementUnlockerService} from './services/achievements/achievement-unlocker.service';
 import {AchievementCriteriaValueResolverService} from './services/achievements/achievement-criteria-value-resolver.service';
-import {AchievementProgressBarComponent} from './website/game/achievement-progress-bar/achievement-progress-bar.component';
 import {AchievementEvaluatorService} from './services/achievements/achievement-evaluator.service';
 import {BusinessUnitUnlockListenerService} from './services/listeners/business-unit-unlock-listener.service';
-import {CorporateComponent} from './website/game/management/business-units/corporate/corporate.component';
 import {SkillsService} from './services/resource-services/skills.service';
-import {DevelopmentSkillsImprovementActionsComponent} from './website/game/management/business-units/development/development-actions/development-skills-improvement-actions/development-skills-improvement-actions.component';
 import {ConfigurationModule} from './configuration/configuration.module';
 import {LoggingModule} from './logging/logging.module';
 import {PersistenceModule} from './persistence/persistence.module';
 import {UtilitiesModule} from './utilities/utilities.module';
 import {TimeModule} from './time/time.module';
+import {WebModule} from './web/web.module';
 
-const appRoutes: Routes = [
-   {
-      path: '',
-      redirectTo: 'new',
-      pathMatch: 'full'
-   },
-   {
-      path: 'new',
-      component: NewGameComponent
-   },
-   {
-      path: 'game/:gameId',
-      component: GameComponent,
-      children: [
-         {
-            path: '',
-            component: ManagementComponent,
-            children: [
-               {
-                  path: '',
-                  pathMatch: 'full',
-                  redirectTo: 'development',
-               },
-               {
-                  path: 'development',
-                  component: DevelopmentComponent,
-               },
-               {
-                  path: 'debug',
-                  component: DebugComponent,
-               },
-               {
-                  path: 'hr',
-                  component: HRComponent
-               },
-               {
-                  path: 'corporate',
-                  component: CorporateComponent
-               }
-            ]
-         }
-      ]
-   }
-];
 
 @NgModule({
    declarations: [
       AppComponent,
-      GameComponent,
-      NewGameComponent,
-      GameStateComponent,
-      LogHistoryComponent,
-      TickerSpeedComponent,
-      ManagementComponent,
-      DevelopmentComponent,
-      HRComponent,
-      CodeBreakdownComponent,
-      DebugComponent,
-      DevelopmentActionsComponent,
-      CompanyDigestComponent,
-      FundsDigestComponent,
-      DateDigestComponent,
-      CustomersDigestComponent,
-      StaffSummaryComponent,
-      JobMarketComponent,
-      AlertsDigestComponent,
-      TalentCapacityBreakdownComponent,
-      AchievementProgressBarComponent,
-      CorporateComponent,
-      DevelopmentSkillsImprovementActionsComponent,
    ],
    imports: [
-      BrowserModule,
-      FormsModule,
-      HttpModule,
-      RouterModule.forRoot(appRoutes),
-      NgbModule.forRoot(),
       UtilitiesModule,
       ConfigurationModule,
       LoggingModule,
       PersistenceModule,
       TimeModule,
+      WebModule
    ],
    providers: [
       NgbAlertConfig,
