@@ -12,27 +12,8 @@ export const day = hour * 24;
 export const year = day * 365;
 export const month = year / 12;
 
-// this is the fundamental time constant
-// which essentially controls game tick > date speed
-let speedMultiplier = 1/second;
-
-// "frame rate" of the game
-let msBetweenTicks = second/50; // 50 per second
-
-let msPerTick = hour * speedMultiplier * msBetweenTicks;
-let ticksPerHour = hour / msPerTick;
-
 export const environment = {
-   production: false,
-   gameSettings: {
-      ticker: {
-         msBetweenTicks: msBetweenTicks,
-         ticksPerHour: ticksPerHour,
-         msPerTick: msPerTick,
-         msInAnHour: hour,
-         speedMultiplier: speedMultiplier,
-      }
-   }
+   production: false
 };
 // TODO: the ability to choose what area of business to unlock
 console.log(environment);
