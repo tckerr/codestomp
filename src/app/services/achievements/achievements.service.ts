@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GameStorageService} from '../persistence/game-storage.service';
+import {GameStorageService} from '../../persistence/game-storage.service';
 import * as Enumerable from 'linq';
 import {IEnumerable} from 'linq';
 import {AchievementBlock} from '../../models/achievements/achievement-block';

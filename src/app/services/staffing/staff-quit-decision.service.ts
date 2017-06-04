@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {QuitterNotificationService} from '../notifications/quitter-notification.service';
-import {ConfigurationService} from '../config/configuration.service';
+import {ConfigurationService} from '../../configuration/configuration.service';
 import {PaymentObligationResult} from '../tick/subscribers/automatic/accumulators/staff-salary-accumulator.service';
 
 @Injectable()

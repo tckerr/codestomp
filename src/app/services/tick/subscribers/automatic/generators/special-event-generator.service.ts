@@ -4,13 +4,13 @@ import {CustomerService} from '../../../../resource-services/customer.service';
 import {Subject} from 'rxjs/Subject';
 import {SpecialEvent, SpecialEventDisplayType} from '../../../../../models/messaging/special-event';
 import {NotificationService} from '../../../../notifications/notification.service';
-import {GameStorageService} from '../../../../persistence/game-storage.service';
+import {GameStorageService} from '../../../../../persistence/game-storage.service';
 import {LogType} from '../../../../../models/definitions/log-type';
 import {ITickSubscriber} from '../i-tick-subscriber';
-import {TickService} from 'app/services/tick/tick.service';
+import {TickService} from 'app/time/tick.service';
 import {TickSubscriberBase} from '../tick-subscriber-base';
 import {Subscription} from 'rxjs/Subscription';
-import {ConfigurationService} from '../../../../config/configuration.service';
+import {ConfigurationService} from '../../../../../configuration/configuration.service';
 
 @Injectable()
 export class SpecialEventGeneratorService extends TickSubscriberBase implements ITickSubscriber {

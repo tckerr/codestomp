@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {GameStorageService} from '../../../services/persistence/game-storage.service';
+import {GameStorageService} from '../../../persistence/game-storage.service';
 import {UnlocksService} from '../../../services/unlocks.service';
 import {Subscription} from 'rxjs/Subscription';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TickService} from '../../../services/tick/tick.service';
+import {TickService} from '../../../time/tick.service';
 import {SpecialEvent} from '../../../models/messaging/special-event';
 import {isNullOrUndefined} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';

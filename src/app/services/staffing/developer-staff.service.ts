@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as Enumerable from 'linq';
-import {GameStorageService} from '../persistence/game-storage.service';
+import {GameStorageService} from '../../persistence/game-storage.service';
 
 @Injectable()
 export class DeveloperStaffService {

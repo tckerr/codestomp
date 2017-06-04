@@ -1,10 +1,10 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {TickService} from '../../../tick.service';
+import {TickService} from '../../../../../time/tick.service';
 import {Tick} from '../../../../../models/tick/tick';
 import {FundService} from '../../../../resource-services/fund.service';
 import {Staff} from '../../../../../models/game/company/business-units/staff';
-import {GameStorageService} from '../../../../persistence/game-storage.service';
+import {GameStorageService} from '../../../../../persistence/game-storage.service';
 import {hour} from '../../../../../../environments/environment';
 import * as Enumerable from 'linq';
 import {IEnumerable} from 'linq';

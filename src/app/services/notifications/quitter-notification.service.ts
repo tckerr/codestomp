@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {LoggerService} from '../logging/logger-service';
+import {LoggerService} from '../../logging/logger-service';
 import {LogType} from '../../models/definitions/log-type';
 
 @Injectable()

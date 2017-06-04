@@ -1,62 +1,59 @@
 import {Injectable} from '@angular/core';
-import {Pipeline} from '../pipeline';
+import {Pipeline} from '../services/pipeline';
 import {Subject} from 'rxjs/Subject';
-import {Tick} from '../../models/tick/tick';
+import {Tick} from '../models/tick/tick';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-import {environment, hour, second} from '../../../environments/environment';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
 import {GameStorageService} from '../persistence/game-storage.service';
+import {ConfigurationService} from '../configuration/configuration.service';
 
 @Injectable()
 export class TickService implements Pipeline {
-   public msBetweenTicks: number;
-   public msPerTick: number;
    private subscription: Subscription;
    private timer: Observable<number>;
    private source = new Subject<Tick>();
-   public pipeline = this.source.asObservable();
-   private minimumMsBetweenTicks: number;
    private speedMultiplier: number;
    private incrementingSub: Subscription;
    private latest: moment.Moment;
-   private msPerTickCached: number;
-   private originalSpeedMultiplier: number;
-   private speedChangeDelta: number;
-   private tpsIncrementDelta: number;
+   private cachedIntervalMultiplier: number;
+   private timeGeneratedPerTick: number;
 
-   constructor(private gameStorageService: GameStorageService) {
+   public pipeline = this.source.asObservable();
+   public tps: number;
+
+   constructor(
+      private gameStorageService: GameStorageService,
+      private config: ConfigurationService
+   ) {
       this.initialize();
    }
 
    public initialize() {
-      // "frame rate" of the game
-      this.tpsIncrementDelta = 1.1;
-      this.msBetweenTicks = second/50; // 50 per second
-      this.minimumMsBetweenTicks = 20; // this is a performance consideration, since we have at least 2ms overhead
-      // this is the fundamental time constant
-      // which essentially controls game tick > date speed
-      this.speedMultiplier = 1 / second;
-      this.originalSpeedMultiplier = this.speedMultiplier;
-      this.speedChangeDelta = .001;
+      this.tps = this.config.INITIAL_TPS;
+      this.speedMultiplier = this.config.INITIAL_SPEED_MULTIPLIER;
       this.setNewSpeed();
+   }
+
+   private get interval(){
+      return 1000 / this.tps;
    }
 
    start(offset: number = 0) {
       this.stop();
-      this.timer = Observable.timer(offset - moment().diff(this.latest, 'ms'), this.msBetweenTicks);
-      this.msPerTickCached = this.msPerTick;
-      this.subscription = this.timer.subscribe(() => this.generateTick(this.msPerTickCached, this.msBetweenTicks));
+      this.timer = Observable.timer(offset - moment().diff(this.latest, 'ms'), this.interval);
+      this.cachedIntervalMultiplier = this.speedMultiplier / this.tps;
+      this.subscription = this.timer.subscribe(() => this.generateTick(this.cachedIntervalMultiplier, this.interval));
    }
 
    step() {
-      this.generateTick(this.msPerTickCached, this.msBetweenTicks);
+      this.generateTick(this.cachedIntervalMultiplier, this.interval);
    }
 
    continueWithUpdates() {
       this.incrementingSub && this.incrementingSub.unsubscribe();
-      let cachedInterval = this.msBetweenTicks;
+      let cachedInterval = this.interval;
       this.incrementingSub = this.timer.take(1).subscribe(() => {
          if (!this.paused)
             this.start(cachedInterval);
@@ -75,24 +72,25 @@ export class TickService implements Pipeline {
 
 
    increaseTps() {
-      let newValue = Math.max(this.minimumMsBetweenTicks, this.msBetweenTicks / this.tpsIncrementDelta);
+      let newValue = Math.min(this.config.MAX_TPS, this.tps * this.config.TPS_INCREMENT_MULTIPLIER);
       this.setNewTps(newValue);
       this.continueWithUpdates();
    }
 
    decreaseTps() {
-      let newValue = this.msBetweenTicks * 1.1;
+      let newValue = this.tps / 1.1;
       this.setNewTps(newValue);
       this.continueWithUpdates();
    }
 
    private setNewTps(newValue: number) {
-      this.msBetweenTicks = newValue;
+      this.tps = newValue;
       this.setNewSpeed();
    }
 
+
    private setNewSpeed() {
-      this.msPerTick = hour * this.speedMultiplier * this.msBetweenTicks;
+      this.timeGeneratedPerTick = this.config.GAME_TIME_ELAPSED_PER_SECOND * this.speedMultiplier / this.tps;
    }
 
    faster() {
@@ -108,7 +106,7 @@ export class TickService implements Pipeline {
    }
 
    resetSpeed() {
-      this.speedMultiplier = this.originalSpeedMultiplier;
+      this.speedMultiplier = this.config.INITIAL_SPEED_MULTIPLIER;
       this.setNewSpeed();
       this.continueWithUpdates();
    }
@@ -118,21 +116,18 @@ export class TickService implements Pipeline {
    }
 
    public get speed() {
-      return this.speedMultiplier / this.speedChangeDelta;
+      return this.speedMultiplier;
    }
 
-   public get tps() {
-      return Math.round(100000 / this.msBetweenTicks) / 100;
-   }
-
-   private generateTick(tickToMsMapCached, interval) {
+   private generateTick(cachedIntervalMultiplier, interval) {
+      let elapsedMs = this.config.GAME_TIME_ELAPSED_PER_SECOND * cachedIntervalMultiplier;
       let index = this.incrementIndex();
-      let date = this.generateDate(tickToMsMapCached);
+      let date = this.generateDate(elapsedMs);
       let msSinceLastTick = 0;
       if (this.latest)
          msSinceLastTick = moment().diff(this.latest, 'ms');
       let msOverlap = msSinceLastTick - interval;
-      let tick = new Tick(index, date, tickToMsMapCached, msSinceLastTick, msOverlap);
+      let tick = new Tick(index, date, elapsedMs, msSinceLastTick, msOverlap);
       this.latest = moment();
       this.source.next(tick);
    }
@@ -142,9 +137,9 @@ export class TickService implements Pipeline {
       return this.gameStorageService.game.tick;
    }
 
-   private generateDate(tickToMsMapCached) {
+   private generateDate(elapsedMs) {
       let durationCtor = {};
-      durationCtor['ms'] = tickToMsMapCached;
+      durationCtor['ms'] = elapsedMs;
       let newDate = moment(this.gameStorageService.game.time).add(durationCtor);
       this.gameStorageService.game.time = newDate.format();
       return newDate;

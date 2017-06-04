@@ -1,8 +1,8 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import * as alertifyjs from 'alertifyjs';
-import {LoggerService} from '../logging/logger-service';
+import {LoggerService} from '../../logging/logger-service';
 import {LogType} from '../../models/definitions/log-type';
-import {GameStorageService} from '../persistence/game-storage.service';
+import {GameStorageService} from '../../persistence/game-storage.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Notification} from '../../models/messaging/notification';
 

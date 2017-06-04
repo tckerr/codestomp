@@ -1,4 +1,4 @@
-import {TickService} from '../../tick.service';
+import {TickService} from '../../../../time/tick.service';
 
 export interface ITickSubscriber {
    subscribe(tickService: TickService);

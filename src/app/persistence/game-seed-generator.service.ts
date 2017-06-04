@@ -1,29 +1,32 @@
 import {Injectable} from '@angular/core';
-import {IdGeneratorService} from '../util/id-generator.service';
-import {environment, hour, year} from '../../../environments/environment';
+import {IdGeneratorService} from '../utilities/id-generator.service';
+import {environment, hour, year} from '../../environments/environment';
 import * as moment from 'moment';
-import {ExperienceLevel, StaffCategory, StaffType} from '../../models/definitions/staff-definitions';
-import {AchievementCriteriaType} from '../../models/achievements/achievement-criteria-type.enum';
-import {UnlockableFeature} from '../../models/achievements/unlockable-feature.enum';
-import {LogType} from '../../models/definitions/log-type';
-import {EnumParser} from '../../util/enum-parser';
-import {ConfigurationService} from '../config/configuration.service';
+import {ExperienceLevel, StaffCategory, StaffType} from '../models/definitions/staff-definitions';
+import {AchievementCriteriaType} from '../models/achievements/achievement-criteria-type.enum';
+import {UnlockableFeature} from '../models/achievements/unlockable-feature.enum';
+import {LogType} from '../models/definitions/log-type';
+import {EnumParserService} from '../utilities/enum-parser.service';
+import {ConfigurationService} from '../configuration/configuration.service';
 
 
 @Injectable()
 export class GameSeedGeneratorService {
 
-   constructor(private idGeneratorService: IdGeneratorService, private config: ConfigurationService) {
+   constructor(
+      private idGeneratorService: IdGeneratorService,
+      private config: ConfigurationService,
+      private enumParser: EnumParserService) {
    }
 
    public defaultSeed(): any {
       let unlockedFeatures = {};
-      EnumParser.getMembers(UnlockableFeature).forEach(a => unlockedFeatures[a] = false);
+      this.enumParser.getMembers(UnlockableFeature).forEach(a => unlockedFeatures[a] = false);
 
       return {
-         id: 'csgm_' + this.idGeneratorService.generate(),
+         id: this.idGeneratorService.generate(),
          tick: 0,
-         time: moment(this.config.DEFAULT_GAME_START_DATE).format(),
+         time: moment(this.config.INITIAL_GAME_DATE).format(),
          marketResources: {
             talent: {
                balance: 0,
@@ -163,13 +166,13 @@ export class GameSeedGeneratorService {
                },
                skills: {
                   coding: {
-                     balance: 3,
+                     balance: 300,
                      totalAccumulated: 3,
                      level: 1,
                      improvementConstant: 2,
                   },
                   testing: {
-                     balance: 5,
+                     balance: 500,
                      totalAccumulated: 5,
                      level: 1,
                      improvementConstant: 3,
@@ -285,7 +288,7 @@ export class GameSeedGeneratorService {
                   id: 'debug',
                   name: 'Debug',
                   icon: 'fa-code',
-                  active: false,
+                  active: true,
                   staff: []
                },
                development: {

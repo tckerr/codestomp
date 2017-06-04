@@ -1,12 +1,12 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {LoggerService} from '../../../logging/logger-service';
+import {LoggerService} from '../../../../logging/logger-service';
 import {Subject} from 'rxjs/Subject';
 import {CodeService} from '../../../resource-services/code.service';
 import 'rxjs/Rx';
-import {TickService} from 'app/services/tick/tick.service';
-import {ConfigurationService} from '../../../config/configuration.service';
+import {TickService} from 'app/time/tick.service';
+import {ConfigurationService} from '../../../../configuration/configuration.service';
 import * as moment from 'moment';
-import {GameStorageService} from '../../../persistence/game-storage.service';
+import {GameStorageService} from '../../../../persistence/game-storage.service';
 import {LogType} from '../../../../models/definitions/log-type';
 import {Subscription} from 'rxjs/Subscription';
 import {DeploymentInfoService} from '../../../resource-services/deployment-info.service';

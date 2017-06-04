@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {GameStorageService} from '../../../services/persistence/game-storage.service';
+import {GameStorageService} from '../../../persistence/game-storage.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
-import {ConfigurationService} from '../../../services/config/configuration.service';
+import {ConfigurationService} from '../../../configuration/configuration.service';
 
 @Component({
    selector: 'app-game-state',

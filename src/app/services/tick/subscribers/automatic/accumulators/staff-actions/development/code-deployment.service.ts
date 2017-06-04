@@ -4,7 +4,7 @@ import {DeveloperStaffService} from '../../../../../../staffing/developer-staff.
 import {Tick} from '../../../../../../../models/tick/tick';
 import {DeploymentExecutor} from '../../../../manual/deployment-executor.service';
 import {StaffCategory} from '../../../../../../../models/definitions/staff-definitions';
-import {ConfigurationService} from '../../../../../../config/configuration.service';
+import {ConfigurationService} from '../../../../../../../configuration/configuration.service';
 import * as Enumerable from 'linq';
 
 @Injectable()

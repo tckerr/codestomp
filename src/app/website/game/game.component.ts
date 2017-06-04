@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {TickService} from '../../services/tick/tick.service';
-import {GameStorageService} from '../../services/persistence/game-storage.service';
+import {TickService} from '../../time/tick.service';
+import {GameStorageService} from '../../persistence/game-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {CodeService} from '../../services/resource-services/code.service';

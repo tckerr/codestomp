@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CodeService} from '../../../../../../services/resource-services/code.service';
-import {ConfigurationService} from 'app/services/config/configuration.service';
+import {ConfigurationService} from 'app/configuration/configuration.service';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
-import {CommitGeneratorService} from '../../../../../../services/util/commit-generator.service';
-import {LoggerService} from '../../../../../../services/logging/logger-service';
-import {TickService} from '../../../../../../services/tick/tick.service';
+import {CommitGeneratorService} from '../../../../../../utilities/commit-generator.service';
+import {LoggerService} from '../../../../../../logging/logger-service';
+import {TickService} from '../../../../../../time/tick.service';
 import {Subscription} from "rxjs/Subscription";
 import {DeploymentExecutor} from '../../../../../../services/tick/subscribers/manual/deployment-executor.service';
 import {UnlockableFeature} from '../../../../../../models/achievements/unlockable-feature.enum';

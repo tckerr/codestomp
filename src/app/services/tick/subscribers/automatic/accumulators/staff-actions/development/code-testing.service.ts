@@ -4,7 +4,7 @@ import {Staff} from '../../../../../../../models/game/company/business-units/sta
 import {DeveloperStaffService} from '../../../../../../staffing/developer-staff.service';
 import {CodeService} from '../../../../../../resource-services/code.service';
 import {TickExecutor} from '../../../../../tick-executor';
-import {ConfigurationService} from '../../../../../../config/configuration.service';
+import {ConfigurationService} from '../../../../../../../configuration/configuration.service';
 
 @Injectable()
 export class CodeTestingService implements TickExecutor {

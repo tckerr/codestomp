@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {LogItem} from '../../models/logging/log-item';
-import {IdGeneratorService} from '../util/id-generator.service';
+import {LogItem} from '../models/logging/log-item';
+import {IdGeneratorService} from '../utilities/id-generator.service';
 import {Subject} from 'rxjs/Subject';
-import {LogType} from '../../models/definitions/log-type';
+import {LogType} from '../models/definitions/log-type';
 
 @Injectable()
 export class LoggerService {

@@ -6,11 +6,11 @@ import {StaffSalaryAccumulatorService} from './tick/subscribers/automatic/accumu
 import {ITickSubscriber} from './tick/subscribers/automatic/i-tick-subscriber';
 import {TalentGeneratorService} from './tick/subscribers/automatic/generators/talent-generator-service';
 import {SpecialEventGeneratorService} from './tick/subscribers/automatic/generators/special-event-generator.service';
-import {TickService} from './tick/tick.service';
+import {TickService} from '../time/tick.service';
 import {AchievementUnlockListenerService} from './tick/subscribers/automatic/listeners/achievement-unlock-listener.service';
 import {IListener} from './listeners/i-listener';
 import {BusinessUnitUnlockListenerService} from './listeners/business-unit-unlock-listener.service';
-
+ 
 @Injectable()
 export class SubscriptionAggregationService {
 

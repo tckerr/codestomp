@@ -1,12 +1,19 @@
 import {Injectable} from '@angular/core';
-import {day, hour, month} from '../../../environments/environment';
-import {ExperienceLevel} from '../../models/definitions/staff-definitions';
+import {day, hour, month} from '../../environments/environment';
+import {ExperienceLevel} from '../models/definitions/staff-definitions';
 
 @Injectable()
 export class ConfigurationService {
 
-   public DEFAULT_GAME_START_DATE = '2050-01-01 00:00';
    public ASK_BEFORE_CLEARING_LOCAL_STORAGE = false;
+
+   public INITIAL_GAME_DATE = '2050-01-01 00:00';
+
+   public GAME_TIME_ELAPSED_PER_SECOND = hour;
+   public TPS_INCREMENT_MULTIPLIER = 1.1;
+   public INITIAL_TPS = 60;
+   public INITIAL_SPEED_MULTIPLIER = 1;
+   public MAX_TPS = 150;
 
    // devops rates
    public MINIMUM_TESTED_CODE_FOR_DEPLOY = 100;
@@ -36,7 +43,7 @@ export class ConfigurationService {
    public TALENT_COST_PER_EXPERIENCE: any;
 
    constructor() {
-      this.TALENT_COST_PER_EXPERIENCE = {}
+      this.TALENT_COST_PER_EXPERIENCE = {};
       this.TALENT_COST_PER_EXPERIENCE[ExperienceLevel.Intern] = 1;
       this.TALENT_COST_PER_EXPERIENCE[ExperienceLevel.Associate] = 1;
       this.TALENT_COST_PER_EXPERIENCE[ExperienceLevel.Junior] = 2;

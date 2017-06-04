@@ -4,7 +4,7 @@ import {IListener} from './i-listener';
 import {ListenerBase} from './listener-base';
 import {Subscription} from 'rxjs/Subscription';
 import {UnlockableFeature} from '../../models/achievements/unlockable-feature.enum';
-import {GameStorageService} from '../persistence/game-storage.service';
+import {GameStorageService} from '../../persistence/game-storage.service';
 
 @Injectable()
 export class BusinessUnitUnlockListenerService extends ListenerBase implements IListener {

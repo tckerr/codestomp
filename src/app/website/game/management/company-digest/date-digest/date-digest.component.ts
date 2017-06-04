@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {TickService} from '../../../../../services/tick/tick.service';
+import {TickService} from '../../../../../time/tick.service';
 import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
 import {environment} from '../../../../../../environments/environment';
-import {ConfigurationService} from '../../../../../services/config/configuration.service';
+import {ConfigurationService} from '../../../../../configuration/configuration.service';
 
 @Component({
   selector: 'app-date-digest',
@@ -15,7 +15,7 @@ export class DateDigestComponent implements OnInit {
    private latestTickDate: moment.Moment;
 
   constructor(private tickService: TickService, config: ConfigurationService) {
-     this.latestTickDate = moment(config.DEFAULT_GAME_START_DATE);
+     this.latestTickDate = moment(config.INITIAL_GAME_DATE);
   }
 
   ngOnInit() {

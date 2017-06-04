@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ExperienceLevel, StaffType} from '../../models/definitions/staff-definitions';
-import {LoggerService} from '../logging/logger-service';
+import {LoggerService} from '../../logging/logger-service';
 import {TalentService} from '../resource-services/talent.service';
-import {GameStorageService} from '../persistence/game-storage.service';
+import {GameStorageService} from '../../persistence/game-storage.service';
 import * as Enumerable from 'linq';
 import {LogType} from '../../models/definitions/log-type';
 

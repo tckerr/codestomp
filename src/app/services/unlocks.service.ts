@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GameStorageService} from './persistence/game-storage.service';
+import {GameStorageService} from '../persistence/game-storage.service';
 import {ExperienceLevel} from '../models/definitions/staff-definitions';
 import {UnlockableFeature} from '../models/achievements/unlockable-feature.enum';
 import {Subject} from 'rxjs/Subject';

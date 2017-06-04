@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GameStorageService} from '../persistence/game-storage.service';
+import {GameStorageService} from '../../persistence/game-storage.service';
 import {SkillResource} from '../../models/game/resources/skills/skill-resource';
 import {FundService} from './fund.service';
 

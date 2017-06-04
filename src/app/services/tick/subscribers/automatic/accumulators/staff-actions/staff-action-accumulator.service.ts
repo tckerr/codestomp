@@ -1,5 +1,5 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {TickService} from '../../../../tick.service';
+import {TickService} from '../../../../../../time/tick.service';
 import {Tick} from '../../../../../../models/tick/tick';
 import {Subscription} from 'rxjs/Subscription';
 import {CodeWritingService} from './development/code-writing.service';

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {GameStorageService} from '../persistence/game-storage.service';
-import {LoggerService} from '../logging/logger-service';
+import {GameStorageService} from '../../persistence/game-storage.service';
+import {LoggerService} from '../../logging/logger-service';
 
 @Injectable()
 export class CustomerService {

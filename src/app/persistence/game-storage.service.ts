@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Game} from '../../models/game';
+import {Game} from '../models/game';
 import {LoggerService} from '../logging/logger-service';
 import {Subject} from 'rxjs/Subject';
 import {GameSeedGeneratorService} from './game-seed-generator.service';
