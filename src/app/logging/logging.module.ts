@@ -1,11 +1,8 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {LoggerService} from './logger-service';
 
 @NgModule({
-   imports: [
-      CommonModule
-   ],
+   imports: [],
    declarations: [],
    providers: [
       LoggerService,

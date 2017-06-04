@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {TickExecutor} from '../../../tick-executor';
 import {DeveloperStaffService} from '../../../../../staffing/developer-staff.service';
 import {Tick} from '../../../../../../models/tick/tick';
@@ -18,10 +18,10 @@ export class CodeDeploymentService implements TickExecutor {
 
    public execute(tick: Tick) {
       let readyEngineers = this.getReadyEngineers(tick);
-      if(readyEngineers){
+      if (readyEngineers) {
          let msIn12Hours = 1000 * 60 * 60 * 12;
          let deploymentCapability = this.getDeploymentCapabilityForMs(msIn12Hours, readyEngineers);
-         if(deploymentCapability > 0)
+         if (deploymentCapability > 0)
             this.executor.deploy(deploymentCapability, tick.date, this.config.BASE_DEPLOY_RATE * readyEngineers);
       }
    }
@@ -30,9 +30,9 @@ export class CodeDeploymentService implements TickExecutor {
       if (!this.executor.canDeploy)
          return false;
 
-      let timeSinceLastDeploy = tick.date.diff(this.executor.lastDeployedDate, "hours");
+      let timeSinceLastDeploy = tick.date.diff(this.executor.lastDeployedDate, 'hours');
       let hasBeenAtLeast12Hours = timeSinceLastDeploy >= 12;
-      if(!hasBeenAtLeast12Hours)
+      if (!hasBeenAtLeast12Hours)
          return false;
 
       return Enumerable

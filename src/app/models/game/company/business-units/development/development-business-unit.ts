@@ -1,5 +1,4 @@
 import {IBusinessUnit} from '../ibusiness-unit';
-import {Staff} from '../staff';
 import {DeploymentInfo} from './deployment-info';
 import {DevelopmentStaff} from './development-staff';
 
@@ -21,7 +20,7 @@ export class DevelopmentBusinessUnit implements IBusinessUnit {
          this.staff.push(new DevelopmentStaff(staff));
       }
       this.deploymentInfo = new DeploymentInfo(json.deploymentInfo);
-      this.icon = json.icon || "fa-building";
+      this.icon = json.icon || 'fa-building';
    }
 
    public get $totalStaff() {

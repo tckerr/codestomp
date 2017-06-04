@@ -15,7 +15,7 @@ export class BugFixingService implements TickExecutor {
 
    public execute(tick: Tick) {
       let growth = this.bugsFixedForMs(tick.msElapsed);
-      if (growth > 0){
+      if (growth > 0) {
          this.codeService.bugFix(growth);
       }
    }

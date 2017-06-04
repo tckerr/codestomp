@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {CodeService} from './resource-services/code.service';
 import {DeploymentExecutor} from './tick-subscribers/manual/deployment-executor.service';
 import {CustomerAccumulatorService} from './tick-subscribers/automatic/accumulators/customer-accumulator.service';
@@ -39,7 +38,6 @@ import {TimeModule} from '../time/time.module';
 
 @NgModule({
    imports: [
-      CommonModule,
       UtilitiesModule,
       ConfigurationModule,
       LoggingModule,

@@ -16,13 +16,14 @@ export class DevelopmentSkillsImprovementActionsComponent implements OnInit {
                private fundService: FundService,) {
    }
 
-   ngOnInit() {   }
+   ngOnInit() {
+   }
 
    private get selfImprovementUnlocked() {
       return this.unlocksService.isUnlocked(UnlockableFeature.SelfImprovement);
    }
 
-   private get bugsUnlocked(){
+   private get bugsUnlocked() {
       return this.unlocksService.isUnlocked(UnlockableFeature.ManualBugFixes);
    }
 

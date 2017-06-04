@@ -10,7 +10,7 @@ import {CodeTestingService} from './development/code-testing.service';
 import {TickSubscriberBase} from '../../tick-subscriber-base';
 
 @Injectable()
-export class StaffActionAccumulatorService extends TickSubscriberBase implements ITickSubscriber  {
+export class StaffActionAccumulatorService extends TickSubscriberBase implements ITickSubscriber {
    private executors: TickExecutor[] = [];
 
    constructor(private codeWritingService: CodeWritingService,
