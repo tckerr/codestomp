@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {AchievementsService} from '../../../services/achievements/achievements.service';
-import {AchievementEvaluatorService} from '../../../services/achievements/achievement-evaluator.service';
+import {AchievementsService} from '../../../game/achievements/achievements.service';
+import {AchievementEvaluatorService} from '../../../game/achievements/achievement-evaluator.service';
 import * as Enumerable from 'linq';
 import {isNullOrUndefined} from 'util';
-import {AchievementCriteriaValueResolverService} from '../../../services/achievements/achievement-criteria-value-resolver.service';
+import {AchievementCriteriaValueResolverService} from '../../../game/achievements/achievement-criteria-value-resolver.service';
 import {UnlockableFeature} from '../../../models/achievements/unlockable-feature.enum';
 
 @Component({

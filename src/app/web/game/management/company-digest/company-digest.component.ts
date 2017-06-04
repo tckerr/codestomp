@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerService} from '../../../../services/resource-services/customer.service';
-import {CustomerAccumulatorService} from '../../../../services/tick-subscribers/automatic/accumulators/customer-accumulator.service';
+import {CustomerService} from '../../../../game/resource-services/customer.service';
+import {CustomerAccumulatorService} from '../../../../game/tick-subscribers/automatic/accumulators/customer-accumulator.service';
 
 @Component({
    selector: 'app-company-digest',

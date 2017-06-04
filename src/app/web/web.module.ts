@@ -27,6 +27,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
+import {GameModule} from '../game/game.module';
 
 @NgModule({
    imports: [
@@ -36,6 +37,7 @@ import {RouterModule} from '@angular/router';
       CommonModule,
       RouterModule,
       NgbModule.forRoot(),
+      GameModule,
    ],
    declarations: [
       GameComponent,

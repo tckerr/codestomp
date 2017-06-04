@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TalentService} from "../../../../../services/resource-services/talent.service";
+import {TalentService} from "../../../../../game/resource-services/talent.service";
 
 @Component({
    selector: 'app-talent-capacity-breakdown',

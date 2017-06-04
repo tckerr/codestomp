@@ -3,9 +3,9 @@ import {TickService} from '../../time/tick.service';
 import {GameStorageService} from '../../persistence/game-storage.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {CodeService} from '../../services/resource-services/code.service';
+import {CodeService} from '../../game/resource-services/code.service';
 import {SubscriptionAggregationService} from '../../services/subscription-aggregation.service';
-import {NotificationService} from '../../services/notifications/notification.service';
+import {NotificationService} from '../../game/notifications/notification.service';
 
 @Component({
    selector: 'app-game',

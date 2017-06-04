@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UnlocksService} from '../unlocks.service';
+import {UnlocksService} from '../../services/unlocks.service';
 import {IListener} from './i-listener';
 import {ListenerBase} from './listener-base';
 import {Subscription} from 'rxjs/Subscription';

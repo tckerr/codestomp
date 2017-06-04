@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CodeService} from '../../../../../../services/resource-services/code.service';
+import {CodeService} from '../../../../../../game/resource-services/code.service';
 
 @Component({
    selector: 'app-code-breakdown',

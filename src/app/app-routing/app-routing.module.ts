@@ -8,6 +8,7 @@ import {ManagementComponent} from '../web/game/management/management.component';
 import {GameComponent} from '../web/game/game.component';
 import {NewGameComponent} from '../web/game/new-game/new-game.component';
 import {Routes, RouterModule} from '@angular/router';
+import {WebModule} from '../web/web.module';
 
 const appRoutes: Routes = [
    {
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
 @NgModule({
    imports: [
       CommonModule,
+      WebModule,
       RouterModule.forRoot(appRoutes)
    ],
    exports: [

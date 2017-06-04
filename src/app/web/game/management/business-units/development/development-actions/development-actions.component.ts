@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CodeService} from '../../../../../../services/resource-services/code.service';
+import {CodeService} from '../../../../../../game/resource-services/code.service';
 import {ConfigurationService} from 'app/configuration/configuration.service';
 import {UnlocksService} from '../../../../../../services/unlocks.service';
 import {CommitGeneratorService} from '../../../../../../utilities/commit-generator.service';
@@ -7,8 +7,8 @@ import {LoggerService} from '../../../../../../logging/logger-service';
 import {TickService} from '../../../../../../time/tick.service';
 import {Subscription} from 'rxjs/Subscription';
 import {UnlockableFeature} from '../../../../../../models/achievements/unlockable-feature.enum';
-import {SkillsService} from '../../../../../../services/resource-services/skills.service';
-import {DeploymentExecutor} from '../../../../../../services/tick-subscribers/manual/deployment-executor.service';
+import {SkillsService} from '../../../../../../game/resource-services/skills.service';
+import {DeploymentExecutor} from '../../../../../../game/tick-subscribers/manual/deployment-executor.service';
 
 @Component({
    selector: 'app-development-actions',

@@ -6,9 +6,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TickService} from '../../../time/tick.service';
 import {SpecialEvent} from '../../../models/messaging/special-event';
 import {Router} from '@angular/router';
-import {AchievementsService} from '../../../services/achievements/achievements.service';
+import {AchievementsService} from '../../../game/achievements/achievements.service';
 import * as Enumerable from 'linq';
-import {SpecialEventGeneratorService} from '../../../services/tick-subscribers/automatic/generators/special-event-generator.service';
+import {SpecialEventGeneratorService} from '../../../game/tick-subscribers/automatic/generators/special-event-generator.service';
 
 @Component({
    selector: 'app-management',

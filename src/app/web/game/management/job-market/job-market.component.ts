@@ -3,11 +3,11 @@ import {hour, year} from '../../../../../environments/environment';
 import {StaffCategory} from '../../../../models/definitions/staff-definitions';
 import {UnlocksService} from '../../../../services/unlocks.service';
 import * as Enumerable from 'linq';
-import {TalentService} from '../../../../services/resource-services/talent.service';
+import {TalentService} from '../../../../game/resource-services/talent.service';
 import {Staff} from 'app/models/game/company/business-units/staff';
-import {HiringService} from '../../../../services/staffing/hiring.service';
+import {HiringService} from '../../../../game/staffing/hiring.service';
 import {GameStorageService} from '../../../../persistence/game-storage.service';
-import {StaffCategoryIconResolverService} from '../../../../services/staffing/staff-category-icon-resolver.service';
+import {StaffCategoryIconResolverService} from '../../../../game/staffing/staff-category-icon-resolver.service';
 
 
 @Component({
