@@ -10,6 +10,8 @@ import {CorporateSeedGeneratorService} from './business-unit-generators/corporat
 import {BusinessUnitsSeedGeneratorService} from './business-unit-generators/business-units-seed-generator.service';
 import {MarketingSeedGeneratorService} from './business-unit-generators/marketing-seed-generator.service';
 import {FinanceSeedGeneratorService} from './business-unit-generators/finance-seed-generator.service';
+import {AchievementsSeedGeneratorService} from "./achievements-seed-generator.service";
+import {ResourcesSeedGeneratorService} from "./resources-seed-generator.service";
 
 @NgModule({
    imports: [
@@ -28,6 +30,8 @@ import {FinanceSeedGeneratorService} from './business-unit-generators/finance-se
       MarketingSeedGeneratorService,
       FinanceSeedGeneratorService,
       BusinessUnitsSeedGeneratorService,
+      ResourcesSeedGeneratorService,
+      AchievementsSeedGeneratorService,
    ]
 })
 export class PersistenceModule {
