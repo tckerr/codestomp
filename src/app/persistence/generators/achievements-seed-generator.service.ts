@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {AchievementCriteriaType} from "../models/achievements/achievement-criteria-type.enum";
-import {UnlockableFeature} from "../models/achievements/unlockable-feature.enum";
-import {LogType} from "../models/definitions/log-type";
+import {AchievementCriteriaType} from "../../models/achievements/achievement-criteria-type.enum";
+import {UnlockableFeature} from "../../models/achievements/unlockable-feature.enum";
+import {LogType} from "../../models/definitions/log-type";
 
 @Injectable()
 export class AchievementsSeedGeneratorService {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ExperienceLevel, StaffCategory, StaffType} from '../../models/definitions/staff-definitions';
-import {ConfigurationService} from '../../configuration/configuration.service';
+import {ExperienceLevel, StaffCategory, StaffType} from '../../../models/definitions/staff-definitions';
+import {ConfigurationService} from '../../../configuration/configuration.service';
 
 @Injectable()
 export class HrSeedGeneratorService {

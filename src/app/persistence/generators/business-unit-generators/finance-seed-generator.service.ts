@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ConfigurationService} from '../../configuration/configuration.service';
+import {ConfigurationService} from '../../../configuration/configuration.service';
 
 @Injectable()
 export class FinanceSeedGeneratorService {
