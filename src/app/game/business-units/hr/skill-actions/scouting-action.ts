@@ -33,12 +33,9 @@ export class ScoutingAction extends ImprovableSkill implements ISkillAction {
       //this.codeService.test(this.value, this.config.BASE_TESTING_FAILURE_PCT);
    }
 
-   public get visible() {
-      //return this.unlocksService.isUnlocked(UnlockableFeature.ManualTesting);
-   }
-
    public get disabled() {
       //return this.codeService.pushed.balance <= 0;
+      return false;
    }
 
 }

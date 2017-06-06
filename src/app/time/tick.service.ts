@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs/Subscription';
 import * as moment from 'moment';
 import {GameStorageService} from '../persistence/game-storage.service';
 import {ConfigurationService} from '../configuration/configuration.service';
+import {TimeOfDayProductivityWeighterService} from '../models/tick/time-of-day-productivity-weighter.service';
 
 @Injectable()
 export class TickService {
@@ -23,7 +24,8 @@ export class TickService {
    public tps: number;
 
    constructor(private gameStorageService: GameStorageService,
-               private config: ConfigurationService) {
+               private config: ConfigurationService,
+               private weighter: TimeOfDayProductivityWeighterService) {
       this.initialize();
    }
 
@@ -124,7 +126,8 @@ export class TickService {
       if (this.latest)
          msSinceLastTick = moment().diff(this.latest, 'ms');
       let msOverlap = msSinceLastTick - interval;
-      let tick = new Tick(index, date, elapsedMs, msSinceLastTick, msOverlap);
+      let weightedMs = this.weighter.getWeightedMs(date, elapsedMs);
+      let tick = new Tick(index, date, elapsedMs, msSinceLastTick, msOverlap, weightedMs);
       this.latest = moment();
       this.source.next(tick);
    }

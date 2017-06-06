@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {TickService} from './tick.service';
 import {PersistenceModule} from '../persistence/persistence.module';
 import {ConfigurationModule} from '../configuration/configuration.module';
+import {TimeOfDayProductivityWeighterService} from '../models/tick/time-of-day-productivity-weighter.service';
 
 @NgModule({
    imports: [
@@ -10,7 +11,8 @@ import {ConfigurationModule} from '../configuration/configuration.module';
    ],
    declarations: [],
    providers: [
-      TickService
+      TickService,
+      TimeOfDayProductivityWeighterService
    ]
 })
 export class TimeModule {

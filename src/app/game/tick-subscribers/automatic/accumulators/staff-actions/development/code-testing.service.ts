@@ -15,7 +15,7 @@ export class CodeTestingService implements TickExecutor {
    }
 
    public execute(tick: Tick) {
-      let growth = this.codeTestedForMs(tick.msElapsed);
+      let growth = this.codeTestedForMs(tick.weightedMs);
       let defaultFailureRate = this.config.BASE_TESTING_FAILURE_PCT;
       if (growth > 0)
          this.codeService.test(growth, defaultFailureRate);
