@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IManualAction} from '../../../../../game/business-units/manual-actions/i-manual-action';
+import {ISkillAction} from '../../../../../game/business-units/skill-actions/i-skill-action';
 
 @Component({
    selector: 'app-manual-action',
@@ -8,7 +8,7 @@ import {IManualAction} from '../../../../../game/business-units/manual-actions/i
 })
 export class ManualActionComponent implements OnInit {
 
-   @Input() action: IManualAction;
+   @Input() action: ISkillAction;
 
    constructor() {
    }

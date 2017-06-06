@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DevelopmentSkillsImprovementActionsComponent} from './game/management/business-units/development/development-actions/development-skills-improvement-actions/development-skills-improvement-actions.component';
 import {CorporateComponent} from './game/management/business-units/corporate/corporate.component';
 import {AchievementProgressBarComponent} from './game/achievement-progress-bar/achievement-progress-bar.component';
 import {TalentCapacityBreakdownComponent} from './game/management/job-market/talent-capacity-breakdown/talent-capacity-breakdown.component';
@@ -31,7 +30,8 @@ import {GameModule} from '../game/game.module';
 import { FinanceComponent } from './game/management/business-units/finance/finance.component';
 import { MarketingComponent } from './game/management/business-units/marketing/marketing.component';
 import { HrActionsComponent } from './game/management/business-units/hr/hr-actions/hr-actions.component';
-import { ManualActionComponent } from './game/management/business-units/manual-action/manual-action.component';
+import { ManualActionComponent } from './game/management/skill-actions/manual-action/manual-action.component';
+import {SkillActionsImprovementComponent} from './game/management/skill-actions/skill-actions-improvement/skill-actions-improvement.component';
 
 @NgModule({
    imports: [
@@ -65,7 +65,7 @@ import { ManualActionComponent } from './game/management/business-units/manual-a
       TalentCapacityBreakdownComponent,
       AchievementProgressBarComponent,
       CorporateComponent,
-      DevelopmentSkillsImprovementActionsComponent,
+      SkillActionsImprovementComponent,
       FinanceComponent,
       MarketingComponent,
       HrActionsComponent,

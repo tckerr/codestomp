@@ -1,14 +1,16 @@
-import {IManualAction} from '../../manual-actions/i-manual-action';
 import {Injectable} from '@angular/core';
 import {CodeService} from '../../../resource-services/code.service';
 import {ConfigurationService} from '../../../../configuration/configuration.service';
 import {SkillsService} from '../../../resource-services/skills.service';
 import {CommitGeneratorService} from '../../../../utilities/commit-generator.service';
 import {LoggerService} from '../../../../logging/logger-service';
+import {ISkillAction} from '../../skill-actions/i-skill-action';
+import {FundService} from '../../../resource-services/fund.service';
+import {ImprovableSkill} from '../../skill-actions/improvable-skill';
 
 @Injectable()
-export class CodingAction implements IManualAction {
-   id: string = 'coding';
+export class CodingAction extends ImprovableSkill implements ISkillAction {
+   public skillId = 'coding';
    public buttonTheme = 'btn-info';
    public popoverContents = 'Code is the lifeblood of your application... get typing!';
    public label = 'Write some code';
@@ -20,7 +22,9 @@ export class CodingAction implements IManualAction {
                private loggerService: LoggerService,
                private codeService: CodeService,
                private config: ConfigurationService,
-               private skillsService: SkillsService,) {
+               skillsService: SkillsService,
+               fundService: FundService) {
+      super(skillsService, fundService);
    }
 
    public get value() {
@@ -33,5 +37,6 @@ export class CodingAction implements IManualAction {
       let effectiveValue = this.value;
       this.codeService.write(effectiveValue);
    }
+
 
 }

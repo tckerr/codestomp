@@ -2,5 +2,6 @@
    *ngFor="let action of actions; trackBy: byIndex"
    [action]="action">
 </app-manual-action>
-<app-development-skills-improvement-actions>
-</app-development-skills-improvement-actions>
+<app-skill-actions-improvement
+   [actions]="actions">
+</app-skill-actions-improvement>

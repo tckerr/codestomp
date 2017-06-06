@@ -1,0 +1,29 @@
+<div class="h-100 d-inline-block" style="flex-grow: 100; vertical-align: top;" *ngIf="selfImprovementUnlocked">
+   <div class="card d-flex h-100">
+      <div class="card-header p-1 small">
+         Improve your skills
+      </div>
+      <div class="card-block p-2 h-100">
+         <div class="btn-group-sm pt-2 h-100" role="group">
+            <ng-container *ngFor="let action of actions; trackBy: byIndex">
+               <button
+                  *ngIf="action.visible"
+                  type="button"
+                  [disabled]="!action.canImprove"
+                  (click)="action.improve()"
+                  class="btn btn-sm btn-secondary btn-interactive">
+                  <div>
+                     <i class="fa" [ngClass]="action.iconClass"></i>
+                     +{{action.improveAmount}}
+                  </div>
+                  <div class="pull-right mt-1">
+                     <span class="badge badge-default">{{action.improveCost | currency:"usd":true}}</span>
+                  </div>
+               </button>
+            </ng-container>
+         </div>
+      </div>
+   </div>
+</div>
+
+

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {IManualAction} from '../../../../../../game/business-units/manual-actions/i-manual-action';
-import {TestingAction} from '../../../../../../game/business-units/development/manual-actions/testing-action';
-import {CodingAction} from '../../../../../../game/business-units/development/manual-actions/coding-action';
-import {DeploymentAction} from '../../../../../../game/business-units/development/manual-actions/deployment-action';
-import {BugfixAction} from '../../../../../../game/business-units/development/manual-actions/bugfix-action';
+import {TestingAction} from '../../../../../../game/business-units/development/skill-actions/testing-action';
+import {CodingAction} from '../../../../../../game/business-units/development/skill-actions/coding-action';
+import {DeploymentAction} from '../../../../../../game/business-units/development/skill-actions/deployment-action';
+import {BugfixAction} from '../../../../../../game/business-units/development/skill-actions/bugfix-action';
+import {ISkillAction} from '../../../../../../game/business-units/skill-actions/i-skill-action';
 
 @Component({
    selector: 'app-development-actions',
@@ -25,7 +25,7 @@ export class DevelopmentActionsComponent implements OnInit {
       return index;
    }
 
-   public get actions(): IManualAction[] {
+   public get actions(): ISkillAction[] {
       return [
          this.codingAction,
          this.testingAction,

@@ -1,4 +1,3 @@
-import {IManualAction} from '../../manual-actions/i-manual-action';
 import {Injectable, OnDestroy} from '@angular/core';
 import {UnlockableFeature} from '../../../../models/achievements/unlockable-feature.enum';
 import {CodeService} from '../../../resource-services/code.service';
@@ -8,10 +7,13 @@ import {SkillsService} from '../../../resource-services/skills.service';
 import {DeploymentExecutor} from '../../../tick-subscribers/manual/deployment-executor.service';
 import {Subscription} from 'rxjs/Subscription';
 import {TickService} from '../../../../time/tick.service';
+import {ImprovableSkill} from '../../skill-actions/improvable-skill';
+import {FundService} from '../../../resource-services/fund.service';
+import {ISkillAction} from '../../skill-actions/i-skill-action';
 
 @Injectable()
-export class DeploymentAction implements IManualAction, OnDestroy {
-   public id = 'deployment';
+export class DeploymentAction extends ImprovableSkill implements ISkillAction, OnDestroy {
+   public skillId = 'deploying';
    public buttonTheme = 'btn-warning';
    public popoverContents = `
       Tested code must be <strong>deployed</strong> to production before 
@@ -19,12 +21,15 @@ export class DeploymentAction implements IManualAction, OnDestroy {
    public iconClass = 'fa-ship';
    private queuedDeploy: Subscription;
 
+
    constructor(private codeService: CodeService,
                private config: ConfigurationService,
                private unlocksService: UnlocksService,
                private deploymentExecutor: DeploymentExecutor,
                private ticker: TickService,
-               private skillsService: SkillsService) {
+               skillsService: SkillsService,
+               fundService: FundService) {
+      super(skillsService, fundService);
    }
 
    public get value() {

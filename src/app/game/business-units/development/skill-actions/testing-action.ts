@@ -1,14 +1,16 @@
-import {IManualAction} from '../../manual-actions/i-manual-action';
 import {Injectable} from '@angular/core';
 import {UnlockableFeature} from '../../../../models/achievements/unlockable-feature.enum';
 import {CodeService} from '../../../resource-services/code.service';
 import {ConfigurationService} from '../../../../configuration/configuration.service';
 import {UnlocksService} from '../../../achievements/unlocks.service';
 import {SkillsService} from '../../../resource-services/skills.service';
+import {ImprovableSkill} from '../../skill-actions/improvable-skill';
+import {FundService} from '../../../resource-services/fund.service';
+import {ISkillAction} from '../../skill-actions/i-skill-action';
 
 @Injectable()
-export class TestingAction implements IManualAction {
-   id: string = 'testing';
+export class TestingAction extends ImprovableSkill implements ISkillAction {
+   public skillId = 'testing';
    public buttonTheme = 'btn-info';
    public popoverContents = 'All code must be <strong>tested</strong> before it is deployed. Remember, not all tested code works!';
    public label = 'Test your code';
@@ -17,7 +19,9 @@ export class TestingAction implements IManualAction {
    constructor(private codeService: CodeService,
                private config: ConfigurationService,
                private unlocksService: UnlocksService,
-               private skillsService: SkillsService) {
+               skillsService: SkillsService,
+               fundService: FundService) {
+      super(skillsService, fundService);
    }
 
    public get value() {
