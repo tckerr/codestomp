@@ -12,8 +12,8 @@ export class ConfigurationService {
    // business units
    public FINANCE_UNLOCKED_AT_START = false;
    public DEVELOPMENT_UNLOCKED_AT_START = true;
-   public CORPORATE_UNLOCKED_AT_START = true;
-   public HR_UNLOCKED_AT_START = false;
+   public CORPORATE_UNLOCKED_AT_START = false;
+   public HR_UNLOCKED_AT_START = true;
    public MARKETING_UNLOCKED_AT_START = false;
    public DEBUG_UNLOCKED_AT_START = true;
 

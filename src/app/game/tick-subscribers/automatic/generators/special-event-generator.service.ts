@@ -32,7 +32,7 @@ export class SpecialEventGeneratorService extends TickSubscriberBase implements 
    }
 
    public subscribe(tickService: TickService) {
-      this.initalizeGettingStartedEvent(tickService);
+      this.initializeGettingStartedEvent(tickService);
       this.initializeNotificationSub();
       this.initializeDeploymentEventWatcher();
    }
@@ -53,7 +53,7 @@ export class SpecialEventGeneratorService extends TickSubscriberBase implements 
       })
    }
 
-   private initalizeGettingStartedEvent(tickService: TickService) {
+   private initializeGettingStartedEvent(tickService: TickService) {
       this.tickerSubscription = tickService.pipeline
          .takeWhile(() => this.config.SHOW_WELCOME_MODAL && this.gameStorageService.game.company.resources.code.pushed.totalAccumulated <= 0)
          .take(1)

@@ -1,0 +1,27 @@
+<ng-template #popover>
+   <p class="pb-0 mb-0" [innerHtml]="action.popoverContents"></p>
+</ng-template>
+
+<button
+   *ngIf="action.visible"
+   style="min-width: 120px;"
+   class="btn btn-popover btn-sm btn-interactive h-100 p-2 pt-3"
+   [ngClass]="action.buttonTheme"
+   (click)="action.execute()"
+   [disabled]="action.disabled">
+   <span
+      class="top-corner-icon-adjusted">
+      <i class="fa fa-question"
+         container="body"
+         [ngbPopover]="popover"
+         placement="top"
+         triggers="mouseenter:mouseleave"></i>
+   </span>
+   <p class="m-0 p-0" style="font-size: 30px">
+      <i class="fa" [ngClass]="action.iconClass"></i>
+   </p>
+   <p class="m-0 p-0">{{action.label}}</p>
+   <p class="m-0 mt-1 p-0">
+      <small><span class="small text-uppercase">{{action.value}}</span></small>
+   </p>
+</button>

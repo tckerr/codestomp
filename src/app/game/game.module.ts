@@ -38,6 +38,10 @@ import {TimeModule} from '../time/time.module';
 import {BusinessUnitService} from './business-units/business-unit.service';
 import {AchievementTrackUnlockerService} from './achievements/achievement-track-unlocker.service';
 import {BusinessUnitUnlockerService} from './business-units/business-unit-unlocker.service';
+import {CodingAction} from './business-units/development/manual-actions/coding-action';
+import {TestingAction} from './business-units/development/manual-actions/testing-action';
+import {DeploymentAction} from './business-units/development/manual-actions/deployment-action';
+import {BugfixAction} from './business-units/development/manual-actions/bugfix-action';
 
 @NgModule({
    imports: [
@@ -84,6 +88,10 @@ import {BusinessUnitUnlockerService} from './business-units/business-unit-unlock
       BusinessUnitService,
       AchievementTrackUnlockerService,
       BusinessUnitUnlockerService,
+      TestingAction,
+      CodingAction,
+      DeploymentAction,
+      BugfixAction,
    ]
 })
 export class GameModule {

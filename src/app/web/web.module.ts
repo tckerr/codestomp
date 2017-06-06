@@ -30,6 +30,8 @@ import {RouterModule} from '@angular/router';
 import {GameModule} from '../game/game.module';
 import { FinanceComponent } from './game/management/business-units/finance/finance.component';
 import { MarketingComponent } from './game/management/business-units/marketing/marketing.component';
+import { HrActionsComponent } from './game/management/business-units/hr/hr-actions/hr-actions.component';
+import { ManualActionComponent } from './game/management/business-units/manual-action/manual-action.component';
 
 @NgModule({
    imports: [
@@ -66,6 +68,8 @@ import { MarketingComponent } from './game/management/business-units/marketing/m
       DevelopmentSkillsImprovementActionsComponent,
       FinanceComponent,
       MarketingComponent,
+      HrActionsComponent,
+      ManualActionComponent,
    ]
 })
 export class WebModule {
