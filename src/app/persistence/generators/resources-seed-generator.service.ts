@@ -37,7 +37,13 @@ export class ResourcesSeedGeneratorService {
                totalAccumulated: 1,
                level: 1,
                improvementConstant: 1,
-            }
+            },
+            scouting: {
+               balance: 1,
+               totalAccumulated: 1,
+               level: 1,
+               improvementConstant: 1,
+            },
          },
          code: {
             pushed: {

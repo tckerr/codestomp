@@ -28,6 +28,7 @@ export class ConfigurationService {
    public CODE_TESTED_CONSTANT = 1000;
    public CODE_DEPLOY_CONSTANT = 1000;
    public BUG_FIX_CONSTANT = 1000;
+   public SCOUTING_CONSTANT = 1000;
 
    // devops rates
    public MINIMUM_TESTED_CODE_FOR_DEPLOY = 100;

@@ -6,12 +6,14 @@ export class SkillBank {
    public testing: SkillResource;
    public deploying: SkillResource;
    public bugFixing: SkillResource;
+   public scouting: SkillResource;
 
    constructor(json: any) {
       this.coding = new SkillResource(json.coding);
       this.testing = new SkillResource(json.testing);
       this.deploying = new SkillResource(json.deploying);
       this.bugFixing = new SkillResource(json.bugFixing);
+      this.scouting = new SkillResource(json.scouting);
    }
 
 }
