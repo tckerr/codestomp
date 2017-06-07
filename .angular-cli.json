@@ -28,7 +28,9 @@
         "../node_modules/alertifyjs/build/css/alertify.css",
         "../node_modules/alertifyjs/build/css/themes/bootstrap.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/anychart/dist/anychart-bundle.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

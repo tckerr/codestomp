@@ -32,6 +32,8 @@ import { MarketingComponent } from './game/management/business-units/marketing/m
 import { HrActionsComponent } from './game/management/business-units/hr/hr-actions/hr-actions.component';
 import { ManualActionComponent } from './game/management/skill-actions/manual-action/manual-action.component';
 import {SkillActionsImprovementComponent} from './game/management/skill-actions/skill-actions-improvement/skill-actions-improvement.component';
+import { RecruitingMapComponent } from './game/management/business-units/hr/recruiting-map/recruiting-map/recruiting-map.component';
+import {MapDataProviderService} from './game/management/business-units/hr/recruiting-map/map-data-provider.service';
 
 @NgModule({
    imports: [
@@ -42,6 +44,9 @@ import {SkillActionsImprovementComponent} from './game/management/skill-actions/
       RouterModule,
       NgbModule.forRoot(),
       GameModule,
+   ],
+   providers: [
+      MapDataProviderService,
    ],
    declarations: [
       GameComponent,
@@ -70,6 +75,7 @@ import {SkillActionsImprovementComponent} from './game/management/skill-actions/
       MarketingComponent,
       HrActionsComponent,
       ManualActionComponent,
+      RecruitingMapComponent,
    ]
 })
 export class WebModule {

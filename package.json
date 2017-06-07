@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.25",
     "alertify": "^0.3.0",
     "alertifyjs": "^1.10.0",
+    "anychart": "^7.14.1",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "font-awesome": "*",
