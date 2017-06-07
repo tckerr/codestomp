@@ -12,14 +12,13 @@ import {ISkillAction} from '../../skill-actions/i-skill-action';
 export class ScoutingAction extends ImprovableSkill implements ISkillAction {
    public skillId = 'scouting';
    public buttonTheme = 'btn-info';
-   public popoverContents = 'todo';
-   public label = 'Scout hiring prospects';
-   public iconClass = 'fa-?';
+   public popoverContents = 'Scouting for talent in the job market is important to keep your hiring pipeline full.';
+   public label = 'Scout job market';
+   public iconClass = 'fa-search';
    public visible = true;
+   public disabled = false;
 
-   constructor(private codeService: CodeService,
-               private config: ConfigurationService,
-               private unlocksService: UnlocksService,
+   constructor(private config: ConfigurationService,
                skillsService: SkillsService,
                fundService: FundService) {
       super(skillsService, fundService);
@@ -31,11 +30,7 @@ export class ScoutingAction extends ImprovableSkill implements ISkillAction {
 
    public execute() {
       //this.codeService.test(this.value, this.config.BASE_TESTING_FAILURE_PCT);
-   }
-
-   public get disabled() {
-      //return this.codeService.pushed.balance <= 0;
-      return false;
+      console.log("Scout")
    }
 
 }

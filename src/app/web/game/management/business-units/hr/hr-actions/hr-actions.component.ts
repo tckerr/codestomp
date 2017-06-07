@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ScoutingAction} from "../../../../../../game/business-units/hr/skill-actions/scouting-action";
+import {ISkillAction} from "../../../../../../game/business-units/skill-actions/i-skill-action";
 
 @Component({
   selector: 'app-hr-actions',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HrActionsComponent implements OnInit {
 
-  constructor() { }
+   constructor(private scoutingAction: ScoutingAction,) {
+   }
 
-  ngOnInit() {
-  }
+   ngOnInit(): void {
+   }
+
+   public byIndex(index) {
+      return index;
+   }
+
+   public get actions(): ISkillAction[] {
+      return [
+         this.scoutingAction,
+      ];
+   }
 
 }

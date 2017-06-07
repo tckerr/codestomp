@@ -42,6 +42,7 @@ import {TestingAction} from './business-units/development/skill-actions/testing-
 import {CodingAction} from './business-units/development/skill-actions/coding-action';
 import {DeploymentAction} from './business-units/development/skill-actions/deployment-action';
 import {BugfixAction} from './business-units/development/skill-actions/bugfix-action';
+import {ScoutingAction} from "./business-units/hr/skill-actions/scouting-action";
 
 @NgModule({
    imports: [
@@ -92,6 +93,7 @@ import {BugfixAction} from './business-units/development/skill-actions/bugfix-ac
       CodingAction,
       DeploymentAction,
       BugfixAction,
+      ScoutingAction,
    ]
 })
 export class GameModule {

@@ -1,3 +1,7 @@
-<p>
-  hr-actions works!
-</p>
+<app-manual-action
+   *ngFor="let action of actions; trackBy: byIndex"
+   [action]="action">
+</app-manual-action>
+<app-skill-actions-improvement
+   [actions]="actions">
+</app-skill-actions-improvement>
