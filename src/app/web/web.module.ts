@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {CorporateComponent} from './game/management/business-units/corporate/corporate.component';
 import {AchievementProgressBarComponent} from './game/achievement-progress-bar/achievement-progress-bar.component';
 import {TalentCapacityBreakdownComponent} from './game/management/job-market/talent-capacity-breakdown/talent-capacity-breakdown.component';
-import {AlertsDigestComponent} from './game/management/company-digest/alerts-digest/alerts-digest.component';
 import {GameComponent} from './game/game.component';
 import {NewGameComponent} from './game/new-game/new-game.component';
 import {GameStateComponent} from './game/game-state/game-state.component';
@@ -66,7 +65,6 @@ import {MapDataProviderService} from './game/management/business-units/hr/recrui
       CustomersDigestComponent,
       StaffSummaryComponent,
       JobMarketComponent,
-      AlertsDigestComponent,
       TalentCapacityBreakdownComponent,
       AchievementProgressBarComponent,
       CorporateComponent,

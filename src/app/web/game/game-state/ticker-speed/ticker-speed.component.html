@@ -1,75 +1,47 @@
-<div class="form-inline p-1 game-state">
-   <div class="input-group input-group-sm mr-1">
-      <button
-         (click)="decreaseTps()"
-         class="btn btn-sm btn-secondary">
-         <i class="fa fa-minus-circle"></i>
-      </button>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <button
-         (click)="increaseTps()"
-         class=" btn btn-sm btn-secondary">
-         <i class="fa fa-plus-circle"></i>
-      </button>
-   </div>
-   <div class="input-group input-group-sm">
-      <span class="input-group-addon p-1 mr-4">
-         <label class="col-form-label col-form-label-sm">{{tickService.tps | number : '1.2-2'}} ticks/s</label>
-      </span>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <button
-         (click)="resetSpeed()"
-         class="btn btn-sm btn-secondary">
-         <i class="fa fa-undo"></i>
-      </button>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <button
-         (click)="decreaseSpeed()"
-         class="btn btn-sm btn-secondary">
-         <i class="fa fa-backward"></i>
-      </button>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <button
-         *ngIf="!tickService.paused"
-         (click)="pause()"
-         class="btn btn-secondary btn-sm"
-         style="min-width: 30px">
-         <i class="fa fa-pause"></i>
-      </button>
-      <button
-         *ngIf="tickService.paused"
-         (click)="resume()"
-         class="btn btn-sm btn-secondary"
-         style="min-width: 30px">
-         <i class="fa fa-play"></i>
-      </button>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <button
-         (click)="step()"
-         class="btn btn-sm btn-interactive btn-secondary">
-         <i class="fa fa-step-forward"></i>
-      </button>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <button
-         (click)="increaseSpeed()"
-         class="btn btn-sm btn-secondary">
-         <i class="fa fa-forward"></i>
-      </button>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <span class="input-group-addon p-1">
-         <label class="col-form-label col-form-label-sm">x{{tickService.speed | number : '1.2-2'}}</label>
-      </span>
-   </div>
-   <div class="input-group input-group-sm mr-1">
-      <span class="input-group-addon p-1">
-         <label class="col-form-label col-form-label-sm">{{averageOverlap | number : '1.2-2'}}ms overlap</label>
-      </span>
-   </div>
-</div>
+<button
+   (click)="decreaseTps()"
+   class="btn btn-sm btn-secondary d-inline">
+   <i class="fa fa-minus-circle"></i>
+</button>
+<button
+   (click)="increaseTps()"
+   class=" btn btn-sm btn-secondary d-inline">
+   <i class="fa fa-plus-circle"></i>
+</button>
+<label class="col-form-label col-form-label-sm">{{tickService.tps | number : '1.2-2'}} ticks/s</label>
+<button
+   (click)="resetSpeed()"
+   class="btn btn-sm btn-secondary">
+   <i class="fa fa-undo"></i>
+</button>
+<button
+   (click)="decreaseSpeed()"
+   class="btn btn-sm btn-secondary">
+   <i class="fa fa-backward"></i>
+</button>
+<button
+   *ngIf="!tickService.paused"
+   (click)="pause()"
+   class="btn btn-secondary btn-sm"
+   style="min-width: 30px">
+   <i class="fa fa-pause"></i>
+</button>
+<button
+   *ngIf="tickService.paused"
+   (click)="resume()"
+   class="btn btn-sm btn-secondary"
+   style="min-width: 30px">
+   <i class="fa fa-play"></i>
+</button>
+<button
+   (click)="step()"
+   class="btn btn-sm btn-interactive btn-secondary">
+   <i class="fa fa-step-forward"></i>
+</button>
+<button
+   (click)="increaseSpeed()"
+   class="btn btn-sm btn-secondary">
+   <i class="fa fa-forward"></i>
+</button>
+<label class="col-form-label col-form-label-sm">x{{tickService.speed | number : '1.2-2'}}</label>
+<label class="col-form-label col-form-label-sm">{{averageOverlap | number : '1.2-2'}}ms overlap</label>

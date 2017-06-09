@@ -1,35 +1,17 @@
-<div class="col-12 game-state hidden-xs-down">
-   <div style="width: 420px" class="d-inline-block">
-      <div class="form-inline p-1 ">
-         <div class="input-group input-group-sm mr-1">
-            <button routerLink="/" class="btn-secondary btn btn-sm">
-               <i class="fa fa-plus"></i>
-            </button>
-         </div>
-         <div class="input-group input-group-sm mr-1">
-            <button (click)="save()" class="btn-secondary btn btn-sm">
-               <i class="fa fa-floppy-o"></i>
-            </button>
-         </div>
-         <div class="input-group input-group-sm mr-1">
-               <span class="input-group-addon p-1">
-                  <label for="gameId" class="col-form-label col-form-label-sm small">Game ID</label>
-               </span>
-            <input [(ngModel)]="selectedGameId" type="text" class="small form-control form-control-sm" id="gameId"
-                   name="gameId" required>
-            <span class="input-group-btn">
-                  <button type="submit" class="btn-secondary btn" (click)="loadGame(selectedGameId)">Load</button>
-               </span>
-         </div>
-         <div class="input-group input-group-sm">
-            <button (click)="clear()" class="btn-secondary btn btn-sm">
-               <i class="fa fa-trash"></i>
-            </button>
-         </div>
-      </div>
-   </div>
-   <div class="d-inline-block">
-      <app-ticker-speed></app-ticker-speed>
-   </div>
+<div class="col-12 game-state">
+   <button routerLink="/" class="btn-secondary btn btn-sm">
+      <i class="fa fa-plus"></i>
+   </button>
+   <button (click)="save()" class="btn-secondary btn btn-sm">
+      <i class="fa fa-floppy-o"></i>
+   </button>
+   <label for="gameId" class="col-form-label col-form-label-sm small">Game ID</label>
+   <input [(ngModel)]="selectedGameId" type="text" class="small" id="gameId"
+          name="gameId" required>
+   <button type="submit" class="btn-secondary btn btn-sm" (click)="loadGame(selectedGameId)">Load</button>
+   <button (click)="clear()" class="btn-secondary btn btn-sm">
+      <i class="fa fa-trash"></i>
+   </button>
+   <app-ticker-speed></app-ticker-speed>
 </div>
 

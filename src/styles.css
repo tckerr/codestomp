@@ -50,7 +50,7 @@ html, body {
 
 .card-digest{
    max-width: 300px;
-   min-width: 200px;
+   min-width: 150px;
    display: inline-block;
    vertical-align: top;
    height: 90px;
