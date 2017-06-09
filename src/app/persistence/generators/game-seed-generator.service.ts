@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {IdGeneratorService} from '../../utilities/id-generator.service';
 import * as moment from 'moment';
-import {AchievementCriteriaType} from '../../models/achievements/achievement-criteria-type.enum';
 import {UnlockableFeature} from '../../models/achievements/unlockable-feature.enum';
-import {LogType} from '../../models/definitions/log-type';
 import {EnumParserService} from '../../utilities/enum-parser.service';
 import {ConfigurationService} from '../../configuration/configuration.service';
 import {BusinessUnitsSeedGeneratorService} from './business-unit-generators/business-units-seed-generator.service';
@@ -35,6 +33,9 @@ export class GameSeedGeneratorService {
                balance: 0,
                totalAccumulated: 0,
                canBeNegative: false
+            },
+            prospecting: {
+
             }
          },
          unlockedFeatures: unlockedFeatures,

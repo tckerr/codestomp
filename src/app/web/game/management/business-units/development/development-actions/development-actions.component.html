@@ -1,7 +1,17 @@
-<app-manual-action
-   *ngFor="let action of actions; trackBy: byIndex"
-   [action]="action">
-</app-manual-action>
-<app-skill-actions-improvement
-   [actions]="actions">
-</app-skill-actions-improvement>
+<div class="row">
+   <div class="col-7 pr-0">
+      <div>
+         <app-manual-action
+            *ngFor="let action of actions; trackBy: byIndex"
+            [action]="action">
+         </app-manual-action>
+      </div>
+   </div>
+   <div class="col-5 ">
+      <div>
+         <app-skill-actions-improvement
+            [actions]="actions">
+         </app-skill-actions-improvement>
+      </div>
+   </div>
+</div>
