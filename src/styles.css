@@ -87,3 +87,7 @@ a , button{
 .ajs-success {
    background-color:#5cb85c !important;
 }
+
+.text-mono {
+   font-family: 'Roboto Mono', monospace;
+}

@@ -15,13 +15,13 @@ export class ResourcesSeedGeneratorService {
          },
          skills: {
             coding: {
-               balance: 300,
+               balance: 3,
                totalAccumulated: 3,
                level: 1,
                improvementConstant: 2,
             },
             testing: {
-               balance: 500,
+               balance: 5,
                totalAccumulated: 5,
                level: 1,
                improvementConstant: 3,

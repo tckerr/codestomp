@@ -24,11 +24,11 @@ export class ConfigurationService {
    public MAX_TPS = 150;
 
    // debug helpers, set to 0 in prod
-   public CODE_GENERATED_CONSTANT = 1000;
-   public CODE_TESTED_CONSTANT = 1000;
-   public CODE_DEPLOY_CONSTANT = 1000;
-   public BUG_FIX_CONSTANT = 1000;
-   public SCOUTING_CONSTANT = 1000;
+   public CODE_GENERATED_CONSTANT = 0;//1000;
+   public CODE_TESTED_CONSTANT = 0;//1000;
+   public CODE_DEPLOY_CONSTANT = 0;//1000;
+   public BUG_FIX_CONSTANT = 0;//1000;
+   public SCOUTING_CONSTANT = 0;//1000;
 
    // devops rates
    public MINIMUM_TESTED_CODE_FOR_DEPLOY = 100;

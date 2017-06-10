@@ -4,8 +4,8 @@
 
 <button
    *ngIf="action.visible"
-   style="min-width: 120px;"
-   class="btn btn-popover btn-sm btn-interactive h-100 p-2 pt-3"
+   style="min-width: 40px; max-height: 100px"
+   class="btn btn-popover btn-sm btn-interactive h-100 p-2 mt-1 pt-3"
    [ngClass]="action.buttonTheme"
    (click)="action.execute()"
    [disabled]="action.disabled">

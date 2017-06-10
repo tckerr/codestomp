@@ -2,7 +2,7 @@
    [ngClass]="bgColor"
    class="card card-inverse h-100">
    <div class="card-block p-2">
-      <h3 class="card-title">{{fundsService.funds.balance | currency:'USD':true }}</h3>
+      <h3 class="card-title text-mono"><strong>{{fundsService.funds.balance | currency:'USD':true }}</strong></h3>
       <div style="padding-top: 5px">({{profitPerHour | currency: 'USD':true}}/hr)</div>
    </div>
 </div>
